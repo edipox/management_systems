@@ -1,17 +1,60 @@
-<h2>Sign in</h2>
+<div id="login_view" data-theme="a" style="width:350px; margin:auto">
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+    <div data-role="content" data-theme="a" style="width:350px;">
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+            <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+              <div><%= f.label :email %>
+              <%= f.email_field :email %></div>
+              <br/>
+              <div>
+                    <%= f.label :password %>
+                 
+                    <%= f.password_field :password %>
+                   <div id="pass_forgot">
+                      <%= render "devise/shared/links" %>
+                    </div>
+              </div>
+            
+            
+              <% if devise_mapping.rememberable? -%>
+                <div class="containing-element">
+                  <select  name="remember" id="remember" data-role="slider" >
+	                  <option value="0">Do not remember</option>
+	                  <option value="1">Remember me</option>
+                  </select> 
+                </div>
+                
+                <div style="display:none">
+                      <%= f.check_box :remember_me, "id"=>"remember_me_check_box" %>
+                      <%= f.label :remember_me, "data-inline"=>"true" %>
+                </div>
+              <% end -%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+              <div style="float:right;"><%= f.submit "Sign in", "data-inline"=>"true" %></div>
+            <% end %>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+          
+    </div>   
+</div>
+<script>
+    $(function(){
+      //$("div[data-role=page]").removeClass("ui-body-a").removeClass("ui-body-b").removeClass("ui-body-c").removeClass("ui-body-d").removeClass("ui-body-e").addClass("ui-body-c");
+          
+    });
+    
+    $(document).bind("pageinit", function(){
+       $("#login_view").dialog();
+       $("#remember").change(function() {$('input[name="user[remember_me]"]').val(this.value);});  
+    });
+</script>
 
-<%= render "devise/shared/links" %>
+<style>
+    .containing-element .ui-slider-switch { 
+      width: 200px;
+    }
+    #pass_forgot a{
+      color:white;
+      font-size:10px;
+      float:right;
+    }
+</style>
