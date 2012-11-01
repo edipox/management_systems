@@ -1,13 +1,14 @@
 es:
   errors:
     messages:
-      not_found: "no encontrado"
-      already_confirmed: "ya fue confirmado"
-      not_locked: "no ha sido desbloqueado"
+      not_found: 'no encontrado'
+      already_confirmed: 'ya ha sido confirmada'
+      not_locked: 'no está bloqueada'
+      expired: "ha caducado, por favor pida uno nuevo"
       not_saved:
-        one: "1 error No se pudo registrar al usuario:"
-        other: "%{count} errores No se pudo registrar al usuario:"
-
+        one: "1 error evitó guardar este %{resource}:"
+        other: "%{count} errores evitaron guardar este %{resource}:"
+        
   devise:
     failure:
       unauthenticated: 'Necesita ingresar o registrarse para continuar.'
