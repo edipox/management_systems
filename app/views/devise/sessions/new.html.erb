@@ -7,7 +7,7 @@
               <%= f.email_field :email %></div>
               <br/>
               <div>
-                    <%= f.label :password %>
+                    <%= f.label :password, "Contraseña" %>
                  
                     <%= f.password_field :password %>
                    <div id="pass_forgot">
@@ -19,8 +19,8 @@
               <% if devise_mapping.rememberable? -%>
                 <div class="containing-element">
                   <select  name="remember" id="remember" data-role="slider" >
-	                  <option value="0">Do not remember</option>
-	                  <option value="1">Remember me</option>
+	                  <option value="0">No recordarme</option>
+	                  <option value="1">Recordarme</option>
                   </select> 
                 </div>
                 
@@ -30,18 +30,13 @@
                 </div>
               <% end -%>
 
-              <div style="float:right;"><%= f.submit "Sign in", "data-inline"=>"true" %></div>
+              <div style="float:right;"><%= f.submit "Ingresar", "data-inline"=>"true" %></div>
             <% end %>
 
           
     </div>   
 </div>
 <script>
-    $(function(){
-      //$("div[data-role=page]").removeClass("ui-body-a").removeClass("ui-body-b").removeClass("ui-body-c").removeClass("ui-body-d").removeClass("ui-body-e").addClass("ui-body-c");
-          
-    });
-    
     $(document).bind("pageinit", function(){
        $("#login_view").dialog();
        $("#remember").change(function() {$('input[name="user[remember_me]"]').val(this.value);});  
