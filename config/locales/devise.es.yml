@@ -4,6 +4,9 @@ es:
       not_found: "no encontrado"
       already_confirmed: "ya fue confirmado"
       not_locked: "no ha sido desbloqueado"
+      not_saved:
+        one: "1 error No se pudo registrar al usuario:"
+        other: "%{count} errores No se pudo registrar al usuario:"
 
   devise:
     failure:
