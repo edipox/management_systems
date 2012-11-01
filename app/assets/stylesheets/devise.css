@@ -1,0 +1,13 @@
+.containing-element .ui-slider-switch {
+    width: 200px;
+}
+#pass_forgot a{
+    color:white;
+    font-size:10px;
+    float:right;
+}
+
+#login_view, .login_container{
+    width:350px!important;
+    margin:auto!important;
+}
