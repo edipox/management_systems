@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Ms01
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    %div{ data: { role: 'page' } }
+      %div{ data: { role: 'header' } }
+        %h3 Header
+        = render 'layouts/top_tabs'
+      %div{ data: { role: 'content' } }
+        = yield
+
+      %div{ data: { role: 'footer', position: 'fixed' } }
+        %h3 Footer Content

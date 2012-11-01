@@ -1,0 +1,9 @@
+.section .menu {
+  width: 25%;
+  float: left;
+ }
+
+.section .content {
+  width: 73%;
+  float: right;
+ }
