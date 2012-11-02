@@ -10,6 +10,7 @@
     %div{ data: { role: 'page' }, class: 'not' }
       %div{ data: { role: 'header' } }
         %h3 Header
+        %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
         = render 'layouts/top_tabs'
       %div{ data: { role: 'content' }, class: 'not' }
         = yield
