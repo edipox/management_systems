@@ -1,0 +1,32 @@
+.ui-content{
+    width:30%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+}
+
+.section .menu {
+    width: 25%;
+    float: left;
+}
+
+.section .content {
+    width: 73%;
+    float: right;
+}
+
+
+/*label.ui-input-text{*/
+/*	width: 40%!important;*/
+/*	display: inline-block!important;*/
+/*}*/
+
+/*input.ui-input-text{*/
+/*	width: 50%!important;*/
+/*	display: inline-block!important;*/
+/*}*/
+
+.ui-submit{
+    width:40%!important;
+    margin-left:auto!important;
+/*    margin-right:auto!important;*/
+}
