@@ -7,11 +7,11 @@
     = csrf_meta_tags
 
   %body
-    %div{ data: { role: 'page' } }
+    %div{ data: { role: 'page' }, class: 'not' }
       %div{ data: { role: 'header' } }
         %h3 Header
         = render 'layouts/top_tabs'
-      %div{ data: { role: 'content' } }
+      %div{ data: { role: 'content' }, class: 'not' }
         = yield
 
       %div{ data: { role: 'footer', position: 'fixed' } }
