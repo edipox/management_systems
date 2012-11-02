@@ -8,7 +8,7 @@
     margin-right:auto!important;
 }
 
-*:not(.not) .ui-content:not(.not) form:not(.not){
+:not(.not) .ui-content:not(.not) form:not(.not){
     width:30%!important;
     margin-left:auto!important;
     margin-right:auto!important;
