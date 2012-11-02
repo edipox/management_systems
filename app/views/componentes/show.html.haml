@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @componente.nombre
+%p
+  %b Descripcion:
+  = @componente.descripcion
+%p
+  %b Codigo:
+  = @componente.codigo
+%p
+  %b Categoria:
+  = @componente.categoria
+
+= link_to 'Edit', edit_componente_path(@componente)
+\|
+= link_to 'Back', componentes_path
