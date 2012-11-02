@@ -11,3 +11,11 @@
     width:350px!important;
     margin:auto!important;
 }
+
+#login_view label.ui-input-text, #login_view input.ui-input-text{
+    width:100%!important;
+    display:inline!important;
+}
+#login_view .ui-submit{ 
+    width:100%!important;
+}
