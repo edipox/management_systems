@@ -1,8 +1,8 @@
- <div id="login_view" data-theme="a">
+ <div id="login_view" data-theme="a" class="not">
 
-    <div data-role="content" data-theme="a" class="login_container">
+    <div data-role="content" data-theme="a" class="login_container not">
 
-            <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+            <%= form_for(resource, :as => resource_name, :html => {:class => "not"} ,:url => session_path(resource_name)) do |f| %>
               <div><%= f.label :email %>
               <%= f.email_field :email %></div>
               <br/>

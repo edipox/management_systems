@@ -1,6 +1,6 @@
-class CreateComponentes < ActiveRecord::Migration
+class CreateComponents < ActiveRecord::Migration
   def change
-    create_table :componentes do |t|
+    create_table :components do |t|
       t.string :nombre
       t.string :descripcion
       t.string :codigo

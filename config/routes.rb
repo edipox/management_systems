@@ -7,7 +7,7 @@ Stock::Application.routes.draw do
     sign_up: 'register'
   }
 
-  resources :componentes
+  resources :components
 
   #root :to => "application#index"
   root :to => "stock#components"

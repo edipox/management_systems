@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121102011310) do
 
-  create_table "componentes", :force => true do |t|
+  create_table "components", :force => true do |t|
     t.string   "nombre"
     t.string   "descripcion"
     t.string   "codigo"
