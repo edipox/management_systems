@@ -1,3 +1,9 @@
+== Set Up The Project
+    bundle install
+    rake db:create
+    rake db:migrate
+    rails runner db/setup.rb
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
