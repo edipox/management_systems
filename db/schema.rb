@@ -22,6 +22,28 @@ ActiveRecord::Schema.define(:version => 20121102011310) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "entities", :force => true do |t|
+    t.string   "name"
+    t.string   "const"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "role_id",    :limit => 36
+    t.string   "entity_id",  :limit => 36
+    t.string   "action"
+    t.boolean  "enabled"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false

@@ -1,4 +1,6 @@
 Stock::Application.routes.draw do
+  resources :roles
+
   #get "stock/components"
 
   devise_for :users, :path_names => {
