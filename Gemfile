@@ -18,14 +18,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
 gem 'pg'
-
 gem 'uuid'
-
 gem 'haml-rails'
-
 gem 'devise'
+gem 'foreigner'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
