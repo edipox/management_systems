@@ -1,0 +1,19 @@
+%div{ data: {role: "content", theme: "c" } }
+  %p#notice= notice
+
+  %p
+    %b name:
+    = @component.name
+  %p
+    %b description:
+    = @component.description
+  %p
+    %b code:
+    = @component.code
+  %p
+    %b category:
+    = @component.category
+
+  = link_to 'Editar', edit_component_path(@component)
+  \|
+  = link_to 'Volver', components_path

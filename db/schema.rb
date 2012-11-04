@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102011310) do
+ActiveRecord::Schema.define(:version => 20121104120259) do
 
   create_table "components", :force => true do |t|
-    t.string   "nombre"
-    t.string   "descripcion"
-    t.string   "codigo"
-    t.string   "categoria"
+    t.string   "name",        :null => false
+    t.string   "description"
+    t.string   "code",        :null => false
+    t.string   "category",    :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

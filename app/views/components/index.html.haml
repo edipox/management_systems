@@ -1,0 +1,26 @@
+%div{ data: {role: "content", theme: "c" } }
+  %h1 Lista de componentes
+
+  %table{ data: {role: "content", theme: "b" } }
+    %tr
+      %th Nombre
+      %th Descripcion
+      %th Codigo
+      %th Categoria
+      %th
+      %th
+      %th
+
+    - @components.each do |component|
+      %tr
+        %td= component.name
+        %td= component.description
+        %td= component.code
+        %td= component.category
+        %td= link_to 'Ver', component
+        %td= link_to 'Editar', edit_component_path(component)
+        %td= link_to 'Eliminar', component, method: :delete, data: { confirm: 'Are you sure?' }
+
+  %br
+
+  = link_to 'Nuevo Componente', new_component_path
