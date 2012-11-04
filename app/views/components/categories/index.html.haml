@@ -1,0 +1,21 @@
+%h1 Listing components_categories
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @components_categories.each do |components_category|
+    %tr
+      %td= components_category.name
+      %td= components_category.description
+      %td= link_to 'Show', components_category
+      %td= link_to 'Edit', edit_components_category_path(components_category)
+      %td= link_to 'Destroy', components_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Category', new_components_category_path

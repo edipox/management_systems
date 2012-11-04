@@ -1,4 +1,8 @@
 Stock::Application.routes.draw do
+  namespace :components do resources :items end
+
+  namespace :components do resources :categories end
+
   resources :roles
 
   #get "stock/components"

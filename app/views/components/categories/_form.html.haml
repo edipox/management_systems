@@ -1,0 +1,16 @@
+= form_for @components_category do |f|
+  - if @components_category.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@components_category.errors.count, "error")} prohibited this components_category from being saved:"
+      %ul
+        - @components_category.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit 'Save'
