@@ -18,3 +18,8 @@
 $(document).bind("mobileinit", function(){
   $.mobile.ajaxEnabled = false;
 });
+
+
+changeContentBySectionId = function(content, section_id) {
+  $('#'+section_id).html(content);
+}
