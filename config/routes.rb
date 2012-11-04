@@ -11,8 +11,6 @@ Stock::Application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :components
-
   #root :to => "application#index"
   root :to => "stock#components"
 
