@@ -1,7 +1,7 @@
 puts 'Inserting initial registers in the database...'
 
 # The super user role MUST be created first!!
-Role.create!({ name: 'Administrador' })
+admin_role = Role.create!({ name: 'Administrador' })
 
 ACL::Entity.create!({
   name: 'Componentes',
@@ -13,5 +13,6 @@ Role.create!({ name: 'Empleado' })
 User.create!({
   email: 'admin@site.com',
   password: 'contrasenha',
-  password_confirmation: 'contrasenha'
+  password_confirmation: 'contrasenha',
+  role: admin_role
 })

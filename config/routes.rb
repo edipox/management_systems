@@ -7,6 +7,8 @@ Stock::Application.routes.draw do
     sign_in: 'login',
     sign_out: 'logout',
     sign_up: 'register'
+  }, :controllers => {
+    registrations: 'users/registrations'
   }
 
   resources :components
