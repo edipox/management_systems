@@ -1,7 +1,8 @@
-%h1 Editing components_category
+%div{ data: {role: "content", theme: "c" } }
+  %h1 Editar categoria
 
-= render 'form'
+  = render 'form'
 
-= link_to 'Show', @components_category
-\|
-= link_to 'Back', components_categories_path
+  = link_to 'Ver', @components_category
+  \|
+  = link_to 'Volver', components_categories_path

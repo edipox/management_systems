@@ -1,21 +1,21 @@
-%h1 Listing components_categories
-
-%table
-  %tr
-    %th Name
-    %th Description
-    %th
-    %th
-    %th
-
-  - @components_categories.each do |components_category|
+%div{ data: {role: "content", theme: "c" } }
+  %h1 Lista de categorias
+  %table{ data: {role: "content", theme: "b" } }
     %tr
-      %td= components_category.name
-      %td= components_category.description
-      %td= link_to 'Show', components_category
-      %td= link_to 'Edit', edit_components_category_path(components_category)
-      %td= link_to 'Destroy', components_category, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Nombre
+      %th Descripcion
+      %th
+      %th
+      %th
 
-%br
+    - @components_categories.each do |components_category|
+      %tr
+        %td= components_category.name
+        %td= components_category.description
+        %td= link_to 'Ver', components_category
+        %td= link_to 'Editar', edit_components_category_path(components_category)
+        %td= link_to 'Eliminar', components_category, method: :delete, data: { confirm: 'Esta seguro?' }
 
-= link_to 'New Category', new_components_category_path
+  %br
+
+  = link_to 'Nueva categoria', new_components_category_path

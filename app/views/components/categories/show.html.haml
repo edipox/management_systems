@@ -1,12 +1,13 @@
-%p#notice= notice
+%div{ data: {role: "content", theme: "c" } }
+  %p#notice= notice
 
-%p
-  %b Name:
-  = @components_category.name
-%p
-  %b Description:
-  = @components_category.description
+  %p
+    %b Name:
+    = @components_category.name
+  %p
+    %b Description:
+    = @components_category.description
 
-= link_to 'Edit', edit_components_category_path(@components_category)
-\|
-= link_to 'Back', components_categories_path
+  = link_to 'Editar', edit_components_category_path(@components_category)
+  \|
+  = link_to 'Volver', components_categories_path
