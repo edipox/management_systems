@@ -21,5 +21,9 @@ $(document).bind("mobileinit", function(){
 
 
 changeContentBySectionId = function(content, section_id) {
-  $('#'+section_id).html(content);
+  var temp = $('#'+section_id);
+  temp.trigger( "enhance" );
+  temp.html(content)//
+
+//.trigger('create');
 }
