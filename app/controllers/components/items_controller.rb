@@ -15,7 +15,6 @@ class Components::ItemsController < ApplicationController
   # GET /components/items/1.json
   def show
     @components_item = Components::Item.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @components_item }
@@ -27,7 +26,6 @@ class Components::ItemsController < ApplicationController
   # GET /components/items/new.json
   def new
     @components_item = Components::Item.new
-
     respond_to do |format|
       format.html { render 'new', :layout => false }# new.html.erb
 #      format.json { render json: @components_item }
@@ -47,20 +45,20 @@ class Components::ItemsController < ApplicationController
 
     respond_to do |format|
       if @components_item.save
-        format.html { redirect_to @components_item, notice: 'Item was successfully created.' }
+        #format.html { redirect_to @components_item, notice: 'Item was successfully created.' }
         format.json { render json: @components_item, status: :created, location: @components_item }
-        format.js {     
-            # Variable utilizada para re renderizar index
-            @components_items = Components::Item.all;
-            render action: "index"
+        format.html { redirect_to @components_item, notice: 'Componente creado.' }
+        format.js{ 
+          @components_items = Components::Item.all;
+          render action: "index" 
         }
       else
         format.html { render action: "new" }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
         format.js {     
-            # Variable utilizada para re renderizar index
-            @components_items = Components::Item.all;
-            render action: "index"
+          # Variable utilizada para re renderizar index
+          @components_items = Components::Item.all;
+          render action: "index" 
         }
       end
     end
