@@ -1,7 +1,7 @@
 %div{ data: {role: "content", theme: "c" } }
   %h1 Lista de categorias
-  %table{ data: {role: "content", theme: "b" } }
-    %tr
+  %table{ data: { role: 'listview', inset: 'true', filter: 'true' }, class: "not" }
+    %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
       %th Nombre
       %th Descripcion
       %th
@@ -9,7 +9,7 @@
       %th
 
     - @components_categories.each do |components_category|
-      %tr
+      %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
         %td= components_category.name
         %td= components_category.description
         %td= link_to 'Ver', components_category

@@ -1,25 +1,30 @@
-%div{ data: {role: "content", theme: "c" } }
+%div{ data: {role: "content", theme: "c" }}
   %h1 Lista de componentes
 
-  %table{ data: {role: "content", theme: "b" } }
-    %tr
-      %th Nombre
-      %th Descripcion
-      %th Codigo
-      %th Categoria
-      %th
-      %th
-      %th
+  %ul{ data: { role: 'listview', inset: 'true', filter: 'true' } }
+    %li{ data: { role: 'list-divider' } }
+      %div{ class: 'ui-grid-a' }  
+        %div{ class: 'ui-block-a', style: 'text-align: center; width:70%;' }
+          %div{ class: 'ui-grid-c' }
+            %div{ class: 'ui-block-a' } Nombre
+            %div{ class: 'ui-block-b' } Descripcion
+            %div{ class: 'ui-block-c' } Codigo
+            %div{ class: 'ui-block-d' } Categoria
+        %div{ class: 'ui-block-b', style: 'text-align: center; width:30%;' }
 
     - @components_items.each do |components_item|
-      %tr
-        %td= components_item.name
-        %td= components_item.description
-        %td= components_item.code
-        %td= components_item.category
-        %td= link_to 'Ver', components_item, data: { role: 'button' }
-        %td= link_to 'Editar', edit_components_item_path(components_item), data: { role: 'button' }
-        %td= link_to 'Eliminar', components_item, method: :delete, data: { confirm: 'Esta seguro?', role: 'button' }
+      %li
+        %div{ class: 'ui-grid-a' }  
+          %div{ class: 'ui-block-a', style: 'text-align: center; width:70%; line-height:30px;' }
+            %div{ class: 'ui-grid-c' }
+              %div{ class: 'ui-block-a' }= components_item.name
+              %div{ class: 'ui-block-b' }= components_item.description
+              %div{ class: 'ui-block-c' }= components_item.code
+              %div{ class: 'ui-block-d' }= components_item.category
+          %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }
+            = link_to 'Ver', components_item, data: { role: 'button'}
+            = link_to 'Editar', edit_components_item_path(components_item), data: { role: 'button' }
+            = link_to 'Eliminar', components_item, method: :delete, data: { confirm: 'Esta seguro?', role: 'button' }
 
   %br
 
