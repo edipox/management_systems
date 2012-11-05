@@ -1,5 +1,4 @@
 :plain
-  changeContentBySectionId(
-    '#{escape_javascript render :file => "components/items/index", :formats => [:html]}',
-    'main_content'
+  changeContent('#page #content',
+    '#{escape_javascript render :file => "components/items/index", :formats => [:html]}'
   );

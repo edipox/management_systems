@@ -5,7 +5,6 @@ Stock::Application.routes.draw do
 
   resources :roles
 
-  #get "stock/components"
 
   devise_for :users, :path_names => {
     sign_in: 'login',
@@ -17,6 +16,7 @@ Stock::Application.routes.draw do
 
   #root :to => "application#index"
   root :to => "stock#components"
+  get "stock/components"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

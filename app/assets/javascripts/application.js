@@ -20,6 +20,6 @@ $(document).bind("mobileinit", function(){
 });
 
 
-changeContentBySectionId = function(content, section_id) {
-  $('#'+section_id).html(content).trigger('create');
-}
+function changeContent(where, content) {
+  $(where).html(content).trigger('create');
+};

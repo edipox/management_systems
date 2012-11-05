@@ -3,5 +3,6 @@ class StockController < ApplicationController
   end
 
   def components
+    @components_items = Components::Item.all
   end
 end
