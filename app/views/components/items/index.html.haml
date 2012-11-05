@@ -1,19 +1,24 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   %li{ data: { role: 'list-divider' } }
-    %div{ class: 'ui-grid-c' }
+    %div{ class: 'ui-grid-d' }
       %div{ class: 'ui-block-a' } Nombre
       %div{ class: 'ui-block-b' } Descripci&oacute;n
       %div{ class: 'ui-block-c' } C&oacute;digo
       %div{ class: 'ui-block-d' } Categor&iacute;a
+      %div{ class: 'ui-block-e' } Opciones
       
   - @components_items.each do |item|
     %li
-      %div{ class: 'ui-grid-c' }
+      %div{ class: 'ui-grid-d' }
         %div{ class: 'ui-block-a' }
           %a{ href: components_item_path(item) }= item.name
         %div{ class: 'ui-block-b' }= item.description
         %div{ class: 'ui-block-c' }= item.code
         %div{ class: 'ui-block-d' }= item.category
+        %div{ class: 'ui-block-e' }
+          %div{ data: { role: 'controlgroup', type: 'horizontal' } }
+            %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+            %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true' } } Editar
 
 %a{ href: '#newComponentPopup', style: 'width: 250px; float: right',
     data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window' } } Nuevo Componente
