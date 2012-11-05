@@ -21,10 +21,14 @@ $(document).bind("mobileinit", function(){
 
 
 function changeContent(where, content) {
-  $(where).html(content).trigger('create');
+  return $(where).html(content).trigger('create');
 };
 
-showPopup = function(popup, content){
-  $(popup).html(content).trigger('create').popup("open");
+function showPopup(popup, content){
+  changeContent(popup, content).popup("open");
+  $(popup+" .closer").click(function(){
+      var id = $(this).attr("close");
+      $(id).popup("close");
+  });
 }
 

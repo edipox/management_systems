@@ -3,7 +3,6 @@ class Components::ItemsController < ApplicationController
   # GET /components/items.json
   def index
     @components_items = Components::Item.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.js
