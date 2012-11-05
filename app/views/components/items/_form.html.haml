@@ -1,22 +1,15 @@
 = form_for @components_item do |f|
-  - if @components_item.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@components_item.errors.count, "error")} prohibited this component from being saved:"
-      %ul
-        - @components_item.errors.full_messages.each do |msg|
-          %li= msg
+  = f.label :name, "Nombre"
+  = f.text_field :name
 
-  .field
-    = f.label :name, "Nombre"
-    = f.text_field :name
-  .field
-    = f.label :description, "Descripcion"
-    = f.text_field :description
-  .field
-    = f.label :code, "Codigo"
-    = f.text_field :code
-  .field
-    = f.label :category, "Categoria"
-    = f.text_field :category
-  .actions
-    = f.submit 'Guardar'
+  = f.label :description, "Descripcion"
+  = f.text_field :description
+
+  = f.label :code, "Codigo"
+  = f.text_field :code
+
+  = f.label :category, "Categoria"
+  = f.text_field :category
+
+  %br
+  %input{ type: 'submit', value: 'Agregar', data: { icon: 'plus', theme: 'b' } }

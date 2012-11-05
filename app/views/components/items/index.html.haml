@@ -15,7 +15,22 @@
         %div{ class: 'ui-block-c' }= item.code
         %div{ class: 'ui-block-d' }= item.category
 
-%a{ href: new_components_item_path, style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } } Nuevo Componente
+%a{ href: '#newComponentPopup', style: 'width: 250px; float: right',
+    data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window' } } Nuevo Componente
+
+%div#newComponentPopup{ class: 'ui-corner-all',
+    data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } }
+  :javascript
+    $(document).live('pageshow', function(){
+      $.ajax({
+        type: "GET",
+        url: "/components/items/new",
+        success: function(txt) {
+          $('div#newComponentPopup').html(txt).trigger('create');
+        }
+      });
+    });
+
 
 -#
   %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }

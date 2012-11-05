@@ -28,8 +28,9 @@ class Components::ItemsController < ApplicationController
     @components_item = Components::Item.new
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @components_item }
+      format.html { render 'new', :layout => false }# new.html.erb
+#      format.json { render json: @components_item }
+#      format.js
     end
   end
 

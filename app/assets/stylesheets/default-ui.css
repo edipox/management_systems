@@ -8,12 +8,15 @@
     margin-right:auto!important;
 }
 
-form:not([role="search"]):not(.not) {
+/*form:not([role="search"]):not(.not) {
     width:30%!important;
     margin-left:auto!important;
     margin-right:auto!important;
-}
+}*/
 
+div[data-role="popup"] {
+  padding: 5px 15px;
+}
 
 
 /*label.ui-input-text{*/
@@ -26,10 +29,10 @@ form:not([role="search"]):not(.not) {
 /*	display: inline-block!important;*/
 /*}*/
 
-.ui-submit:not(.not) {
+/*.ui-submit:not(.not) {
     width:40%!important;
     margin-left:auto!important;
-}
+}*/
 /*    margin-right:auto!important;*/
 
 #page #menu { width: 25%; float: left; }
