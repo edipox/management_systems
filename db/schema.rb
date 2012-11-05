@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20121104162019) do
 
+  create_table "components", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "description"
+    t.string   "code",        :null => false
+    t.string   "category",    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "components_categories", :force => true do |t|
     t.string   "name"
     t.string   "description"

@@ -23,3 +23,8 @@ $(document).bind("mobileinit", function(){
 function changeContent(where, content) {
   $(where).html(content).trigger('create');
 };
+
+showPopup = function(popup, content){
+  $(popup).html(content).trigger('create').popup("open");
+}
+

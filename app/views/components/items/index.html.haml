@@ -11,31 +11,22 @@
     %li
       %div{ class: 'ui-grid-d' }
         %div{ class: 'ui-block-a' }
-          %a{ href: components_item_path(item) }= item.name
+          %a{ href: components_item_path(item), data: { remote: true } }= item.name
         %div{ class: 'ui-block-b' }= item.description
         %div{ class: 'ui-block-c' }= item.code
         %div{ class: 'ui-block-d' }= item.category
         %div{ class: 'ui-block-e' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
-            %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
-            %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true' } } Editar
+            %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: true } } Eliminar
+            %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: true } } Editar
 
-%a{ href: '#newComponentPopup', style: 'width: 250px; float: right',
-    data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window' } } Nuevo Componente
+-#%a{ href: '#newComponentPopup', style: 'width: 250px; float: right',
+-#    data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window' } } Nuevo Componente
+%a{ href: new_components_item_path, style: 'width: 250px; float: right',
+    data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window', remote: true } } Nuevo Componente
 
-%div#newComponentPopup{ class: 'ui-corner-all',
+%div#componentPopup{ class: 'ui-corner-all',
     data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } }
-  :javascript
-    $(document).live('pageshow', function(){
-      $.ajax({
-        type: "GET",
-        url: "/components/items/new",
-        success: function(txt) {
-          $('div#newComponentPopup').html(txt).trigger('create');
-        }
-      });
-    });
-
 
 -#
   %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }

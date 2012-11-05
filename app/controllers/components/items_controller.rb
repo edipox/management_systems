@@ -19,6 +19,7 @@ class Components::ItemsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @components_item }
+      format.js
     end
   end
 
@@ -30,7 +31,7 @@ class Components::ItemsController < ApplicationController
     respond_to do |format|
       format.html { render 'new', :layout => false }# new.html.erb
 #      format.json { render json: @components_item }
-#      format.js
+      format.js
     end
   end
 
@@ -48,9 +49,19 @@ class Components::ItemsController < ApplicationController
       if @components_item.save
         format.html { redirect_to @components_item, notice: 'Item was successfully created.' }
         format.json { render json: @components_item, status: :created, location: @components_item }
+        format.js {     
+            # Variable utilizada para re renderizar index
+            @components_items = Components::Item.all;
+            render action: "index"
+        }
       else
         format.html { render action: "new" }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
+        format.js {     
+            # Variable utilizada para re renderizar index
+            @components_items = Components::Item.all;
+            render action: "index"
+        }
       end
     end
   end
@@ -64,9 +75,19 @@ class Components::ItemsController < ApplicationController
       if @components_item.update_attributes(params[:components_item])
         format.html { redirect_to @components_item, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
+        format.js {     
+            # Variable utilizada para re renderizar index
+            @components_items = Components::Item.all;
+            render action: "index"
+        }
       else
         format.html { render action: "edit" }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
+        format.js {     
+            # Variable utilizada para re renderizar index
+            @components_items = Components::Item.all;
+            render action: "index"
+        }
       end
     end
   end
@@ -76,10 +97,15 @@ class Components::ItemsController < ApplicationController
   def destroy
     @components_item = Components::Item.find(params[:id])
     @components_item.destroy
-
+        
     respond_to do |format|
       format.html { redirect_to components_items_url }
       format.json { head :no_content }
+      format.js {     
+          # Variable utilizada para re renderizar index
+          @components_items = Components::Item.all;
+          render action: "index"
+      }
     end
   end
 end
