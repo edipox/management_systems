@@ -17,9 +17,9 @@
         %td= components_item.description
         %td= components_item.code
         %td= components_item.category
-        %td= link_to 'Ver', components_item
-        %td= link_to 'Editar', edit_components_item_path(components_item)
-        %td= link_to 'Eliminar', components_item, method: :delete, data: { confirm: 'Esta seguro?' }
+        %td= link_to 'Ver', components_item, data: { role: 'button' }
+        %td= link_to 'Editar', edit_components_item_path(components_item), data: { role: 'button' }
+        %td= link_to 'Eliminar', components_item, method: :delete, data: { confirm: 'Esta seguro?', role: 'button' }
 
   %br
 
