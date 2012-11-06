@@ -8,7 +8,7 @@
     margin-right:auto!important;
 }
 
-:not(#popup) > form:not([data-role="search"]){
+:not(div[data-role="popup"]) > form:not([data-role="search"]){
     width:30%!important;
     margin-left:auto!important;
     margin-right:auto!important;

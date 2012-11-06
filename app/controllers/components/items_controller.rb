@@ -44,13 +44,13 @@ class Components::ItemsController < ApplicationController
 
     respond_to do |format|
       if @components_item.save
-        #format.html { redirect_to @components_item, notice: 'Item was successfully created.' }
         format.json { render json: @components_item, status: :created, location: @components_item }
         format.html { redirect_to @components_item, notice: 'Componente creado.' }
-        format.js{ 
-          @components_items = Components::Item.all;
-          render action: "index" 
-        }
+        format.js
+#        { 
+#          @components_items = Components::Item.all;
+#          render action: "index" 
+#        }
       else
         format.html { render action: "new" }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
