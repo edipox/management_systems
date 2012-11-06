@@ -24,6 +24,24 @@ function changeContent(where, content) {
   return $(where).html(content).trigger('create');
 };
 
+function open(){
+  if(popup.current == null){ 
+  //PRIMER POPUP
+      popup.back = null;
+  }else{
+    popup.back = popup.current;
+  }
+  popup.current = new Popup(content);
+}
+
+function close(){
+  if(popup.back == null){
+      popup.current.close();
+  }else{
+    popup.current = popup.back;  
+  }
+}
+
 function showPopup(popup, content){
   changeContent(popup, content).popup("open");
   $(popup+" .closer").click(function(){
