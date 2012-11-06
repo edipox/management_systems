@@ -8,7 +8,7 @@
       %div{ class: 'ui-block-e' } Opciones
       
   - @components_items.each do |item|
-    %li
+    %li{ class: 'element' }
       %div{ class: 'ui-grid-d' }
         %div{ class: 'ui-block-a' }
           %a{ href: components_item_path(item), data: { remote: true } }= item.name

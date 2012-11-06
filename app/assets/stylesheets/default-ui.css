@@ -8,11 +8,11 @@
     margin-right:auto!important;
 }
 
-/*form:not([role="search"]):not(.not) {
+form:not([role="search"]):not(.not) {
     width:30%!important;
     margin-left:auto!important;
     margin-right:auto!important;
-}*/
+}
 
 div[data-role="popup"] {
   padding: 5px 15px;
@@ -31,6 +31,19 @@ div[data-role="popup"] {
   vertical-align : middle;
   display:inline-block;
 }
+
+.element{
+  line-height:50px;
+}
+
+div[data-role="controlgroup"]{
+  line-height:20px;
+}
+
+li.ui-li.element{
+  padding:0;
+}
+
 
 /*label.ui-input-text{*/
 /*	width: 40%!important;*/
