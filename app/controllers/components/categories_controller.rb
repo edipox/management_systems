@@ -59,12 +59,10 @@ class Components::CategoriesController < ApplicationController
         format.json { render json: @components_category.errors, status: :unprocessable_entity }
         format.js{ 
             render :nothing => true
-        
         ## CODIGO QUE PUEDE SER DE UTILIDAD
 #              render :update do |page|
 #                  page.redirect_to your_url_for_parameters_or_string
 #              end
-            
         }
 #        {     
 #           Variable utilizada para re renderizar index

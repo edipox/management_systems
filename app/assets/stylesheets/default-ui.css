@@ -17,7 +17,11 @@
 div[data-role="popup"] {
   padding: 5px 15px;
 }
-
+.field.plus .ui-select{
+  vertical-align : middle;
+  width:90%;
+  display:inline-block;
+}
 .field.plus input{
   vertical-align : middle;
   width:90%;
