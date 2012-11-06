@@ -7,7 +7,7 @@
   <%= f.email_field :email %></div>
 
   <div><%= f.label :role %>
-  <%= f.select :role_id, @roles.collect {|r| [r.name, r.id]} %></div>
+  <%= f.select :acl_role_id, @roles.collect {|r| [r.name, r.id]} %></div>
 
   <div><%= f.label :password, "Contraseña" %>
   <%= f.password_field :password %></div>

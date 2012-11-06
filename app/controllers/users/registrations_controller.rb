@@ -5,6 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def initialize
     super
-    @roles = Role.all    
+    @roles = ACL::Role.all    
   end
 end

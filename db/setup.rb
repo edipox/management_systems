@@ -14,7 +14,7 @@ ACL::Entity.create!({
 
 # For test permissions creation, create a Role after a Component
 employee_role = ACL::Role.create!({ name: 'Empleado' })
-=begin
+
 User.create!({
   email: 'admin@site.com',
   password: 'contrasenha',
@@ -27,7 +27,7 @@ employee = User.create!({
   password_confirmation: 'contrasenha',
   role: employee_role
 })
-
+=begin
 employee.role.permissions.each do |permission|
   permission.enabled = true if permission.action == 'read'
   permission.save

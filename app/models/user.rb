@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :role_id, :role
-  # attr_accessible :title, :body
 
-  belongs_to :role
+  attr_accessible :role
+  belongs_to :acl_role, :class_name => ACL::Role.to_s
+  alias_attribute :role, :acl_role
 end
