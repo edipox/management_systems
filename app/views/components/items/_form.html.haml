@@ -1,0 +1,19 @@
+= form_for @components_item, remote: true do |f|
+  = f.label :name, "Nombre"
+  = f.text_field :name
+
+  = f.label :description, "Descripcion"
+  = f.text_field :description
+
+  = f.label :code, "Codigo"
+  = f.text_field :code
+  .field.plus
+    = f.label :components_category_id, "Categoria"
+    = f.collection_select(:components_category_id, Components::Category.all, :id, :name)
+
+
+
+    %a{ href: new_components_category_path , data:{ remote: "true", role:'button', icon: 'plus', iconpos: 'notext'} }
+    
+  %br
+  %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

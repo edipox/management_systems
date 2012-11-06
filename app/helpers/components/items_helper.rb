@@ -1,0 +1,2 @@
+module Components::ItemsHelper
+end

@@ -1,38 +1,8 @@
-%div.section
-  %div.menu{ data: { role: 'controlgroup' } }
-    %a{ href: '#', class: 'ui-btn-active', data: { role: 'button' } } Stock
+%div#page
+  %div#menu{ data: { role: 'controlgroup' } }
+    %a{ href: components_items_path, data: { role: 'button', remote: 'true' } } Componentes
+    %a{ href: '#', data: { role: 'button' } } Stock
     %a{ href: '#', data: { role: 'button' } } Pedidos de Compra 
     %a{ hreof: '#', data: { role: 'button' } } Pedidos de Componentes 
-  %div.content
-    %br
-    %ul{ data: { role: 'listview', inset: 'true', filter: 'true' } }
-      %li{ style: 'text-align: center;', data: { role: 'list-divider' } }
-        %div{ class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
-      %li 
-        %div{ style: 'text-align: center;', class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
-      %li 
-        %div{ style: 'text-align: center;', class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
-      %li 
-        %div{ style: 'text-align: center;', class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
-      %li 
-        %div{ style: 'text-align: center;', class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
-      %li 
-        %div{ style: 'text-align: center;', class: 'ui-grid-b' }
-          %div{ class: 'ui-block-a' } Nombre
-          %div{ class: 'ui-block-b' } Descripcion
-          %div{ class: 'ui-block-c' } Cantidad
+  %div#content
+    = render :file => 'components/items/index', :formats => [:html]

@@ -1,0 +1,21 @@
+%div{ data: {role: "content", theme: "c" } }
+  %h1 Lista de categorias
+  %table{ data: { role: 'listview', inset: 'true', filter: 'true' }, class: "not" }
+    %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
+      %th Nombre
+      %th Descripcion
+      %th
+      %th
+      %th
+
+    - @components_categories.each do |components_category|
+      %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
+        %td= components_category.name
+        %td= components_category.description
+        %td= link_to 'Ver', components_category
+        %td= link_to 'Editar', edit_components_category_path(components_category)
+        %td= link_to 'Eliminar', components_category, method: :delete, data: { confirm: 'Esta seguro?' }
+
+  %br
+
+  = link_to 'Nueva categoria', new_components_category_path
