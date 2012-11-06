@@ -2,17 +2,17 @@
   %p#notice= notice
 
   %p
-    %b name:
+    %b Nombre:
     = @components_item.name
   %p
-    %b description:
+    %b Descripcion:
     = @components_item.description
   %p
-    %b code:
+    %b Codigo:
     = @components_item.code
   %p
-    %b category:
-    = @components_item.category
+    %b Categoria:
+    = @components_item.components_category.name
 
   = link_to 'Editar', edit_components_item_path(@components_item)
   \|
