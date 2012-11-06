@@ -1,3 +1,5 @@
+%div#categoryPopup{ class: 'ui-corner-all', data: {role: 'popup', theme: 'a', :'overlay-theme' => 'c' } }  lll
+
 = form_for @components_item, remote: true do |f|
   = f.label :name, "Nombre"
   = f.text_field :name
@@ -7,9 +9,10 @@
 
   = f.label :code, "Codigo"
   = f.text_field :code
-
-  = f.label :category, "Categoria"
-  = f.text_field :category
-
+  .field.plus
+    = f.label :category, "Categoria"
+    = f.text_field :category, { asdsad: "asaaa" }
+    %a{ href: new_components_category_path , data:{ remote: "true", role:'button', icon: 'plus', iconpos: 'notext'} }
+    
   %br
   %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

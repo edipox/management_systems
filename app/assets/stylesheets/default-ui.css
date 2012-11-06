@@ -18,6 +18,15 @@ div[data-role="popup"] {
   padding: 5px 15px;
 }
 
+.field.plus input{
+  vertical-align : middle;
+  width:90%;
+  display:inline-block;
+}
+.field.plus a{
+  vertical-align : middle;
+  display:inline-block;
+}
 
 /*label.ui-input-text{*/
 /*	width: 40%!important;*/
