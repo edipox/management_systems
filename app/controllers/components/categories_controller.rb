@@ -48,7 +48,7 @@ class Components::CategoriesController < ApplicationController
       if @components_category.save
         format.html { redirect_to @components_category, notice: 'Category was successfully created.' }
         format.json { render json: @components_category, status: :created, location: @components_category }
-        format.js
+        format.js{ render :nothing => true }
 #         {     
 #           Variable utilizada para re renderizar index
 #          @components_categories = Components::Category.all;
@@ -57,7 +57,15 @@ class Components::CategoriesController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @components_category.errors, status: :unprocessable_entity }
-        format.js 
+        format.js{ 
+            render :nothing => true
+        
+        ## CODIGO QUE PUEDE SER DE UTILIDAD
+#              render :update do |page|
+#                  page.redirect_to your_url_for_parameters_or_string
+#              end
+            
+        }
 #        {     
 #           Variable utilizada para re renderizar index
 #          @components_categories = Components::Category.all;

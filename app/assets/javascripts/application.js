@@ -31,11 +31,18 @@ function PopupLevel(_content){
   this.back = null;
   this.open = function(){
     changeContent("#popup", this.content).popup("open");
+    $("#popup").bind({
+       popupafterclose: closePopup
+    });
   };
   this.close = function(){
     changeContent("#popup", this.content).popup("close");
   };
 }
+
+var _EVENT = null;
+var _UI = null;
+
 var _POPUP = new PopupLevel("");
 
 function openPopup(content){
@@ -47,10 +54,10 @@ function openPopup(content){
 }
 
 function closePopup(){
-  if(_POPUP.back == null){
+  if(_POPUP.back == null && _POPUP.current != null){
       _POPUP.current.close();
       _POPUP.current = null;
-  }else{
+  }else if(_POPUP.current != null){
     _POPUP.current = _POPUP.back;
     _POPUP.back = _POPUP.back == null ? null : _POPUP.back.back;
     _POPUP.current.open();
@@ -60,12 +67,6 @@ function closePopup(){
 function showPopup(popup, content){
   openPopup(content);
   $("#popup .closer").click(closePopup);
-  
-/*  changeContent(popup, content).popup("open");
-  $(popup+" .closer").click(function(){
-      var id = $(this).attr("close");
-      $(id).popup("close");
-  });*/
 }
 
 
