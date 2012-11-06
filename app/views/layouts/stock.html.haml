@@ -12,7 +12,9 @@
         %h3 Header
         %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
         = render 'layouts/stock_top_menu'
+        
       %div{ data: { role: 'content' }, class: 'not' }
+        %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } } 
         = yield
 
       %div{ data: { role: 'footer', position: 'fixed' } }

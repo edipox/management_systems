@@ -24,29 +24,48 @@ function changeContent(where, content) {
   return $(where).html(content).trigger('create');
 };
 
-function open(){
-  if(popup.current == null){ 
-  //PRIMER POPUP
-      popup.back = null;
-  }else{
-    popup.back = popup.current;
+
+function PopupLevel(_content){
+  this.content = _content;
+  this.current = null;
+  this.back = null;
+  this.open = function(){
+    changeContent("#popup", this.content).popup("open");
+  };
+  this.close = function(){
+    changeContent("#popup", this.content).popup("close");
+  };
+}
+var _POPUP = new PopupLevel("");
+
+function openPopup(content){
+  if(_POPUP.current != null){ 
+    _POPUP.back = _POPUP.current;
   }
-  popup.current = new Popup(content);
+  _POPUP.current = new PopupLevel(content);
+  _POPUP.current.open();
 }
 
-function close(){
-  if(popup.back == null){
-      popup.current.close();
+function closePopup(){
+  if(_POPUP.back == null){
+      _POPUP.current.close();
+      _POPUP.current = null;
   }else{
-    popup.current = popup.back;  
+    _POPUP.current = _POPUP.back;
+    _POPUP.back = _POPUP.back == null ? null : _POPUP.back.back;
+    _POPUP.current.open();
   }
 }
 
 function showPopup(popup, content){
-  changeContent(popup, content).popup("open");
+  openPopup(content);
+  $("#popup .closer").click(closePopup);
+  
+/*  changeContent(popup, content).popup("open");
   $(popup+" .closer").click(function(){
       var id = $(this).attr("close");
       $(id).popup("close");
-  });
+  });*/
 }
+
 

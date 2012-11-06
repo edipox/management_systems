@@ -14,4 +14,4 @@
     = f.text_field :description
 
   .actions
-    = f.submit 'Guardar'
+    = f.submit "Guardar", { class: "closer", close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b', remote: true } }
