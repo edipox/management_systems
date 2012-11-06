@@ -1,8 +1,10 @@
-module ACL
-  class Permission < ActiveRecord::Base
-    attr_accessible :role, :entity, :action, :enabled
+class ACL::Permission < ActiveRecord::Base
+  attr_accessible :action_id, :entity_id, :role_id, :enabled
 
-    belongs_to :role
-    belongs_to :entity
-  end
+  attr_accessible :action, :role, :entity
+
+  belongs_to :action, :class_name => ACL::Action.to_s
+  belongs_to :entity, :class_name => ACL::Entity.to_s
+  belongs_to :role, :class_name => ACL::Role.to_s
+
 end

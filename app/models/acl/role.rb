@@ -1,20 +1,20 @@
 module ACL
-  class EntityCallbacks
-    def after_create(entity)
+  class RoleCallbacks
+    def after_create(role)
       admin = Role.order(:created_at).first
-      Role.all.each do |role|
-        enabled = role.id == admin.id
+      Entity.all.each do |entity|
+        enabled = admin.id == role.id
         PermissionsGenerator.generate(role, entity, enabled)
       end
     end
   end
 end
 
-class ACL::Entity < ActiveRecord::Base
-  attr_accessible :const, :name
+class ACL::Role < ActiveRecord::Base
+  attr_accessible :name
 
   has_many :acl_permissions, :class_name => ACL::Permission.to_s
   alias_attribute :permissions, :acl_permissions
 
-  after_create ACL::EntityCallbacks.new
+  after_create ACL::RoleCallbacks.new
 end

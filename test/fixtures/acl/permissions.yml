@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  acl_role_id: MyString
+  acl_entity_id: MyString
+  acl_action_id: MyString
+  enabled: false
+
+two:
+  acl_role_id: MyString
+  acl_entity_id: MyString
+  acl_action_id: MyString
+  enabled: false
