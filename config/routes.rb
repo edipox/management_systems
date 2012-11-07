@@ -1,4 +1,9 @@
 Stock::Application.routes.draw do
+  namespace :settings do
+    get 'permissions', :to => 'permissions#index'
+    post 'permissions/save'
+  end
+
   namespace :components do resources :items end
 
   namespace :components do resources :categories end
