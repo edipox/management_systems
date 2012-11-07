@@ -8,7 +8,7 @@ class Ability
     permissions.each do |p|
       method = p.enabled ? 'can' : 'cannot'
       const = p.entity.const
-      action = p.action
+      action = p.action.symbol
 
       begin
         eval "#{method} :#{action}, ::#{const}"

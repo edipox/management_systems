@@ -17,8 +17,11 @@
         %div{ class: 'ui-block-d' }= item.components_category.name
         %div{ class: 'ui-block-e' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
-            %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: true } } Eliminar
-            %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: true } } Editar
+            - if can? :delete, item
+              %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?',
+                role: 'button', icon: 'delete', mini: 'true', remote: true } } Eliminar
+            - if can? :update, item
+              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: true } } Editar
 
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
     data: { role: 'button', theme: 'b', icon: 'new', rel: 'popup', :'position-to' => 'window', remote: true } } Nuevo Componente
