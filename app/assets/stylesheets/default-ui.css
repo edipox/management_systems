@@ -22,7 +22,7 @@
 div[data-role="popup"] {
   padding: 5px 15px;
 }
-.field.plus .ui-select{
+.field.plus .ui-select, .field.plus div{
   vertical-align : middle;
   width:90%;
   display:inline-block;
@@ -39,6 +39,7 @@ div[data-role="popup"] {
 
 .element{
   line-height:50px;
+  text-align:center;
 }
 
 div[data-role="controlgroup"]{

@@ -16,9 +16,38 @@
 //= require_tree .
 
 $(document).bind("mobileinit", function(){
- // $.mobile.ajaxEnabled = false;
+  $.mobile.ajaxEnabled = false;
   $.mobile.selectmenu.prototype.options.nativeMenu = false;
+  
 });
+
+function on_load(){
+  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');  
+//  $(".sub_form_loader").click(function(){
+//      showFakeSubForm(
+//        "#"+$(this).attr("id"), 
+//        "#"+$(this).attr("subform_id"),
+//        "#"+$(this).attr("select_id"));  
+//  });
+}
+
+function showFakeSubForm(caller, subform, select){
+ return $(caller).toggle(
+      function () {
+        $(select).hide();
+        $(subform).show();
+        var e = $(caller+" .ui-icon-plus");
+        $(e).removeClass("ui-icon-plus");
+        $(e).addClass("ui-icon-delete");
+      },      function () {
+        $(select).show();
+        $(subform).hide();
+        var e = $(caller+" .ui-icon-delete");
+        $(e).removeClass("ui-icon-delte");
+        $(e).addClass("ui-icon-plus");
+      }
+  );
+}
 
 
 function changeContent(where, content) {

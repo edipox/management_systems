@@ -1,4 +1,4 @@
-= form_for @components_item, remote: true do |f|
+= form_for @components_item do |f|
   = f.label :name, "Nombre"
   = f.text_field :name
 
@@ -9,11 +9,19 @@
   = f.text_field :code
   .field.plus
     = f.label :components_category_id, "Categoria"
-    = f.collection_select(:components_category_id, Components::Category.all, :id, :name)
+    %div#category_select{style:"display:inline-block;" }
+      = f.collection_select(:components_category_id, Components::Category.all, :id, :name)
+   
+    %a#category_button{ data:{ role:'button', icon: 'plus', iconpos: 'notext'}, subform_id: "categorySubForm", select_id: "category_select", class: "sub_form_loader", onclick: "on_load" }
 
+  %div#categorySubForm{ class: 'ui-corner-all', data: { role: 'content', theme: 'a' }, style: "display:none" } 
 
+    = label_tag :category_name, "Nombre"  
+    = text_field_tag :category_name
 
-    %a{ href: new_components_category_path , data:{ remote: "true", role:'button', icon: 'plus', iconpos: 'notext'} }
+    = label_tag :category_description, "Descripcion"
+    = text_field_tag :category_description
+
     
   %br
   %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

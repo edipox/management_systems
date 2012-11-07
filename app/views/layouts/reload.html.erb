@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dialog</title>
+  <title>Reload</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <script>
 $(document).bind("mobileinit", function(){
-  $.mobile.ajaxEnabled = true;
+  $.mobile.ajaxEnabled = false;
   $.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
-
 $(on_load);
 </script>
 <body>
 
-    <div data-role="dialog" class="not" data-rel="back">
+    <div data-role="page" class="not" >
         <%= yield %>
     </div>
 

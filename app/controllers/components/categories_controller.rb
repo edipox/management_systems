@@ -1,10 +1,12 @@
 class Components::CategoriesController < ApplicationController
   # GET /components/categories
   # GET /components/categories.json
+  layout "dialog"
+  
   def index
     @components_categories = Components::Category.all
     respond_to do |format|
-      format.html { render 'index', :layout => "dialog" } 
+      format.html{ render 'index', :layout => "reload" }
       format.js
       format.json { render json: @components_categories }
     end
@@ -16,7 +18,7 @@ class Components::CategoriesController < ApplicationController
     @components_category = Components::Category.find(params[:id])
 
     respond_to do |format|
-      format.html{render "show", :layout => "dialog"} # show.html.erb
+      format.html
       format.json { render json: @components_category }
       format.js
     end
@@ -26,9 +28,8 @@ class Components::CategoriesController < ApplicationController
   # GET /components/categories/new.json
   def new
     @components_category = Components::Category.new
-
     respond_to do |format|
-      format.html { render 'new', :layout => "dialog" } # new.html.erb
+      format.html
 #      format.json { render json: @components_category }
       format.js
     end
@@ -38,7 +39,7 @@ class Components::CategoriesController < ApplicationController
   def edit
     @components_category = Components::Category.find(params[:id])
     respond_to do |format|
-      format.html { render 'edit', :layout => "dialog" } 
+      format.html
     end
   end
 
@@ -46,32 +47,13 @@ class Components::CategoriesController < ApplicationController
   # POST /components/categories.json
   def create
     @components_category = Components::Category.new(params[:components_category])
-
     respond_to do |format|
       if @components_category.save
-        format.html { redirect_to @components_category, notice: 'Category was successfully created.' }
-        format.json { render json: @components_category, status: :created, location: @components_category }
-        format.js{ render :nothing => true }
-#         {     
-#           Variable utilizada para re renderizar index
-#          @components_categories = Components::Category.all;
-#          render action: "index"
-#        }
+        format.html { 
+            redirect_to components_categories_path, notice: 'Category was successfully created.' 
+        }
       else
         format.html { render action: "new" }
-        format.json { render json: @components_category.errors, status: :unprocessable_entity }
-        format.js{ 
-            render :nothing => true
-        ## CODIGO QUE PUEDE SER DE UTILIDAD
-#              render :update do |page|
-#                  page.redirect_to your_url_for_parameters_or_string
-#              end
-        }
-#        {     
-#           Variable utilizada para re renderizar index
-#          @components_categories = Components::Category.all;
-#          render action: "index"
-#        }
       end
     end
   end
@@ -83,21 +65,11 @@ class Components::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @components_category.update_attributes(params[:components_category])
-        format.html { redirect_to @components_category, notice: 'Category was successfully updated.' }
-        format.json { head :no_content }
-        format.js {     
-          # Variable utilizada para re renderizar index
-          @components_categories = Components::Category.all;
-          render action: "index"
+        format.html { 
+            redirect_to components_categories_path, notice: 'Category was successfully created.' 
         }
       else
         format.html { render action: "edit" }
-        format.json { render json: @components_category.errors, status: :unprocessable_entity }
-        format.js {     
-          # Variable utilizada para re renderizar index
-          @components_categories = Components::Category.all;
-          render action: "index"
-        }
       end
     end
   end
@@ -107,7 +79,6 @@ class Components::CategoriesController < ApplicationController
   def destroy
     @components_category = Components::Category.find(params[:id])
     @components_category.destroy
-
     respond_to do |format|
       format.html { redirect_to components_categories_url }
       format.json { head :no_content }

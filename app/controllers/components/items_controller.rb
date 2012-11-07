@@ -1,10 +1,12 @@
 class Components::ItemsController < ApplicationController
   # GET /components/items
   # GET /components/items.json
+  layout "dialog"
+  
   def index
     @components_items = Components::Item.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.html{ render 'index', :layout => "stock" }
       format.js
       format.json { render json: @components_items }
     end
@@ -26,7 +28,7 @@ class Components::ItemsController < ApplicationController
   def new
     @components_item = Components::Item.new
     respond_to do |format|
-      format.html { render 'new', :layout => "dialog" }# new.html.erb
+      format.html
 #      format.json { render json: @components_item }
       format.js
     end
@@ -41,24 +43,30 @@ class Components::ItemsController < ApplicationController
   # POST /components/items.json
   def create
     @components_item = Components::Item.new(params[:components_item])
-
+    
+    
+    category_name = params[:category_name];
+    category_description = params[:category_description];
+    if category_name && category_description 
+      category = Components::Category.new;
+      category.name = category_name;
+      category.description = category_description;
+      if category.save
+        @components_item.components_category_id = category.id;
+      else
+        format.html { render action: "components/categories/edit" }
+      end
+    end
+    
     respond_to do |format|
       if @components_item.save
         format.json { render json: @components_item, status: :created, location: @components_item }
-        format.html { redirect_to @components_item, notice: 'Componente creado.' }
-        format.js
-#        { 
-#          @components_items = Components::Item.all;
-#          render action: "index" 
-#        }
+        format.html { 
+            redirect_to components_items_path, notice: 'Category was successfully created.' 
+        }
       else
         format.html { render action: "new" }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
-        format.js {     
-          # Variable utilizada para re renderizar index
-          @components_items = Components::Item.all;
-          render action: "index" 
-        }
       end
     end
   end
@@ -70,16 +78,16 @@ class Components::ItemsController < ApplicationController
 
     respond_to do |format|
       if @components_item.update_attributes(params[:components_item])
-        format.html { redirect_to @components_item, notice: 'Item was successfully updated.' }
-        format.json { head :no_content }
+        format.html { 
+            redirect_to components_items_path, notice: 'Category was successfully created.' 
+        }
         format.js {     
             # Variable utilizada para re renderizar index
             @components_items = Components::Item.all;
             render action: "index"
         }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @components_item.errors, status: :unprocessable_entity }
+        format.html { render action: "edit", notice: 'Category was not created.'  }
         format.js {     
             # Variable utilizada para re renderizar index
             @components_items = Components::Item.all;
