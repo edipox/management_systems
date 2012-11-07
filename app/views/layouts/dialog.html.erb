@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div data-role="page" class="not">
-      <%= yield %>
-  </div>
+
+    <div data-role="dialog" class="not" >
+        <%= yield %>
+    </div>
+
 </body>
 </html>

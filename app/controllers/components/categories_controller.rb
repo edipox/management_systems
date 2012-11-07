@@ -4,7 +4,7 @@ class Components::CategoriesController < ApplicationController
   def index
     @components_categories = Components::Category.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render 'index', :layout => "dialog" } 
       format.js
       format.json { render json: @components_categories }
     end
@@ -16,7 +16,7 @@ class Components::CategoriesController < ApplicationController
     @components_category = Components::Category.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html{render "show", :layout => "dialog"} # show.html.erb
       format.json { render json: @components_category }
       format.js
     end
@@ -28,7 +28,7 @@ class Components::CategoriesController < ApplicationController
     @components_category = Components::Category.new
 
     respond_to do |format|
-#      format.html # new.html.erb
+      format.html { render 'new', :layout => "dialog" } # new.html.erb
 #      format.json { render json: @components_category }
       format.js
     end
@@ -37,6 +37,9 @@ class Components::CategoriesController < ApplicationController
   # GET /components/categories/1/edit
   def edit
     @components_category = Components::Category.find(params[:id])
+    respond_to do |format|
+      format.html { render 'edit', :layout => "dialog" } 
+    end
   end
 
   # POST /components/categories

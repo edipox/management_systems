@@ -1,7 +1,7 @@
 /*.ui-content{*/
 /*    width:100%!important;*/
 /*}*/
-
+/*
 .ui-content:not(.not) {
     width:80%!important;
     margin-left:auto!important;
@@ -12,6 +12,11 @@
     width:30%!important;
     margin-left:auto!important;
     margin-right:auto!important;
+}*/
+
+*[data-role="header"]{
+  padding:10px!important;
+  text-align:center;
 }
 
 div[data-role="popup"] {
