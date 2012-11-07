@@ -1,2 +1,0 @@
-module Components::CategoriesHelper
-end

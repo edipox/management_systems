@@ -4,11 +4,10 @@ Stock::Application.routes.draw do
     post 'permissions/save'
   end
 
-  namespace :components do resources :items end
-
-  namespace :components do resources :categories end
-
-  resources :roles
+  namespace :components do
+    resources :items
+    resources :categories
+  end
 
   devise_for :users, :path_names => {
     sign_in: 'login',
