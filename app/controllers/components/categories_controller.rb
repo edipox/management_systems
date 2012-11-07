@@ -6,7 +6,7 @@ class Components::CategoriesController < ApplicationController
   def index
     @components_categories = Components::Category.all
     respond_to do |format|
-      format.html{ render 'index', :layout => "reload" }
+      format.html{ render 'index', :layout => "default" }
       format.js
       format.json { render json: @components_categories }
     end

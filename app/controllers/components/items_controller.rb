@@ -6,7 +6,7 @@ class Components::ItemsController < ApplicationController
   def index
     @components_items = Components::Item.all
     respond_to do |format|
-      format.html{ render 'index', :layout => "stock" }
+      format.html{ render 'index', :layout => "default" }
       format.js
       format.json { render json: @components_items }
     end

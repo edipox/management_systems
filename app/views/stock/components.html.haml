@@ -3,6 +3,9 @@
     %a{ href: components_items_path, data: { role: 'button', remote: 'true' } } Componentes
     %a{ href: '#', data: { role: 'button' } } Stock
     %a{ href: '#', data: { role: 'button' } } Pedidos de Compra 
-    %a{ hreof: '#', data: { role: 'button' } } Pedidos de Componentes 
+    %a{ href: '#', data: { role: 'button' } } Pedidos de Componentes 
+    
+    %a{ href: components_categories_path, data: { role: 'button' } } Categorias
+    
   %div#content
     = render :file => 'components/items/index', :formats => [:html]

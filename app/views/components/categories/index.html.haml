@@ -1,21 +1,22 @@
-%div{ data: {role: "content", theme: "c" } }
-  %h1 Lista de categorias
-  %table{ data: { role: 'listview', inset: 'true', filter: 'true' }, class: "not" }
-    %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
-      %th Nombre
-      %th Descripcion
-      %th
-      %th
-      %th
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  %li{ data: { role: 'list-divider' } }
+    %div{ class: 'ui-grid-b' }
+      %div{ class: 'ui-block-a' } Nombre
+      %div{ class: 'ui-block-b' } Descripci&oacute;n
+      %div{ class: 'ui-block-c' } 
 
-    - @components_categories.each do |components_category|
-      %tr{ style: 'text-align: center;', data: { role: 'list-divider' } }
-        %td= components_category.name
-        %td= components_category.description
-        %td= link_to 'Ver', components_category
-        %td= link_to 'Editar', edit_components_category_path(components_category)
-        %td= link_to 'Eliminar', components_category, method: :delete, data: { confirm: 'Esta seguro?' }
+  - @components_categories.each do |category|
+    %li{ class: 'element'}
+      %div{ class: 'ui-grid-b' }
+        %div{ class: 'ui-block-a' }= category.name
+        %div{ class: 'ui-block-b' }= category.description
+        %div{  class: 'ui-block-c', data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, category #-
+          %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, category #-
+          %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
 
   %br
 
-  = link_to 'Nueva categoria', new_components_category_path
+  = link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

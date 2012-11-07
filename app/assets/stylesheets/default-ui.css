@@ -14,6 +14,11 @@
     margin-right:auto!important;
 }*/
 
+form{
+  width:400px;
+  margin:auto;
+}
+
 *[data-role="header"]{
   padding:10px!important;
   text-align:center;
@@ -48,6 +53,7 @@ div[data-role="controlgroup"]{
 
 li.ui-li.element{
   padding:0;
+  text-align:center;
 }
 
 

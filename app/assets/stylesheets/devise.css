@@ -7,7 +7,7 @@
     float:right;
 }
 
-#login_view, .login_container{
+#login_view, .login_container, #login_view form, .login_container form{
     width:350px!important;
     margin:auto!important;
 }
