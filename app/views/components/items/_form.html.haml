@@ -1,12 +1,12 @@
-= form_for @components_item, :html => { :class => "to_validate"} do |f|
+= form_for @components_item, :html => { :class => "to_validate", "data-validate" => "true", "validate" => "true"} do |f|
   = f.label :name, "Nombre"
-  = f.text_field :name, :class => "required"
+  = f.text_field :name, :class => "required", "maxlength" => "36" 
 
   = f.label :description, "Descripcion"
-  = f.text_field :description
+  = f.text_field :description, "maxlength" => "200" 
 
   = f.label :code, "Codigo"
-  = f.text_field :code
+  = f.text_field :code, :class => "required", "maxlength" => "36" 
   .field.plus
     = f.label :components_category_id, "Categoria"
     %div#category_select{style:"display:inline-block;" }
@@ -17,10 +17,10 @@
   %div#categorySubForm{ class: 'ui-corner-all', data: { role: 'content', theme: 'a' }, style: "display:none" } 
 
     = label_tag :category_name, "Nombre"  
-    = text_field_tag :category_name
+    = text_field_tag :category_name, :maxlength => 36
 
     = label_tag :category_description, "Descripcion"
-    = text_field_tag :category_description
+    = text_field_tag :category_description, :html => { "maxlength" => "200" }
 
     
   %br
