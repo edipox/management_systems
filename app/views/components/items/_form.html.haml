@@ -17,10 +17,10 @@
   %div#categorySubForm{ class: 'ui-corner-all', data: { role: 'content', theme: 'a' }, style: "display:none" } 
 
     = label_tag :category_name, "Nombre"  
-    = text_field_tag :category_name, :maxlength => 36
+    = text_field_tag :category_name, nil, :maxlength => 36
 
     = label_tag :category_description, "Descripcion"
-    = text_field_tag :category_description, :html => { "maxlength" => "200" }
+    = text_field_tag :category_description, nil, :html => { "maxlength" => "200" }
 
     
   %br

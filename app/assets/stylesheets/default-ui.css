@@ -25,6 +25,10 @@
   color: #CD0A0A;
 }
 
+.error{
+  float: right;
+}
+
 form{
   width:450px;
   margin:auto;

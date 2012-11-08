@@ -47,14 +47,16 @@ class Components::ItemsController < ApplicationController
     
     category_name = params[:category_name];
     category_description = params[:category_description];
-    if category_name && category_description 
+    if category_name != "" && category_description != ""
       category = Components::Category.new;
       category.name = category_name;
       category.description = category_description;
       if category.save
         @components_item.components_category_id = category.id;
       else
-        format.html { render action: "components/categories/edit" }
+          respond_to do |format|   
+            format.html { render action: "components/categories/edit" }
+          end
       end
     end
     
