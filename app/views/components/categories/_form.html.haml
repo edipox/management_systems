@@ -8,10 +8,10 @@
 
   .field
     = f.label :name, "Nombre"
-    = f.text_field :name
+    = f.text_field :name, { class: "required" }
   .field
     = f.label :description, "Descripcion"
-    = f.text_field :description
+    = f.text_field :description, { class: "required" }
 
   .actions
     = f.submit "Guardar", { class: "closer", close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b', remote: true } }

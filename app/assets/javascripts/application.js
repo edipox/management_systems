@@ -20,14 +20,13 @@ $(document).bind("mobileinit", function(){
   $.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
 
+$(document).ready(function(){
+  on_load();
+});
+
 function on_load(){
-  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');  
-//  $(".sub_form_loader").click(function(){
-//      showFakeSubForm(
-//        "#"+$(this).attr("id"), 
-//        "#"+$(this).attr("subform_id"),
-//        "#"+$(this).attr("select_id"));  
-//  });
+  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
+  $(".to_validate").validate(); 
 }
 
 function showFakeSubForm(caller, subform, select){
@@ -42,7 +41,7 @@ function showFakeSubForm(caller, subform, select){
         $(select).show();
         $(subform).hide();
         var e = $(caller+" .ui-icon-delete");
-        $(e).removeClass("ui-icon-delte");
+        $(e).removeClass("ui-icon-delete");
         $(e).addClass("ui-icon-plus");
       }
   );
