@@ -1,0 +1,5 @@
+:plain
+  changeSelectedButton('#roles', '#permissions_of_#{@role.id}')
+  changeContent('#page #edit_role_section',
+    '#{escape_javascript render "settings/permissions/of_role", :formats => [:html]}'
+  );

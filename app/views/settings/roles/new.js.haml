@@ -1,0 +1,6 @@
+:plain
+  changeSelectedButton('#roles', '#create_role_button');
+  changeContent('#edit_role_section',
+    '#{escape_javascript render "form", :formats => [:html]}'
+  );
+  $('[name="role[name]"]').focus();

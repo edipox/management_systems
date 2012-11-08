@@ -1,0 +1,10 @@
+:plain
+  changeContent('#roles', 
+    '#{escape_javascript render 'list'}' +
+    '#{escape_javascript render 'create_button'}'
+  );
+  changeContent('#notification',
+    '<h3> El Tipo de funcionario "#{@role.name}" se ha guardado correctamente </h3>'
+  );
+  $('#notification').popup('open');
+  $('#edit_role_#{@role.id}').click();

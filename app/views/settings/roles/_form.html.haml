@@ -1,0 +1,17 @@
+- action = settings_roles_path
+- action = settings_role_path(@role) unless @role.id.nil?
+%form{ action: action, method: 'post', :'accept-charset' => 'UTF-8', data: { remote: 'true' } }
+
+  %input{ type: 'hidden', name: 'authenticity_token', value: form_authenticity_token }
+  - unless @role.id.nil?
+    %input{ type: 'hidden', name: '_method', value: 'put' }
+  
+  %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+    %li{ data: { role: 'list-divider' } }
+      = "Nuevo tipo de funcionario" if @role.id.nil?
+      != "Editar tipo de funcionario <b><i>(#{@role.name})</i></b>" unless @role.id.nil?
+    %li
+      %h2{ style: 'width: 100%; text-align: left;' } Nombre
+      %input{ name: 'role[name]', value: @role.name }
+
+  %input{ type: 'submit', value: 'Guardar' }

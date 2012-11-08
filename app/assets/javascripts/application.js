@@ -52,6 +52,11 @@ function changeContent(where, content) {
   return $(where).html(content).trigger('create');
 };
 
+function changeSelectedButton(where, selected) {
+  $(where + ' [data-role="button"]').removeClass($.mobile.activeBtnClass);
+  $(selected).addClass($.mobile.activeBtnClass);
+}
+
 
 function PopupLevel(_content){
   this.content = _content;
