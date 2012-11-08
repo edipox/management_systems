@@ -27,6 +27,17 @@ $(document).ready(function(){
 function on_load(){
   showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
   $(".to_validate").validate(); 
+  trim($(".trim"));
+  trim($("*[trim]"));
+}
+
+function trim(element){
+    $.each($.makeArray(element), function(i, val){
+       var maxLength = eval($(val).attr("trim"));
+       maxLength = maxLength == undefined || maxLength == 0 || maxLength == "" || isNaN(maxLength) ? 20 : maxLength;
+       var s = $(val).text();
+       $(val).text(s.length > maxLength ? s.substr(0,maxLength-3)+"..." : s);
+    })
 }
 
 function showFakeSubForm(caller, subform, select){

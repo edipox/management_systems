@@ -8,8 +8,8 @@
   - @components_categories.each do |category|
     %li{ class: 'element'}
       %div{ class: 'ui-grid-b' }
-        %div{ class: 'ui-block-a' }= category.name
-        %div{ class: 'ui-block-b' }= category.description
+        %div{ class: 'ui-block-a', trim:"40" }= category.name
+        %div{ class: 'ui-block-b', trim:"40" }= category.description
         %div{  class: 'ui-block-c', data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, category #-
           %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar

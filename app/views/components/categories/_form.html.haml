@@ -2,10 +2,10 @@
 
   .field
     = f.label :name, "Nombre"
-    = f.text_field :name, { class: "required" }
+    = f.text_field :name, { class: "required", "maxlength" => "40"  }
   .field
     = f.label :description, "Descripcion"
-    = f.text_field :description, { class: "required" }
+    = f.text_field :description, { class: "required", "maxlength" => "200"  }
 
   .actions
     = f.submit "Guardar", { type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b'} }

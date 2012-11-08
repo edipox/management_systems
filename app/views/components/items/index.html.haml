@@ -10,10 +10,10 @@
   - @components_items.each do |item|
     %li{ class: 'element' }
       %div{ class: 'ui-grid-d' }
-        %div{ class: 'ui-block-a' }= item.name
-        %div{ class: 'ui-block-b' }= item.description
-        %div{ class: 'ui-block-c' }= item.code
-        %div{ class: 'ui-block-d' }= item.category.name
+        %div{ class: 'ui-block-a trim' }= item.name
+        %div{ class: 'ui-block-b trim' }= item.description
+        %div{ class: 'ui-block-c trim' }= item.code
+        %div{ class: 'ui-block-d trim' }= item.category.name
         %div{ class: 'ui-block-e' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
             - if can? :delete, item
