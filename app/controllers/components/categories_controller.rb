@@ -69,7 +69,9 @@ class Components::CategoriesController < ApplicationController
             redirect_to components_categories_path, notice: 'Categoria actualizada correctamente' 
         }
       else
-        format.html { render action: "edit" }
+        format.html { 
+        flash[:notice] = "Error al actualizar categoria"
+        render action: "edit" }
       end
     end
   end

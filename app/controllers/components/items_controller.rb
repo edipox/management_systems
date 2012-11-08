@@ -28,8 +28,9 @@ class Components::ItemsController < ApplicationController
   def new
     @components_item = Components::Item.new
     respond_to do |format|
-      format.html
-#      format.json { render json: @components_item }
+      format.html{
+        flash[:notice] = nil
+      }
       format.js
     end
   end
@@ -44,32 +45,35 @@ class Components::ItemsController < ApplicationController
   def create
     @components_item = Components::Item.new(params[:components_item])
     
-    
     category_name = params[:category_name];
     category_description = params[:category_description];
+
     if category_name != "" && category_description != ""
       category = Components::Category.new;
       category.name = category_name;
       category.description = category_description;
+
       if category.save
-        @components_item.components_category_id = category.id;
-      else
-          respond_to do |format|   
-            format.html { render action: "components/categories/edit", notice: "Error al crear componente. Categoria vacia." }
-          end
+        @components_item.category_id = category.id;
       end
     end
-    
+
     respond_to do |format|
-      if @components_item.save
-        format.json { render json: @components_item, status: :created, location: @components_item }
-        format.html { 
-            redirect_to components_items_path, notice: 'Componente creado correctamente.' 
-        }
+      
+      if @components_item.category_id == nil
+            format.html { 
+            flash[:notice] = "Error al crear componente. Categoria vacia."
+            render action: 'new'   }
       else
-        format.html { render action: "new", notice: 'Error al crear componente.'  }
-        format.json { render json: @components_item.errors, status: :unprocessable_entity }
+        if @components_item.save
+          format.html { 
+            redirect_to components_items_path, notice: 'Componente creado correctamente.'
+          }
+        else
+          format.html { render action: "new", notice: 'Error al crear componente.'  }
+        end
       end
+      
     end
   end
 

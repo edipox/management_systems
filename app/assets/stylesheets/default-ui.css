@@ -23,6 +23,17 @@
 /*  border: 1px solid #FCEFA1;*/
   border:1px solid #187f00;
 }
+
+#error_container{
+  padding:5px;
+/*  background:#FEFFD4;*/
+  background:#ffd4d4;
+  border-radius:5px!important;
+  margin-bottom:4px;
+/*  border: 1px solid #FCEFA1;*/
+  border:1px solid #a53939;
+}
+
 #notice{
 /* color:#734000!important;*/
   color:black!important;
