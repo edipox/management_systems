@@ -12,6 +12,18 @@ ACL::Entity.create!({
   const: 'Components::Item'
 })
 
+category = Components::Category.create!({
+  name:'Teclado inalambrico',
+  description:'Teclado inalambrico comun'
+})
+
+Components::Item.create!({
+  name:'Teclado Satellite',
+  description:'Teclado Wireless Satellite AK701RF ',
+  code:'00245',
+  category:category
+})
+
 # For test permissions creation, create a Role after a Component
 employee_role = ACL::Role.create!({ name: 'Empleado' })
 
