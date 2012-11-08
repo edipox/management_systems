@@ -55,7 +55,7 @@ class Components::ItemsController < ApplicationController
         @components_item.components_category_id = category.id;
       else
           respond_to do |format|   
-            format.html { render action: "components/categories/edit" }
+            format.html { render action: "components/categories/edit", notice: "Error al crear componente. Categoria vacia." }
           end
       end
     end

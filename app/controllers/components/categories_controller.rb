@@ -53,7 +53,7 @@ class Components::CategoriesController < ApplicationController
             redirect_to components_categories_path, notice: 'Categoria creada correctamente.' 
         }
       else
-        format.html { render action: "new", notice: '<div style="color:red;">Error al crear categoria.</div>'  }
+        format.html { render action: "new", notice: 'Error al crear categoria.'  }
       end
     end
   end
@@ -66,7 +66,7 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       if @components_category.update_attributes(params[:components_category])
         format.html { 
-            redirect_to components_categories_path, notice: '' 
+            redirect_to components_categories_path, notice: 'Categoria actualizada correctamente' 
         }
       else
         format.html { render action: "edit" }
