@@ -1,5 +1,10 @@
 :plain
-  changeContent('#roles', 
-    '#{escape_javascript render 'list'}' +
-    '#{escape_javascript render 'create_button'}'
-  );
+  $('#roles') 
+    .html('#{escape_javascript render 'list'}' +
+    '#{escape_javascript render 'create_button'}')
+    .trigger('create');
+
+  $('#notification')
+    .html('<h3> El tipo de usuario "#{@role.name}" se ha creado correctamente </h3>')
+    .trigger('create')
+    .popup('open');
