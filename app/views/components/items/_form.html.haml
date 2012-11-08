@@ -8,9 +8,9 @@
   = f.label :code, "Codigo"
   = f.text_field :code, :class => "required", "maxlength" => "36" 
   .field.plus
-    = f.label :components_category_id, "Categoria"
+    = f.label :category_id, "Categoria"
     %div#category_select{style:"display:inline-block;" }
-      = f.collection_select(:components_category_id, Components::Category.all, :id, :name)
+      = f.collection_select(:category_id, Components::Category.all, :id, :name)
    
     %a#category_button{ data:{ role:'button', icon: 'plus', iconpos: 'notext'}, subform_id: "categorySubForm", select_id: "category_select", class: "sub_form_loader", onclick: "on_load" }
 

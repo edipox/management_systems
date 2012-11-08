@@ -78,7 +78,7 @@ class Components::CategoriesController < ApplicationController
   # DELETE /components/categories/1.json
   def destroy
     @components_category = Components::Category.find(params[:id])
-    if @components_category.components_items
+    if @components_category.components_items != []
       respond_to do |format|
         format.html { 
           #redirect_to components_categories_url, 

@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(:version => 20121106210504) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
-    t.string   "components_category_id", :limit => 36, :null => false
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.string   "category_id", :limit => 36, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|

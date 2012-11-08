@@ -13,7 +13,7 @@
         %div{ class: 'ui-block-a' }= item.name
         %div{ class: 'ui-block-b' }= item.description
         %div{ class: 'ui-block-c' }= item.code
-        %div{ class: 'ui-block-d' }= item.components_category.name
+        %div{ class: 'ui-block-d' }= item.category.name
         %div{ class: 'ui-block-e' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
             - if can? :delete, item
