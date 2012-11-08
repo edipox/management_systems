@@ -13,6 +13,16 @@ $(on_load);
 
     <div data-role="dialog" class="not" data-rel="back">
         <%= yield %>
+      
+      <% if notice %>
+        <div id="notice_container">
+          <span class="ui-icon ui-icon-alert" ></span>
+          <div id="notice">
+            <%= notice %>
+          </div>
+        </div>
+      <% end %>
+      
     </div>
 
 </body>

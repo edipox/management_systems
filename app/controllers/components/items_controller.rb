@@ -64,10 +64,10 @@ class Components::ItemsController < ApplicationController
       if @components_item.save
         format.json { render json: @components_item, status: :created, location: @components_item }
         format.html { 
-            redirect_to components_items_path, notice: 'Category was successfully created.' 
+            redirect_to components_items_path, notice: 'Componente creado correctamente.' 
         }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: 'Error al crear componente.'  }
         format.json { render json: @components_item.errors, status: :unprocessable_entity }
       end
     end
@@ -81,7 +81,7 @@ class Components::ItemsController < ApplicationController
     respond_to do |format|
       if @components_item.update_attributes(params[:components_item])
         format.html { 
-            redirect_to components_items_path, notice: 'Category was successfully created.' 
+            redirect_to components_items_path, notice: 'Componente actualizado correctamente.' 
         }
         format.js {     
             # Variable utilizada para re renderizar index
@@ -89,7 +89,7 @@ class Components::ItemsController < ApplicationController
             render action: "index"
         }
       else
-        format.html { render action: "edit", notice: 'Category was not created.'  }
+        format.html { render action: "edit", notice: 'Error al actualizar componente.'  }
         format.js {     
             # Variable utilizada para re renderizar index
             @components_items = Components::Item.all;

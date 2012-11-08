@@ -14,6 +14,25 @@
     margin-right:auto!important;
 }*/
 
+#notice_container{
+  padding:5px;
+/*  background:#FEFFD4;*/
+  background:#daffdd;
+  border-radius:5px!important;
+  margin-bottom:4px;
+/*  border: 1px solid #FCEFA1;*/
+  border:1px solid #187f00;
+}
+#notice{
+/* color:#734000!important;*/
+  color:black!important;
+}
+#notice_container span.ui-icon{
+  float:left;
+  margin-left:10px;
+  margin-right:10px;
+}
+
 .field_with_errors {
   background:none!important;
   width:100%;

@@ -24,7 +24,12 @@
           %a{ href: components_categories_path, data: { role: 'button' } } Categorias
           
         %div#content
-  
+
+          - if notice  
+            %div#notice_container
+              %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+              %div#notice= notice
+        
           = yield
 
       %div{ data: { role: 'footer', position: 'fixed' } }

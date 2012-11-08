@@ -50,10 +50,10 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       if @components_category.save
         format.html { 
-            redirect_to components_categories_path, notice: 'Category was successfully created.' 
+            redirect_to components_categories_path, notice: 'Categoria creada correctamente.' 
         }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: '<div style="color:red;">Error al crear categoria.</div>'  }
       end
     end
   end
@@ -66,7 +66,7 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       if @components_category.update_attributes(params[:components_category])
         format.html { 
-            redirect_to components_categories_path, notice: 'Category was successfully created.' 
+            redirect_to components_categories_path, notice: '' 
         }
       else
         format.html { render action: "edit" }
@@ -78,15 +78,31 @@ class Components::CategoriesController < ApplicationController
   # DELETE /components/categories/1.json
   def destroy
     @components_category = Components::Category.find(params[:id])
-    @components_category.destroy
-    respond_to do |format|
-      format.html { redirect_to components_categories_url }
-      format.json { head :no_content }
-      format.js {     
-          # Variable utilizada para re renderizar index
-          @components_categories = Components::Category.all;
-          render action: "index"
-      }
+    if @components_category.components_items
+      respond_to do |format|
+        format.html { 
+          #redirect_to components_categories_url, 
+          redirect_to components_categories_path, notice: 'No puedes eliminar la categoria "'+@components_category.name+'", porque existen registros relacionados.' 
+           }
+        format.js {     
+            @components_categories = Components::Category.all;
+            render action: "index"
+        }
+      end 
+    else
+      @components_category.destroy
+      respond_to do |format|
+        format.html { redirect_to components_categories_url }
+        format.json { head :no_content }
+        format.js {     
+            # Variable utilizada para re renderizar index
+            @components_categories = Components::Category.all;
+            render action: "index"
+        }
+      end
     end
+    
   end
+  
+  
 end
