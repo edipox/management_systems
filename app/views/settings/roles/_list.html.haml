@@ -1,0 +1,16 @@
+-# List Roles
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  - @roles.each do |role|
+    %li{ class: 'element', id: ['role', role.id] }
+      %div{ class: 'ui-grid-a' }
+        %div{ class: 'ui-block-a' }= role.name
+        %div{ class: 'ui-block-b' }
+          %div{ data: { role: 'controlgroup', type: 'horizontal' } }
+
+            -# Permissions button, id = permissions_of_#{role.id}
+            %a{ href: "/settings/permissions/#{role.id}", id: ['permissions_of', role.id],
+              data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' } } Permisos
+
+            -# Edit role button, id = edit_role_#{role.id}
+            %a{ href: edit_settings_role_path(role), id: ['edit_role', role.id],
+              data: { role: 'button', mini: 'true', remote: 'true' } } Editar

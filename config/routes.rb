@@ -1,7 +1,10 @@
 Stock::Application.routes.draw do
   namespace :settings do
+    get '/', :to => 'settings#index'
     get 'permissions', :to => 'permissions#index'
+    match 'permissions/:role_id', :to => 'permissions#of_role', :via => 'get'
     post 'permissions/save'
+    resources :roles
   end
 
   namespace :components do

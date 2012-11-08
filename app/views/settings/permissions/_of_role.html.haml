@@ -1,0 +1,19 @@
+%form{ action: settings_permissions_save_path, method: :post, data: { remote: 'true' } }
+  %input{ type: 'hidden', name: 'authenticity_toke', value: form_authenticity_token }
+
+  %ul{ data: { role: 'listview', inset: 'true' } }
+    - @count = 0
+    - @permissions_by_entity.each do |id, permissions|
+      - entity = ACL::Entity.find(id)
+      %li{ data: { role: 'list-divider' } }= entity.name
+      %li
+        %div{ data: { role: 'controlgroup' } }
+          - permissions.each do |p|
+            - i_id = "#{p.id}_#{p.action.symbol}"
+            - i_name = "[permissions][#{@count}]"
+
+            %input{ type: 'hidden', name: i_name + '[id]', value: p.id }
+            %input{ id: i_id, type: 'checkbox', name: i_name + '[enabled]', checked: p.enabled }
+            %label{ for: i_id }= p.action.name
+            - @count += 1
+  %input{ type: 'submit', value: 'Guardar' }

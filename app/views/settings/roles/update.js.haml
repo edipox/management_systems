@@ -1,0 +1,6 @@
+:plain
+  changeContent('#roles', 
+    '#{escape_javascript render 'list'}' +
+    '#{escape_javascript render 'create_button'}'
+  );
+  $('#edit_role_#{@role.id}').click();
