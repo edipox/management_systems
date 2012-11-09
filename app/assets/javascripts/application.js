@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 function on_load(){
   showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
-  $(".to_validate").validate(); 
+  $("form").validate(); 
   trim($(".trim"));
   trim($("*[trim]"));
 }
