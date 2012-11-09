@@ -21,7 +21,7 @@ Components::Item.create!({
   name:'Teclado Satellite',
   description:'Teclado Wireless Satellite AK701RF ',
   code:'00245',
-  category:category
+  category: category
 })
 
 # For test permissions creation, create a Role after a Component
