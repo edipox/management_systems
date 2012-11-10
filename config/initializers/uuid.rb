@@ -10,6 +10,6 @@ class ActiveRecord::Base
 
   private
   def generate_uuid
-    self.id = UUID.new.generate
+    self.id = UUID.new.generate if self.id.nil?
   end
 end
