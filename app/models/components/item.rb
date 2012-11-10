@@ -3,4 +3,6 @@ class Components::Item < ActiveRecord::Base
   belongs_to :category, :class_name => "Components::Category"
   
   validates_presence_of  :code, :name
+
+  has_paper_trail
 end

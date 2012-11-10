@@ -7,4 +7,5 @@ class ACL::Permission < ActiveRecord::Base
   belongs_to :entity, :class_name => ACL::Entity.to_s
   belongs_to :role, :class_name => ACL::Role.to_s
 
+  has_paper_trail
 end

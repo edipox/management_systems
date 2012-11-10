@@ -19,4 +19,6 @@ class ACL::Role < ActiveRecord::Base
 
   after_create ACL::RoleCallbacks.new
   default_scope order(:created_at)
+
+  has_paper_trail
 end

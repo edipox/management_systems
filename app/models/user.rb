@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   attr_accessible :role, :acl_role_id
   belongs_to :acl_role, :class_name => ACL::Role.to_s
   alias_attribute :role, :acl_role
+
+  has_paper_trail
 end

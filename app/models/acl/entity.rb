@@ -17,4 +17,6 @@ class ACL::Entity < ActiveRecord::Base
   alias_attribute :permissions, :acl_permissions
 
   after_create ACL::EntityCallbacks.new
+
+  has_paper_trail
 end
