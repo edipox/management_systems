@@ -4,7 +4,7 @@ class Components::ItemsController < ApplicationController
   layout "dialog"
   
   def index
-    @components_items = Components::Item.all
+    @components_items = Components::Item.paginate(:page => params[:page])
     respond_to do |format|
       format.html{ render 'index', :layout => "default" }
       format.js

@@ -4,7 +4,7 @@ class Components::CategoriesController < ApplicationController
   layout "dialog"
   
   def index
-    @components_categories = Components::Category.all
+    @components_categories = Components::Category.paginate(:page => params[:page])
     respond_to do |format|
       format.html{ render 'index', :layout => "default" }
       format.js

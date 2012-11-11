@@ -120,6 +120,7 @@ GEM
       macaddr (~> 1.0)
     warden (1.2.1)
       rack (>= 1.0)
+    will_paginate (3.0.3)
 
 PLATFORMS
   ruby
@@ -137,3 +138,4 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   uuid
+  will_paginate (~> 3.0)

@@ -1,4 +1,5 @@
-%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+= will_paginate @components_categories
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: "true" } }
   %li{ data: { role: 'list-divider' } }
     %div{ class: 'ui-grid-b' }
       %div{ class: 'ui-block-a' } Nombre
@@ -15,5 +16,4 @@
           %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
           -# if can? :update, category #-
           %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
-
-  = link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+= link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { inline:"true",role: 'button', theme: 'b', icon: 'new' } }
