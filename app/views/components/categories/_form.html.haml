@@ -1,5 +1,10 @@
-= form_for @components_category,  :html => { :class => "to_validate" } do |f|
-
+= form_for @components_category do |f|
+  - if @components_category.errors.any?
+    #error_explanation
+      %h2= "No se pudo guardar el registro:"
+      %ul
+        - @components_category.errors.full_messages.each do |msg|
+          %li= msg
   .field
     = f.label :name, "Nombre"
     = f.text_field :name, { class: "required", "maxlength" => "40"  }

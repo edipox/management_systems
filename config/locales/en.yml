@@ -99,7 +99,7 @@ en:
       second: Segundos
       year: Año
   errors: &errors
-    format: ! '%{attribute} %{message}'
+    format: ! 'El campo señalado %{message}'
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
