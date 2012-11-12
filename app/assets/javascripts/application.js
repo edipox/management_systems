@@ -48,12 +48,20 @@ function showFakeSubForm(caller, subform, select){
         var e = $(caller+" .ui-icon-plus");
         $(e).removeClass("ui-icon-plus");
         $(e).addClass("ui-icon-delete");
+
+        $('#new_category').val('true');
+        $('#category_name').addClass('required');
+        $('#category_description').addClass('required');
       },      function () {
         $(select).show();
         $(subform).hide();
         var e = $(caller+" .ui-icon-delete");
         $(e).removeClass("ui-icon-delete");
         $(e).addClass("ui-icon-plus");
+
+        $('#new_category').val('false');
+        $('#category_name').removeClass('required');
+        $('#category_description').removeClass('required');
       }
   );
 }

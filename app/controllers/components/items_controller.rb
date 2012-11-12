@@ -43,37 +43,29 @@ class Components::ItemsController < ApplicationController
   # POST /components/items
   # POST /components/items.json
   def create
-    @components_item = Components::Item.new(params[:components_item])
-    
-    category_name = params[:category_name];
-    category_description = params[:category_description];
+  
+    if params[:new_category] == 'true'
+      params[:components_item][:category_id] = nil 
+      category = Components::Category.new({
+        name: params[:category_name],
+        description: params[:category_description]
+      })
 
-    if category_name != "" && category_description != ""
-      category = Components::Category.new;
-      category.name = category_name;
-      category.description = category_description;
+      raise 'Problema al crear la nueva categoria' unless category.save
 
-      if category.save
-        @components_item.category_id = category.id;
-      end
+      params[:components_item][:category_id] = category.id
     end
 
+    @components_item = Components::Item.new(params[:components_item])
+    
     respond_to do |format|
-      
-      if @components_item.category_id == nil
-            format.html { 
-            flash[:notice] = "Error al crear componente. Categoria vacia."
-            render action: 'new'   }
+      if @components_item.save
+        format.html { 
+          redirect_to components_items_path, notice: 'Componente creado correctamente.'
+        }
       else
-        if @components_item.save
-          format.html { 
-            redirect_to components_items_path, notice: 'Componente creado correctamente.'
-          }
-        else
-          format.html { render action: "new", notice: 'Error al crear componente.'  }
-        end
+        format.html { render action: "new", notice: 'Error al crear componente.'  }
       end
-      
     end
   end
 

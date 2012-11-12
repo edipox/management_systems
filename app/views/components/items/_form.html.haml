@@ -28,7 +28,8 @@
 
     = label_tag :category_description, "Descripcion"
     = text_field_tag :category_description, nil, :html => { "maxlength" => "200" }
-
+    
+    = hidden_field_tag :new_category, 'false'
     
   %br
   %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

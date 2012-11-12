@@ -3,6 +3,6 @@ class StockController < ApplicationController
   end
 
   def components
-    @components_items = Components::Item.all
+    @components_items = Components::Item.paginate(:page => params[:page])
   end
 end
