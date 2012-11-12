@@ -1,4 +1,18 @@
 Stock::Application.routes.draw do
+  namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end
+
+  namespace :orders do  namespace :productions do resources :details end end
+
+  namespace :requests do  namespace :devolutions do  namespace :products do resources :details end end end
+
+  namespace :requests do  namespace :transferences do  namespace :products do resources :details end end end
+
+  namespace :requests do  namespace :transferences do  namespace :components do resources :details end end end
+
+  namespace :requests do  namespace :purchases do  namespace :components do resources :details end end end
+
+  namespace :products do  namespace :compositions do resources :details end end
+
   namespace :requests do  namespace :devolutions do resources :components end end
 
   namespace :orders do resources :productions end

@@ -1,0 +1,25 @@
+
+= will_paginate @requests_devolutions_components_details
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-b" }
+  
+      
+      %div{ class: "ui-block-b" }  
+      
+      %div{ class: "ui-block-c" }  
+  
+  - @requests_devolutions_components_details.each do |requests_devolutions_components_detail|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-b" }
+      
+        %div{ class: "ui-block-b trim" }= requests_devolutions_components_detail.header_id
+      
+        %div{ class: "ui-block-c trim" }= requests_devolutions_components_detail.component_id
+  
+        %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, requests_devolutions_components_detail 
+          %a{ href: requests_devolutions_components_detail_path(requests_devolutions_components_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
+          -# if can? :update, requests_devolutions_components_detail 
+          %a{ href: edit_requests_devolutions_components_detail_path(requests_devolutions_components_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar

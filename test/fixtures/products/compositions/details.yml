@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  composition_id: MyString
+  components_id: MyString
+  quantity: 1
+
+two:
+  composition_id: MyString
+  components_id: MyString
+  quantity: 1

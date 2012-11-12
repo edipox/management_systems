@@ -1,0 +1,29 @@
+
+= will_paginate @products_compositions_details
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-c" }
+  
+      
+      %div{ class: "ui-block-b" }  
+      
+      %div{ class: "ui-block-c" }  
+      
+      %div{ class: "ui-block-d" } Cantidad 
+  
+  - @products_compositions_details.each do |products_compositions_detail|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-c" }
+      
+        %div{ class: "ui-block-b trim" }= products_compositions_detail.composition_id
+      
+        %div{ class: "ui-block-c trim" }= products_compositions_detail.components_id
+      
+        %div{ class: "ui-block-d trim" }= products_compositions_detail.quantity
+  
+        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, products_compositions_detail 
+          %a{ href: products_compositions_detail_path(products_compositions_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
+          -# if can? :update, products_compositions_detail 
+          %a{ href: edit_products_compositions_detail_path(products_compositions_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar

@@ -1,0 +1,23 @@
+
+= form_for @requests_devolutions_products_detail, :html => { "data-remote" => "true" } do |f|
+  - if @requests_devolutions_products_detail.errors.any?
+    #error_explanation
+      %h2= "No se pudo guardar:"
+      %ul
+        - @requests_devolutions_products_detail.errors.full_messages.each do |msg|
+          %li= msg
+    -#= fd.hidden_field :SINGULAR_HEADER_id
+    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
+
+      
+    
+  .field    
+    = hidden_field_tag "header_id", @requests_devolutions_product.id
+    
+          
+  .field
+    = f.label :product_id, 'Producto'
+    = f.collection_select(:product_id, Products::Item.all, :id, :name,{}, { class: "required" })
+    
+  .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }
