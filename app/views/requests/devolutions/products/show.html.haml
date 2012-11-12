@@ -1,0 +1,35 @@
+
+%div{ data: {role: "content", theme: "c" } }
+
+%div{ data: {role: "content", theme: "c" } }
+  %div{ class: "ui-grid-d" }
+      
+    %div{ class: "ui-block-b" } :
+      
+    %div{ class: "ui-block-c" } :
+      
+    %div{ class: "ui-block-d" } Motivo:
+      
+    %div{ class: "ui-block-e" } :
+  
+  %div{ class: "ui-grid-d" }
+  
+    %div{ class: "ui-block-e" }= @requests_devolutions_product.transaction_id
+  
+    %div{ class: "ui-block-e" }= @requests_devolutions_product.user_id
+  
+    %div{ class: "ui-block-e" }= @requests_devolutions_product.reason
+  
+    %div{ class: "ui-block-e" }= @requests_devolutions_product.status_id
+  
+
+- @requests_devolutions_products_details = @requests_devolutions_product.details.paginate(:page => params[:page])
+- @requests_devolutions_products_detail = Requests::Devolutions::Products::Detail.new
+
+%div#form
+  = render 'requests/devolutions/products/details/form'
+
+%div#list
+  = render 'requests/devolutions/products/details/list'
+  
+= link_to 'Volver', requests_devolutions_products_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c' } }

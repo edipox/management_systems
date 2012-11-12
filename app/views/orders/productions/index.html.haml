@@ -1,0 +1,33 @@
+
+= will_paginate @orders_productions
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-c" }
+  
+      
+      %div{ class: "ui-block-b" }  
+      
+      %div{ class: "ui-block-c" }  
+      
+      %div{ class: "ui-block-d" }  
+  
+  - @orders_productions.each do |orders_production|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-c" }
+      
+        %div{ class: "ui-block-b trim" }= orders_production.transaction_id
+      
+        %div{ class: "ui-block-c trim" }= orders_production.status_id
+      
+        %div{ class: "ui-block-d trim" }= orders_production.user_id
+  
+        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, orders_production 
+          %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, orders_production 
+          %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+          %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          
+
+  = link_to 'Agregar  ', new_orders_production_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
