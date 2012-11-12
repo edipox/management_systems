@@ -1,0 +1,23 @@
+
+= will_paginate @locations_continents
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-a" }
+  
+      
+      %div{ class: "ui-block-b" } Nombre 
+  
+  - @locations_continents.each do |locations_continent|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-a" }
+      
+        %div{ class: "ui-block-b trim" }= locations_continent.name
+  
+        %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, locations_continent 
+          %a{ href: locations_continent_path(locations_continent), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, locations_continent 
+          %a{ href: edit_locations_continent_path(locations_continent), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
+  = link_to 'Agregar  ', new_locations_continent_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

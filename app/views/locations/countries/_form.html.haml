@@ -1,0 +1,19 @@
+
+= form_for @locations_country do |f|
+  - if @locations_country.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @locations_country.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    
+  .field
+    = f.label :continent_id 
+    = f.text_field :continent_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

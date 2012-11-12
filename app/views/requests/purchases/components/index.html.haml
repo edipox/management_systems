@@ -1,0 +1,33 @@
+
+= will_paginate @requests_purchases_components
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-c" }
+  
+      
+      %div{ class: "ui-block-b" }  
+      
+      %div{ class: "ui-block-c" }  
+      
+      %div{ class: "ui-block-d" }  
+  
+  - @requests_purchases_components.each do |requests_purchases_component|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-c" }
+      
+        %div{ class: "ui-block-b trim" }= requests_purchases_component.status_id
+      
+        %div{ class: "ui-block-c trim" }= requests_purchases_component.user_id
+      
+        %div{ class: "ui-block-d trim" }= requests_purchases_component.transaction_id
+  
+        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, requests_purchases_component 
+          %a{ href: requests_purchases_component_path(requests_purchases_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, requests_purchases_component 
+          %a{ href: edit_requests_purchases_component_path(requests_purchases_component), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+          %a{ href: requests_purchases_component_path(requests_purchases_component), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          
+
+  = link_to 'Agregar  ', new_requests_purchases_component_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

@@ -1,0 +1,31 @@
+
+= will_paginate @components_models
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-c" }
+  
+      
+      %div{ class: "ui-block-b" } Nombre 
+      
+      %div{ class: "ui-block-c" } Descripci&oacute;n 
+      
+      %div{ class: "ui-block-d" }  
+  
+  - @components_models.each do |components_model|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-c" }
+      
+        %div{ class: "ui-block-b trim" }= components_model.name
+      
+        %div{ class: "ui-block-c trim" }= components_model.description
+      
+        %div{ class: "ui-block-d trim" }= components_model.brand_id
+  
+        %div{  class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, components_model 
+          %a{ href: components_model_path(components_model), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, components_model 
+          %a{ href: edit_components_model_path(components_model), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
+  = link_to 'Agregar  ', new_components_model_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

@@ -1,0 +1,24 @@
+
+= form_for @products_composition, :html => { style: "width:400px;" } do |f|
+  - if @products_composition.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @products_composition.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+      
+    
+    
+  .field
+    = f.label :description, 'Descripción' 
+    = f.text_field :description, { class: " ", "maxlength" => "200", "minlength" => "2"  }
+      
+  
+  .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

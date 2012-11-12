@@ -1,0 +1,27 @@
+
+= will_paginate @locations_cities
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-b" }
+  
+      
+      %div{ class: "ui-block-b" } Nombre 
+      
+      %div{ class: "ui-block-c" }  
+  
+  - @locations_cities.each do |locations_city|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-b" }
+      
+        %div{ class: "ui-block-b trim" }= locations_city.name
+      
+        %div{ class: "ui-block-c trim" }= locations_city.region_id
+  
+        %div{  class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, locations_city 
+          %a{ href: locations_city_path(locations_city), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, locations_city 
+          %a{ href: edit_locations_city_path(locations_city), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
+  = link_to 'Agregar  ', new_locations_city_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

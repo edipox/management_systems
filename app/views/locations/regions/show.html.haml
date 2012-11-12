@@ -1,0 +1,13 @@
+%div{ data: {role: "content", theme: "c" } }
+    
+  %p
+    %b Name:
+    = @locations_region.name
+    
+  %p
+    %b Country:
+    = @locations_region.country_id
+  
+  = link_to 'Edit', edit_locations_region_path(@locations_region)
+  \|
+  = link_to 'Back', locations_regions_path

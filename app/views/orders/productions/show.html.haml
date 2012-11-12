@@ -1,0 +1,31 @@
+
+%div{ data: {role: "content", theme: "c" } }
+
+%div{ data: {role: "content", theme: "c" } }
+  %div{ class: "ui-grid-c" }
+      
+    %div{ class: "ui-block-b" } :
+      
+    %div{ class: "ui-block-c" } :
+      
+    %div{ class: "ui-block-d" } :
+  
+  %div{ class: "ui-grid-c" }
+  
+    %div{ class: "ui-block-e" }= @orders_production.transaction_id
+  
+    %div{ class: "ui-block-e" }= @orders_production.status_id
+  
+    %div{ class: "ui-block-e" }= @orders_production.user_id
+  
+
+- @orders_productions_details = @orders_production.details.paginate(:page => params[:page])
+- @orders_productions_detail = Orders::Productions::Detail.new
+
+%div#form
+  = render 'orders/productions/details/form'
+
+%div#list
+  = render 'orders/productions/details/list'
+  
+= link_to 'Volver', orders_productions_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c' } }

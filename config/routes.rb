@@ -1,4 +1,50 @@
 Stock::Application.routes.draw do
+  namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end
+
+  namespace :orders do  namespace :productions do resources :details end end
+
+  namespace :requests do  namespace :devolutions do  namespace :products do resources :details end end end
+
+  namespace :requests do  namespace :transferences do  namespace :products do resources :details end end end
+
+  namespace :requests do  namespace :transferences do  namespace :components do resources :details end end end
+
+  namespace :requests do  namespace :purchases do  namespace :components do resources :details end end end
+
+  namespace :products do  namespace :compositions do resources :details end end
+
+  namespace :requests do  namespace :devolutions do resources :components end end
+
+  namespace :orders do resources :productions end
+
+  namespace :requests do  namespace :devolutions do resources :products end end
+
+  namespace :requests do  namespace :transferences do resources :products end end
+
+  namespace :requests do  namespace :transferences do resources :components end end
+
+  namespace :requests do  namespace :purchases do resources :components end end
+
+  namespace :products do resources :compositions end
+
+  namespace :transactions do resources :statuses end
+
+  namespace :locations do resources :cities end
+
+  namespace :locations do resources :regions end
+
+  namespace :locations do resources :countries end
+
+  namespace :locations do resources :continents end
+
+  namespace :products do resources :items end
+
+  namespace :components do resources :models end
+
+  namespace :components do resources :brands end
+
+  namespace :components do  namespace :categories do resources :kinds end end
+
   namespace :settings do
     get '/', :to => 'settings#index'
     get 'permissions', :to => 'permissions#index'

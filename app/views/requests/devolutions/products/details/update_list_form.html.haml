@@ -1,0 +1,5 @@
+:plain
+  
+$("#list").html("#{escape_javascript render :file => 'requests/devolutions/products/details/_list', :formats => [:html]}").trigger("create") ;
+  
+  $("#form").html("#{escape_javascript render :file => 'requests/devolutions/products/details/_form', :formats => [:html]}").trigger("create") ;

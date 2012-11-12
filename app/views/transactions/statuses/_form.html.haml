@@ -1,0 +1,15 @@
+
+= form_for @transactions_status do |f|
+  - if @transactions_status.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @transactions_status.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

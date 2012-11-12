@@ -1,0 +1,32 @@
+
+= form_for @products_compositions_detail, :html => { "data-remote" => "true" } do |f|
+  - if @products_compositions_detail.errors.any?
+    #error_explanation
+      %h2= "No se pudo guardar:"
+      %ul
+        - @products_compositions_detail.errors.full_messages.each do |msg|
+          %li= msg
+    -#= fd.hidden_field :SINGULAR_HEADER_id
+    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
+
+      
+    
+  .field
+    = f.label :composition_id 
+    = f.text_field :composition_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+      
+      
+    
+  .field
+    = f.label :components_id 
+    = f.text_field :components_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+      
+      
+    
+  .field
+    = f.label :quantity, 'Cantidad' 
+    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+      
+    
+  .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

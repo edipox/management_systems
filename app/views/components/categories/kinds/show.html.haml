@@ -1,0 +1,9 @@
+%div{ data: {role: "content", theme: "c" } }
+    
+  %p
+    %b Name:
+    = @components_categories_kind.name
+  
+  = link_to 'Edit', edit_components_categories_kind_path(@components_categories_kind)
+  \|
+  = link_to 'Back', components_categories_kinds_path

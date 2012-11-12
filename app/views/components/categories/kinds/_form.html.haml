@@ -1,0 +1,15 @@
+
+= form_for @components_categories_kind do |f|
+  - if @components_categories_kind.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @components_categories_kind.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

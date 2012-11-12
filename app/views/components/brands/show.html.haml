@@ -1,0 +1,13 @@
+%div{ data: {role: "content", theme: "c" } }
+    
+  %p
+    %b Name:
+    = @components_brand.name
+    
+  %p
+    %b Description:
+    = @components_brand.description
+  
+  = link_to 'Edit', edit_components_brand_path(@components_brand)
+  \|
+  = link_to 'Back', components_brands_path

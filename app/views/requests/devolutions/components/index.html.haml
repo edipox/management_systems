@@ -1,0 +1,37 @@
+
+= will_paginate @requests_devolutions_components
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-d" }
+  
+      
+      %div{ class: "ui-block-b" }  
+      
+      %div{ class: "ui-block-c" }  
+      
+      %div{ class: "ui-block-d" }  
+      
+      %div{ class: "ui-block-e" } Motivo 
+  
+  - @requests_devolutions_components.each do |requests_devolutions_component|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-d" }
+      
+        %div{ class: "ui-block-b trim" }= requests_devolutions_component.transaction_id
+      
+        %div{ class: "ui-block-c trim" }= requests_devolutions_component.status_id
+      
+        %div{ class: "ui-block-d trim" }= requests_devolutions_component.user_id
+      
+        %div{ class: "ui-block-e trim" }= requests_devolutions_component.reason
+  
+        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, requests_devolutions_component 
+          %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, requests_devolutions_component 
+          %a{ href: edit_requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+          %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          
+
+  = link_to 'Agregar  ', new_requests_devolutions_component_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

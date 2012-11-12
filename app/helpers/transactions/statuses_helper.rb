@@ -1,0 +1,2 @@
+module Transactions::StatusesHelper
+end

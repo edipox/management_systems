@@ -1,0 +1,9 @@
+%div{ data: {role: "content", theme: "c" } }
+    
+  %p
+    %b Name:
+    = @transactions_status.name
+  
+  = link_to 'Edit', edit_transactions_status_path(@transactions_status)
+  \|
+  = link_to 'Back', transactions_statuses_path

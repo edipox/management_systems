@@ -1,0 +1,31 @@
+
+= form_for @products_item do |f|
+  - if @products_item.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @products_item.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    
+  .field
+    = f.label :model_id 
+    = f.text_field :model_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    
+  .field
+    = f.label :minimum_quantity, 'Cantidad mínima' 
+    = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+    
+  .field
+    = f.label :price 
+    = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+    
+  .field
+    = f.label :quantity, 'Cantidad' 
+    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+    .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

@@ -1,0 +1,2 @@
+module Locations::CountriesHelper
+end

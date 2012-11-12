@@ -1,0 +1,31 @@
+
+%div{ data: {role: "content", theme: "c" } }
+
+%div{ data: {role: "content", theme: "c" } }
+  %div{ class: "ui-grid-c" }
+      
+    %div{ class: "ui-block-b" } :
+      
+    %div{ class: "ui-block-c" } :
+      
+    %div{ class: "ui-block-d" } :
+  
+  %div{ class: "ui-grid-c" }
+  
+    %div{ class: "ui-block-e" }= @requests_transferences_product.status_id
+  
+    %div{ class: "ui-block-e" }= @requests_transferences_product.transaction_id
+  
+    %div{ class: "ui-block-e" }= @requests_transferences_product.user_id
+  
+
+- @requests_transferences_products_details = @requests_transferences_product.details.paginate(:page => params[:page])
+- @requests_transferences_products_detail = Requests::Transferences::Products::Detail.new
+
+%div#form
+  = render 'requests/transferences/products/details/form'
+
+%div#list
+  = render 'requests/transferences/products/details/list'
+  
+= link_to 'Volver', requests_transferences_products_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c' } }
