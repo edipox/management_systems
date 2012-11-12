@@ -1,0 +1,23 @@
+
+= form_for @components_model do |f|
+  - if @components_model.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @components_model.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+  .field
+    = f.label :name, 'Nombre' 
+    = f.text_field :name, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    
+  .field
+    = f.label :description, 'Descripción' 
+    = f.text_field :description, { class: " ", "maxlength" => "200", "minlength" => "2"  }
+    
+  .field
+    = f.label :brand_id 
+    = f.text_field :brand_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+    .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

@@ -1,4 +1,22 @@
 Stock::Application.routes.draw do
+  namespace :transactions do resources :statuses end
+
+  namespace :locations do resources :cities end
+
+  namespace :locations do resources :regions end
+
+  namespace :locations do resources :countries end
+
+  namespace :locations do resources :continents end
+
+  namespace :products do resources :items end
+
+  namespace :components do resources :models end
+
+  namespace :components do resources :brands end
+
+  namespace :components do  namespace :categories do resources :kinds end end
+
   namespace :settings do
     get '/', :to => 'settings#index'
     get 'permissions', :to => 'permissions#index'

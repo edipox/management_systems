@@ -1,0 +1,13 @@
+%div{ data: {role: "content", theme: "c" } }
+    
+  %p
+    %b Name:
+    = @locations_country.name
+    
+  %p
+    %b Continent:
+    = @locations_country.continent_id
+  
+  = link_to 'Edit', edit_locations_country_path(@locations_country)
+  \|
+  = link_to 'Back', locations_countries_path

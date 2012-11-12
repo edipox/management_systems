@@ -1,0 +1,23 @@
+
+= will_paginate @transactions_statuses
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-a" }
+  
+      
+      %div{ class: "ui-block-b" } Nombre 
+  
+  - @transactions_statuses.each do |transactions_status|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-a" }
+      
+        %div{ class: "ui-block-b trim" }= transactions_status.name
+  
+        %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, transactions_status 
+          %a{ href: transactions_status_path(transactions_status), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, transactions_status 
+          %a{ href: edit_transactions_status_path(transactions_status), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
+  = link_to 'Agregar  ', new_transactions_status_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }

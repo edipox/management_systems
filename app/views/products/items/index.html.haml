@@ -1,0 +1,39 @@
+
+= will_paginate @products_items
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-e" }
+  
+      
+      %div{ class: "ui-block-b" } Nombre 
+      
+      %div{ class: "ui-block-c" }  
+      
+      %div{ class: "ui-block-d" } Cantidad m&iacute;nima 
+      
+      %div{ class: "ui-block-e" }  
+      
+      %div{ class: "ui-block-e" } Cantidad 
+  
+  - @products_items.each do |products_item|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-e" }
+      
+        %div{ class: "ui-block-b trim" }= products_item.name
+      
+        %div{ class: "ui-block-c trim" }= products_item.model_id
+      
+        %div{ class: "ui-block-d trim" }= products_item.minimum_quantity
+      
+        %div{ class: "ui-block-e trim" }= products_item.price
+      
+        %div{ class: "ui-block-e trim" }= products_item.quantity
+  
+        %div{  class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# if can? :delete, products_item 
+          %a{ href: products_item_path(products_item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          -# if can? :update, products_item 
+          %a{ href: edit_products_item_path(products_item), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+
+  = link_to 'Agregar  ', new_products_item_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
