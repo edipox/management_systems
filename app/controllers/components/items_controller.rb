@@ -43,26 +43,12 @@ class Components::ItemsController < ApplicationController
   # POST /components/items
   # POST /components/items.json
   def create
-  
-    if params[:new_category] == 'true'
-      params[:components_item][:category_id] = nil 
-      category = Components::Category.new({
-        name: params[:category_name],
-        description: params[:category_description]
-      })
-
-      raise 'Problema al crear la nueva categoria' unless category.save
-
-      params[:components_item][:category_id] = category.id
-    end
-
+    process_category
     @components_item = Components::Item.new(params[:components_item])
     
     respond_to do |format|
       if @components_item.save
-        format.html { 
-          redirect_to components_items_path, notice: 'Componente creado correctamente.'
-        }
+        format.html { redirect_to components_items_path, notice: 'Componente creado correctamente.' }
       else
         format.html { render action: "new", notice: 'Error al crear componente.'  }
       end
@@ -72,25 +58,14 @@ class Components::ItemsController < ApplicationController
   # PUT /components/items/1
   # PUT /components/items/1.json
   def update
+    process_category
     @components_item = Components::Item.find(params[:id])
 
     respond_to do |format|
       if @components_item.update_attributes(params[:components_item])
-        format.html { 
-            redirect_to components_items_path, notice: 'Componente actualizado correctamente.' 
-        }
-        format.js {     
-            # Variable utilizada para re renderizar index
-            @components_items = Components::Item.all;
-            render action: "index"
-        }
+        format.html { redirect_to components_items_path, notice: 'Componente actualizado correctamente.' }
       else
         format.html { render action: "edit", notice: 'Error al actualizar componente.'  }
-        format.js {     
-            # Variable utilizada para re renderizar index
-            @components_items = Components::Item.all;
-            render action: "index"
-        }
       end
     end
   end
@@ -110,5 +85,21 @@ class Components::ItemsController < ApplicationController
           render action: "index"
       }
     end
+  end
+
+  private
+
+  def process_category
+    return if params[:new_category] == 'false'
+
+    params[:components_item][:category_id] = nil 
+
+    category = Components::Category.new({
+      name: params[:category_name],
+      description: params[:category_description]
+    })
+    raise 'Error al guardar la nueva categoria' unless category.save
+
+    params[:components_item][:category_id] = category.id
   end
 end
