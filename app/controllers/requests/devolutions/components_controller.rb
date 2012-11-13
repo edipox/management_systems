@@ -42,6 +42,12 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # POST /requests/devolutions/components.json
   def create
     @requests_devolutions_component = Requests::Devolutions::Component.new(params[:requests_devolutions_component])
+    transaction = Stocks::Transactions::Component.new
+    transaction.kind = "Requests::Devolutions::Component"
+    @requests_devolutions_component.save
+    transaction.kind_id = @requests_devolutions_component.id
+    transaction.save
+    @requests_devolutions_component.transaction = transaction
     respond_to do |format|
       if @requests_devolutions_component.save
         format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }

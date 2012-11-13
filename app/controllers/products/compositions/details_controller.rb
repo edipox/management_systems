@@ -48,7 +48,6 @@ class Products::Compositions::DetailsController < ApplicationController
       if @products_compositions_detail.save
         format.js{ 
           @products_composition = @products_compositions_detail.products_composition
-          #@orders_productions_details = @production.details
           @products_compositions_detail = Products::Compositions::Detail.new
           render 'update_list_form' 
          }
