@@ -1,6 +1,6 @@
 class Products::Compositions::Detail < ActiveRecord::Base
   has_paper_trail
-  attr_accessible :components_id, :composition_id, :quantity
+  attr_accessible :component_id, :composition_id, :quantity
   validates :composition_id, :presence => true #, :length => { :minimum => 2 }  
   validates :component_id, :presence => true #, :length => { :minimum => 2 }  
   validates :quantity, :presence => true #, :length => { :minimum => 2 }  
