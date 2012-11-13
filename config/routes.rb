@@ -5,8 +5,11 @@ Stock::Application.routes.draw do
   get "stock/production/index", :to => "stock/production#index"
   get "stock/production/transactions", :to => "stock/production#transactions"
 
-  get "stock/components/index", :to => "stock/components#index"
   get "stock/components/transactions", :to => "stock/components#transactions"
+
+  namespace :stock do
+    get "components", :to => "components#index"
+  end
 
   namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end
 
