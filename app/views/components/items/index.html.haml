@@ -19,12 +19,12 @@
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
             - if can? :delete, item
               %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?',
-                role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+                role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
             - if can? :update, item
-              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
 
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
-    data: { role: 'button', theme: 'b', icon: 'new' } } Nuevo Componente
+    data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } } Nuevo Componente
 
 -#
   %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }

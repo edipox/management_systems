@@ -1,5 +1,5 @@
 
-= form_for @orders_production, :html => { style: "width:400px;" } do |f|
+= form_for @orders_production, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
   - if @orders_production.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"

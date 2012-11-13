@@ -1,5 +1,5 @@
 
-= form_for @requests_purchases_component, :html => { style: "width:400px;" } do |f|
+= form_for @requests_purchases_component, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
   - if @requests_purchases_component.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"

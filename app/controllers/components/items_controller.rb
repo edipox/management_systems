@@ -5,11 +5,11 @@ class Components::ItemsController < ApplicationController
   
   def index
     @components_items = Components::Item.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-      format.js
-      format.json { render json: @components_items }
-    end
+#    respond_to do |format|
+#      format.html{ render 'index', :layout => "default" }
+#      format.js
+#      format.json { render json: @components_items }
+#    end
   end
 
   # GET /components/items/1
@@ -17,8 +17,8 @@ class Components::ItemsController < ApplicationController
   def show
     @components_item = Components::Item.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @components_item }
+#      format.html # show.html.erb
+#      format.json { render json: @components_item }
       format.js
     end
   end
@@ -38,6 +38,9 @@ class Components::ItemsController < ApplicationController
   # GET /components/items/1/edit
   def edit
     @components_item = Components::Item.find(params[:id])
+    respond_to do |format|
+      format.js
+    end    
   end
 
   # POST /components/items
@@ -45,12 +48,12 @@ class Components::ItemsController < ApplicationController
   def create
     process_category
     @components_item = Components::Item.new(params[:components_item])
-    
+    index
     respond_to do |format|
       if @components_item.save
-        format.html { redirect_to components_items_path, notice: 'Componente creado correctamente.' }
+        format.js { render 'index', notice: 'Componente creado correctamente.' }
       else
-        format.html { render action: "new", notice: 'Error al crear componente.'  }
+        format.js { render action: "new", notice: 'Error al crear componente.'  }
       end
     end
   end
@@ -60,12 +63,12 @@ class Components::ItemsController < ApplicationController
   def update
     process_category
     @components_item = Components::Item.find(params[:id])
-
+    index
     respond_to do |format|
       if @components_item.update_attributes(params[:components_item])
-        format.html { redirect_to components_items_path, notice: 'Componente actualizado correctamente.' }
+        format.js { render 'index', notice: 'Componente actualizado correctamente.' }
       else
-        format.html { render action: "edit", notice: 'Error al actualizar componente.'  }
+        format.js { render action: "edit", notice: 'Error al actualizar componente.'  }
       end
     end
   end
@@ -81,7 +84,7 @@ class Components::ItemsController < ApplicationController
       format.json { head :no_content }
       format.js {     
           # Variable utilizada para re renderizar index
-          @components_items = Components::Item.all;
+          @components_items = Components::Item.paginate(:page => params[:page])
           render action: "index"
       }
     end

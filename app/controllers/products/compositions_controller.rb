@@ -4,10 +4,14 @@ class Products::CompositionsController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @products_compositions = Products::Composition.paginate(:page => params[:page])
+  end
+
+  def index
+    list  
     respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
+      format.js
     end
   end
 
@@ -16,7 +20,7 @@ class Products::CompositionsController < ApplicationController
   def show
     @products_composition = Products::Composition.find(params[:id])
     respond_to do |format|
-      format.html{ render 'show', :layout => "default" } # show.html.erb
+      format.js
     end
   end
 
@@ -25,7 +29,7 @@ class Products::CompositionsController < ApplicationController
   def new
     @products_composition = Products::Composition.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
@@ -38,13 +42,11 @@ class Products::CompositionsController < ApplicationController
   # POST /products/compositions.json
   def create
     @products_composition = Products::Composition.new(params[:products_composition])
-
     respond_to do |format|
       if @products_composition.save
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro actualizado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -56,10 +58,9 @@ class Products::CompositionsController < ApplicationController
 
     respond_to do |format|
       if @products_composition.update_attributes(params[:products_composition])
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro guardado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +71,10 @@ class Products::CompositionsController < ApplicationController
   # DELETE /products/compositions/1.json
   def destroy
     @products_composition = Products::Composition.find(params[:id])
-    
-#    if @products_composition.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to products_compositions_path, notice: 'No se puede eliminar el registro "'+@products_composition.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @products_composition.destroy
-
+    list
     respond_to do |format|
-      format.html { redirect_to  products_compositions_path }
+      format.js { render 'index' }
     end
   end
 end

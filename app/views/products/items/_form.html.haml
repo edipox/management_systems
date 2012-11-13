@@ -1,5 +1,5 @@
 
-= form_for @products_item do |f|
+= form_for @products_item, :html => { "data-remote" => "true" }  do |f|
   - if @products_item.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"

@@ -1,5 +1,5 @@
 
-= form_for @locations_city do |f|
+= form_for @locations_city, :html => { "data-remote" => "true" }  do |f|
   - if @locations_city.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"

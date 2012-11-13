@@ -16,8 +16,8 @@
   
         %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, locations_continent 
-          %a{ href: locations_continent_path(locations_continent), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: locations_continent_path(locations_continent), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, locations_continent 
-          %a{ href: edit_locations_continent_path(locations_continent), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+          %a{ href: edit_locations_continent_path(locations_continent), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' } } Editar
 
-  = link_to 'Agregar  ', new_locations_continent_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+  = link_to 'Agregar  ', new_locations_continent_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  } }

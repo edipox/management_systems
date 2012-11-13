@@ -24,10 +24,10 @@
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, orders_production 
-          %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, orders_production 
-          %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
-          %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 
-  = link_to 'Agregar  ', new_orders_production_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+  = link_to 'Agregar  ', new_orders_production_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

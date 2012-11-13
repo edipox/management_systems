@@ -68,7 +68,9 @@ function showFakeSubForm(caller, subform, select){
 
 
 function changeContent(where, content) {
-  return $(where).html(content).trigger('create');
+  var v = $(where).html(content).trigger('create');
+  on_load();
+  return v;
 };
 
 function changeSelectedButton(where, selected) {
@@ -98,22 +100,27 @@ var _UI = null;
 var _POPUP = new PopupLevel("");
 
 function openPopup(content){
-  if(_POPUP.current != null){ 
-    _POPUP.back = _POPUP.current;
-  }
-  _POPUP.current = new PopupLevel(content);
-  _POPUP.current.open();
+  changeContent('#popup', content ).popup("open");
+  $("#popup input[type='submit']").click(function(){
+      $("#popup").popup("close");
+  });
+  on_load();
+//  if(_POPUP.current != null){ 
+//    _POPUP.back = _POPUP.current;
+//  }
+//  _POPUP.current = new PopupLevel(content);
+//  _POPUP.current.open();
 }
 
 function closePopup(){
-  if(_POPUP.back == null && _POPUP.current != null){
+/*  if(_POPUP.back == null && _POPUP.current != null){
       _POPUP.current.close();
       _POPUP.current = null;
   }else if(_POPUP.current != null){
     _POPUP.current = _POPUP.back;
     _POPUP.back = _POPUP.back == null ? null : _POPUP.back.back;
     _POPUP.current.open();
-  }
+  }*/
 }
 
 function showPopup(popup, content){

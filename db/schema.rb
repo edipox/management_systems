@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112194843) do
+ActiveRecord::Schema.define(:version => 20121113061823) do
 
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
@@ -277,6 +277,12 @@ ActiveRecord::Schema.define(:version => 20121112194843) do
   create_table "stocks_transactions_products", :force => true do |t|
     t.string   "kind"
     t.string   "kind_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tests", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

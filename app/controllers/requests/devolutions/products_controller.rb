@@ -4,10 +4,14 @@ class Requests::Devolutions::ProductsController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @requests_devolutions_products = Requests::Devolutions::Product.paginate(:page => params[:page])
+  end
+
+  def index
+    list  
     respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
+      format.js
     end
   end
 
@@ -16,7 +20,7 @@ class Requests::Devolutions::ProductsController < ApplicationController
   def show
     @requests_devolutions_product = Requests::Devolutions::Product.find(params[:id])
     respond_to do |format|
-      format.html{ render 'show', :layout => "default" } # show.html.erb
+      format.js
     end
   end
 
@@ -25,7 +29,7 @@ class Requests::Devolutions::ProductsController < ApplicationController
   def new
     @requests_devolutions_product = Requests::Devolutions::Product.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
@@ -38,13 +42,11 @@ class Requests::Devolutions::ProductsController < ApplicationController
   # POST /requests/devolutions/products.json
   def create
     @requests_devolutions_product = Requests::Devolutions::Product.new(params[:requests_devolutions_product])
-
     respond_to do |format|
       if @requests_devolutions_product.save
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro actualizado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -56,10 +58,9 @@ class Requests::Devolutions::ProductsController < ApplicationController
 
     respond_to do |format|
       if @requests_devolutions_product.update_attributes(params[:requests_devolutions_product])
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro guardado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +71,10 @@ class Requests::Devolutions::ProductsController < ApplicationController
   # DELETE /requests/devolutions/products/1.json
   def destroy
     @requests_devolutions_product = Requests::Devolutions::Product.find(params[:id])
-    
-#    if @requests_devolutions_product.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to requests_devolutions_products_path, notice: 'No se puede eliminar el registro "'+@requests_devolutions_product.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @requests_devolutions_product.destroy
-
+    list
     respond_to do |format|
-      format.html { redirect_to  requests_devolutions_products_path }
+      format.js { render 'index' }
     end
   end
 end

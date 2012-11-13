@@ -28,10 +28,10 @@
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, requests_devolutions_product 
-          %a{ href: requests_devolutions_product_path(requests_devolutions_product), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: requests_devolutions_product_path(requests_devolutions_product), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, requests_devolutions_product 
-          %a{ href: edit_requests_devolutions_product_path(requests_devolutions_product), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
-          %a{ href: requests_devolutions_product_path(requests_devolutions_product), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          %a{ href: edit_requests_devolutions_product_path(requests_devolutions_product), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          %a{ href: requests_devolutions_product_path(requests_devolutions_product), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 
-  = link_to 'Agregar  ', new_requests_devolutions_product_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+  = link_to 'Agregar  ', new_requests_devolutions_product_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

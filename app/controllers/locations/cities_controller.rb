@@ -6,9 +6,6 @@ class Locations::CitiesController < ApplicationController
 
   def index
     @locations_cities = Locations::City.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-    end
   end
 
   # GET /locations/cities/1
@@ -16,7 +13,7 @@ class Locations::CitiesController < ApplicationController
   def show
     @locations_city = Locations::City.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.js # show.html.erb
     end
   end
 
@@ -25,26 +22,29 @@ class Locations::CitiesController < ApplicationController
   def new
     @locations_city = Locations::City.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
   # GET /locations/cities/1/edit
   def edit
     @locations_city = Locations::City.find(params[:id])
+    respond_to do |format|
+      format.js
+    end    
   end
 
   # POST /locations/cities
   # POST /locations/cities.json
   def create
     @locations_city = Locations::City.new(params[:locations_city])
-
+    index
     respond_to do |format|
       if @locations_city.save
-        format.html { redirect_to locations_cities_path, notice: 'Registro guardado correctamente.' 
+        format.js { render 'index', notice: 'Registro guardado correctamente.' 
         }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -53,13 +53,13 @@ class Locations::CitiesController < ApplicationController
   # PUT /locations/cities/1.json
   def update
     @locations_city = Locations::City.find(params[:id])
-
+    index
     respond_to do |format|
       if @locations_city.update_attributes(params[:locations_city])
-        format.html { redirect_to locations_cities_path, notice: 'Registro actualizado correctamente.' 
+        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
         }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +70,12 @@ class Locations::CitiesController < ApplicationController
   # DELETE /locations/cities/1.json
   def destroy
     @locations_city = Locations::City.find(params[:id])
-    
-#    if @locations_city.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to locations_cities_path, notice: 'No se puede eliminar el registro "'+@locations_city.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @locations_city.destroy
-
     respond_to do |format|
-      format.html { redirect_to  locations_cities_path }
+      format.js { 
+        index
+        render  'index'
+      }
     end
   end
 end
