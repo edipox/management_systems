@@ -34,7 +34,20 @@ function on_load(){
     $(".ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
+ ajaxifyPagination();
+};
+
+function ajaxifyPagination() {
+    $(".pagination a").click(function() {
+    	$.ajax({
+    	  type: "GET",
+    	  url: $(this).attr("href"),
+    	  dataType: "script"
+    	});
+    	return false;
+    });
 }
+
 
 function trim(element){
     $.each($.makeArray(element), function(i, val){
@@ -84,27 +97,42 @@ function changeSelectedButton(where, selected) {
 }
 
 
-function PopupLevel(_content){
-  this.content = _content;
-  this.current = null;
-  this.back = null;
-  this.open = function(){
-    changeContent("#popup", this.content).popup("open");
-    $("#popup").bind({
-       popupafterclose: closePopup
-    });
-  };
-  this.close = function(){
-    changeContent("#popup", this.content).popup("close");
-  };
-}
+//function PopupLevel(_content){
+//  this.content = _content;
+//  this.current = null;
+//  this.back = null;
+//  this.open = function(){
+//    changeContent("#popup", this.content).popup("open");
+//    $("#popup").bind({
+//       popupafterclose: closePopup
+//    });
+//  };
+//  this.close = function(){
+//    changeContent("#popup", this.content).popup("close");
+//  };
+//}
 
-var _EVENT = null;
-var _UI = null;
+//var _EVENT = null;
+//var _UI = null;
 
-var _POPUP = new PopupLevel("");
+//var _POPUP = new PopupLevel("");
+
 
 function openPopup(content){
+
+//       var lol="<div data-role='page' id='pg"+(id++)+"'><div data-role='header' data-backbtn='true'>XPTO</div><h1>LOL</h1></div>";
+//       $("body").append(lol);
+//       $("#pg2").bind("callback", function(e, args) {
+//           alert(args.mydata);
+//       });
+//       $.mobile.changePage($("#pg"+id),"slide");
+//       $.mobile.updateHash('#pg'+id,true);
+//       $(page).trigger("callback", args);
+
+//  $("#popup input[type='submit']").click(function(){
+//      $("#popup").popup("close");
+//  });
+
 
 //  changeContent('#popup', content ).popup("open");
 //  $("#popup input[type='submit']").click(function(){

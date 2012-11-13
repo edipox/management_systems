@@ -24,14 +24,14 @@
           %a{ href: transactions_statuses_path, data: { role: 'button', remote: "true"  } } Estados de solicitudes
           -#%a{ href: '#', data: { role: 'button', remote: "true"  } } Valores Iniciales
 
-        %div#content
-          = yield
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } } 
           - if notice  
             %div#notice_container
               %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
               %div#notice= notice
 
+        %div#content
+          = yield
 
       %div{ data: { role: 'footer', position: 'fixed' } }
         %h3 Sistema de Gestion

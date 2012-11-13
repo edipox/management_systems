@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113061823) do
+ActiveRecord::Schema.define(:version => 20121113063217) do
 
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
@@ -72,9 +72,10 @@ ActiveRecord::Schema.define(:version => 20121113061823) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
-    t.string   "category_id", :limit => 36, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "category_id",      :limit => 36, :null => false
+    t.integer  "minimum_quantity"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "components_models", :force => true do |t|
