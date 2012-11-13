@@ -29,6 +29,11 @@ function on_load(){
   $("form").validate(); 
   trim($(".trim"));
   trim($("*[trim]"));
+  
+  $("a").click(function(){
+    $(".ui-btn-active").removeClass("ui-btn-active");
+    $(this).addClass("ui-btn-active")
+  });
 }
 
 function trim(element){
@@ -100,11 +105,18 @@ var _UI = null;
 var _POPUP = new PopupLevel("");
 
 function openPopup(content){
-  changeContent('#popup', content ).popup("open");
-  $("#popup input[type='submit']").click(function(){
-      $("#popup").popup("close");
-  });
-  on_load();
+
+//  changeContent('#popup', content ).popup("open");
+//  $("#popup input[type='submit']").click(function(){
+//      $("#popup").popup("close");
+//  });
+
+
+  changeContent('#content', content);
+
+
+
+//  on_load();
 //  if(_POPUP.current != null){ 
 //    _POPUP.back = _POPUP.current;
 //  }
