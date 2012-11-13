@@ -9,6 +9,7 @@ Stock::Application.routes.draw do
 
   namespace :stock do
     get "components", :to => "components#index"
+    get "components/list"
   end
 
   namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end

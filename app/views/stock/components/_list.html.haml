@@ -1,1 +1,14 @@
-Lista de airesntoarisntuft
+- will_paginate @components
+%ul{ data: { role: 'listview', inset: 'true' } }
+  %li{ data: { role: 'list-divider'} }
+    %div.ui-grid-b
+      %div.ui-block-a Componente
+      %div.ui-block-b Descripción
+      %div.ui-block-c Cantidad
+
+  - @components.each do |component|
+    %li
+      %div.ui-grid-b
+        %div.ui-block-a= component.name
+        %div.ui-block-b= component.description
+        %div.ui-block-c= component.raw_material_stocks.reduce {|s0, s1| s0.quantity = s0.quantity + s1.quantity; s0 }.quantity
