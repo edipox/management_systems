@@ -1,2 +1,34 @@
-%h1 Stock::Production#index
-%p Find me in app/views/stock/production/index.html.haml
+<!DOCTYPE html>
+%html
+  %head
+    %title Default
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    %div{ data: { role: 'page' }, class: 'not' }
+      %div{ data: { role: 'header' } }
+        %h3 Header
+        %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
+        = render 'layouts/stock_top_menu'
+        
+      %div#page
+        %div#menu{ data: { role: 'controlgroup' } }
+          %a{ href: '#', data: { role: 'button', remote: "true" } } Stock de producción
+          %a{ href: requests_transferences_components, data: { role: 'button', remote: "true"  } } Solicitud de componentes
+          %a{ href: requests_devolutions_components, data: { role: 'button', remote: "true"  } } Devolucion de componentes          
+          %a{ href: '#', data: { role: 'button', remote: "true"  } } Movimientos
+          %a{ href: '#', data: { role: 'button', remote: "true"  } } Valores Iniciales
+                    
+        %div#content
+
+          - if notice  
+            %div#notice_container
+              %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+              %div#notice= notice
+          %div#index
+            = yield
+
+      %div{ data: { role: 'footer', position: 'fixed' } }
+        %h3 Footer Content
