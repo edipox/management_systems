@@ -1,0 +1,19 @@
+:plain
+  <style>
+    .modified { color: red; }
+    .ui-dialog-contain { max-width: 100% !important; }
+  </style>
+
+%h3{ data: { role: 'header' } } Mostrar Cambios
+%div{ data: { role: 'content' } }
+  %div.ui-grid-a
+    %div.ui-block-a
+      - unless @versioned.nil?
+        - @versioned.attributes.each do |k, v|
+          %p= "#{k}: #{v}"
+
+    %div.ui-block-b
+      - unless @current.nil?
+        - @current.attributes.each do |k, v|
+          - class_name = eval "@versioned.#{k}.to_s != '#{v}' ? 'modified' : ''" unless @versioned.nil?
+          %p{ class: class_name }= "#{k}: #{v}"

@@ -1,4 +1,7 @@
 Stock::Application.routes.draw do
+  get "activity", :to => 'activity#index'
+  get 'activity/:id', :to => 'activity#show'
+
   namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end
 
   namespace :orders do  namespace :productions do resources :details end end

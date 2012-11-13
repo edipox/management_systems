@@ -1,0 +1,23 @@
+= will_paginate @versions
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  %li{ data: { role: 'list-divider' } }
+    %div.ui-grid-d
+      %div.ui-block-a Evento
+      %div.ui-block-b Objeto
+      %div.ui-block-c Usuario
+      %div.ui-block-d Fecha
+      %div.ui-block-e
+  - @versions.each do |v|
+    - user = 'Sistema'
+    - user = User.find(v.terminator).email unless v.terminator.nil?
+
+    - obj = ACL::Entity.where('const = :const', { const: v.item_type }).first
+    - obj = obj.nil? ? v.item_type : obj.name
+    %li
+      %div.ui-grid-d
+        %div.ui-block-a= v.event
+        %div.ui-block-b= obj
+        %div.ui-block-c= user
+        %div.ui-block-d= v.created_at.strftime("%m/%d/%Y %H:%M")
+        %div.ui-block-e
+          %a{ href: "/activity/#{v.id}", data: { role: 'button', icon: 'arrow-r', mini: 'true' } } Ver Cambios

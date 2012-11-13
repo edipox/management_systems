@@ -7,10 +7,23 @@ ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
 # The super user role MUST be created first!!
 admin_role = ACL::Role.create!({ name: 'Administrador' })
 
-ACL::Entity.create!({
-  name: 'Componentes',
-  const: 'Components::Item'
-})
+# ACL Entities
+acl_entities = []
+acl_entities << ['Componente', 'Components::Item']
+acl_entities << ['Usuario', 'User']
+acl_entities << ['Permiso de Usuario', 'ACL::Permission']
+acl_entities << ['Tipo de Usuario', 'ACL::Role']
+acl_entities << ['Acción de Usuario (Permisos)', 'ACL::Action']
+acl_entities << ['Objeto (Permisos)', 'ACL::Entity']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+# acl_entities << ['', '']
+
+acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
 
 category = Components::Category.create!({
   name:'Teclado inalambrico',
