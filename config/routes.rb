@@ -1,9 +1,9 @@
 Stock::Application.routes.draw do
-  get "products/index"
+  get "products/index", :to => "stock/products#index"
 
-  get "production/index"
+  get "production/index", :to => "stock/production#index"
 
-  get "components/index"
+  get "components/index", :to => "stock/components#index"
 
   namespace :requests do  namespace :devolutions do  namespace :components do resources :details end end end
 
@@ -73,7 +73,7 @@ Stock::Application.routes.draw do
   }
 
   #root :to => "application#index"
-  root :to => "stock#components"
+  root :to => "stock/components#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Default
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    %div{ data: { role: 'page' }, class: 'not' }
+      %div{ data: { role: 'header' } }
+        %h3 Header
+        %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
+        = render 'layouts/stock_top_menu'
+        
+      %div#page
+        %div#menu{ data: { role: 'controlgroup' } }
+          %a{ href: components_items_path, data: { role: 'button' } } Componentes
+          %a{ href: '#', data: { role: 'button' } } Stock
+          %a{ href: '#', data: { role: 'button' } } Pedidos de Compra 
+          %a{ href: '#', data: { role: 'button' } } Pedidos de Componentes 
+          
+          %a{ href: components_categories_path, data: { role: 'button' } } Categorias
+          
+        %div#content
+
+          - if notice  
+            %div#notice_container
+              %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+              %div#notice= notice
+        
+          = yield
+
+      %div{ data: { role: 'footer', position: 'fixed' } }
+        %h3 Footer Content
