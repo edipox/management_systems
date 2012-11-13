@@ -41,7 +41,7 @@ class Requests::Devolutions::Products::DetailsController < ApplicationController
   # POST /requests/devolutions/products/details
   # POST /requests/devolutions/products/details.json
   def create
-    @requests_devolutions_products_detail = Orders::Productions::Detail.new(params[:requests_devolutions_products_detail])
+    @requests_devolutions_products_detail = Requests::Devolutions::Products::Detail.new(params[:requests_devolutions_products_detail])
     @requests_devolutions_products_detail.requests_devolutions_product = Requests::Devolutions::Product.find(params["header_id"])
     @requests_devolutions_products_details = @requests_devolutions_products_detail.requests_devolutions_product.details.paginate(:page => params[:page])
     respond_to do |format|
