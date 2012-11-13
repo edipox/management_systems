@@ -104,7 +104,14 @@ var _UI = null;
 
 var _POPUP = new PopupLevel("");
 
+var id = 0;
+
 function openPopup(content){
+
+//  $("#popup input[type='submit']").click(function(){
+//      $("#popup").popup("close");
+//  });
+
 
 //  changeContent('#popup', content ).popup("open");
 //  $("#popup input[type='submit']").click(function(){
@@ -113,8 +120,6 @@ function openPopup(content){
 
 
   changeContent('#content', content);
-
-
 
 //  on_load();
 //  if(_POPUP.current != null){ 
