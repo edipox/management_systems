@@ -7,24 +7,9 @@
         - @orders_production.errors.full_messages.each do |msg|
           %li= msg
   
-    
-    
-  .field
-    = f.label :transaction_id 
-    = f.text_field :transaction_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
-    
   .field
     = f.label :status_id, 'Estado'
     = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
-      
-    
-    
-  .field
-    = f.label :user_id 
-    = f.text_field :user_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
   
   .actions
     = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

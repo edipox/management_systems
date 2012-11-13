@@ -6,19 +6,6 @@
       %ul
         - @requests_devolutions_product.errors.full_messages.each do |msg|
           %li= msg
-  
-    
-    
-  .field
-    = f.label :transaction_id 
-    = f.text_field :transaction_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
-    
-  .field
-    = f.label :user_id 
-    = f.text_field :user_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
     
     
   .field

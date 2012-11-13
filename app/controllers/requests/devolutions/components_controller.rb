@@ -44,6 +44,8 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     @requests_devolutions_component = Requests::Devolutions::Component.new(params[:requests_devolutions_component])
     transaction = Stocks::Transactions::Component.new
     transaction.kind = "Requests::Devolutions::Component"
+    @requests_devolutions_component.user_id = "nil"
+    @requests_devolutions_component.transaction_id = "nil"
     @requests_devolutions_component.save
     transaction.kind_id = @requests_devolutions_component.id
     transaction.save

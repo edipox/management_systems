@@ -42,6 +42,15 @@ class Requests::Purchases::ComponentsController < ApplicationController
   # POST /requests/purchases/components.json
   def create
     @requests_purchases_component = Requests::Purchases::Component.new(params[:requests_purchases_component])
+    transaction = Stocks::Transactions::Component.new
+    transaction.kind = "Requests::Purchases::Component"
+    @requests_purchases_component.user_id = "nil"
+    @requests_purchases_component.transaction_id = "nil"
+    @requests_purchases_component.save
+    transaction.kind_id = @requests_purchases_component.id
+    transaction.save
+    @requests_purchases_component.transaction = transaction
+    
     respond_to do |format|
       if @requests_purchases_component.save
         format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }

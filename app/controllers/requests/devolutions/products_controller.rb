@@ -42,6 +42,15 @@ class Requests::Devolutions::ProductsController < ApplicationController
   # POST /requests/devolutions/products.json
   def create
     @requests_devolutions_product = Requests::Devolutions::Product.new(params[:requests_devolutions_product])
+    transaction = Stocks::Transactions::Product.new
+    transaction.kind = "Requests::Devolutions::Product"
+    @requests_devolutions_product.user_id = "nil"
+    @requests_devolutions_product.transaction_id = "nil"
+    @requests_devolutions_product.save
+    transaction.kind_id = @requests_devolutions_product.id
+    transaction.save
+    @requests_devolutions_product.transaction = transaction
+
     respond_to do |format|
       if @requests_devolutions_product.save
         format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }

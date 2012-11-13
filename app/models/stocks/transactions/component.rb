@@ -5,4 +5,5 @@ class Stocks::Transactions::Component < ActiveRecord::Base
   validates :kind_id, :presence => true #, :length => { :minimum => 2 }  
   
   has_one :devolution, :foreign_key => :transaction_id, :class_name => "Requests::Devolutions::Component"
+  has_one :devolution, :foreign_key => :transaction_id, :class_name => "Requests::Purchases::Component"  
 end
