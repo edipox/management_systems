@@ -9,4 +9,6 @@ class Requests::Transferences::Component < ActiveRecord::Base
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
+  
+  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Production"  
 end
