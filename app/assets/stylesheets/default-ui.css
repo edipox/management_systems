@@ -231,3 +231,5 @@ li.ui-li.element{
 #page #content [data-role="listview"] * { text-align: center; }
 
 .text-center { text-align: center; }
+
+.ui-controlgroup { margin: 0 !important; }
