@@ -6,10 +6,6 @@
       %ul
         - @products_compositions_detail.errors.full_messages.each do |msg|
           %li= msg
-    -#= fd.hidden_field :SINGULAR_HEADER_id
-    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
-
-      
         
   .field    
     = hidden_field_tag "header_id", @products_composition.id
