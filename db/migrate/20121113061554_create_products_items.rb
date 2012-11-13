@@ -5,7 +5,6 @@ class CreateProductsItems < ActiveRecord::Migration
       t.string :model_id
       t.integer :minimum_quantity
       t.integer :price
-      t.integer :quantity
 
       t.timestamps
     end

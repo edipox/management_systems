@@ -44,6 +44,8 @@ class Requests::Transferences::ProductsController < ApplicationController
     @requests_transferences_product = Requests::Transferences::Product.new(params[:requests_transferences_product])
      transaction = Stocks::Transactions::Product.new
     transaction.kind = "Requests::Transferences::Product"
+    @requests_devolutions_component.user_id = 'nil'
+    @requests_devolutions_component.transaction_id = 'nil'
     @requests_devolutions_component.save
     transaction.kind_id = @requests_devolutions_component.id
     transaction.save

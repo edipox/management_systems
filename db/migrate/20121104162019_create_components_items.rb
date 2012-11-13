@@ -6,7 +6,8 @@ class CreateComponentsItems < ActiveRecord::Migration
       t.string :code
       t.string :category_id
       t.integer :minimum_quantity
-
+      t.integer :price
+      
       t.timestamps
     end
 

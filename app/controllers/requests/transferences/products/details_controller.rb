@@ -41,7 +41,7 @@ class Requests::Transferences::Products::DetailsController < ApplicationControll
   # POST /requests/transferences/products/details
   # POST /requests/transferences/products/details.json
   def create
-    @requests_transferences_products_detail = Orders::Productions::Detail.new(params[:requests_transferences_products_detail])
+    @requests_transferences_products_detail = Requests::Transferences::Products::Detail.new(params[:requests_transferences_products_detail])
     @requests_transferences_products_detail.requests_transferences_product = Requests::Transferences::Product.find(params["header_id"])
     @requests_transferences_products_details = @requests_transferences_products_detail.requests_transferences_product.details.paginate(:page => params[:page])
     respond_to do |format|
