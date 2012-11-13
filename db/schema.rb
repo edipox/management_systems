@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "code"
     t.string   "category_id",      :limit => 36, :null => false
     t.integer  "minimum_quantity"
+    t.integer  "price"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -156,7 +157,6 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "model_id"
     t.integer  "minimum_quantity"
     t.integer  "price"
-    t.integer  "quantity"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
