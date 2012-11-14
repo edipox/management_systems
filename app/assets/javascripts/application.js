@@ -120,27 +120,19 @@ function changeSelectedButton(where, selected) {
 
 function openPopup(content){
 
-//       var lol="<div data-role='page' id='pg"+(id++)+"'><div data-role='header' data-backbtn='true'>XPTO</div><h1>LOL</h1></div>";
-//       $("body").append(lol);
-//       $("#pg2").bind("callback", function(e, args) {
-//           alert(args.mydata);
-//       });
-//       $.mobile.changePage($("#pg"+id),"slide");
-//       $.mobile.updateHash('#pg'+id,true);
-//       $(page).trigger("callback", args);
 
 //  $("#popup input[type='submit']").click(function(){
 //      $("#popup").popup("close");
 //  });
 
 
-//  changeContent('#popup', content ).popup("open");
+  changeContent('#popup', content ).popup("open");
 //  $("#popup input[type='submit']").click(function(){
 //      $("#popup").popup("close");
 //  });
+  $("#popup form").validate();
 
-
-  changeContent('#content', content);
+//  changeContent('#content', content);
 
 
 

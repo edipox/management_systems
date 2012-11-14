@@ -25,10 +25,12 @@
           -#%a{ href: '#', data: { role: 'button', remote: "true"  } } Valores Iniciales
 
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } } 
-          - if notice  
-            %div#notice_container
-              %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
-              %div#notice= notice
+
+        - if notice  
+          %div#notice_container
+            %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+            %div#notice= notice
+
 
         %div#content
           = yield
