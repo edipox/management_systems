@@ -1,5 +1,5 @@
 
-= form_for @requests_devolutions_component, :html => { style: "width:400px;" } do |f|
+= form_for @requests_devolutions_component, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
   - if @requests_devolutions_component.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"
@@ -8,24 +8,11 @@
           %li= msg
   
     
-    
-  .field
-    = f.label :transaction_id 
-    = f.text_field :transaction_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
-    
+  
   .field
     = f.label :status_id, 'Estado'
     = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
-      
-    
-    
-  .field
-    = f.label :user_id 
-    = f.text_field :user_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
+
     
   .field
     = f.label :reason, 'Motivo' 

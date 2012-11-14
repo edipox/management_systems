@@ -6,9 +6,6 @@ class Transactions::StatusesController < ApplicationController
 
   def index
     @transactions_statuses = Transactions::Status.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-    end
   end
 
   # GET /transactions/statuses/1
@@ -16,7 +13,7 @@ class Transactions::StatusesController < ApplicationController
   def show
     @transactions_status = Transactions::Status.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.js # show.html.erb
     end
   end
 
@@ -25,26 +22,29 @@ class Transactions::StatusesController < ApplicationController
   def new
     @transactions_status = Transactions::Status.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
   # GET /transactions/statuses/1/edit
   def edit
     @transactions_status = Transactions::Status.find(params[:id])
+    respond_to do |format|
+      format.js
+    end    
   end
 
   # POST /transactions/statuses
   # POST /transactions/statuses.json
   def create
     @transactions_status = Transactions::Status.new(params[:transactions_status])
-
+    index
     respond_to do |format|
       if @transactions_status.save
-        format.html { redirect_to transactions_statuses_path, notice: 'Registro guardado correctamente.' 
+        format.js { render 'index', notice: 'Registro guardado correctamente.' 
         }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -53,13 +53,13 @@ class Transactions::StatusesController < ApplicationController
   # PUT /transactions/statuses/1.json
   def update
     @transactions_status = Transactions::Status.find(params[:id])
-
+    index
     respond_to do |format|
       if @transactions_status.update_attributes(params[:transactions_status])
-        format.html { redirect_to transactions_statuses_path, notice: 'Registro actualizado correctamente.' 
+        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
         }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +70,12 @@ class Transactions::StatusesController < ApplicationController
   # DELETE /transactions/statuses/1.json
   def destroy
     @transactions_status = Transactions::Status.find(params[:id])
-    
-#    if @transactions_status.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to transactions_statuses_path, notice: 'No se puede eliminar el registro "'+@transactions_status.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @transactions_status.destroy
-
     respond_to do |format|
-      format.html { redirect_to  transactions_statuses_path }
+      format.js { 
+        index
+        render  'index'
+      }
     end
   end
 end

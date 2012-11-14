@@ -20,8 +20,8 @@
   
         %div{  class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, components_brand 
-          %a{ href: components_brand_path(components_brand), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: components_brand_path(components_brand), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, components_brand 
-          %a{ href: edit_components_brand_path(components_brand), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+          %a{ href: edit_components_brand_path(components_brand), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' } } Editar
 
-  = link_to 'Agregar  ', new_components_brand_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+  = link_to 'Agregar  ', new_components_brand_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  } }

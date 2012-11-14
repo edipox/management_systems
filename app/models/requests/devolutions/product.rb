@@ -10,4 +10,5 @@ class Requests::Devolutions::Product < ActiveRecord::Base
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   validates :reason, :presence => true #, :length => { :minimum => 2 }  
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Product"  
 end

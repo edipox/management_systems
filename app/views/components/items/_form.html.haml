@@ -1,4 +1,4 @@
-= form_for @components_item do |f|
+= form_for @components_item, :html => { "data-remote" => "true" }  do |f|
   - if @components_item.errors.any?
     #error_explanation
       %h2= "No se pudo guardar el registro:"
@@ -11,7 +11,13 @@
 
   = f.label :description, "Descripcion"
   = f.text_field :description, "maxlength" => "200" 
+  
+  = f.label :minimum_quantity, "Cantidad mínima en stock"
+  = f.number_field :minimum_quantity, :class => "required", "maxlength" => "36",  "min" => "0"
 
+  = f.label :price, "Precio"
+  = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+      
   = f.label :code, "Codigo"
   = f.text_field :code, :class => "required", "maxlength" => "36" 
   .field.plus

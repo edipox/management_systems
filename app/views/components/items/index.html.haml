@@ -6,7 +6,8 @@
       %div{ class: 'ui-block-b' } Descripci&oacute;n
       %div{ class: 'ui-block-c' } C&oacute;digo
       %div{ class: 'ui-block-d' } Categor&iacute;a
-      %div{ class: 'ui-block-e' } Opciones
+      %div{ class: 'ui-block-e' } Cantidad mínima
+      %div{ class: 'ui-block-f' } Opciones
       
   - @components_items.each do |item|
     %li{ class: 'element' }
@@ -15,16 +16,17 @@
         %div{ class: 'ui-block-b trim' }= item.description
         %div{ class: 'ui-block-c trim' }= item.code
         %div{ class: 'ui-block-d trim' }= item.category.name
-        %div{ class: 'ui-block-e' }
+        %div{ class: 'ui-block-d trim' }= item.minimum_quantity
+        %div{ class: 'ui-block-f' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
             - if can? :delete, item
               %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?',
-                role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+                role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
             - if can? :update, item
-              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
+              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
 
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
-    data: { role: 'button', theme: 'b', icon: 'new' } } Nuevo Componente
+    data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } } Nuevo Componente
 
 -#
   %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }

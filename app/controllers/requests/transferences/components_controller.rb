@@ -4,10 +4,14 @@ class Requests::Transferences::ComponentsController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page])
+  end
+
+  def index
+    list  
     respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
+      format.js
     end
   end
 
@@ -16,7 +20,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
   def show
     @requests_transferences_component = Requests::Transferences::Component.find(params[:id])
     respond_to do |format|
-      format.html{ render 'show', :layout => "default" } # show.html.erb
+      format.js
     end
   end
 
@@ -25,7 +29,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
   def new
     @requests_transferences_component = Requests::Transferences::Component.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
@@ -38,13 +42,19 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # POST /requests/transferences/components.json
   def create
     @requests_transferences_component = Requests::Transferences::Component.new(params[:requests_transferences_component])
-
+    transaction = Stocks::Transactions::Production.new
+    transaction.kind = "Requests::Transferences::Component"
+    @requests_transferences_component.user_id = 'nil'
+    @requests_transferences_component.transaction_id = 'nil'
+    @requests_transferences_component.save
+    transaction.kind_id = @requests_transferences_component.id
+    transaction.save
+    @requests_transferences_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_component.save
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro actualizado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -56,10 +66,9 @@ class Requests::Transferences::ComponentsController < ApplicationController
 
     respond_to do |format|
       if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro guardado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +79,10 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # DELETE /requests/transferences/components/1.json
   def destroy
     @requests_transferences_component = Requests::Transferences::Component.find(params[:id])
-    
-#    if @requests_transferences_component.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to requests_transferences_components_path, notice: 'No se puede eliminar el registro "'+@requests_transferences_component.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @requests_transferences_component.destroy
-
+    list
     respond_to do |format|
-      format.html { redirect_to  requests_transferences_components_path }
+      format.js { render 'index' }
     end
   end
 end

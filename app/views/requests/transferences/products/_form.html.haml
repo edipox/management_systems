@@ -1,5 +1,5 @@
 
-= form_for @requests_transferences_product, :html => { style: "width:400px;" } do |f|
+= form_for @requests_transferences_product, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
   - if @requests_transferences_product.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"
@@ -13,18 +13,5 @@
     = f.label :status_id, 'Estado'
     = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
       
-    
-    
-  .field
-    = f.label :transaction_id 
-    = f.text_field :transaction_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
-    
-  .field
-    = f.label :user_id 
-    = f.text_field :user_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-  
   .actions
     = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

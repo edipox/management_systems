@@ -1,5 +1,5 @@
 
-= form_for @components_model do |f|
+= form_for @components_model, :html => { "data-remote" => "true" }  do |f|
   - if @components_model.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"

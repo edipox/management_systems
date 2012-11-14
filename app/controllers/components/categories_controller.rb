@@ -1,25 +1,15 @@
 class Components::CategoriesController < ApplicationController
   # GET /components/categories
   # GET /components/categories.json
-  layout "dialog"
-  
   def index
     @components_categories = Components::Category.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-      format.js
-      format.json { render json: @components_categories }
-    end
   end
 
   # GET /components/categories/1
   # GET /components/categories/1.json
   def show
     @components_category = Components::Category.find(params[:id])
-
     respond_to do |format|
-      format.html
-      format.json { render json: @components_category }
       format.js
     end
   end
@@ -39,7 +29,7 @@ class Components::CategoriesController < ApplicationController
   def edit
     @components_category = Components::Category.find(params[:id])
     respond_to do |format|
-      format.html
+      format.js
     end
   end
 
@@ -47,13 +37,14 @@ class Components::CategoriesController < ApplicationController
   # POST /components/categories.json
   def create
     @components_category = Components::Category.new(params[:components_category])
+    index
     respond_to do |format|
       if @components_category.save
-        format.html { 
-            redirect_to components_categories_path, notice: 'Categoria creada correctamente.' 
+        format.js { 
+            render 'index', notice: 'Categoria creada correctamente.' 
         }
       else
-        format.html { render action: "new", notice: 'Error al crear categoria.'  }
+        format.js { render action: "new", notice: 'Error al crear categoria.'  }
       end
     end
   end
@@ -62,14 +53,14 @@ class Components::CategoriesController < ApplicationController
   # PUT /components/categories/1.json
   def update
     @components_category = Components::Category.find(params[:id])
-
+    index
     respond_to do |format|
       if @components_category.update_attributes(params[:components_category])
-        format.html { 
-            redirect_to components_categories_path, notice: 'Categoria actualizada correctamente' 
+        format.js { 
+            render 'index'#, notice: 'Categoria actualizada correctamente' 
         }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar categoria"
         render action: "edit" }
       end
@@ -82,23 +73,17 @@ class Components::CategoriesController < ApplicationController
     @components_category = Components::Category.find(params[:id])
     if @components_category.components_items != []
       respond_to do |format|
-        format.html { 
-          #redirect_to components_categories_url, 
-          redirect_to components_categories_path, notice: 'No puedes eliminar la categoria "'+@components_category.name+'", porque existen registros relacionados.' 
-           }
         format.js {     
-            @components_categories = Components::Category.all;
-            render action: "index"
+            @components_categories = Components::Category.paginate(:page => params[:page]);
+            render action: "index", notice: 'No puedes eliminar la categoria "'+@components_category.name+'", porque existen registros relacionados.' 
         }
       end 
     else
       @components_category.destroy
       respond_to do |format|
-        format.html { redirect_to components_categories_url }
-        format.json { head :no_content }
         format.js {     
-            # Variable utilizada para re renderizar index
-            @components_categories = Components::Category.all;
+            #@components_categories = Components::Category.paginate(:page => params[:page]);
+            index
             render action: "index"
         }
       end

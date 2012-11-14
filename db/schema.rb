@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112194843) do
+ActiveRecord::Schema.define(:version => 20121113063217) do
 
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
@@ -72,9 +72,11 @@ ActiveRecord::Schema.define(:version => 20121112194843) do
     t.string   "name"
     t.string   "description"
     t.string   "code"
-    t.string   "category_id", :limit => 36, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "category_id",      :limit => 36, :null => false
+    t.integer  "minimum_quantity"
+    t.integer  "price"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "components_models", :force => true do |t|
@@ -143,7 +145,8 @@ ActiveRecord::Schema.define(:version => 20121112194843) do
 
   create_table "products_compositions_details", :force => true do |t|
     t.string   "composition_id"
-    t.string   "components_id"
+    t.string   "component_id"
+    t.string   "header_id"
     t.integer  "quantity"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -154,7 +157,6 @@ ActiveRecord::Schema.define(:version => 20121112194843) do
     t.string   "model_id"
     t.integer  "minimum_quantity"
     t.integer  "price"
-    t.integer  "quantity"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -277,6 +279,12 @@ ActiveRecord::Schema.define(:version => 20121112194843) do
   create_table "stocks_transactions_products", :force => true do |t|
     t.string   "kind"
     t.string   "kind_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tests", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

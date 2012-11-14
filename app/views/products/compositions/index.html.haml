@@ -20,10 +20,10 @@
   
         %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, products_composition 
-          %a{ href: products_composition_path(products_composition), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: products_composition_path(products_composition), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, products_composition 
-          %a{ href: edit_products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
-          %a{ href: products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true'} } Detalle
+          %a{ href: edit_products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          %a{ href: products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 
-  = link_to 'Agregar  ', new_products_composition_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new' } }
+  = link_to 'Agregar  ', new_products_composition_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true', rel: "dialog" } }

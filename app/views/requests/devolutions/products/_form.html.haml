@@ -1,24 +1,11 @@
 
-= form_for @requests_devolutions_product, :html => { style: "width:400px;" } do |f|
+= form_for @requests_devolutions_product, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
   - if @requests_devolutions_product.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"
       %ul
         - @requests_devolutions_product.errors.full_messages.each do |msg|
           %li= msg
-  
-    
-    
-  .field
-    = f.label :transaction_id 
-    = f.text_field :transaction_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-    
-    
-  .field
-    = f.label :user_id 
-    = f.text_field :user_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
     
     
   .field

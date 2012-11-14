@@ -6,9 +6,6 @@ class Components::ModelsController < ApplicationController
 
   def index
     @components_models = Components::Model.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-    end
   end
 
   # GET /components/models/1
@@ -16,7 +13,7 @@ class Components::ModelsController < ApplicationController
   def show
     @components_model = Components::Model.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.js # show.html.erb
     end
   end
 
@@ -25,26 +22,29 @@ class Components::ModelsController < ApplicationController
   def new
     @components_model = Components::Model.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
   # GET /components/models/1/edit
   def edit
     @components_model = Components::Model.find(params[:id])
+    respond_to do |format|
+      format.js
+    end    
   end
 
   # POST /components/models
   # POST /components/models.json
   def create
     @components_model = Components::Model.new(params[:components_model])
-
+    index
     respond_to do |format|
       if @components_model.save
-        format.html { redirect_to components_models_path, notice: 'Registro guardado correctamente.' 
+        format.js { render 'index', notice: 'Registro guardado correctamente.' 
         }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -53,13 +53,13 @@ class Components::ModelsController < ApplicationController
   # PUT /components/models/1.json
   def update
     @components_model = Components::Model.find(params[:id])
-
+    index
     respond_to do |format|
       if @components_model.update_attributes(params[:components_model])
-        format.html { redirect_to components_models_path, notice: 'Registro actualizado correctamente.' 
+        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
         }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +70,12 @@ class Components::ModelsController < ApplicationController
   # DELETE /components/models/1.json
   def destroy
     @components_model = Components::Model.find(params[:id])
-    
-#    if @components_model.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to components_models_path, notice: 'No se puede eliminar el registro "'+@components_model.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @components_model.destroy
-
     respond_to do |format|
-      format.html { redirect_to  components_models_path }
+      format.js { 
+        index
+        render  'index'
+      }
     end
   end
 end

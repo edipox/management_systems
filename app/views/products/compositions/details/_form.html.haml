@@ -6,22 +6,13 @@
       %ul
         - @products_compositions_detail.errors.full_messages.each do |msg|
           %li= msg
-    -#= fd.hidden_field :SINGULAR_HEADER_id
-    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
-
-      
+        
+  .field    
+    = hidden_field_tag "header_id", @products_composition.id
     
   .field
-    = f.label :composition_id 
-    = f.text_field :composition_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-      
-    
-  .field
-    = f.label :components_id 
-    = f.text_field :components_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
-      
-      
+    = f.label :component_id, 'Componente'
+    = f.collection_select(:component_id, Components::Item.all, :id, :name,{}, { class: "required" })      
     
   .field
     = f.label :quantity, 'Cantidad' 

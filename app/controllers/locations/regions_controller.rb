@@ -6,9 +6,6 @@ class Locations::RegionsController < ApplicationController
 
   def index
     @locations_regions = Locations::Region.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
-    end
   end
 
   # GET /locations/regions/1
@@ -16,7 +13,7 @@ class Locations::RegionsController < ApplicationController
   def show
     @locations_region = Locations::Region.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.js # show.html.erb
     end
   end
 
@@ -25,26 +22,29 @@ class Locations::RegionsController < ApplicationController
   def new
     @locations_region = Locations::Region.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
   # GET /locations/regions/1/edit
   def edit
     @locations_region = Locations::Region.find(params[:id])
+    respond_to do |format|
+      format.js
+    end    
   end
 
   # POST /locations/regions
   # POST /locations/regions.json
   def create
     @locations_region = Locations::Region.new(params[:locations_region])
-
+    index
     respond_to do |format|
       if @locations_region.save
-        format.html { redirect_to locations_regions_path, notice: 'Registro guardado correctamente.' 
+        format.js { render 'index', notice: 'Registro guardado correctamente.' 
         }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -53,13 +53,13 @@ class Locations::RegionsController < ApplicationController
   # PUT /locations/regions/1.json
   def update
     @locations_region = Locations::Region.find(params[:id])
-
+    index
     respond_to do |format|
       if @locations_region.update_attributes(params[:locations_region])
-        format.html { redirect_to locations_regions_path, notice: 'Registro actualizado correctamente.' 
+        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
         }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +70,12 @@ class Locations::RegionsController < ApplicationController
   # DELETE /locations/regions/1.json
   def destroy
     @locations_region = Locations::Region.find(params[:id])
-    
-#    if @locations_region.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to locations_regions_path, notice: 'No se puede eliminar el registro "'+@locations_region.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @locations_region.destroy
-
     respond_to do |format|
-      format.html { redirect_to  locations_regions_path }
+      format.js { 
+        index
+        render  'index'
+      }
     end
   end
 end

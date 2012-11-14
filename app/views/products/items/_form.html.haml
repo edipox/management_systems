@@ -1,5 +1,5 @@
 
-= form_for @products_item do |f|
+= form_for @products_item, :html => { "data-remote" => "true" }  do |f|
   - if @products_item.errors.any?
     #error_explanation 
       %h2= "No se pudo guardar:"
@@ -21,11 +21,8 @@
     = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
     
   .field
-    = f.label :price 
+    = f.label :price, "Precio"
     = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
     
-  .field
-    = f.label :quantity, 'Cantidad' 
-    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
     .actions
     = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

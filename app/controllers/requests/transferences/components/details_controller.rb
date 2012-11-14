@@ -41,7 +41,7 @@ class Requests::Transferences::Components::DetailsController < ApplicationContro
   # POST /requests/transferences/components/details
   # POST /requests/transferences/components/details.json
   def create
-    @requests_transferences_components_detail = Orders::Productions::Detail.new(params[:requests_transferences_components_detail])
+    @requests_transferences_components_detail = Requests::Transferences::Components::Detail.new(params[:requests_transferences_components_detail])
     @requests_transferences_components_detail.requests_transferences_component = Requests::Transferences::Component.find(params["header_id"])
     @requests_transferences_components_details = @requests_transferences_components_detail.requests_transferences_component.details.paginate(:page => params[:page])
     respond_to do |format|

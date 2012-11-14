@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Producción
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    %div{ data: { role: 'page' }, class: 'not' }
+      %div{ data: { role: 'header' } }
+        %h3 Stock de Producción
+        %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
+        %a{ href: settings_path, data:{ role: 'button', icon: "gear" } } Configuraciones
+        = render 'layouts/stock_top_menu'
+        
+      %div#page
+        %div#menu{ data: { role: 'controlgroup' } }
+          %a{ href: '/stock/production/index', data: { role: 'button', remote: "true" } } Stock de producción
+          %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
+          %a{ href: requests_devolutions_components_path, data: { role: 'button', remote: "true"  } } Devolucion de componentes          
+          %a{ href: '/stock/production/transactions', data: { role: 'button', remote: "true"  } } Movimientos
+          %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos de productos terminados
+          %a{ href: transactions_statuses_path, data: { role: 'button', remote: "true"  } } Estados de solicitudes
+          -#%a{ href: '#', data: { role: 'button', remote: "true"  } } Valores Iniciales
+
+        %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } } 
+
+        - if notice  
+          %div#notice_container
+            %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+            %div#notice= notice
+
+
+        %div#content
+          = yield
+
+      %div{ data: { role: 'footer', position: 'fixed' } }
+        %h3 Sistema de Gestion

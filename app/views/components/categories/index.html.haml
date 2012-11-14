@@ -4,7 +4,7 @@
     %div{ class: 'ui-grid-b' }
       %div{ class: 'ui-block-a' } Nombre
       %div{ class: 'ui-block-b' } Descripci&oacute;n
-      %div{ class: 'ui-block-c' } 
+      %div{ class: 'ui-block-c' } Opciones
 
   - @components_categories.each do |category|
     %li{ class: 'element'}
@@ -13,7 +13,7 @@
         %div{ class: 'ui-block-b', trim:"40" }= category.description
         %div{  class: 'ui-block-c', data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, category #-
-          %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true' } } Eliminar
+          %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: "true" } } Eliminar
           -# if can? :update, category #-
-          %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true'} } Editar
-= link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { inline:"true",role: 'button', theme: 'b', icon: 'new' } }
+          %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true', remote: "true"  } } Editar
+= link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { inline:"true",role: 'button', theme: 'b', icon: 'new', remote: "true" } }

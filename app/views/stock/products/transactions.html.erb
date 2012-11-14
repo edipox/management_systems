@@ -1,0 +1,32 @@
+<%- @products_transactions = Stocks::Transactions::Product.paginate(:page => params[:page]) %>
+<%- letters = ["a","b","c","d","e"] %>
+<%- i = 0 %>
+<%- t = {"Requests::Transferences::Component"=> "Pedido de transferencia de componentes", "Requests::Devolutions::Component" => "Devolucion de componentes", "reason" => "Motivo", "updated_at" => "Actualizado", "Requests::Transferences::Product" => "Transferencia de productos",  "Requests::Devolutions::Product" => "Devolución de productos" } %>
+<%= will_paginate @products_transactions %>
+<ul data-role='listview' data-inset='true' data-theme='c' >
+  <%- @products_transactions.each do |transaction| %>
+    <%- transaction_value = eval "#{transaction.kind}.find('#{transaction.kind_id}')" %>
+    <%- c = eval "::#{transaction.kind}.new" %>
+    <%- attrs = c.attributes %>
+    <li>
+      <span>
+        <%= t[transaction.kind] || '' %>
+      </span>
+    <%- attrs.each do |attr| %>
+      <%- i = i + 1 ; if i > 4 ; i = 4 ; end %>
+      <%- css_class = '"ui-block-'+letters[i]+'"' %>
+      <span class='#{css_class}' >
+        <% if attr[0] != "created_at" && attr[0] != "id" && attr[0] != "transaction_id"%>
+          <% if attr[0] != "status_id" %>
+            <%= t[attr[0]] %>
+            <%= eval"transaction_value.#{attr[0]}" %>
+          <% else %>
+            Estado
+            <%= Transactions::Status.find(eval"transaction_value.#{attr[0]}").name %>
+          <% end %>
+        <% end %>
+      </span>
+    <%- end ; i = 0 %>
+    </li>
+  <%- end %>
+</ul>

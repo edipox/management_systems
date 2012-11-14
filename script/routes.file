@@ -1,0 +1,203 @@
+                               products_index GET    /products/index(.:format)                                     products#index
+                             production_index GET    /production/index(.:format)                                   production#index
+                             components_index GET    /components/index(.:format)                                   components#index
+      requests_devolutions_components_details GET    /requests/devolutions/components/details(.:format)            requests/devolutions/components/details#index
+                                              POST   /requests/devolutions/components/details(.:format)            requests/devolutions/components/details#create
+   new_requests_devolutions_components_detail GET    /requests/devolutions/components/details/new(.:format)        requests/devolutions/components/details#new
+  edit_requests_devolutions_components_detail GET    /requests/devolutions/components/details/:id/edit(.:format)   requests/devolutions/components/details#edit
+       requests_devolutions_components_detail GET    /requests/devolutions/components/details/:id(.:format)        requests/devolutions/components/details#show
+                                              PUT    /requests/devolutions/components/details/:id(.:format)        requests/devolutions/components/details#update
+                                              DELETE /requests/devolutions/components/details/:id(.:format)        requests/devolutions/components/details#destroy
+                   orders_productions_details GET    /orders/productions/details(.:format)                         orders/productions/details#index
+                                              POST   /orders/productions/details(.:format)                         orders/productions/details#create
+                new_orders_productions_detail GET    /orders/productions/details/new(.:format)                     orders/productions/details#new
+               edit_orders_productions_detail GET    /orders/productions/details/:id/edit(.:format)                orders/productions/details#edit
+                    orders_productions_detail GET    /orders/productions/details/:id(.:format)                     orders/productions/details#show
+                                              PUT    /orders/productions/details/:id(.:format)                     orders/productions/details#update
+                                              DELETE /orders/productions/details/:id(.:format)                     orders/productions/details#destroy
+        requests_devolutions_products_details GET    /requests/devolutions/products/details(.:format)              requests/devolutions/products/details#index
+                                              POST   /requests/devolutions/products/details(.:format)              requests/devolutions/products/details#create
+     new_requests_devolutions_products_detail GET    /requests/devolutions/products/details/new(.:format)          requests/devolutions/products/details#new
+    edit_requests_devolutions_products_detail GET    /requests/devolutions/products/details/:id/edit(.:format)     requests/devolutions/products/details#edit
+         requests_devolutions_products_detail GET    /requests/devolutions/products/details/:id(.:format)          requests/devolutions/products/details#show
+                                              PUT    /requests/devolutions/products/details/:id(.:format)          requests/devolutions/products/details#update
+                                              DELETE /requests/devolutions/products/details/:id(.:format)          requests/devolutions/products/details#destroy
+      requests_transferences_products_details GET    /requests/transferences/products/details(.:format)            requests/transferences/products/details#index
+                                              POST   /requests/transferences/products/details(.:format)            requests/transferences/products/details#create
+   new_requests_transferences_products_detail GET    /requests/transferences/products/details/new(.:format)        requests/transferences/products/details#new
+  edit_requests_transferences_products_detail GET    /requests/transferences/products/details/:id/edit(.:format)   requests/transferences/products/details#edit
+       requests_transferences_products_detail GET    /requests/transferences/products/details/:id(.:format)        requests/transferences/products/details#show
+                                              PUT    /requests/transferences/products/details/:id(.:format)        requests/transferences/products/details#update
+                                              DELETE /requests/transferences/products/details/:id(.:format)        requests/transferences/products/details#destroy
+    requests_transferences_components_details GET    /requests/transferences/components/details(.:format)          requests/transferences/components/details#index
+                                              POST   /requests/transferences/components/details(.:format)          requests/transferences/components/details#create
+ new_requests_transferences_components_detail GET    /requests/transferences/components/details/new(.:format)      requests/transferences/components/details#new
+edit_requests_transferences_components_detail GET    /requests/transferences/components/details/:id/edit(.:format) requests/transferences/components/details#edit
+     requests_transferences_components_detail GET    /requests/transferences/components/details/:id(.:format)      requests/transferences/components/details#show
+                                              PUT    /requests/transferences/components/details/:id(.:format)      requests/transferences/components/details#update
+                                              DELETE /requests/transferences/components/details/:id(.:format)      requests/transferences/components/details#destroy
+        requests_purchases_components_details GET    /requests/purchases/components/details(.:format)              requests/purchases/components/details#index
+                                              POST   /requests/purchases/components/details(.:format)              requests/purchases/components/details#create
+     new_requests_purchases_components_detail GET    /requests/purchases/components/details/new(.:format)          requests/purchases/components/details#new
+    edit_requests_purchases_components_detail GET    /requests/purchases/components/details/:id/edit(.:format)     requests/purchases/components/details#edit
+         requests_purchases_components_detail GET    /requests/purchases/components/details/:id(.:format)          requests/purchases/components/details#show
+                                              PUT    /requests/purchases/components/details/:id(.:format)          requests/purchases/components/details#update
+                                              DELETE /requests/purchases/components/details/:id(.:format)          requests/purchases/components/details#destroy
+                products_compositions_details GET    /products/compositions/details(.:format)                      products/compositions/details#index
+                                              POST   /products/compositions/details(.:format)                      products/compositions/details#create
+             new_products_compositions_detail GET    /products/compositions/details/new(.:format)                  products/compositions/details#new
+            edit_products_compositions_detail GET    /products/compositions/details/:id/edit(.:format)             products/compositions/details#edit
+                 products_compositions_detail GET    /products/compositions/details/:id(.:format)                  products/compositions/details#show
+                                              PUT    /products/compositions/details/:id(.:format)                  products/compositions/details#update
+                                              DELETE /products/compositions/details/:id(.:format)                  products/compositions/details#destroy
+              requests_devolutions_components GET    /requests/devolutions/components(.:format)                    requests/devolutions/components#index
+                                              POST   /requests/devolutions/components(.:format)                    requests/devolutions/components#create
+           new_requests_devolutions_component GET    /requests/devolutions/components/new(.:format)                requests/devolutions/components#new
+          edit_requests_devolutions_component GET    /requests/devolutions/components/:id/edit(.:format)           requests/devolutions/components#edit
+               requests_devolutions_component GET    /requests/devolutions/components/:id(.:format)                requests/devolutions/components#show
+                                              PUT    /requests/devolutions/components/:id(.:format)                requests/devolutions/components#update
+                                              DELETE /requests/devolutions/components/:id(.:format)                requests/devolutions/components#destroy
+                           orders_productions GET    /orders/productions(.:format)                                 orders/productions#index
+                                              POST   /orders/productions(.:format)                                 orders/productions#create
+                        new_orders_production GET    /orders/productions/new(.:format)                             orders/productions#new
+                       edit_orders_production GET    /orders/productions/:id/edit(.:format)                        orders/productions#edit
+                            orders_production GET    /orders/productions/:id(.:format)                             orders/productions#show
+                                              PUT    /orders/productions/:id(.:format)                             orders/productions#update
+                                              DELETE /orders/productions/:id(.:format)                             orders/productions#destroy
+                requests_devolutions_products GET    /requests/devolutions/products(.:format)                      requests/devolutions/products#index
+                                              POST   /requests/devolutions/products(.:format)                      requests/devolutions/products#create
+             new_requests_devolutions_product GET    /requests/devolutions/products/new(.:format)                  requests/devolutions/products#new
+            edit_requests_devolutions_product GET    /requests/devolutions/products/:id/edit(.:format)             requests/devolutions/products#edit
+                 requests_devolutions_product GET    /requests/devolutions/products/:id(.:format)                  requests/devolutions/products#show
+                                              PUT    /requests/devolutions/products/:id(.:format)                  requests/devolutions/products#update
+                                              DELETE /requests/devolutions/products/:id(.:format)                  requests/devolutions/products#destroy
+              requests_transferences_products GET    /requests/transferences/products(.:format)                    requests/transferences/products#index
+                                              POST   /requests/transferences/products(.:format)                    requests/transferences/products#create
+           new_requests_transferences_product GET    /requests/transferences/products/new(.:format)                requests/transferences/products#new
+          edit_requests_transferences_product GET    /requests/transferences/products/:id/edit(.:format)           requests/transferences/products#edit
+               requests_transferences_product GET    /requests/transferences/products/:id(.:format)                requests/transferences/products#show
+                                              PUT    /requests/transferences/products/:id(.:format)                requests/transferences/products#update
+                                              DELETE /requests/transferences/products/:id(.:format)                requests/transferences/products#destroy
+            requests_transferences_components GET    /requests/transferences/components(.:format)                  requests/transferences/components#index
+                                              POST   /requests/transferences/components(.:format)                  requests/transferences/components#create
+         new_requests_transferences_component GET    /requests/transferences/components/new(.:format)              requests/transferences/components#new
+        edit_requests_transferences_component GET    /requests/transferences/components/:id/edit(.:format)         requests/transferences/components#edit
+             requests_transferences_component GET    /requests/transferences/components/:id(.:format)              requests/transferences/components#show
+                                              PUT    /requests/transferences/components/:id(.:format)              requests/transferences/components#update
+                                              DELETE /requests/transferences/components/:id(.:format)              requests/transferences/components#destroy
+                requests_purchases_components GET    /requests/purchases/components(.:format)                      requests/purchases/components#index
+                                              POST   /requests/purchases/components(.:format)                      requests/purchases/components#create
+             new_requests_purchases_component GET    /requests/purchases/components/new(.:format)                  requests/purchases/components#new
+            edit_requests_purchases_component GET    /requests/purchases/components/:id/edit(.:format)             requests/purchases/components#edit
+                 requests_purchases_component GET    /requests/purchases/components/:id(.:format)                  requests/purchases/components#show
+                                              PUT    /requests/purchases/components/:id(.:format)                  requests/purchases/components#update
+                                              DELETE /requests/purchases/components/:id(.:format)                  requests/purchases/components#destroy
+                        products_compositions GET    /products/compositions(.:format)                              products/compositions#index
+                                              POST   /products/compositions(.:format)                              products/compositions#create
+                     new_products_composition GET    /products/compositions/new(.:format)                          products/compositions#new
+                    edit_products_composition GET    /products/compositions/:id/edit(.:format)                     products/compositions#edit
+                         products_composition GET    /products/compositions/:id(.:format)                          products/compositions#show
+                                              PUT    /products/compositions/:id(.:format)                          products/compositions#update
+                                              DELETE /products/compositions/:id(.:format)                          products/compositions#destroy
+                        transactions_statuses GET    /transactions/statuses(.:format)                              transactions/statuses#index
+                                              POST   /transactions/statuses(.:format)                              transactions/statuses#create
+                      new_transactions_status GET    /transactions/statuses/new(.:format)                          transactions/statuses#new
+                     edit_transactions_status GET    /transactions/statuses/:id/edit(.:format)                     transactions/statuses#edit
+                          transactions_status GET    /transactions/statuses/:id(.:format)                          transactions/statuses#show
+                                              PUT    /transactions/statuses/:id(.:format)                          transactions/statuses#update
+                                              DELETE /transactions/statuses/:id(.:format)                          transactions/statuses#destroy
+                             locations_cities GET    /locations/cities(.:format)                                   locations/cities#index
+                                              POST   /locations/cities(.:format)                                   locations/cities#create
+                           new_locations_city GET    /locations/cities/new(.:format)                               locations/cities#new
+                          edit_locations_city GET    /locations/cities/:id/edit(.:format)                          locations/cities#edit
+                               locations_city GET    /locations/cities/:id(.:format)                               locations/cities#show
+                                              PUT    /locations/cities/:id(.:format)                               locations/cities#update
+                                              DELETE /locations/cities/:id(.:format)                               locations/cities#destroy
+                            locations_regions GET    /locations/regions(.:format)                                  locations/regions#index
+                                              POST   /locations/regions(.:format)                                  locations/regions#create
+                         new_locations_region GET    /locations/regions/new(.:format)                              locations/regions#new
+                        edit_locations_region GET    /locations/regions/:id/edit(.:format)                         locations/regions#edit
+                             locations_region GET    /locations/regions/:id(.:format)                              locations/regions#show
+                                              PUT    /locations/regions/:id(.:format)                              locations/regions#update
+                                              DELETE /locations/regions/:id(.:format)                              locations/regions#destroy
+                          locations_countries GET    /locations/countries(.:format)                                locations/countries#index
+                                              POST   /locations/countries(.:format)                                locations/countries#create
+                        new_locations_country GET    /locations/countries/new(.:format)                            locations/countries#new
+                       edit_locations_country GET    /locations/countries/:id/edit(.:format)                       locations/countries#edit
+                            locations_country GET    /locations/countries/:id(.:format)                            locations/countries#show
+                                              PUT    /locations/countries/:id(.:format)                            locations/countries#update
+                                              DELETE /locations/countries/:id(.:format)                            locations/countries#destroy
+                         locations_continents GET    /locations/continents(.:format)                               locations/continents#index
+                                              POST   /locations/continents(.:format)                               locations/continents#create
+                      new_locations_continent GET    /locations/continents/new(.:format)                           locations/continents#new
+                     edit_locations_continent GET    /locations/continents/:id/edit(.:format)                      locations/continents#edit
+                          locations_continent GET    /locations/continents/:id(.:format)                           locations/continents#show
+                                              PUT    /locations/continents/:id(.:format)                           locations/continents#update
+                                              DELETE /locations/continents/:id(.:format)                           locations/continents#destroy
+                               products_items GET    /products/items(.:format)                                     products/items#index
+                                              POST   /products/items(.:format)                                     products/items#create
+                            new_products_item GET    /products/items/new(.:format)                                 products/items#new
+                           edit_products_item GET    /products/items/:id/edit(.:format)                            products/items#edit
+                                products_item GET    /products/items/:id(.:format)                                 products/items#show
+                                              PUT    /products/items/:id(.:format)                                 products/items#update
+                                              DELETE /products/items/:id(.:format)                                 products/items#destroy
+                            components_models GET    /components/models(.:format)                                  components/models#index
+                                              POST   /components/models(.:format)                                  components/models#create
+                         new_components_model GET    /components/models/new(.:format)                              components/models#new
+                        edit_components_model GET    /components/models/:id/edit(.:format)                         components/models#edit
+                             components_model GET    /components/models/:id(.:format)                              components/models#show
+                                              PUT    /components/models/:id(.:format)                              components/models#update
+                                              DELETE /components/models/:id(.:format)                              components/models#destroy
+                            components_brands GET    /components/brands(.:format)                                  components/brands#index
+                                              POST   /components/brands(.:format)                                  components/brands#create
+                         new_components_brand GET    /components/brands/new(.:format)                              components/brands#new
+                        edit_components_brand GET    /components/brands/:id/edit(.:format)                         components/brands#edit
+                             components_brand GET    /components/brands/:id(.:format)                              components/brands#show
+                                              PUT    /components/brands/:id(.:format)                              components/brands#update
+                                              DELETE /components/brands/:id(.:format)                              components/brands#destroy
+                  components_categories_kinds GET    /components/categories/kinds(.:format)                        components/categories/kinds#index
+                                              POST   /components/categories/kinds(.:format)                        components/categories/kinds#create
+               new_components_categories_kind GET    /components/categories/kinds/new(.:format)                    components/categories/kinds#new
+              edit_components_categories_kind GET    /components/categories/kinds/:id/edit(.:format)               components/categories/kinds#edit
+                   components_categories_kind GET    /components/categories/kinds/:id(.:format)                    components/categories/kinds#show
+                                              PUT    /components/categories/kinds/:id(.:format)                    components/categories/kinds#update
+                                              DELETE /components/categories/kinds/:id(.:format)                    components/categories/kinds#destroy
+                                     settings GET    /settings(.:format)                                           settings/settings#index
+                         settings_permissions GET    /settings/permissions(.:format)                               settings/permissions#index
+                                              GET    /settings/permissions/:role_id(.:format)                      settings/permissions#of_role
+                    settings_permissions_save POST   /settings/permissions/save(.:format)                          settings/permissions#save
+                               settings_roles GET    /settings/roles(.:format)                                     settings/roles#index
+                                              POST   /settings/roles(.:format)                                     settings/roles#create
+                            new_settings_role GET    /settings/roles/new(.:format)                                 settings/roles#new
+                           edit_settings_role GET    /settings/roles/:id/edit(.:format)                            settings/roles#edit
+                                settings_role GET    /settings/roles/:id(.:format)                                 settings/roles#show
+                                              PUT    /settings/roles/:id(.:format)                                 settings/roles#update
+                                              DELETE /settings/roles/:id(.:format)                                 settings/roles#destroy
+                             components_items GET    /components/items(.:format)                                   components/items#index
+                                              POST   /components/items(.:format)                                   components/items#create
+                          new_components_item GET    /components/items/new(.:format)                               components/items#new
+                         edit_components_item GET    /components/items/:id/edit(.:format)                          components/items#edit
+                              components_item GET    /components/items/:id(.:format)                               components/items#show
+                                              PUT    /components/items/:id(.:format)                               components/items#update
+                                              DELETE /components/items/:id(.:format)                               components/items#destroy
+                        components_categories GET    /components/categories(.:format)                              components/categories#index
+                                              POST   /components/categories(.:format)                              components/categories#create
+                      new_components_category GET    /components/categories/new(.:format)                          components/categories#new
+                     edit_components_category GET    /components/categories/:id/edit(.:format)                     components/categories#edit
+                          components_category GET    /components/categories/:id(.:format)                          components/categories#show
+                                              PUT    /components/categories/:id(.:format)                          components/categories#update
+                                              DELETE /components/categories/:id(.:format)                          components/categories#destroy
+                             new_user_session GET    /users/login(.:format)                                        devise/sessions#new
+                                 user_session POST   /users/login(.:format)                                        devise/sessions#create
+                         destroy_user_session DELETE /users/logout(.:format)                                       devise/sessions#destroy
+                                user_password POST   /users/password(.:format)                                     devise/passwords#create
+                            new_user_password GET    /users/password/new(.:format)                                 devise/passwords#new
+                           edit_user_password GET    /users/password/edit(.:format)                                devise/passwords#edit
+                                              PUT    /users/password(.:format)                                     devise/passwords#update
+                     cancel_user_registration GET    /users/cancel(.:format)                                       users/registrations#cancel
+                            user_registration POST   /users(.:format)                                              users/registrations#create
+                        new_user_registration GET    /users/register(.:format)                                     users/registrations#new
+                       edit_user_registration GET    /users/edit(.:format)                                         users/registrations#edit
+                                              PUT    /users(.:format)                                              users/registrations#update
+                                              DELETE /users(.:format)                                              users/registrations#destroy
+                                         root        /                                                             stock#components

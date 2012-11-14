@@ -4,10 +4,14 @@ class Orders::ProductionsController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @orders_productions = Orders::Production.paginate(:page => params[:page])
+  end
+
+  def index
+    list  
     respond_to do |format|
-      format.html{ render 'index', :layout => "default" }
+      format.js
     end
   end
 
@@ -16,7 +20,7 @@ class Orders::ProductionsController < ApplicationController
   def show
     @orders_production = Orders::Production.find(params[:id])
     respond_to do |format|
-      format.html{ render 'show', :layout => "default" } # show.html.erb
+      format.js
     end
   end
 
@@ -25,7 +29,7 @@ class Orders::ProductionsController < ApplicationController
   def new
     @orders_production = Orders::Production.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.js # new.html.erb
     end
   end
 
@@ -38,13 +42,20 @@ class Orders::ProductionsController < ApplicationController
   # POST /orders/productions.json
   def create
     @orders_production = Orders::Production.new(params[:orders_production])
-
+    transaction = Stocks::Transactions::Production.new
+    transaction.kind = "Orders::Production"
+    @orders_production.user_id = "nil"
+    @orders_production.transaction_id = "nil"
+    @orders_production.save
+    transaction.kind_id = @orders_production.id
+    transaction.save
+    @orders_production.transaction = transaction
+    
     respond_to do |format|
       if @orders_production.save
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro actualizado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
       else
-        format.html { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
     end
   end
@@ -56,10 +67,9 @@ class Orders::ProductionsController < ApplicationController
 
     respond_to do |format|
       if @orders_production.update_attributes(params[:orders_production])
-        format.html { render action: 'show', :layout => "default" , notice: 'Registro guardado correctamente.' 
-        }
+        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
       else
-        format.html { 
+        format.js { 
         flash[:notice] = "Error al actualizar el registro"
         render action: "edit" }
       end
@@ -70,19 +80,10 @@ class Orders::ProductionsController < ApplicationController
   # DELETE /orders/productions/1.json
   def destroy
     @orders_production = Orders::Production.find(params[:id])
-    
-#    if @orders_production.components_items != []
-#      respond_to do |format|
-#        format.html { 
-#          redirect_to orders_productions_path, notice: 'No se puede eliminar el registro "'+@orders_production.name+'", porque existen registros relacionados.' 
-#           }
-#      end 
-#    else
-    
     @orders_production.destroy
-
+    list
     respond_to do |format|
-      format.html { redirect_to  orders_productions_path }
+      format.js { render 'index' }
     end
   end
 end

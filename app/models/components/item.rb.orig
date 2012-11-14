@@ -1,0 +1,16 @@
+class Components::Item < ActiveRecord::Base
+  attr_accessible :category, :category_id, :code, :description, :name, :minimum_quantity
+  belongs_to :category, :class_name => "Components::Category"
+  
+  validates_presence_of  :code, :name, :category_id
+<<<<<<< HEAD
+
+  has_many :stocks, :foreign_key => :component_id, :class_name => ::Stocks::Component.to_s
+
+=======
+>>>>>>> 85bfa6c69ffd39e4e0db86c0d3953875ac5f4948
+  has_paper_trail
+  
+  #has_many :requests_devolutions_components_details, :foreign_key => :component_id, :class_name => "Requests::Devolutions::Components::Detail"
+  
+end

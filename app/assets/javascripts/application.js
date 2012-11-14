@@ -29,7 +29,25 @@ function on_load(){
   $("form").validate(); 
   trim($(".trim"));
   trim($("*[trim]"));
+  
+  $("a").click(function(){
+    $(".ui-btn-active").removeClass("ui-btn-active");
+    $(this).addClass("ui-btn-active")
+  });
+ ajaxifyPagination();
+};
+
+function ajaxifyPagination() {
+    $(".pagination a").click(function() {
+    	$.ajax({
+    	  type: "GET",
+    	  url: $(this).attr("href"),
+    	  dataType: "script"
+    	});
+    	return false;
+    });
 }
+
 
 function trim(element){
     $.each($.makeArray(element), function(i, val){
@@ -68,7 +86,9 @@ function showFakeSubForm(caller, subform, select){
 
 
 function changeContent(where, content) {
-  return $(where).html(content).trigger('create');
+  var v = $(where).html(content).trigger('create');
+  on_load();
+  return v;
 };
 
 function changeSelectedButton(where, selected) {
@@ -77,48 +97,57 @@ function changeSelectedButton(where, selected) {
 }
 
 
-function PopupLevel(_content){
-  this.content = _content;
-  this.current = null;
-  this.back = null;
-  this.open = function(){
-    changeContent("#popup", this.content).popup("open");
-    $("#popup").bind({
-       popupafterclose: closePopup
-    });
-  };
-  this.close = function(){
-    changeContent("#popup", this.content).popup("close");
-  };
-}
+//function PopupLevel(_content){
+//  this.content = _content;
+//  this.current = null;
+//  this.back = null;
+//  this.open = function(){
+//    changeContent("#popup", this.content).popup("open");
+//    $("#popup").bind({
+//       popupafterclose: closePopup
+//    });
+//  };
+//  this.close = function(){
+//    changeContent("#popup", this.content).popup("close");
+//  };
+//}
 
-var _EVENT = null;
-var _UI = null;
+//var _EVENT = null;
+//var _UI = null;
 
-var _POPUP = new PopupLevel("");
+//var _POPUP = new PopupLevel("");
+
 
 function openPopup(content){
-  if(_POPUP.current != null){ 
-    _POPUP.back = _POPUP.current;
-  }
-  _POPUP.current = new PopupLevel(content);
-  _POPUP.current.open();
+  changeContent('#popup', content ).popup("open");
+  $("#popup form").submit(function() {
+      if($("#popup form").valid()){
+        $("#popup").popup("close");
+      }
+  });
+  $("#popup form").validate();
+//  on_load();
+//  if(_POPUP.current != null){ 
+//    _POPUP.back = _POPUP.current;
+//  }
+//  _POPUP.current = new PopupLevel(content);
+//  _POPUP.current.open();
 }
 
 function closePopup(){
-  if(_POPUP.back == null && _POPUP.current != null){
+/*  if(_POPUP.back == null && _POPUP.current != null){
       _POPUP.current.close();
       _POPUP.current = null;
   }else if(_POPUP.current != null){
     _POPUP.current = _POPUP.back;
     _POPUP.back = _POPUP.back == null ? null : _POPUP.back.back;
     _POPUP.current.open();
-  }
+  }*/
 }
 
 function showPopup(popup, content){
   openPopup(content);
-  $("#popup .closer").click(closePopup);
+//  $("#popup .closer").click(closePopup);
 }
 
 

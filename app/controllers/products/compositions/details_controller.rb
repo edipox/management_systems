@@ -41,14 +41,13 @@ class Products::Compositions::DetailsController < ApplicationController
   # POST /products/compositions/details
   # POST /products/compositions/details.json
   def create
-    @products_compositions_detail = Orders::Productions::Detail.new(params[:products_compositions_detail])
+    @products_compositions_detail = Products::Compositions::Detail.new(params[:products_compositions_detail])
     @products_compositions_detail.products_composition = Products::Composition.find(params["header_id"])
-    @products_compositions_details = @products_compositions_detail.products_composition.details.paginate(:page => params[:page])
     respond_to do |format|
       if @products_compositions_detail.save
         format.js{ 
+          @products_compositions_details = @products_compositions_detail.products_composition.details.paginate(:page => params[:page])
           @products_composition = @products_compositions_detail.products_composition
-          #@orders_productions_details = @production.details
           @products_compositions_detail = Products::Compositions::Detail.new
           render 'update_list_form' 
          }
