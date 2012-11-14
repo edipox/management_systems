@@ -119,23 +119,13 @@ function changeSelectedButton(where, selected) {
 
 
 function openPopup(content){
-
-
-//  $("#popup input[type='submit']").click(function(){
-//      $("#popup").popup("close");
-//  });
-
-
   changeContent('#popup', content ).popup("open");
-//  $("#popup input[type='submit']").click(function(){
-//      $("#popup").popup("close");
-//  });
+  $("#popup form").submit(function() {
+      if($("#popup form").valid()){
+        $("#popup").popup("close");
+      }
+  });
   $("#popup form").validate();
-
-//  changeContent('#content', content);
-
-
-
 //  on_load();
 //  if(_POPUP.current != null){ 
 //    _POPUP.back = _POPUP.current;
@@ -157,7 +147,7 @@ function closePopup(){
 
 function showPopup(popup, content){
   openPopup(content);
-  $("#popup .closer").click(closePopup);
+//  $("#popup .closer").click(closePopup);
 }
 
 
