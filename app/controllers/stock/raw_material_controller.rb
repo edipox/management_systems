@@ -1,5 +1,4 @@
-class Stock::ComponentsController < ApplicationController
-  layout "stock_components"
+class Stock::RawMaterialController < ApplicationController
   def index
 
   end
