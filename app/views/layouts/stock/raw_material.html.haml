@@ -18,7 +18,7 @@
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: stock_raw_material_list_path, data: { role: 'button', remote: "true" } } Stock de componentes
           %a{ href: 'stock/components/transactions', class: 'ui-disabled', data: { role: 'button', remote: "true"  } } Movimientos
-          %a{ href: components_items_path, class: 'ui-disabled', data: { role: 'button', remote:"true" } } Componentes
+          %a{ href: components_items_path, data: { role: 'button', remote:"true" } } Componentes
           %a{ href: components_categories_path, class: 'ui-disabled', data: { role: 'button', remote:"true" } } Categorias
 
         - if notice  
