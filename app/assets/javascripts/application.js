@@ -25,7 +25,11 @@ $(document).ready(function(){
 });
 
 function on_load(){
-  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
+  defaultShowForm("category",["category_name", "category_description"]);
+  defaultShowForm("brand",["brand_name", "brand_description"]);
+   
+//  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
+
   $("form").validate(); 
   trim($(".trim"));
   trim($("*[trim]"));
@@ -58,7 +62,11 @@ function trim(element){
     })
 }
 
-function showFakeSubForm(caller, subform, select){
+function defaultShowForm(element, fields){
+ showFakeSubForm('#'+element+'_button', '#'+element+'SubForm', '#'+element+'_select', fields, "new_"+element+"");
+}
+
+function showFakeSubForm(caller, subform, select, required_fields, existence_field){
  return $(caller).toggle(
       function () {
         $(select).hide();
@@ -67,9 +75,14 @@ function showFakeSubForm(caller, subform, select){
         $(e).removeClass("ui-icon-plus");
         $(e).addClass("ui-icon-delete");
 
-        $('#new_category').val('true');
-        $('#category_name').addClass('required');
-        $('#category_description').addClass('required');
+        $('#'+existence_field).val('true');
+        if(required_fields){
+          for(var i = 0; i < required_fields.length; i++){
+            $('#'+required_fields[i]).addClass('required');    
+          }
+        }
+//        $('#category_name').addClass('required');
+//        $('#category_description').addClass('required');
       },      function () {
         $(select).show();
         $(subform).hide();
@@ -77,9 +90,15 @@ function showFakeSubForm(caller, subform, select){
         $(e).removeClass("ui-icon-delete");
         $(e).addClass("ui-icon-plus");
 
-        $('#new_category').val('false');
-        $('#category_name').removeClass('required');
-        $('#category_description').removeClass('required');
+        $('#'+existence_field).val('false');
+        if(required_fields){
+          for(var i = 0; i < required_fields.length; i++){
+            $('#'+required_fields[i]).removeClass('required');    
+          }
+        }
+
+//        $('#category_name').removeClass('required');
+//        $('#category_description').removeClass('required');
       }
   );
 }
@@ -107,7 +126,7 @@ function openPopup(content){
   });
   $("#popup form").validate();
   $("#popup .cancel").click(function(){
-     $("#popup").slideUp("normal", function(){
+     $("#popup").slideUp("fast", function(){
        $("#popup").popup("close");
      });
   });

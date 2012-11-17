@@ -13,10 +13,10 @@
   = f.text_field :description, "maxlength" => "200" 
   
   = f.label :minimum_quantity, "Cantidad mínima en stock"
-  = f.number_field :minimum_quantity, :class => "required", "maxlength" => "36",  "min" => "0", placeholder: '0'
+  = f.number_field :minimum_quantity, :class => "required", "maxlength" => "36",  "min" => "0"
 
   = f.label :price, "Precio"
-  = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0", placeholder: '0' }
+  = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0" }
       
   = f.label :code, "Codigo"
   = f.text_field :code, :class => "required", "maxlength" => "36" 
@@ -36,6 +36,10 @@
     = text_field_tag :category_description, nil, :html => { "maxlength" => "200" }
     
     = hidden_field_tag :new_category, 'false'
+    
+  
+  %a#model_button{ data:{ role:'button', icon: 'plus', iconpos: 'notext'}, subform_id: "categorySubForm", select_id: "category_select", class: "sub_form_loader", onclick: "on_load" }
+
     
   %div.ui-grid-a
     %div.ui-block-a

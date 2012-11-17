@@ -16,9 +16,24 @@
     = f.label :description, 'Descripción' 
     = f.text_field :description, { class: " ", "maxlength" => "200", "minlength" => "2"  }
     
-  .field
-    = f.label :brand_id 
-    = f.text_field :brand_id, { class: "required ", "maxlength" => "60", "minlength" => "2"  }
+  .field.plus
+    = f.label :brand_id, "Marcas"
+    %div#brand_select{style:"display:inline-block;" }
+      = f.collection_select(:brand_id, Components::Brand.all, :id, :name)
+   
+    %a#brand_button{ data:{ role:'button', icon: 'plus', iconpos: 'notext'}, subform_id: "categorySubForm", select_id: "category_select", class: "sub_form_loader", onclick: "on_load" }
+
+  %div#brandSubForm{ class: 'ui-corner-all', data: { role: 'content', theme: 'a' }, style: "display:none" } 
+    = label_tag :brand_name, "Nombre"  
+    = text_field_tag :brand_name, nil, :maxlength => 36
+
+    = label_tag :brand_description, "Descripcion"
+    = text_field_tag :brand_description, nil, :html => { "maxlength" => "200" }
+    
+    = hidden_field_tag :new_brand, 'false'
+    
+  
+
   %div.ui-grid-a
     %div.ui-block-a
       %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
