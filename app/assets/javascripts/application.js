@@ -30,8 +30,8 @@ function on_load(){
   trim($(".trim"));
   trim($("*[trim]"));
   
-  $("a").click(function(){
-    $(".ui-btn-active").removeClass("ui-btn-active");
+  $("#menu a").click(function(){
+    $("#menu .ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
  ajaxifyPagination();

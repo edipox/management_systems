@@ -179,7 +179,9 @@ div[data-role="popup"] {
   line-height:50px;
   text-align:center;
 }
-
+.element div[data-role="controlgroup"]{
+  padding-top:7px;
+}
 div[data-role="controlgroup"]{
   line-height:20px;
 }
@@ -215,14 +217,19 @@ li.ui-li.element{
 .ui-controlgroup { margin: 0 !important; }
 
 .ui-grid-f{
-  width:100%;
+  display: block;
+  height: 50px;
+  position: static;
 }
-
+.ui-li-divider .ui-grid-f{
+  height: 20px;
+}
+.ui-grid-f [data-role="controlgroup"]{
+  z-index: 4;
+  width: 175px;
+  margin-left: -22px!important;
+}
 .ui-grid-f .ui-block-a, .ui-grid-f .ui-block-b, .ui-grid-f .ui-block-c, .ui-grid-f .ui-block-d, .ui-grid-f .ui-block-e, .ui-grid-f .ui-block-f, .ui-grid-f .ui-block-g{
-  width:5%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-/*  float: left;*/
-/*  min-height: 1px;*/
-} 
+  width:14%;
+  float: left;
+}
