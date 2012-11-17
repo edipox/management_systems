@@ -81,19 +81,5 @@ class Components::ModelsController < ApplicationController
     end
   end
   
-    private
 
-  def process_brand
-    return if params[:new_brand] == 'false'
-
-    params[:components_model][:brand_id] = nil 
-
-    brand = Components::Brand.new({
-      name: params[:brand_name],
-      description: params[:brand_description]
-    })
-    raise 'Error al guardar la nueva marca' unless brand.save
-
-    params[:components_model][:brand_id] = brand.id
-  end
 end

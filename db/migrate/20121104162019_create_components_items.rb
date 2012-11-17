@@ -4,7 +4,9 @@ class CreateComponentsItems < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :code
+      t.string :model      
       t.string :category_id
+      t.string :brand_id      
       t.integer :minimum_quantity
       t.integer :price
       
@@ -13,5 +15,6 @@ class CreateComponentsItems < ActiveRecord::Migration
 
     change_column :components_items, :id, :string, :limit => 36, :null => false
     change_column :components_items, :category_id, :string, :limit => 36, :null => false
+    change_column :components_items, :brand_id, :string, :limit => 36, :null => false    
   end
 end
