@@ -15,5 +15,9 @@
   .field
     = f.label :description, 'Descripción' 
     = f.text_field :description, { class: " ", "maxlength" => "200", "minlength" => "2"  }
-    .actions
-    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }
+  
+  %div.ui-grid-a
+    %div.ui-block-a
+      %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
+    %div.ui-block-b  
+      %input{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

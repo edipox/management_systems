@@ -24,5 +24,8 @@
     = f.label :price, "Precio"
     = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
     
-    .actions
-    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }
+  %div.ui-grid-a
+    %div.ui-block-a
+      %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
+    %div.ui-block-b  
+      %input{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

@@ -37,5 +37,8 @@
     
     = hidden_field_tag :new_category, 'false'
     
-  %br
-  %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }
+  %div.ui-grid-a
+    %div.ui-block-a
+      %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
+    %div.ui-block-b  
+      %input{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

@@ -126,6 +126,9 @@ function openPopup(content){
       }
   });
   $("#popup form").validate();
+  $("#popup .cancel").click(function(){
+    $("#popup").popup("close");
+  });
 //  on_load();
 //  if(_POPUP.current != null){ 
 //    _POPUP.back = _POPUP.current;
