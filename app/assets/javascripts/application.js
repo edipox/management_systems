@@ -96,61 +96,27 @@ function changeSelectedButton(where, selected) {
   $(selected).addClass($.mobile.activeBtnClass);
 }
 
-
-//function PopupLevel(_content){
-//  this.content = _content;
-//  this.current = null;
-//  this.back = null;
-//  this.open = function(){
-//    changeContent("#popup", this.content).popup("open");
-//    $("#popup").bind({
-//       popupafterclose: closePopup
-//    });
-//  };
-//  this.close = function(){
-//    changeContent("#popup", this.content).popup("close");
-//  };
-//}
-
-//var _EVENT = null;
-//var _UI = null;
-
-//var _POPUP = new PopupLevel("");
-
-
 function openPopup(content){
-  changeContent('#popup', content ).popup("open");
+  changeContent('#popup', content ).show().popup("open");
   $("#popup form").submit(function() {
       if($("#popup form").valid()){
-        $("#popup").popup("close");
+          $("#popup").hide("normal", function(){
+            $("#popup").popup("close");
+          });
       }
   });
   $("#popup form").validate();
   $("#popup .cancel").click(function(){
-    $("#popup").popup("close");
+     $("#popup").slideUp("normal", function(){
+       $("#popup").popup("close");
+     });
   });
 //  on_load();
-//  if(_POPUP.current != null){ 
-//    _POPUP.back = _POPUP.current;
-//  }
-//  _POPUP.current = new PopupLevel(content);
-//  _POPUP.current.open();
 }
 
-function closePopup(){
-/*  if(_POPUP.back == null && _POPUP.current != null){
-      _POPUP.current.close();
-      _POPUP.current = null;
-  }else if(_POPUP.current != null){
-    _POPUP.current = _POPUP.back;
-    _POPUP.back = _POPUP.back == null ? null : _POPUP.back.back;
-    _POPUP.current.open();
-  }*/
-}
 
 function showPopup(popup, content){
   openPopup(content);
-//  $("#popup .closer").click(closePopup);
 }
 
 
