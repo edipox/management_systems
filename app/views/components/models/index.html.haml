@@ -10,7 +10,7 @@
       
       %div{ class: "ui-block-c" } Descripci&oacute;n 
       
-      %div{ class: "ui-block-d" }  
+      %div{ class: "ui-block-d" }  Marca
   
   - @components_models.each do |components_model|
     %li{ class: 'element'}
@@ -20,7 +20,7 @@
       
         %div{ class: "ui-block-c trim" }= components_model.description
       
-        %div{ class: "ui-block-d trim" }= components_model.brand_id
+        %div{ class: "ui-block-d trim" }= components_model.brand.name
   
         %div{  class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, components_model 

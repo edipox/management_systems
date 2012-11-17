@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 function on_load(){
   defaultShowForm("category",["category_name", "category_description"]);
-  defaultShowForm("brand",["brand_name", "brand_description"]);
+  defaultShowForm("brand",["brand_name"]);
    
 //  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
 
