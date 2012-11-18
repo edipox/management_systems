@@ -8,12 +8,11 @@
           %li= msg
   
     
-  
-  .field
-    = f.label :status_id, 'Estado'
-    = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
+  - if !@hide_status_select
+    .field
+      = f.label :status_id, 'Estado'
+      = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
 
-    
   .field
     = f.label :reason, 'Motivo' 
     = f.text_field :reason, { class: "required ", "maxlength" => "60", "minlength" => "2"  }

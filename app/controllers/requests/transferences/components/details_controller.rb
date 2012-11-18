@@ -23,8 +23,11 @@ class Requests::Transferences::Components::DetailsController < ApplicationContro
   # GET /requests/transferences/components/details/new
   # GET /requests/transferences/components/details/new.json
   def new
+    @requests_transferences_component = Requests::Transferences::Component.find(params["header_id"])
     @requests_transferences_components_detail = Requests::Transferences::Components::Detail.new
+    @requests_transferences_components_details = @requests_transferences_component.details.paginate(:page => params[:page])
     respond_to do |format|
+      format.js{ render 'update_list_form' }
     end
   end
 

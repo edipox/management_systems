@@ -24,7 +24,10 @@ class Requests::Purchases::Components::DetailsController < ApplicationController
   # GET /requests/purchases/components/details/new.json
   def new
     @requests_purchases_components_detail = Requests::Purchases::Components::Detail.new
+    @requests_purchases_component = Requests::Purchases::Component.find(params["header_id"])
+    @requests_purchases_components_details = @requests_purchases_component.details.paginate(:page => params[:page])
     respond_to do |format|
+      format.js{ render 'update_list_form' }
     end
   end
 

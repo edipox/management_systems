@@ -29,3 +29,4 @@
   = render 'requests/purchases/components/details/list'
   
 = link_to 'Volver', requests_purchases_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
+= link_to 'Agregar  ', new_requests_purchases_components_detail_path(:header_id => @requests_purchases_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

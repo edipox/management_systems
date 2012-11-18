@@ -29,3 +29,5 @@
   = render 'orders/productions/details/list'
   
 = link_to 'Volver', orders_productions_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
+
+= link_to 'Agregar  ', new_orders_productions_detail_path(:header_id => @orders_production.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

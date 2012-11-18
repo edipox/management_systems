@@ -23,8 +23,11 @@ class Requests::Transferences::Products::DetailsController < ApplicationControll
   # GET /requests/transferences/products/details/new
   # GET /requests/transferences/products/details/new.json
   def new
+    @requests_transferences_product = Requests::Transferences::Product.find(params["header_id"])
     @requests_transferences_products_detail = Requests::Transferences::Products::Detail.new
+    @requests_transferences_products_details = @requests_transferences_product.details.paginate(:page => params[:page])
     respond_to do |format|
+      format.js{ render 'update_list_form' }
     end
   end
 
