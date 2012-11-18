@@ -4,7 +4,6 @@ class CreateComponentsItems < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :code
-      t.string :model      
       t.string :category_id
       t.string :brand_id      
       t.integer :minimum_quantity

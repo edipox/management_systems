@@ -3,7 +3,7 @@
   %li{ data: { role: 'list-divider' } }
     %div{ class: 'ui-grid-f' }
       %div{ class: 'ui-block-a' } Nombre
-      %div{ class: 'ui-block-b' } Descripci&oacute;n
+      %div{ class: 'ui-block-b' } Marca
       %div{ class: 'ui-block-c' } C&oacute;digo
       %div{ class: 'ui-block-d' } Categor&iacute;a
       %div{ class: 'ui-block-e' } Cantidad mínima
@@ -14,7 +14,7 @@
     %li{ class: 'element' }
       %div{ class: 'ui-grid-f' }
         %div{ class: 'ui-block-a trim' }= item.name
-        %div{ class: 'ui-block-b trim' }= item.description
+        %div{ class: 'ui-block-b trim' }= item.brand.name
         %div{ class: 'ui-block-c trim' }= item.code
         %div{ class: 'ui-block-d trim' }= item.category.name
         %div{ class: 'ui-block-e trim' }= item.minimum_quantity

@@ -70,12 +70,21 @@ class Components::BrandsController < ApplicationController
   # DELETE /components/brands/1.json
   def destroy
     @components_brand = Components::Brand.find(params[:id])
-    @components_brand.destroy
-    respond_to do |format|
-      format.js { 
-        index
-        render  'index'
-      }
+    if @components_brand.components_items != []
+      respond_to do |format|
+        format.js {     
+            @components_categories = Components::Brand.paginate(:page => params[:page]);
+            render action: "index", notice: 'No puedes eliminar la marca "'+@components_brand.name+'", porque existen registros relacionados.' 
+        }
+      end 
+    else
+      @components_brand.destroy
+      respond_to do |format|
+        format.js { 
+          index
+          render  'index'
+        }
+      end
     end
   end
 end

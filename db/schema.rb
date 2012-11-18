@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "description"
     t.string   "code"
     t.string   "category_id",      :limit => 36, :null => false
+    t.string   "brand_id",         :limit => 36, :null => false
     t.integer  "minimum_quantity"
     t.integer  "price"
     t.datetime "created_at",                     :null => false
