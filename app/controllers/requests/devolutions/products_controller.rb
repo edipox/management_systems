@@ -6,6 +6,8 @@ class Requests::Devolutions::ProductsController < ApplicationController
 
   def list
     @requests_devolutions_products = Requests::Devolutions::Product.paginate(:page => params[:page])
+    delete_if_void @requests_devolutions_products
+    @requests_devolutions_products = Requests::Devolutions::Product.paginate(:page => params[:page])
   end
 
   def index

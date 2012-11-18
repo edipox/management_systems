@@ -6,6 +6,8 @@ class Requests::Devolutions::ComponentsController < ApplicationController
 
   def list
     @requests_devolutions_components = Requests::Devolutions::Component.paginate(:page => params[:page])
+    delete_if_void @requests_devolutions_components
+    @requests_devolutions_components = Requests::Devolutions::Component.paginate(:page => params[:page])
   end
 
   def index

@@ -6,19 +6,8 @@ class Requests::Purchases::ComponentsController < ApplicationController
 
   def list
     @requests_purchases_components = Requests::Purchases::Component.paginate(:page => params[:page])
-    list = @requests_purchases_components
-    list.each do |element|
-      will_destroy = true
-      atts = element.attributes
-      atts.each do |a|
-        attribute = a[0]
-        value = a[1]
-        if attribute != "created_at" &&  attribute != "updated_at" && attribute != "id" && attribute != "transaction_id" if attribute != "status_id" && value != ""  && value != nil
-          will_destroy = false
-        end
-      end
-      element.destroy unless !will_destroy || element.details != []
-    end
+    delete_if_void @requests_purchases_components
+    @requests_purchases_components = Requests::Purchases::Component.paginate(:page => params[:page])
   end
 
   def index

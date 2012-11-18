@@ -24,12 +24,9 @@ class ApplicationController < ActionController::Base
           end
         end
         if will_destroy && element.details == []
-          puts list
-          puts element
-          #list.delete element.id
+          element.destroy
         end
       end
-      puts list
     end
     
   end

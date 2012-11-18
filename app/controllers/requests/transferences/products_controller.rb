@@ -6,6 +6,8 @@ class Requests::Transferences::ProductsController < ApplicationController
 
   def list
     @requests_transferences_products = Requests::Transferences::Product.paginate(:page => params[:page])
+    delete_if_void @requests_transferences_products
+    @requests_transferences_products = Requests::Transferences::Product.paginate(:page => params[:page])
   end
 
   def index
