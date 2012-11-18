@@ -2,25 +2,21 @@
 %div{ data: {role: "content", theme: "c" } }
 
 %div{ data: {role: "content", theme: "c" } }
-  %div{ class: "ui-grid-d" }
+  %div{ class: "ui-grid-b" }
       
-    %div{ class: "ui-block-b" } :
+    %div{ class: "ui-block-a" } Estado:
       
-    %div{ class: "ui-block-c" } :
+    %div{ class: "ui-block-b" } Usuario:
       
-    %div{ class: "ui-block-d" } :
-      
-    %div{ class: "ui-block-e" } Motivo:
+    %div{ class: "ui-block-c" } Motivo:
+    
+  %div{ class: "ui-grid-b" }
   
-  %div{ class: "ui-grid-d" }
+    %div{ class: "ui-block-a" }= @requests_devolutions_component.status.name
   
-    %div{ class: "ui-block-e" }= @requests_devolutions_component.transaction_id
+    %div{ class: "ui-block-b" }= @requests_devolutions_component.user.email
   
-    %div{ class: "ui-block-e" }= @requests_devolutions_component.status_id
-  
-    %div{ class: "ui-block-e" }= @requests_devolutions_component.user_id
-  
-    %div{ class: "ui-block-e" }= @requests_devolutions_component.reason
+    %div{ class: "ui-block-c" }= @requests_devolutions_component.reason
   
 
 - @requests_devolutions_components_details = @requests_devolutions_component.details.paginate(:page => params[:page])
@@ -33,3 +29,4 @@
   = render 'requests/devolutions/components/details/list'
   
 = link_to 'Volver', requests_devolutions_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
+= link_to 'Agregar  ', new_requests_devolutions_components_detail_path(:header_id => @requests_devolutions_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

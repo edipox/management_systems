@@ -55,8 +55,6 @@ Stock::Application.routes.draw do
 
   namespace :products do resources :items end
 
-  namespace :components do resources :models end
-
   namespace :components do resources :brands end
 
   namespace :components do  namespace :categories do resources :kinds end end

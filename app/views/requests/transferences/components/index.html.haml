@@ -6,23 +6,25 @@
     %div{ class: "ui-grid-c" }
   
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-a" }  Estado
       
-      %div{ class: "ui-block-c" }  
+      %div{ class: "ui-block-b" }  Usuario
       
-      %div{ class: "ui-block-d" }  
+      %div{ class: "ui-block-c" }  Fecha
+      
+      %div{ class: "ui-block-d" }  Opciones
   
   - @requests_transferences_components.each do |requests_transferences_component|
-    %li{ class: 'element'}
+    %li{ class: 'element detail'}
       %div{ class: "ui-grid-c" }
       
-        %div{ class: "ui-block-b trim" }= requests_transferences_component.status_id
+        %div{ class: "ui-block-a trim" }= requests_transferences_component.status.name
       
-        %div{ class: "ui-block-c trim" }= requests_transferences_component.user_id
+        %div{ class: "ui-block-b trim" }= requests_transferences_component.user.email
       
-        %div{ class: "ui-block-d trim" }= requests_transferences_component.transaction_id
+        %div{ class: "ui-block-c trim" }= requests_transferences_component.updated_at
   
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, requests_transferences_component 
           %a{ href: requests_transferences_component_path(requests_transferences_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, requests_transferences_component 

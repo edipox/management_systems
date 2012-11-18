@@ -30,11 +30,19 @@ category = Components::Category.create!({
   description:'Teclado inalambrico comun'
 })
 
+brand = Components::Brand.create!({
+	name:'Satellite',
+	description:'Componentes en general'
+})
+
 Components::Item.create!({
-  name:'Teclado Satellite',
-  description:'Teclado Wireless Satellite AK701RF ',
+  name:'Teclado Satellite AK701RF',
+  description:'Teclado Wireless',
   code:'00245',
-  category: category
+  minimum_quantity: 4,
+  price: 70000,
+  category: category,
+  brand: brand
 })
 
 # For test permissions creation, create a Role after a Component

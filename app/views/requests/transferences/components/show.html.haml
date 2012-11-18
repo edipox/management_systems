@@ -4,19 +4,19 @@
 %div{ data: {role: "content", theme: "c" } }
   %div{ class: "ui-grid-c" }
       
-    %div{ class: "ui-block-b" } :
+    %div{ class: "ui-block-b" } Estado:
       
-    %div{ class: "ui-block-c" } :
+    %div{ class: "ui-block-c" } Usuario:
       
-    %div{ class: "ui-block-d" } :
-  
+    %div{ class: "ui-block-d" } Fecha:
+
   %div{ class: "ui-grid-c" }
   
-    %div{ class: "ui-block-e" }= @requests_transferences_component.status_id
+    %div{ class: "ui-block-e" }= @requests_transferences_component.status.name
   
-    %div{ class: "ui-block-e" }= @requests_transferences_component.user_id
+    %div{ class: "ui-block-e" }= @requests_transferences_component.user.email
   
-    %div{ class: "ui-block-e" }= @requests_transferences_component.transaction_id
+    %div{ class: "ui-block-e" }= @requests_transferences_component.updated_at
   
 
 - @requests_transferences_components_details = @requests_transferences_component.details.paginate(:page => params[:page])
@@ -29,3 +29,8 @@
   = render 'requests/transferences/components/details/list'
   
 = link_to 'Volver', requests_transferences_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
+= link_to 'Agregar  ', new_requests_transferences_components_detail_path(:header_id => @requests_transferences_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+
+-#    %div{ class: "ui-block-d" } :
+-#    %div{ class: "ui-block-e" }= @requests_transferences_component.transaction_id  
+

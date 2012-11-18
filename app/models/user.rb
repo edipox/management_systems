@@ -12,5 +12,8 @@ class User < ActiveRecord::Base
   belongs_to :acl_role, :class_name => ACL::Role.to_s
   alias_attribute :role, :acl_role
 
+  has_many :requests_transferences_components, :class_name => Requests::Transferences::Component.to_s
+  has_many :requests_devolutions_component, :class_name => Requests::Devolutions::Component.to_s
+
   has_paper_trail
 end

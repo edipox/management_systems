@@ -3,26 +3,23 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-c" }
+    %div{ class: "ui-grid-b" }
   
+      %div{ class: "ui-block-a" }  Componente
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Cantidad 
       
-      %div{ class: "ui-block-c" }  
-      
-      %div{ class: "ui-block-d" } Cantidad 
+      %div{ class: "ui-block-c" } Opciones       
   
   - @requests_transferences_components_details.each do |requests_transferences_components_detail|
-    %li{ class: 'element'}
-      %div{ class: "ui-grid-c" }
+    %li{ class: 'element detail'}
+      %div{ class: "ui-grid-b" }
       
-        %div{ class: "ui-block-b trim" }= requests_transferences_components_detail.header_id
+        %div{ class: "ui-block-a trim" }= requests_transferences_components_detail.component.name
       
-        %div{ class: "ui-block-c trim" }= requests_transferences_components_detail.component_id
-      
-        %div{ class: "ui-block-d trim" }= requests_transferences_components_detail.quantity
+        %div{ class: "ui-block-b trim" }= requests_transferences_components_detail.quantity
   
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, requests_transferences_components_detail 
           %a{ href: requests_transferences_components_detail_path(requests_transferences_components_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, requests_transferences_components_detail 

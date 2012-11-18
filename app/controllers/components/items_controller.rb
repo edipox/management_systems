@@ -46,7 +46,7 @@ class Components::ItemsController < ApplicationController
   # POST /components/items
   # POST /components/items.json
   def create
-    process_category
+    process_fields
     @components_item = Components::Item.new(params[:components_item])
     index
     respond_to do |format|
@@ -61,7 +61,7 @@ class Components::ItemsController < ApplicationController
   # PUT /components/items/1
   # PUT /components/items/1.json
   def update
-    process_category
+    process_fields
     @components_item = Components::Item.find(params[:id])
     index
     respond_to do |format|
@@ -92,6 +92,11 @@ class Components::ItemsController < ApplicationController
 
   private
 
+  def process_fields
+    process_category
+    process_brand
+  end
+
   def process_category
     return if params[:new_category] == 'false'
 
@@ -105,4 +110,18 @@ class Components::ItemsController < ApplicationController
 
     params[:components_item][:category_id] = category.id
   end
+  
+  def process_brand
+    return if params[:new_brand] == 'false'
+
+    params[:components_item][:brand_id] = nil 
+
+    brand = Components::Brand.new({
+      name: params[:brand_name],
+      description: params[:brand_description]
+    })
+    raise 'Error al guardar la nueva marca' unless brand.save
+
+    params[:components_item][:brand_id] = brand.id
+  end  
 end

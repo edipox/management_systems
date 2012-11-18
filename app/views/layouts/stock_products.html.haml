@@ -24,14 +24,9 @@
           %a{ href: products_items_path, data: { role: 'button', remote: "true"  } } Productos terminados
           %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos
 
-        - if notice  
-          %div#notice_container
-            %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
-            %div#notice= notice
-        
         %div#content
           = yield
-        %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' } } 
+        %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' , transition: "slidefade" } } 
           
       %div{ data: { role: 'footer', position: 'fixed' } }
         %h3 Sistema de Gestion

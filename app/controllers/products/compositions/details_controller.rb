@@ -24,7 +24,10 @@ class Products::Compositions::DetailsController < ApplicationController
   # GET /products/compositions/details/new.json
   def new
     @products_compositions_detail = Products::Compositions::Detail.new
+    @products_composition = Products::Composition.find(params["header_id"])
+    @products_compositions_details = @products_composition.details.paginate(:page => params[:page])
     respond_to do |format|
+      format.js{ render 'update_list_form' }
     end
   end
 

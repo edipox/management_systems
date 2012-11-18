@@ -6,6 +6,8 @@ class Requests::Purchases::ComponentsController < ApplicationController
 
   def list
     @requests_purchases_components = Requests::Purchases::Component.paginate(:page => params[:page])
+    delete_if_void @requests_purchases_components
+    @requests_purchases_components = Requests::Purchases::Component.paginate(:page => params[:page])
   end
 
   def index

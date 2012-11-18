@@ -73,18 +73,11 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "description"
     t.string   "code"
     t.string   "category_id",      :limit => 36, :null => false
+    t.string   "brand_id",         :limit => 36, :null => false
     t.integer  "minimum_quantity"
     t.integer  "price"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-  end
-
-  create_table "components_models", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "brand_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "locations_cities", :force => true do |t|
@@ -173,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "requests_devolutions_components_details", :force => true do |t|
     t.string   "header_id"
     t.string   "component_id"
+    t.integer  "quantity"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

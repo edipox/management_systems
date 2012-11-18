@@ -6,6 +6,8 @@ class Requests::Transferences::ComponentsController < ApplicationController
 
   def list
     @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page])
+    delete_if_void @requests_transferences_components
+    @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page])
   end
 
   def index
@@ -28,9 +30,11 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # GET /requests/transferences/components/new.json
   def new
     @requests_transferences_component = Requests::Transferences::Component.new
-    respond_to do |format|
-      format.js # new.html.erb
-    end
+    @requests_transferences_component.status = get_default_status
+    create    
+#    respond_to do |format|
+#      format.js # new.html.erb
+#    end
   end
 
   # GET /requests/transferences/components/1/edit
@@ -41,10 +45,10 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # POST /requests/transferences/components
   # POST /requests/transferences/components.json
   def create
-    @requests_transferences_component = Requests::Transferences::Component.new(params[:requests_transferences_component])
+    #@requests_transferences_component = Requests::Transferences::Component.new(params[:requests_transferences_component])
     transaction = Stocks::Transactions::Production.new
     transaction.kind = "Requests::Transferences::Component"
-    @requests_transferences_component.user_id = 'nil'
+    @requests_transferences_component.user = current_user
     @requests_transferences_component.transaction_id = 'nil'
     @requests_transferences_component.save
     transaction.kind_id = @requests_transferences_component.id
@@ -63,7 +67,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # PUT /requests/transferences/components/1.json
   def update
     @requests_transferences_component = Requests::Transferences::Component.find(params[:id])
-
+    @requests_transferences_component.user = current_user
     respond_to do |format|
       if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
         format.js { render action: 'show', notice: 'Registro guardado correctamente.' }

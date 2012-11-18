@@ -13,13 +13,14 @@
   = f.text_field :description, "maxlength" => "200" 
   
   = f.label :minimum_quantity, "Cantidad mínima en stock"
-  = f.number_field :minimum_quantity, :class => "required", "maxlength" => "36",  "min" => "0"
+  = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }
 
   = f.label :price, "Precio"
-  = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+  = f.number_field :price, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }
       
   = f.label :code, "Codigo"
   = f.text_field :code, :class => "required", "maxlength" => "36" 
+  
   .field.plus
     = f.label :category_id, "Categoria"
     %div#category_select{style:"display:inline-block;" }
@@ -36,6 +37,25 @@
     = text_field_tag :category_description, nil, :html => { "maxlength" => "200" }
     
     = hidden_field_tag :new_category, 'false'
+
+  .field.plus
+    = f.label :brand_id, "Marca"
+    %div#brand_select{style:"display:inline-block;" }
+      = f.collection_select(:brand_id, Components::Brand.all, :id, :name)
+   
+    %a#brand_button{ data:{ role:'button', icon: 'plus', iconpos: 'notext'}, subform_id: "categorySubForm", select_id: "category_select", class: "sub_form_loader", onclick: "on_load" }
+
+  %div#brandSubForm{ class: 'ui-corner-all', data: { role: 'content', theme: 'a' }, style: "display:none" } 
+    = label_tag :brand_name, "Nombre"  
+    = text_field_tag :brand_name, nil, :maxlength => 36
+
+    = label_tag :brand_description, "Descripcion"
+    = text_field_tag :brand_description, nil, :html => { "maxlength" => "200" }
     
-  %br
-  %input.closer{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }
+    = hidden_field_tag :new_brand, 'false'
+    
+  %div.ui-grid-a
+    %div.ui-block-a
+      %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
+    %div.ui-block-b  
+      %input{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }

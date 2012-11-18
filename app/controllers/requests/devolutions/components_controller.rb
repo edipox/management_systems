@@ -6,6 +6,8 @@ class Requests::Devolutions::ComponentsController < ApplicationController
 
   def list
     @requests_devolutions_components = Requests::Devolutions::Component.paginate(:page => params[:page])
+    delete_if_void @requests_devolutions_components
+    @requests_devolutions_components = Requests::Devolutions::Component.paginate(:page => params[:page])
   end
 
   def index
@@ -28,6 +30,7 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # GET /requests/devolutions/components/new.json
   def new
     @requests_devolutions_component = Requests::Devolutions::Component.new
+    @hide_status_select = true
     respond_to do |format|
       format.js # new.html.erb
     end
@@ -42,9 +45,10 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # POST /requests/devolutions/components.json
   def create
     @requests_devolutions_component = Requests::Devolutions::Component.new(params[:requests_devolutions_component])
+    @requests_devolutions_component.status = get_default_status
     transaction = Stocks::Transactions::Component.new
     transaction.kind = "Requests::Devolutions::Component"
-    @requests_devolutions_component.user_id = "nil"
+    @requests_devolutions_component.user = current_user
     @requests_devolutions_component.transaction_id = "nil"
     @requests_devolutions_component.save
     transaction.kind_id = @requests_devolutions_component.id
@@ -63,6 +67,7 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # PUT /requests/devolutions/components/1.json
   def update
     @requests_devolutions_component = Requests::Devolutions::Component.find(params[:id])
+    @requests_devolutions_component.user = current_user
     respond_to do |format|
       if @requests_devolutions_component.update_attributes(params[:requests_devolutions_component])
         format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
