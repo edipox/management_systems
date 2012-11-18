@@ -5,28 +5,30 @@
   
     %div{ class: "ui-grid-d" }
   
+      %div{ class: "ui-block-a" } Motivo
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Usuario
       
-      %div{ class: "ui-block-c" }  
+      %div{ class: "ui-block-c" } Estado
+
+      %div{ class: "ui-block-d" } Fecha
       
-      %div{ class: "ui-block-d" }  
+      %div{ class: "ui-block-e" } Opciones
       
-      %div{ class: "ui-block-e" } Motivo 
   
   - @requests_devolutions_components.each do |requests_devolutions_component|
     %li{ class: 'element detail'}
       %div{ class: "ui-grid-d" }
       
-        %div{ class: "ui-block-b trim" }= requests_devolutions_component.transaction_id
+        %div{ class: "ui-block-a trim" }= requests_devolutions_component.reason
       
-        %div{ class: "ui-block-c trim" }= requests_devolutions_component.status_id
+        %div{ class: "ui-block-b trim" }= requests_devolutions_component.user.email
       
-        %div{ class: "ui-block-d trim" }= requests_devolutions_component.user_id
-      
-        %div{ class: "ui-block-e trim" }= requests_devolutions_component.reason
+        %div{ class: "ui-block-c trim" }= requests_devolutions_component.status.name
+        
+        %div{ class: "ui-block-d trim" }= requests_devolutions_component.updated_at
   
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, requests_devolutions_component 
           %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, requests_devolutions_component 

@@ -4,21 +4,22 @@
   %li{ data: { role: 'list-divider' } }
   
     %div{ class: "ui-grid-b" }
+      
+      %div{ class: "ui-block-a" } Nombre 
+      
+      %div{ class: "ui-block-b" } Descripci&oacute;n 
   
-      
-      %div{ class: "ui-block-b" } Nombre 
-      
-      %div{ class: "ui-block-c" } Descripci&oacute;n 
+      %div{ class: "ui-block-c" } Opciones
   
   - @components_brands.each do |components_brand|
     %li{ class: 'element'}
       %div{ class: "ui-grid-b" }
       
-        %div{ class: "ui-block-b trim" }= components_brand.name
+        %div{ class: "ui-block-a trim" }= components_brand.name
       
-        %div{ class: "ui-block-c trim" }= components_brand.description
+        %div{ class: "ui-block-b trim" }= components_brand.description
   
-        %div{  class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, components_brand 
           %a{ href: components_brand_path(components_brand), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, components_brand 

@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "requests_devolutions_components_details", :force => true do |t|
     t.string   "header_id"
     t.string   "component_id"
+    t.integer  "quantity"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

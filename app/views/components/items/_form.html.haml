@@ -13,10 +13,10 @@
   = f.text_field :description, "maxlength" => "200" 
   
   = f.label :minimum_quantity, "Cantidad mínima en stock"
-  = f.number_field :minimum_quantity, :class => "required", "maxlength" => "36",  "min" => "0"
+  = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }
 
   = f.label :price, "Precio"
-  = f.number_field :price, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0" }
+  = f.number_field :price, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }
       
   = f.label :code, "Codigo"
   = f.text_field :code, :class => "required", "maxlength" => "36" 

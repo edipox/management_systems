@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   alias_attribute :role, :acl_role
 
   has_many :requests_transferences_components, :class_name => Requests::Transferences::Component.to_s
+  has_many :requests_devolutions_component, :class_name => Requests::Devolutions::Component.to_s
 
   has_paper_trail
 end

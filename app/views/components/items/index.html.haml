@@ -13,12 +13,12 @@
   - @components_items.each do |item|
     %li{ class: 'element' }
       %div{ class: 'ui-grid-f' }
-        %div{ class: 'ui-block-a trim' }= item.name
-        %div{ class: 'ui-block-b trim' }= item.brand.name
-        %div{ class: 'ui-block-c trim' }= item.code
-        %div{ class: 'ui-block-d trim' }= item.category.name
-        %div{ class: 'ui-block-e trim' }= item.minimum_quantity
-        %div{ class: 'ui-block-f trim' }= item.price
+        %div{ class: 'ui-block-a trim', data: {trim: '17'} }= item.name
+        %div{ class: 'ui-block-b trim', data: {trim: '17'} }= item.brand.name
+        %div{ class: 'ui-block-c trim', data: {trim: '17'} }= item.code
+        %div{ class: 'ui-block-d trim', data: {trim: '17'} }= item.category.name
+        %div{ class: 'ui-block-e trim', data: {trim: '17'} }= item.minimum_quantity
+        %div{ class: 'ui-block-f trim', data: {trim: '17'} }= item.price
         %div{ class: 'ui-block-g' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
             - if can? :delete, item
