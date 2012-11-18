@@ -80,14 +80,6 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.datetime "updated_at",                     :null => false
   end
 
-  create_table "components_models", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "brand_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "locations_cities", :force => true do |t|
     t.string   "name"
     t.integer  "region_id_id"

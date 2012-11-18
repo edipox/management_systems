@@ -7,11 +7,14 @@ class ApplicationController < ActionController::Base
   def index
   end
   
+  def get_default_status
+    default_status = Transactions::Status.where("name = 'Abierta'")[0]
+    default_status = Transactions::Status.create!({name:"Abierta"}) unless default_status
+    return default_status
+  end
+  
   def delete_if_void list
-    default_status = Transactions::Status.where("name = 'Abierta'")[0].id
-    original_list = list
-    
-    
+    default_status = get_default_status.id
     list.each do |element|
       if element.created_at != element.updated_at
         will_destroy = true

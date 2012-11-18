@@ -249,6 +249,12 @@ display:-moz-box;
 .ui-li-divider .ui-grid-f{
   height: 20px;
 }
+.detail [data-role="controlgroup"]{
+  z-index: 4;
+  width: 175px;
+  margin-left: -22px!important;
+}
+
 .ui-grid-f [data-role="controlgroup"]{
   z-index: 4;
   width: 175px;
