@@ -1,26 +1,24 @@
+%ul{ data: { role: 'listview', theme: 'c' } }
+  %li{ data: { role: 'list-divider'} }
+    %div{ class: "ui-grid-c" }
+        
+      %div{ class: "ui-block-b" } :
+        
+      %div{ class: "ui-block-c" } :
+        
+      %div{ class: "ui-block-d" } :
+  %li  
+    %div{ class: "ui-grid-c" }
+    
+      %div{ class: "ui-block-e" }= @requests_purchases_component.status_id
+    
+      %div{ class: "ui-block-e" }= @requests_purchases_component.user_id
+    
+      %div{ class: "ui-block-e" }= @requests_purchases_component.transaction_id
+    
 
-%div{ data: {role: "content", theme: "c" } }
-
-%div{ data: {role: "content", theme: "c" } }
-  %div{ class: "ui-grid-c" }
-      
-    %div{ class: "ui-block-b" } :
-      
-    %div{ class: "ui-block-c" } :
-      
-    %div{ class: "ui-block-d" } :
-  
-  %div{ class: "ui-grid-c" }
-  
-    %div{ class: "ui-block-e" }= @requests_purchases_component.status_id
-  
-    %div{ class: "ui-block-e" }= @requests_purchases_component.user_id
-  
-    %div{ class: "ui-block-e" }= @requests_purchases_component.transaction_id
-  
-
-- @requests_purchases_components_details = @requests_purchases_component.details.paginate(:page => params[:page])
-- @requests_purchases_components_detail = Requests::Purchases::Components::Detail.new
+  - @requests_purchases_components_details = @requests_purchases_component.details.paginate(:page => params[:page])
+  - @requests_purchases_components_detail = Requests::Purchases::Components::Detail.new
 
 %div#form
   = render 'requests/purchases/components/details/form'

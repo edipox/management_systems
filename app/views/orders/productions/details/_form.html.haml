@@ -22,7 +22,7 @@
     
   .field
     = f.label :quantity, 'Cantidad' 
-    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "minlength" => "1", "min" => "0"  }
+    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "min" => "1", "max" => "2000000000"  }
       
     
   .actions

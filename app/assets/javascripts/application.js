@@ -38,7 +38,7 @@ function on_load(){
     $("#menu .ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
- ajaxifyPagination();
+  ajaxifyPagination();
 };
 
 function ajaxifyPagination() {
@@ -52,7 +52,6 @@ function ajaxifyPagination() {
     });
 }
 
-
 function trim(element){
     $.each($.makeArray(element), function(i, val){
        var maxLength = eval($(val).attr("data-trim"));
@@ -65,6 +64,7 @@ function trim(element){
 function defaultShowForm(element, fields){
  showFakeSubForm('#'+element+'_button', '#'+element+'SubForm', '#'+element+'_select', fields, "new_"+element+"");
 }
+
 
 function showFakeSubForm(caller, subform, select, required_fields, existence_field){
  return $(caller).toggle(
@@ -130,7 +130,6 @@ function openPopup(content){
        $("#popup").popup("close");
      });
   });
-//  on_load();
 }
 
 

@@ -1,29 +1,28 @@
+%ul{ data: { role: 'listview', theme: 'c' } }
+  %li{ data: { role: 'list-divider'} }
+    %div{ class: "ui-grid-a" }
+        
+      %div{ class: "ui-block-a" } Nombre
+        
+      %div{ class: "ui-block-b" } Descripci&oacute;n
+  
+  %li
+    %div{ class: "ui-grid-a" }
+    
+      %div{ class: "ui-block-a" }= @products_composition.name
+    
+      %div{ class: "ui-block-b" }= @products_composition.description
+    
 
-%div{ data: {role: "content", theme: "c" } }
-
-%div{ data: {role: "content", theme: "c" } }
-  %div{ class: "ui-grid-b" }
-      
-    %div{ class: "ui-block-b" } Nombre:
-      
-    %div{ class: "ui-block-c" } Descripci&oacute;n:
-  
-  %div{ class: "ui-grid-b" }
-  
-    %div{ class: "ui-block-d" }= @products_composition.name
-  
-    %div{ class: "ui-block-e" }= @products_composition.description
-  
-
-- @products_compositions_details = @products_composition.details.paginate(:page => params[:page])
-- @products_compositions_detail = Products::Compositions::Detail.new
+  - @products_compositions_details = @products_composition.details.paginate(:page => params[:page])
+  - @products_compositions_detail = Products::Compositions::Detail.new
 
 %div#form
   = render 'products/compositions/details/form'
 
 %div#list
   = render 'products/compositions/details/list'
-  
+    
 = link_to 'Volver', products_compositions_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
 
 = link_to 'Agregar  ', new_products_compositions_detail_path(:header_id => @products_composition.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

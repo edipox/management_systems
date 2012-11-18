@@ -1,26 +1,24 @@
-
-%div{ data: {role: "content", theme: "c" } }
-
-%div{ data: {role: "content", theme: "c" } }
-  %div{ class: "ui-grid-b" }
-      
-    %div{ class: "ui-block-a" } Estado:
-      
-    %div{ class: "ui-block-b" } Usuario:
-      
-    %div{ class: "ui-block-c" } Motivo:
+%ul{ data: { role: 'listview', theme: 'c' } }
+  %li{ data: { role: 'list-divider'} }
+    %div{ class: "ui-grid-b" }
+        
+      %div{ class: "ui-block-a" } Estado:
+        
+      %div{ class: "ui-block-b" } Usuario:
+        
+      %div{ class: "ui-block-c" } Motivo:
+  %li      
+    %div{ class: "ui-grid-b" }
     
-  %div{ class: "ui-grid-b" }
-  
-    %div{ class: "ui-block-a" }= @requests_devolutions_component.status.name
-  
-    %div{ class: "ui-block-b" }= @requests_devolutions_component.user.email
-  
-    %div{ class: "ui-block-c" }= @requests_devolutions_component.reason
-  
+      %div{ class: "ui-block-a" }= @requests_devolutions_component.status.name
+    
+      %div{ class: "ui-block-b" }= @requests_devolutions_component.user.email
+    
+      %div{ class: "ui-block-c" }= @requests_devolutions_component.reason
+    
 
-- @requests_devolutions_components_details = @requests_devolutions_component.details.paginate(:page => params[:page])
-- @requests_devolutions_components_detail = Requests::Devolutions::Components::Detail.new
+  - @requests_devolutions_components_details = @requests_devolutions_component.details.paginate(:page => params[:page])
+  - @requests_devolutions_components_detail = Requests::Devolutions::Components::Detail.new
 
 %div#form
   = render 'requests/devolutions/components/details/form'

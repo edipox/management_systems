@@ -3,26 +3,23 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-c" }
+    %div{ class: "ui-grid-b" }
   
+      %div{ class: "ui-block-a" } Componente
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Cantidad 
       
-      %div{ class: "ui-block-c" }  
-      
-      %div{ class: "ui-block-d" } Cantidad 
+      %div{ class: "ui-block-c" } Opciones 
   
   - @products_compositions_details.each do |products_compositions_detail|
     %li{ class: 'element'}
-      %div{ class: "ui-grid-c" }
+      %div{ class: "ui-grid-b" }
       
-        %div{ class: "ui-block-b trim" }= products_compositions_detail.composition_id
+        %div{ class: "ui-block-a trim" }= products_compositions_detail.component.name
       
-        %div{ class: "ui-block-c trim" }= products_compositions_detail.components_id
-      
-        %div{ class: "ui-block-d trim" }= products_compositions_detail.quantity
+        %div{ class: "ui-block-b trim" }= products_compositions_detail.quantity
   
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ style:"width:262px;", class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, products_compositions_detail 
           %a{ href: products_compositions_detail_path(products_compositions_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, products_compositions_detail 

@@ -10,6 +10,8 @@ class Components::Item < ActiveRecord::Base
   has_many :requests_transferences_components_detail, :class_name => Requests::Transferences::Components::Detail.to_s
   
   has_many :requests_devolutions_components_detail, :class_name => Requests::Devolutions::Components::Detail.to_s
+  
+  has_many :products_compositions_detail, :class_name => Products::Compositions::Detail.to_s
   #has_many :requests_devolutions_components_details, :foreign_key => :component_id, :class_name => "Requests::Devolutions::Components::Detail"
   
 end

@@ -51,7 +51,6 @@ class Requests::Devolutions::Components::DetailsController < ApplicationControll
       if @requests_devolutions_components_detail.save
         format.js{ 
           @requests_devolutions_component = @requests_devolutions_components_detail.requests_devolutions_component
-          #@orders_productions_details = @production.details
           @requests_devolutions_components_detail = Requests::Devolutions::Components::Detail.new
           render 'update_list_form' 
          }
