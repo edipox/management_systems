@@ -17,11 +17,15 @@
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: '/stock/production/list', data: { role: 'button', remote: "true" } } Stock de producción
-          %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
-          %a{ href: requests_devolutions_components_path, data: { role: 'button', remote: "true"  } } Devolucion de componentes          
+          - if can?(:read, Requests::Transferences::Component.new)
+            %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
+          - if can?(:read, Requests::Devolutions::Component.new)
+            %a{ href: requests_devolutions_components_path, data: { role: 'button', remote: "true"  } } Devolucion de componentes 
           %a{ href: '/stock/production/transactions', class: 'ui-disabled', data: { role: 'button', remote: "true"  } } Movimientos
-          %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos de productos terminados
-          %a{ href: transactions_statuses_path, data: { role: 'button', remote: "true"  } } Estados de solicitudes
+          - if can?(:read, Products::Composition.new)
+            %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos de productos terminados
+          - if can?(:read, Transactions::Status.new)
+            %a{ href: transactions_statuses_path, data: { role: 'button', remote: "true"  } } Estados de solicitudes
           -#%a{ href: '#', data: { role: 'button', remote: "true"  } } Valores Iniciales
 
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a', transition: "slidefade"  } } 

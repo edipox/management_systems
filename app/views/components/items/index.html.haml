@@ -26,15 +26,6 @@
             %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
             %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
 
+- create_css_class = !can?(:create, Components::Item.new) ? 'ui-disabled' : ''
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
-    data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } } Nuevo Componente
-
--#
-  %div{ class: 'ui-block-b', style: 'text-align: center; width:30%; padding:0;',data: { role: "controlgroup", type: "horizontal", mini: "true"  }  }
-    = link_to 'Ver', components_item, data: { role: 'button'}
-    = link_to 'Editar', edit_components_item_path(components_item), data: { role: 'button' }
-    = link_to 'Eliminar', components_item, method: :delete, data: { confirm: 'Esta seguro?', role: 'button' }
-  %br
-  = link_to 'Nuevo Componente', new_components_item_path
-  %br
-  = link_to 'Volver', root_path
+    data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class } Nuevo Componente

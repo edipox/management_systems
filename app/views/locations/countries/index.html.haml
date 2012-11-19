@@ -9,6 +9,10 @@
       %div{ class: "ui-block-b" } Nombre 
       
       %div{ class: "ui-block-c" }  
+  - new_object = Locations::Country.new
+  - create_css_class = !can?(:create, new_object) ? 'ui-disabled' : ''
+  - edit_css_class = !can?(:edit, new_object) ? 'ui-disabled' : ''
+  - delete_css_class = !can?(:delete, new_object) ? 'ui-disabled' : ''
   
   - @locations_countries.each do |locations_country|
     %li{ class: 'element'}
@@ -19,9 +23,7 @@
         %div{ class: "ui-block-c trim" }= locations_country.continent_id
   
         %div{  class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, locations_country 
-          %a{ href: locations_country_path(locations_country), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, locations_country 
-          %a{ href: edit_locations_country_path(locations_country), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' } } Editar
+          %a{ href: locations_country_path(locations_country), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_locations_country_path(locations_country), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' }, class: edit_css_class } Editar
 
-  = link_to 'Agregar  ', new_locations_country_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  } }
+  = link_to 'Agregar  ', new_locations_country_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  }, class: create_css_class }

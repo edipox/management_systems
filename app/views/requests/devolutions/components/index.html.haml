@@ -32,11 +32,12 @@
           - obj = requests_devolutions_component
           - delete_css_class = !can?(:delete, obj) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, obj) || obj.status == @close_status ? 'ui-disabled' : ''
-          - detail_css_class = ! (@default_status == obj.status) ? 'ui-disabled' : ''          
-          - if (obj.user == @system_user && current_user.role != @system_user.role) ; delete_css_class = edit_css_class = detail_css_class = 'ui-disabled'; end
+          - detail_css_class = ! (@default_status == obj.status) ? 'ui-disabled' : ''
+          - detail_css_class += ' '+edit_css_class
+          - if (obj.user == @system_user && current_user.role != @system_user.role) ; delete_css_class = 'ui-disabled'; end
           %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: detail_css_class } Detalle
           
-
-  = link_to 'Agregar  ', new_requests_devolutions_component_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+  - create_css_class = !can?(:create, Requests::Devolutions::Component.new) ? 'ui-disabled' : ''
+  = link_to 'Agregar  ', new_requests_devolutions_component_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }

@@ -30,7 +30,7 @@
           - if (obj.user == @system_user && current_user.role != @system_user.role) ; delete_css_class = edit_css_class = detail_css_class = 'ui-disabled'; end
           %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
-          %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
+          %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: detail_css_class+" "+edit_css_class } Detalle
           
-
-  = link_to 'Agregar  ', new_orders_production_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+  - create_css_class = !can?(:create, Orders::Production.new) ? 'ui-disabled' : ''
+  = link_to 'Agregar  ', new_orders_production_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }
