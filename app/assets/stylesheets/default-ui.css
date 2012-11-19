@@ -24,6 +24,10 @@
   
 }
 
+.ui-selectmenu  a:hover{
+  background:none;
+}
+
 .ui-listview-filter{
   width: 98%!important;
   margin: auto!important;
