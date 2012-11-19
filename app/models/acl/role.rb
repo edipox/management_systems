@@ -20,5 +20,7 @@ class ACL::Role < ActiveRecord::Base
   after_create ACL::RoleCallbacks.new
   default_scope order(:created_at)
 
+  has_many :users, :foreign_key => :acl_role_id
+
   has_paper_trail
 end
