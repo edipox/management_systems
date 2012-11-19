@@ -1,11 +1,6 @@
 class Stock::ProductionController < ApplicationController
   layout "stock_production"
   def index
-    @existances = Stocks::Production.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def transactions
@@ -15,4 +10,10 @@ class Stock::ProductionController < ApplicationController
     end
   end
 
+  def list
+    @components = Components::Item.paginate(:page => params[:page])
+    respond_to do |format|
+      format.js
+    end
+  end
 end
