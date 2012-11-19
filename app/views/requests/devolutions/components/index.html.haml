@@ -29,10 +29,10 @@
         %div{ class: "ui-block-d trim" }= requests_devolutions_component.updated_at
   
         %div{ class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, requests_devolutions_component 
-          %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, requests_devolutions_component 
-          %a{ href: edit_requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          - delete_css_class = !can?(:delete, requests_devolutions_component) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, requests_devolutions_component) ? 'ui-disabled' : ''
+          %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 

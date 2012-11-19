@@ -15,9 +15,9 @@
         %div{ class: "ui-block-b trim" }= transactions_status.name
   
         %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, transactions_status 
-          %a{ href: transactions_status_path(transactions_status), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, transactions_status 
-          %a{ href: edit_transactions_status_path(transactions_status), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' } } Editar
+          - delete_css_class = !can?(:delete, transactions_status) || transactions_status.requests_transferences_components != [] || transactions_status.requests_devolutions_components != [] ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, transactions_status) ? 'ui-disabled' : ''
+          %a{ href: transactions_status_path(transactions_status), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_transactions_status_path(transactions_status), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' }, class: edit_css_class } Editar
 
   = link_to 'Agregar  ', new_transactions_status_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  } }

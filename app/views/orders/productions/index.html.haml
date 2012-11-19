@@ -23,10 +23,10 @@
         %div{ class: "ui-block-d trim" }= orders_production.user_id
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, orders_production 
-          %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, orders_production 
-          %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          - delete_css_class = !can?(:delete, orders_production) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, orders_production) ? 'ui-disabled' : ''
+          %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 

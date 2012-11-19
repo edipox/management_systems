@@ -15,19 +15,24 @@ acl_entities << ['Permiso de Usuario', 'ACL::Permission']
 acl_entities << ['Tipo de Usuario', 'ACL::Role']
 acl_entities << ['Acción de Usuario (Permisos)', 'ACL::Action']
 acl_entities << ['Objeto (Permisos)', 'ACL::Entity']
-# acl_entities << ['', '']
-# acl_entities << ['', '']
-# acl_entities << ['', '']
-# acl_entities << ['', '']
-# acl_entities << ['', '']
-# acl_entities << ['', '']
+acl_entities << ['Categoria de componente', 'Components::Category']
+acl_entities << ['Marca de componente', 'Components::Brand']
+acl_entities << ['Solicitud de componentes', 'Requests::Transferences::Component']
+acl_entities << ['Devolución de componentes', 'Requests::Devolutions::Component']
+acl_entities << ['Modelo de productos terminados', 'Products::Composition']
+acl_entities << ['Estado de transacciones', 'Transactions::Status']
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
 
-category = Components::Category.create!({
+keyboards = Components::Category.create!({
   name:'Teclado inalambrico',
   description:'Teclado inalambrico comun'
+})
+
+displays = Components::Category.create!({
+  name:'Monitores LCD',
+  description:'Monitores LCD comun'
 })
 
 brand = Components::Brand.create!({
@@ -35,14 +40,118 @@ brand = Components::Brand.create!({
 	description:'Componentes en general'
 })
 
-Components::Item.create!({
+brand2 = Components::Brand.create!({
+	name:'Samsung',
+	description:''
+})
+
+keyboard = Components::Item.create!({
   name:'Teclado Satellite AK701RF',
   description:'Teclado Wireless',
   code:'00245',
   minimum_quantity: 4,
   price: 70000,
-  category: category,
+  category: keyboards,
   brand: brand
+})
+
+ram = Components::Item.create!({
+  name:'RAM OMRON HMC-ES551',
+  description:'RAM HMC-ES551',
+  code:'00300',
+  minimum_quantity: 16,
+  price: 40000,
+  category: Components::Category.create!({
+    name:'RAM DDR3',
+    description:'RAM HMC-ES551'
+  }),
+  brand: Components::Brand.create!({
+	  name:'G Skill',
+	  description:'RAMs y CDs'
+  })
+})
+
+mouse = Components::Item.create!({
+  name:'Mouse A-F4G',
+  description:'wireless mouse',
+  code:'00305',
+  minimum_quantity: 16,
+  price: 45000,
+  category: Components::Category.create!({
+    name:'Mouse inalambrico',
+    description:'Mouse inalambrico común'
+  }),
+  brand: brand
+})
+
+mother_board = Components::Item.create!({
+  name:'Placamadre AP5T-3.5',
+  description:'Placamadre economica',
+  code:'00302',
+  minimum_quantity: 3,
+  price: 80000,
+  category: Components::Category.create!({
+    name:'Placamadre',
+    description:'System Board'
+  }),
+  brand: Components::Brand.create!({
+	  name:'Acer',
+	  description:'System Board'
+  })
+})
+
+
+display = Components::Item.create!({
+  name:'Monitor LCD D550',
+  description:'',
+  code:'00240',
+  minimum_quantity: 3,
+  price: 200000,
+  category: displays,
+  brand: brand2
+})
+
+
+composition = Products::Composition.create!({
+  name: 'CPU Economica',
+  description: 'modelo basico de CPU economica'
+})
+
+Products::Compositions::Detail.create!({
+  products_composition: composition,
+  component: display,
+  quantity: 1
+})
+Products::Compositions::Detail.create!({
+  products_composition: composition,
+  component: keyboard,
+  quantity: 1
+})
+Products::Compositions::Detail.create!({
+  products_composition: composition,
+  component: mouse,
+  quantity: 1
+})
+Products::Compositions::Detail.create!({
+  products_composition: composition,
+  component: ram,
+  quantity: 2
+})
+Products::Compositions::Detail.create!({
+  products_composition: composition,
+  component: mother_board,
+  quantity: 1
+})
+
+status_open = Transactions::Status.create!({
+  name: 'Abierta'
+})
+
+Transactions::Status.create!({
+  name: 'Pendiente'
+})
+Transactions::Status.create!({
+  name: 'Rechazada'
 })
 
 # For test permissions creation, create a Role after a Component
@@ -60,6 +169,37 @@ employee = User.create!({
   password_confirmation: 'contrasenha',
   role: employee_role
 })
+
+# Those lines could cause an error when transactions will be properly implemented, they must be deleted
+component_transaction = Stocks::Transactions::Component.create!({kind:'temp', kind_id:'temp'})
+production_transaction = Stocks::Transactions::Production.create!({kind:'temp', kind_id:'temp'})
+
+# This request should be created by the System user but it does not exist.
+transference_component = Requests::Transferences::Component.create!({
+  status: status_open,
+  user: employee,
+  transaction: production_transaction,
+})
+Requests::Transferences::Components::Detail.create!({
+  requests_transferences_component: transference_component,
+  component: keyboard,
+  quantity: 4
+})
+
+devolution_component = Requests::Devolutions::Component.create!({
+  status: status_open,
+  user: employee,
+  transaction: component_transaction,
+  reason: 'Pedido excesivo de componentes'
+})
+
+Requests::Devolutions::Components::Detail.create!({
+  requests_devolutions_component: devolution_component,
+  component: ram,
+  quantity: 10
+})
+
+
 =begin
 employee.role.permissions.each do |permission|
   permission.enabled = true if permission.action == 'read'

@@ -12,9 +12,9 @@
         %div{ class: 'ui-block-a', trim:"40" }= category.name
         %div{ class: 'ui-block-b', trim:"40" }= category.description
         %div{  class: 'ui-block-c', data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, category #-
-          - css_class = category.components_items != [] ? 'ui-disabled' : ''
-          %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: "true" }, class: css_class } Eliminar
-          -# if can? :update, category #-
-          %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true', remote: "true"  } } Editar
+          - delete_css_class = category.components_items != [] || !can?(:delete, category) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, category) ? 'ui-disabled' : ''
+          %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: "true" }, class: delete_css_class } Eliminar
+          %a{ href: edit_components_category_path(category), data: { role: 'button', icon: 'grid', mini: 'true', remote: "true"  }, class: edit_css_class } Editar
+          
 = link_to 'Nueva categoria', new_components_category_path, { style: 'width: 250px; float: right', data: { inline:"true",role: 'button', theme: 'b', icon: 'new', remote: "true" } }

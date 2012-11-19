@@ -1,6 +1,6 @@
 class Requests::Transferences::Products::Detail < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :header_id, :product_id, :quantity
+  attr_accessible :header_id, :product_id, :quantity, :product, :requests_transferences_product
   validates :header_id, :presence => true #, :length => { :minimum => 2 }  
   validates :product_id, :presence => true #, :length => { :minimum => 2 }  
   validates :quantity, :presence => true #, :length => { :minimum => 2 }  

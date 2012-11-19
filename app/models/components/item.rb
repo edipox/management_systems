@@ -3,6 +3,7 @@ class Components::Item < ActiveRecord::Base
   belongs_to :category, :class_name => Components::Category.to_s
   belongs_to :brand, :class_name => Components::Brand.to_s
   validates_presence_of  :code, :name, :category_id, :brand_id, :minimum_quantity, :price
+  validates :code, :uniqueness => true
   has_many :raw_material_stocks, :foreign_key => :component_id, :class_name => ::Stocks::Component.to_s
   has_many :production_stocks, :foreign_key => :component_id, :class_name => ::Stocks::Production.to_s
   has_paper_trail

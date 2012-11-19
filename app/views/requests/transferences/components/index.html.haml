@@ -25,10 +25,10 @@
         %div{ class: "ui-block-c trim" }= requests_transferences_component.updated_at
   
         %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, requests_transferences_component 
-          %a{ href: requests_transferences_component_path(requests_transferences_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, requests_transferences_component 
-          %a{ href: edit_requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          - delete_css_class = !can?(:delete, requests_transferences_component) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, requests_transferences_component) ? 'ui-disabled' : ''
+          %a{ href: requests_transferences_component_path(requests_transferences_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
 

@@ -1,6 +1,6 @@
 class Requests::Devolutions::Components::Detail < ActiveRecord::Base
   has_paper_trail
-  attr_accessible :component_id, :header_id, :quantity
+  attr_accessible :component_id, :header_id, :quantity, :component, :requests_devolutions_component
   validates :header_id, :presence => true #, :length => { :minimum => 2 }  
   validates :component_id, :presence => true #, :length => { :minimum => 2 }  
   validates :quantity, :presence => true, :numericality => { :greater_than => 0, :less_than => 2000000001 }#, :length => { :minimum => 2 }   

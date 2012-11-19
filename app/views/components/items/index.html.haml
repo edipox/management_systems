@@ -21,11 +21,10 @@
         %div{ class: 'ui-block-f trim', data: {trim: '17'} }= item.price
         %div{ class: 'ui-block-g' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
-            - if can? :delete, item
-              %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?',
-                role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-            - if can? :update, item
-              %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+            - delete_css_class = !can?(:delete, item) ? 'ui-disabled' : ''
+            - edit_css_class = !can?(:edit, item) ? 'ui-disabled' : ''
+            %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+            %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
 
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
     data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } } Nuevo Componente
