@@ -25,11 +25,6 @@
           - if can?(:read, Components::Brand.new)
             %a{ href: components_brands_path, data: { role: 'button', remote:"true" } } Marcas
 
-        - if notice  
-          %div#notice_container
-            %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
-            %div#notice= notice
-
         %div#content
           = yield
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a', transition: "slidefade" } } 

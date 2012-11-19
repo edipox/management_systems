@@ -24,6 +24,17 @@ $(document).ready(function(){
   on_load();
 });
 
+function showNotice(notice){
+//  if(notice){
+      alert(notice);  
+//  }
+/*  
+    - if notice  
+%div#notice_container
+  %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
+  %div#notice= notice */
+}
+
 function on_load(){
   defaultShowForm("category",["category_name", "category_description"]);
   defaultShowForm("brand",["brand_name"]);
@@ -115,21 +126,38 @@ function changeSelectedButton(where, selected) {
   $(selected).addClass($.mobile.activeBtnClass);
 }
 
+function hasError(){
+  return $("#popup .field_with_errors").length != 0 || $("#popup #error_explanation").length != 0
+}
+
 function openPopup(content){
   changeContent('#popup', content ).show().popup("open");
-  $("#popup form").submit(function() {
-      if($("#popup form").valid()){
-          $("#popup").hide("normal", function(){
-            $("#popup").popup("close");
-          });
-      }
+  
+  $("#popup form input[type='submit']").click(function(){
+    setTimeout(function(){
+      $("#popup #error_explanation").slideUp("slow", function(){$(this).remove();});
+      $("#popup .field_with_errors").removeClass("field_with_errors");
+      $("#popup form").submit();    
+    }, 150)
   });
+  
+  $("#popup form").submit(function() {
+     setTimeout(function() {
+        if($("#popup form").valid() && ! hasError() ){
+            $("#popup").hide("normal", function(){
+              $("#popup").popup("close");
+            });
+        }
+     },100);
+  });
+  
   $("#popup form").validate();
   $("#popup .cancel").click(function(){
      $("#popup").slideUp("fast", function(){
        $("#popup").popup("close");
      });
   });
+  
 }
 
 

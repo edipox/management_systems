@@ -41,8 +41,7 @@ class Components::BrandsController < ApplicationController
     index
     respond_to do |format|
       if @components_brand.save
-        format.js { render 'index', notice: 'Registro guardado correctamente.' 
-        }
+        format.js { render action: 'index', notice: 'Registro guardado correctamente.' }
       else
         format.js { render action: "new", notice: 'Error al guardar el registro.' }
       end
