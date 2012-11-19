@@ -134,11 +134,11 @@ function openPopup(content){
   changeContent('#popup', content ).show().popup("open");
   
   $("#popup form input[type='submit']").click(function(){
-    setTimeout(function(){
-      $("#popup #error_explanation").slideUp("slow", function(){$(this).remove();});
-      $("#popup .field_with_errors").removeClass("field_with_errors");
-      $("#popup form").submit();    
-    }, 150)
+      $("#popup #error_explanation").hide(200, function(){
+        $(this).remove();
+        $("#popup .field_with_errors").removeClass("field_with_errors");
+        $("#popup form").submit();    
+      });
   });
   
   $("#popup form").submit(function() {
