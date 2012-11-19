@@ -51,6 +51,12 @@ class Settings::RolesController < ApplicationController
   # DELETE /settings/roles/1
   # DELETE /settings/roles/1.json
   def destroy
-    raise 'Settings::RolesControles#destroy'
+    role = ACL::Role.find(params[:id])
+    role.destroy if role.users.empty?
+    raise 'Se intenta borrar un role con usuarios' unless role.users.empty?
+    @roles = ACL::Role.all
+    respond_to do |format|
+      format.js
+    end
   end
 end
