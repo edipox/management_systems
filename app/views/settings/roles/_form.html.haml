@@ -12,6 +12,6 @@
       != "Editar tipo de funcionario <b><i>(#{@role.name})</i></b>" unless @role.id.nil?
     %li
       %h2{ style: 'width: 100%; text-align: left;' } Nombre
-      %input{ name: 'role[name]', value: @role.name }
+      %input{ name: 'role[name]', value: @role.name, class: 'required', minlength: 4, maxlength: 25, autocomplete: 'off' }
 
   %input{ type: 'submit', value: 'Guardar' }
