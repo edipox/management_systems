@@ -4,11 +4,14 @@
     %div.ui-grid-b
       %div.ui-block-a Componente
       %div.ui-block-b Descripción
-      %div.ui-block-c Cantidad
+      %div.ui-block-c Existencia
 
   - @components.each do |component|
+    - stocks = component.raw_material_stocks
+    - stock_total = stocks.reduce {|s0, s1| s0.quantity = s0.quantity + s1.quantity; s0 }
+    - stock_qty = stock_total.nil? ? 0 : stock_total.quantity
     %li
       %div.ui-grid-b
         %div.ui-block-a= component.name
         %div.ui-block-b= component.description
-        %div.ui-block-c= component.raw_material_stocks.reduce {|s0, s1| s0.quantity = s0.quantity + s1.quantity; s0 }.quantity
+        %div.ui-block-c= stock_qty
