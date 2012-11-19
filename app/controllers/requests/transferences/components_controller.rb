@@ -30,7 +30,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # GET /requests/transferences/components/new.json
   def new
     @requests_transferences_component = Requests::Transferences::Component.new
-    @requests_transferences_component.status = get_default_status
+    @requests_transferences_component.status = @default_status
     create    
 #    respond_to do |format|
 #      format.js # new.html.erb

@@ -143,19 +143,39 @@ Products::Compositions::Detail.create!({
   quantity: 1
 })
 
-status_open = Transactions::Status.create!({
-  name: 'Abierta'
+status_open = Transactions::Status.find(AppConfig.create!({
+  id: 'open_status_id', 
+  value: Transactions::Status.create!({ name: 'Abierta' }).id
+}).value)
+AppConfig.create!({
+  id: 'close_status_id', 
+  value: Transactions::Status.create!({ name: 'Cerrada' }).id
 })
-
+AppConfig.create!({
+  id: 'reject_status_id', 
+  value: Transactions::Status.create!({ name: 'Rechazada' }).id
+})
 Transactions::Status.create!({
   name: 'Pendiente'
 })
 Transactions::Status.create!({
-  name: 'Rechazada'
+  name: 'En curso'
 })
 
 # For test permissions creation, create a Role after a Component
 employee_role = ACL::Role.create!({ name: 'Empleado' })
+
+system_user = User.create!({
+  email: 'system@site.com',
+  password: 'systempass',
+  password_confirmation: 'systempass',
+  role: admin_role
+})
+
+AppConfig.create!({
+  id: 'system_user_id', 
+  value: system_user.id
+})
 
 User.create!({
   email: 'admin@site.com',
@@ -177,7 +197,7 @@ production_transaction = Stocks::Transactions::Production.create!({kind:'temp', 
 # This request should be created by the System user but it does not exist.
 transference_component = Requests::Transferences::Component.create!({
   status: status_open,
-  user: employee,
+  user: system_user,
   transaction: production_transaction,
 })
 Requests::Transferences::Components::Detail.create!({
@@ -188,7 +208,7 @@ Requests::Transferences::Components::Detail.create!({
 
 devolution_component = Requests::Devolutions::Component.create!({
   status: status_open,
-  user: employee,
+  user: system_user,
   transaction: component_transaction,
   reason: 'Pedido excesivo de componentes'
 })

@@ -20,7 +20,7 @@
         %div{ class: "ui-block-b trim" }= components_brand.description
   
         %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
-          - delete_css_class = !can?(:delete, components_brand) ? 'ui-disabled' : ''
+          - delete_css_class = components_brand.components_items || !can?(:delete, components_brand) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, components_brand) ? 'ui-disabled' : ''
           %a{ href: components_brand_path(components_brand), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_components_brand_path(components_brand), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' }, class: edit_css_class } Editar

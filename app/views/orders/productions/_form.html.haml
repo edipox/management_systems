@@ -9,7 +9,7 @@
   
   .field
     = f.label :status_id, 'Estado'
-    = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
+    = f.collection_select(:status_id, Transactions::Status.all, :id, :name, { :disabled => lambda{|status| (@orders_production.status != @default_status && status == @reject_status) }, class: "required" })
   
   %div.ui-grid-a
     %div.ui-block-a

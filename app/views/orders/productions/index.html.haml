@@ -23,8 +23,11 @@
         %div{ class: "ui-block-d trim" }= orders_production.user_id
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          - delete_css_class = !can?(:delete, orders_production) ? 'ui-disabled' : ''
-          - edit_css_class = !can?(:edit, orders_production) ? 'ui-disabled' : ''
+          - obj = orders_production
+          - delete_css_class = !can?(:delete, obj) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, obj) || obj.status == @close_status ? 'ui-disabled' : ''
+          - detail_css_class = ! (@default_status == obj.status) ? 'ui-disabled' : ''          
+          - if (obj.user == @system_user && current_user.role != @system_user.role) ; delete_css_class = edit_css_class = detail_css_class = 'ui-disabled'; end
           %a{ href: orders_production_path(orders_production), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: orders_production_path(orders_production), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle

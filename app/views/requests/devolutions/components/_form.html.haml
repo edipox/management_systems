@@ -11,7 +11,7 @@
   - if !@hide_status_select
     .field
       = f.label :status_id, 'Estado'
-      = f.collection_select(:status_id, Transactions::Status.all, :id, :name,{}, { class: "required" })
+      = f.collection_select(:status_id, Transactions::Status.all, :id, :name, { :disabled => lambda{|status| (@requests_devolutions_component.status != @default_status && status == @reject_status) }, class: "required" })
 
   .field
     = f.label :reason, 'Motivo' 

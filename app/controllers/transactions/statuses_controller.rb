@@ -16,7 +16,12 @@ class Transactions::StatusesController < ApplicationController
       format.js # show.html.erb
     end
   end
-
+  class << self
+    def is_protected?(status)
+      status == @default_status || status == @reject_status || status == @close_status
+    end
+  end
+  
   # GET /transactions/statuses/new
   # GET /transactions/statuses/new.json
   def new
