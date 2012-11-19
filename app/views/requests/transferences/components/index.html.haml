@@ -27,9 +27,10 @@
         %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = !can?(:delete, requests_transferences_component) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, requests_transferences_component) ? 'ui-disabled' : ''
+          - detail_css_class = ! (@default_status == requests_transferences_component.status) ? 'ui-disabled' : ''
           %a{ href: requests_transferences_component_path(requests_transferences_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
-          %a{ href: requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
+          %a{ href: requests_transferences_component_path(requests_transferences_component), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: detail_css_class } Detalle
           
 
   = link_to 'Agregar  ', new_requests_transferences_component_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }

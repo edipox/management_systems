@@ -70,7 +70,12 @@ class Requests::Transferences::ComponentsController < ApplicationController
     @requests_transferences_component.user = current_user
     respond_to do |format|
       if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
-        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        if @default_status == @requests_transferences_component.status
+          format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        else
+          list
+          format.js { render action: 'index', notice: 'Registro guardado correctamente.' }
+        end
       else
         format.js { 
         flash[:notice] = "Error al actualizar el registro"

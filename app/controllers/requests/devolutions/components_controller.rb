@@ -70,7 +70,12 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     @requests_devolutions_component.user = current_user
     respond_to do |format|
       if @requests_devolutions_component.update_attributes(params[:requests_devolutions_component])
-        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        if @default_status == @requests_devolutions_component.status
+          format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        else
+          list
+          format.js { render action: 'index', notice: 'Registro guardado correctamente.' }
+        end
       else
         format.js { 
         flash[:notice] = "Error al actualizar el registro"

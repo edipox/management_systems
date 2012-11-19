@@ -3,14 +3,14 @@ class ApplicationController < ActionController::Base
   
   WillPaginate.per_page = 7
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :get_default_status
   def index
   end
-  
+
   def get_default_status
-    default_status = Transactions::Status.where("name = 'Abierta'")[0]
-    default_status = Transactions::Status.create!({name:"Abierta"}) unless default_status
-    return default_status
+    @default_status = Transactions::Status.where("name = 'Abierta'")[0]
+    @default_status = Transactions::Status.create!({name:"Abierta"}) unless @default_status
+    return @default_status
   end
   
   def delete_if_void list
