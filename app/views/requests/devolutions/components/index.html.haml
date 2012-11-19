@@ -29,7 +29,10 @@
         %div{ class: "ui-block-d trim" }= requests_devolutions_component.updated_at
   
         %div{ class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          - delete_css_class = !can?(:delete, requests_devolutions_component) ? 'ui-disabled' : ''
+          - delete_css_class = !can?(:delete, requests_devolutions_component) 
+          -#|| (requests_devolutions_component.user == system_user && current_user.role != admin_role) ? 'ui-disabled' : ''
+          
+          
           - edit_css_class = !can?(:edit, requests_devolutions_component) ? 'ui-disabled' : ''
           - detail_css_class = ! (@default_status == requests_devolutions_component.status) ? 'ui-disabled' : ''          
           %a{ href: requests_devolutions_component_path(requests_devolutions_component), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
