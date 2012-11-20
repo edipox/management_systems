@@ -45,8 +45,8 @@ class Components::BrandsController < ApplicationController
           @notice = 'Registro guardado correctamente.'
           render action: 'index' }
       else
-        format.js { @notice = 'Error al guardar el registro.'
-        render action: "new"}
+        format.js { 
+        render  "new"}
       end
     end
   end

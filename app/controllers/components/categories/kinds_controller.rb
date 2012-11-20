@@ -44,7 +44,7 @@ class Components::Categories::KindsController < ApplicationController
         format.js {  @notice = 'Registro guardado correctamente.'; render 'index'
         }
       else
-        format.js {  @notice = 'Error al guardar el registro.'; render action: "new" }
+        format.js { render action: "new" }
       end
     end
   end

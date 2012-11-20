@@ -45,8 +45,8 @@ class Components::CategoriesController < ApplicationController
              render 'index'
         }
       else
-        format.js { @notice = 'Error al crear categoria.' 
-        render action: "new" }
+        format.js { 
+        render  "new" }
       end
     end
   end

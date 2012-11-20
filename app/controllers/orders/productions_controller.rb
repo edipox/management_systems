@@ -59,7 +59,7 @@ class Orders::ProductionsController < ApplicationController
       if @orders_production.save
         format.js { render action: 'show'  }
       else
-        format.js {  @notice = 'Error al guardar el registro.' 
+        format.js { 
         render action: "new"}
       end
     end

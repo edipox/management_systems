@@ -56,7 +56,7 @@ class Orders::Productions::DetailsController < ApplicationController
           render 'update_list_form' 
          }
       else
-        format.html { @notice = 'Error al guardar el registro.'
+        format.html {
         redirect_to :back }
       end
     end
