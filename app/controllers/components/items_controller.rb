@@ -28,9 +28,6 @@ class Components::ItemsController < ApplicationController
   def new
     @components_item = Components::Item.new
     respond_to do |format|
-      format.html{
-        @notice = nil
-      }
       format.js
     end
   end
