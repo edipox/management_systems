@@ -2,3 +2,4 @@
   changeContent('#page #content',
     '#{escape_javascript render :file => "requests/purchases/components/index", :formats => [:html]}'
   );
+  showNotice('#{ @notice }');  

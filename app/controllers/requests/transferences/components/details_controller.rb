@@ -56,7 +56,7 @@ class Requests::Transferences::Components::DetailsController < ApplicationContro
           render 'update_list_form' 
          }
       else
-        format.html { redirect_to :back, notice: 'Error al guardar el registro.' }
+        format.html { @notice = 'Error al guardar el registro.'; redirect_to :back }
       end
     end
   end
@@ -75,7 +75,7 @@ class Requests::Transferences::Components::DetailsController < ApplicationContro
          }
       else
         format.html { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         redirect_to :back }
       end
     end

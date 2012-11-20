@@ -1,2 +1,3 @@
 :plain
   $("#list").html("#{escape_javascript render :file => 'products/compositions/details/_list', :formats => [:html]}").trigger("create") ;
+  showNotice('#{ @notice }');  

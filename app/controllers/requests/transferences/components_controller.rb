@@ -56,9 +56,11 @@ class Requests::Transferences::ComponentsController < ApplicationController
     @requests_transferences_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_component.save
-        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
+        format.js {  @notice = 'Registro actualizado correctamente.' 
+        render action: 'show'}
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js {  @notice = 'Error al guardar el registro.' 
+        render action: "new"}
       end
     end
   end
@@ -71,14 +73,16 @@ class Requests::Transferences::ComponentsController < ApplicationController
     respond_to do |format|
       if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
         if @default_status == @requests_transferences_component.status
-          format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+          format.js {  @notice = 'Registro guardado correctamente.' 
+          render action: 'show'}
         else
           list
-          format.js { render action: 'index', notice: 'Registro guardado correctamente.' }
+          format.js {  @notice = 'Registro guardado correctamente.' 
+          render action: 'index'}
         end
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end

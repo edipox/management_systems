@@ -3,3 +3,4 @@
 $("#list").html("#{escape_javascript render :file => 'products/compositions/details/_list', :formats => [:html]}").trigger("create") ;
   
   $("#form").html("#{escape_javascript render :file => 'products/compositions/details/_form', :formats => [:html]}").trigger("create") ;
+  showNotice('#{ @notice }');  

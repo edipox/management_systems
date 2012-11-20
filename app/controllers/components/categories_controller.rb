@@ -41,10 +41,12 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       if @components_category.save
         format.js { 
-            render 'index', notice: 'Categoria creada correctamente.' 
+             @notice = 'Categoria creada correctamente.' 
+             render 'index'
         }
       else
-        format.js { render action: "new", notice: 'Error al crear categoria.'  }
+        format.js { @notice = 'Error al crear categoria.' 
+        render action: "new" }
       end
     end
   end
@@ -57,11 +59,12 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       if @components_category.update_attributes(params[:components_category])
         format.js { 
-            render 'index'#, notice: 'Categoria actualizada correctamente' 
+            @notice = 'Categoria actualizada correctamente' 
+            render 'index'
         }
       else
         format.js { 
-        flash[:notice] = "Error al actualizar categoria"
+        @notice = "Error al actualizar categoria"
         render action: "edit" }
       end
     end
@@ -75,7 +78,8 @@ class Components::CategoriesController < ApplicationController
       respond_to do |format|
         format.js {     
             @components_categories = Components::Category.paginate(:page => params[:page]);
-            render action: "index", notice: 'No puedes eliminar la categoria "'+@components_category.name+'", porque existen registros relacionados.' 
+            @notice = 'No puedes eliminar la categoria "'+@components_category.name+'", porque existen registros relacionados.' 
+            render action: "index"
         }
       end 
     else

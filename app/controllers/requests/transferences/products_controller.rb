@@ -54,9 +54,11 @@ class Requests::Transferences::ProductsController < ApplicationController
     @requests_devolutions_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_product.save
-        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
+        format.js { @notice = 'Registro actualizado correctamente.' 
+        render action: 'show'}
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { @notice = 'Error al guardar el registro.' 
+        render action: "new"}
       end
     end
   end
@@ -68,10 +70,11 @@ class Requests::Transferences::ProductsController < ApplicationController
 
     respond_to do |format|
       if @requests_transferences_product.update_attributes(params[:requests_transferences_product])
-        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        format.js { @notice = 'Registro guardado correctamente.' 
+        render action: 'show'}
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end

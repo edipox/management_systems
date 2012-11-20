@@ -41,9 +41,12 @@ class Components::BrandsController < ApplicationController
     index
     respond_to do |format|
       if @components_brand.save
-        format.js { render action: 'index', notice: 'Registro guardado correctamente.' }
+        format.js { 
+          @notice = 'Registro guardado correctamente.'
+          render action: 'index' }
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { @notice = 'Error al guardar el registro.'
+        render action: "new"}
       end
     end
   end
@@ -55,11 +58,12 @@ class Components::BrandsController < ApplicationController
     index
     respond_to do |format|
       if @components_brand.update_attributes(params[:components_brand])
-        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
+        format.js { @notice = 'Registro actualizado correctamente.'
+         render 'index'
         }
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end
@@ -73,7 +77,8 @@ class Components::BrandsController < ApplicationController
       respond_to do |format|
         format.js {     
             @components_categories = Components::Brand.paginate(:page => params[:page]);
-            render action: "index", notice: 'No puedes eliminar la marca "'+@components_brand.name+'", porque existen registros relacionados.' 
+            @notice = 'No puedes eliminar la marca "'+@components_brand.name+'", porque existen registros relacionados.' 
+            render action: "index"
         }
       end 
     else

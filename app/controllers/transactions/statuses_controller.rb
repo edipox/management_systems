@@ -46,10 +46,10 @@ class Transactions::StatusesController < ApplicationController
     index
     respond_to do |format|
       if @transactions_status.save
-        format.js { render 'index', notice: 'Registro guardado correctamente.' 
+        format.js { render 'index'; @notice = 'Registro guardado correctamente.' 
         }
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { render action: "new"; @notice = 'Error al guardar el registro.' }
       end
     end
   end
@@ -61,7 +61,7 @@ class Transactions::StatusesController < ApplicationController
     index
     respond_to do |format|
       if @transactions_status.update_attributes(params[:transactions_status])
-        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
+        format.js { render 'index'; @notice = 'Registro actualizado correctamente.' 
         }
       else
         format.js { 

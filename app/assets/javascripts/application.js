@@ -25,14 +25,9 @@ $(document).ready(function(){
 });
 
 function showNotice(notice){
-//  if(notice){
-      alert(notice);  
-//  }
-/*  
-    - if notice  
-%div#notice_container
-  %span{ "class"=>"ui-icon ui-icon-alert", "style"=>"width:17px; display:block;"}              
-  %div#notice= notice */
+  if(notice){
+      TINY.box.show({html:notice,animate:false,close:false,mask:false,boxid:'alert',autohide:2})
+  }
 }
 
 function on_load(){
@@ -144,7 +139,7 @@ function openPopup(content){
   $("#popup form").submit(function() {
      setTimeout(function() {
         if($("#popup form").valid() && ! hasError() ){
-            $("#popup").hide("normal", function(){
+            $("#popup").hide("fast", function(){
               $("#popup").popup("close");
             });
         }

@@ -41,10 +41,10 @@ class Components::Categories::KindsController < ApplicationController
     index
     respond_to do |format|
       if @components_categories_kind.save
-        format.js { render 'index', notice: 'Registro guardado correctamente.' 
+        format.js {  @notice = 'Registro guardado correctamente.'; render 'index'
         }
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js {  @notice = 'Error al guardar el registro.'; render action: "new" }
       end
     end
   end
@@ -56,11 +56,11 @@ class Components::Categories::KindsController < ApplicationController
     index
     respond_to do |format|
       if @components_categories_kind.update_attributes(params[:components_categories_kind])
-        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
+        format.js { @notice = 'Registro actualizado correctamente.' ;render 'index'
         }
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro";
         render action: "edit" }
       end
     end

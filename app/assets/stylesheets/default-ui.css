@@ -95,6 +95,38 @@
   border-radius: 7px 7px 0px 0px;
 }
 
+#alert{
+/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
+	/* RGBa with 0.6 opacity */
+	background: rgba(0, 0, 0, 0.7);
+	/* For IE 5.5 - 7*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+  background-image: -webkit-linear-gradient(top, #444, #222);
+  background-size: auto;
+  border-width: 1px;
+  border-color: #444;
+  border-radius: 7px;
+  border-style: solid;
+  border-top-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 12px 0px;
+  color: white;
+  display: block;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px!important;
+  font-weight: bold;
+  height: 33px;
+  line-height: 18px;
+  padding: 5px;
+  position: relative;
+  text-shadow: #111 0px 1px 1px;
+  width: 400px!important;
+  text-align:center;
+}
+
 #error_explanation{
   border-radius: 10px;
   color: black;
@@ -102,15 +134,26 @@
   width:434px!important;
 }
 
-#notice_container{
-  padding:5px;
-/*  background:#FEFFD4;*/
-  background:#daffdd;
-  border-radius:5px!important;
-  margin-bottom:4px;
-/*  border: 1px solid #FCEFA1;*/
-  border:1px solid #187f00;
-}
+/*#notice_container{*/
+/*  padding:5px;*/
+/*/*  background:#FEFFD4;*/*/
+/*  background:#daffdd;*/
+/*  border-radius:5px!important;*/
+/*  margin-bottom:4px;*/
+/*/*  border: 1px solid #FCEFA1;*/*/
+/*  border:1px solid #187f00;*/
+/*}*/
+/*#notice{*/
+/*/* color:#734000!important;*/*/
+/*  color:black!important;*/
+/*}*/
+/*#notice_container span.ui-icon{*/
+/*  float:left;*/
+/*  margin-left:10px;*/
+/*  margin-right:10px;*/
+/*}*/
+
+
 
 #error_container{
   padding:5px;
@@ -120,16 +163,6 @@
   margin-bottom:4px;
 /*  border: 1px solid #FCEFA1;*/
   border:1px solid #a53939;
-}
-
-#notice{
-/* color:#734000!important;*/
-  color:black!important;
-}
-#notice_container span.ui-icon{
-  float:left;
-  margin-left:10px;
-  margin-right:10px;
 }
 
 .field_with_errors {

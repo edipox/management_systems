@@ -41,10 +41,12 @@ class Products::ItemsController < ApplicationController
     index
     respond_to do |format|
       if @products_item.save
-        format.js { render 'index', notice: 'Registro guardado correctamente.' 
+        format.js {  @notice = 'Registro guardado correctamente.' 
+        render 'index'
         }
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { @notice = 'Error al guardar el registro.' 
+        render action: "new"}
       end
     end
   end
@@ -56,11 +58,12 @@ class Products::ItemsController < ApplicationController
     index
     respond_to do |format|
       if @products_item.update_attributes(params[:products_item])
-        format.js { render 'index', notice: 'Registro actualizado correctamente.' 
+        format.js { @notice = 'Registro actualizado correctamente.' 
+        render 'index'
         }
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end

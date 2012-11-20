@@ -29,7 +29,7 @@ class Components::ItemsController < ApplicationController
     @components_item = Components::Item.new
     respond_to do |format|
       format.html{
-        flash[:notice] = nil
+        @notice = nil
       }
       format.js
     end
@@ -51,9 +51,11 @@ class Components::ItemsController < ApplicationController
     index
     respond_to do |format|
       if @components_item.save
-        format.js { render 'index', notice: 'Componente creado correctamente.' }
+        format.js { @notice = 'Componente creado correctamente.'
+        render 'index' }
       else
-        format.js { render action: "new", notice: 'Error al crear componente.'  }
+        format.js { @notice = 'Error al crear componente.'  
+        render action: "new"}
       end
     end
   end
@@ -66,9 +68,11 @@ class Components::ItemsController < ApplicationController
     index
     respond_to do |format|
       if @components_item.update_attributes(params[:components_item])
-        format.js { render 'index', notice: 'Componente actualizado correctamente.' }
+        format.js {  @notice = 'Componente actualizado correctamente.' 
+        render 'index'}
       else
-        format.js { render action: "edit", notice: 'Error al actualizar componente.'  }
+        format.js {  @notice = 'Error al actualizar componente.'  
+        render action: "edit"}
       end
     end
   end

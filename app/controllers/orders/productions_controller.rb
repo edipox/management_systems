@@ -55,9 +55,11 @@ class Orders::ProductionsController < ApplicationController
     
     respond_to do |format|
       if @orders_production.save
-        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
+        format.js { @notice = 'Registro actualizado correctamente.'
+        render action: 'show' }
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js {  @notice = 'Error al guardar el registro.' 
+        render action: "new"}
       end
     end
   end
@@ -69,10 +71,11 @@ class Orders::ProductionsController < ApplicationController
 
     respond_to do |format|
       if @orders_production.update_attributes(params[:orders_production])
-        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        format.js { @notice = 'Registro guardado correctamente.' 
+        render action: 'show'}
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end

@@ -44,9 +44,11 @@ class Products::CompositionsController < ApplicationController
     @products_composition = Products::Composition.new(params[:products_composition])
     respond_to do |format|
       if @products_composition.save
-        format.js { render action: 'show', notice: 'Registro actualizado correctamente.' }
+        format.js { @notice = 'Registro actualizado correctamente.' 
+        render action: 'show'}
       else
-        format.js { render action: "new", notice: 'Error al guardar el registro.' }
+        format.js { @notice = 'Error al guardar el registro.' 
+        render action: "new"}
       end
     end
   end
@@ -58,10 +60,10 @@ class Products::CompositionsController < ApplicationController
 
     respond_to do |format|
       if @products_composition.update_attributes(params[:products_composition])
-        format.js { render action: 'show', notice: 'Registro guardado correctamente.' }
+        format.js { render action: 'show'; @notice = 'Registro guardado correctamente.' }
       else
         format.js { 
-        flash[:notice] = "Error al actualizar el registro"
+        @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end
