@@ -2,9 +2,9 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   - @roles.each do |role|
     %li{ class: 'element', id: ['role', role.id] }
-      %div{ class: 'ui-grid-a' }
-        %div{ class: 'ui-block-a' }= role.name
-        %div{ class: 'ui-block-b' }
+      %div{ class: 'ui-grid-a',style:'width:600px' }
+        %div{ class: 'ui-block-a', style:'width:190px' }= role.name
+        %div{ class: 'ui-block-b', style:'width:300px' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
 
             -# Permissions button, id = permissions_of_#{role.id}

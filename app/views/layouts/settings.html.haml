@@ -13,6 +13,8 @@
       %div(id="content" data-role="content")
       
         = yield
-
+      
+      %a{ href: url_for(:back), data: { role: 'button' }, style:'width:200px; margin-left:10px; button:10px;top: 85%;position: absolute;' } Volver
+    
       %div(data-role="footer" data-position="fixed")
         %h3 Footer
