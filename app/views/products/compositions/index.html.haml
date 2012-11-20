@@ -26,12 +26,12 @@
         
         %div{ class: "ui-block-d trim" }= products_composition.price
   
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ style:"width:305px!important;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = !can?(:delete, products_composition) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, products_composition) ? 'ui-disabled' : ''
           %a{ href: products_composition_path(products_composition), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
           %a{ href: edit_products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
-          %a{ href: products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Detalle
+          %a{ href: products_composition_path(products_composition), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Componentes
           
   - create_css_class = !can?(:create, Products::Composition.new) ? 'ui-disabled' : ''
   = link_to 'Agregar  ', new_products_composition_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true', rel: "dialog" }, class: create_css_class }

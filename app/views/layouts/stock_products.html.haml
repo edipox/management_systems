@@ -16,7 +16,7 @@
         
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
-          %a{ href: '/stock/products/index', data: { role: 'button', remote: "true" } } Stock de productos terminados
+          %a{ href: '/stock/products/index', data: { role: 'button', remote: "true" }, class: 'ui-disabled' } Stock de productos terminados
           - if can?(:read, Orders::Production.new)
             %a{ href: orders_productions_path, data: { role: 'button', remote: "true"  } } Orden de producción
           %a{ href: '/stock/products/transactions', class: 'ui-disabled',data: { role: 'button', remote: "true"  } } Movimientos
