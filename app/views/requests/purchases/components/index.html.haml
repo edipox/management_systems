@@ -4,7 +4,8 @@
   %li{ data: { role: 'list-divider' } }
   
     %div{ class: "ui-grid-c" }
-  
+
+      %div{ class: "ui-block-a" } Número
       
       %div{ class: "ui-block-b" }  
       
@@ -15,6 +16,8 @@
   - @requests_purchases_components.each do |requests_purchases_component|
     %li{ class: 'element'}
       %div{ class: "ui-grid-c" }
+
+        %div{ class: "ui-block-a trim" }= requests_purchases_component.number
       
         %div{ class: "ui-block-b trim" }= requests_purchases_component.status_id
       

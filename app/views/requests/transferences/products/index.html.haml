@@ -5,7 +5,8 @@
   
     %div{ class: "ui-grid-c" }
   
-      
+      %div{ class: "ui-block-a" } Número
+            
       %div{ class: "ui-block-b" }  
       
       %div{ class: "ui-block-c" }  
@@ -16,6 +17,8 @@
     %li{ class: 'element detail'}
       %div{ class: "ui-grid-c" }
       
+        %div{ class: "ui-block-a" }= requests_transferences_product.number
+
         %div{ class: "ui-block-b trim" }= requests_transferences_product.status_id
       
         %div{ class: "ui-block-c trim" }= requests_transferences_product.transaction_id

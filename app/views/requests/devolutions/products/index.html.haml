@@ -5,7 +5,8 @@
   
     %div{ class: "ui-grid-d" }
   
-      
+      %div{ class: "ui-block-a" } Número
+            
       %div{ class: "ui-block-b" }  
       
       %div{ class: "ui-block-c" }  
@@ -18,6 +19,8 @@
     %li{ class: 'element detail'}
       %div{ class: "ui-grid-d" }
       
+        %div{ class: "ui-block-a" }= requests_devolutions_product.number
+            
         %div{ class: "ui-block-b trim" }= requests_devolutions_product.transaction_id
       
         %div{ class: "ui-block-c trim" }= requests_devolutions_product.user_id

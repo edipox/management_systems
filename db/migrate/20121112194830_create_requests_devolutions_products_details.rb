@@ -3,6 +3,9 @@ class CreateRequestsDevolutionsProductsDetails < ActiveRecord::Migration
     create_table :requests_devolutions_products_details do |t|
       t.string :header_id
       t.string :product_id
+      t.integer :quantity
+
+      t.integer :number
 
       t.timestamps
     end

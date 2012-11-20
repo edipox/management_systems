@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "status_id"
     t.string   "user_id"
     t.string   "reason"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -175,6 +176,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "user_id"
     t.string   "reason"
     t.string   "status_id"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -182,6 +184,8 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "requests_devolutions_products_details", :force => true do |t|
     t.string   "header_id"
     t.string   "product_id"
+    t.integer  "quantity"
+    t.integer  "number"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -190,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "status_id"
     t.string   "user_id"
     t.string   "transaction_id"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -206,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "status_id"
     t.string   "user_id"
     t.string   "transaction_id"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -222,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "status_id"
     t.string   "transaction_id"
     t.string   "user_id"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

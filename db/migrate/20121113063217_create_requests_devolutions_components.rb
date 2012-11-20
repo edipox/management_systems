@@ -5,6 +5,7 @@ class CreateRequestsDevolutionsComponents < ActiveRecord::Migration
       t.string :status_id
       t.string :user_id
       t.string :reason
+      t.integer :number
 
       t.timestamps
     end

@@ -4,7 +4,8 @@ class CreateRequestsTransferencesComponents < ActiveRecord::Migration
       t.string :status_id
       t.string :user_id
       t.string :transaction_id
-
+      t.integer :number
+      
       t.timestamps
     end
     change_column :requests_transferences_components, :id, :string, :limit => 36, :null => false

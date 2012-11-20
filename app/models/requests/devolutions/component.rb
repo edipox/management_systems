@@ -1,6 +1,6 @@
 class Requests::Devolutions::Component < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :reason, :status_id, :transaction_id, :user_id, :user, :transaction, :header_id, :component_id, :component, :status
+   attr_accessible :number, :reason, :status_id, :transaction_id, :user_id, :user, :transaction, :header_id, :component_id, :component, :status
 
   has_many :details, :foreign_key => :header_id, :class_name => "Requests::Devolutions::Components::Detail"
 
@@ -13,4 +13,12 @@ class Requests::Devolutions::Component < ActiveRecord::Base
   validates :reason, :presence => true #, :length => { :minimum => 2 }  
   
   belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Component"
+
+
+#  before_create :set_number
+#  def set_number
+#    max_number = Requests::Devolutions::Component.maximum(:number)
+#    self.number = max_number.to_i + 1
+#  end
+  auto_increment :column => :number
 end

@@ -5,7 +5,8 @@
   
     %div{ class: "ui-grid-c" }
   
-      
+      %div{ class: "ui-block-a" } Número
+            
       %div{ class: "ui-block-b" }  
       
       %div{ class: "ui-block-c" }  
@@ -15,7 +16,9 @@
   - @orders_productions.each do |orders_production|
     %li{ class: 'element detail'}
       %div{ class: "ui-grid-c" }
-      
+        
+        %div{ class: "ui-block-a trim" }= orders_production.number
+            
         %div{ class: "ui-block-b trim" }= orders_production.transaction_id
       
         %div{ class: "ui-block-c trim" }= orders_production.status_id

@@ -3,32 +3,35 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-d" }
+    %div{ class: "ui-grid-e" }
   
-      %div{ class: "ui-block-a" } Motivo
+      %div{ class: "ui-block-a" } Número
       
-      %div{ class: "ui-block-b" } Usuario
+      %div{ class: "ui-block-b" } Motivo
       
-      %div{ class: "ui-block-c" } Estado
+      %div{ class: "ui-block-c" } Usuario
 
-      %div{ class: "ui-block-d" } Fecha
+      %div{ class: "ui-block-d" } Estado
       
-      %div{ class: "ui-block-e" } Opciones
+      %div{ class: "ui-block-e" } Fecha
       
+      %div{ class: "ui-block-f" } Opciones
   
   - @requests_devolutions_components.each do |requests_devolutions_component|
     %li{ class: 'element detail'}
-      %div{ class: "ui-grid-d" }
-      
-        %div{ class: "ui-block-a trim" }= requests_devolutions_component.reason
-      
-        %div{ class: "ui-block-b trim" }= requests_devolutions_component.user.email
-      
-        %div{ class: "ui-block-c trim" }= requests_devolutions_component.status.name
-        
-        %div{ class: "ui-block-d trim" }= requests_devolutions_component.updated_at
+      %div{ class: "ui-grid-e" }
   
-        %div{ class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-a" }= requests_devolutions_component.number
+  
+        %div{ class: "ui-block-b trim" }= requests_devolutions_component.reason
+      
+        %div{ class: "ui-block-c trim" }= requests_devolutions_component.user.email
+      
+        %div{ class: "ui-block-d trim" }= requests_devolutions_component.status.name
+        
+        %div{ class: "ui-block-e trim" }= requests_devolutions_component.updated_at
+  
+        %div{ class: "ui-block-f", data: { role: 'controlgroup', type: 'horizontal' } }
           - obj = requests_devolutions_component
           - delete_css_class = !can?(:delete, obj) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, obj) || obj.status == @close_status ? 'ui-disabled' : ''
