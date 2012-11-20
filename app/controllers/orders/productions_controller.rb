@@ -65,11 +65,7 @@ class Orders::ProductionsController < ApplicationController
     end
   end
 
-  # PUT /orders/productions/1
-  # PUT /orders/productions/1.json
-  def update
-    @orders_production = Orders::Production.find(params[:id])
-    @orders_production.user = current_user
+  def else_update
     respond_to do |format|
       if @orders_production.update_attributes(params[:orders_production])
         if @default_status == @orders_production.status
@@ -85,7 +81,25 @@ class Orders::ProductionsController < ApplicationController
         @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
-    end
+    end  
+  end
+
+  # PUT /orders/productions/1
+  # PUT /orders/productions/1.json
+  def update
+    @orders_production = Orders::Production.find(params[:id])
+    @orders_production.user = current_user
+    status_id = params[:orders_production][:status_id]
+    if status_id == @close_status.id
+      if ! @orders_production.close
+        respond_to do |format|
+          format.js { 
+             @notice = "No se puede cambiar el estado a "+@close_status.name+", probablemente las cantidades sean incoherentes"
+             render action: "edit"
+          }
+        end
+      else else_update end
+    else else_update end
   end
 
   # DELETE /orders/productions/1

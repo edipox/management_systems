@@ -14,4 +14,28 @@ class Requests::Transferences::Component < ActiveRecord::Base
   belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Production"  
   
   auto_increment :column => :number  
+  
+  def close
+    details.each do |d|
+      id = d.component
+      price = d.component.price
+      qtty = d.quantity
+      quantity_on_raw_material = 0;
+      d.component.raw_material_stocks.map{|e| 
+        quantity_on_raw_material += e.quantity
+      }
+      if ! (qtty < quantity_on_raw_material)
+        return false
+      end
+    end
+    details.each do |d|
+      id = d.component
+      price = d.component.price
+      qtty = d.quantity
+      Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
+      Stocks::Production.create!({component_id: id, quantity: qtty, price: price})
+    end
+    return true
+  end
+  
 end

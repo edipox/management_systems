@@ -64,27 +64,42 @@ class Requests::Transferences::ComponentsController < ApplicationController
     end
   end
 
+  def else_update
+    respond_to do |format|
+        if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
+          if @default_status == @requests_transferences_component.status
+            format.js {  @notice = 'Registro guardado correctamente.' 
+            render action: 'show'}
+          else
+            list
+            format.js {  @notice = 'Registro guardado correctamente.' 
+            render action: 'index'}
+          end
+        else
+          format.js { 
+          @notice = "Error al actualizar el registro"
+          render action: "edit" }
+        end
+    end
+  end
+
   # PUT /requests/transferences/components/1
   # PUT /requests/transferences/components/1.json
   def update
     @requests_transferences_component = Requests::Transferences::Component.find(params[:id])
     @requests_transferences_component.user = current_user
-    respond_to do |format|
-      if @requests_transferences_component.update_attributes(params[:requests_transferences_component])
-        if @default_status == @requests_transferences_component.status
-          format.js {  @notice = 'Registro guardado correctamente.' 
-          render action: 'show'}
-        else
-          list
-          format.js {  @notice = 'Registro guardado correctamente.' 
-          render action: 'index'}
+    
+    status_id = params[:requests_transferences_component][:status_id]
+    if status_id == @close_status.id
+      if ! @requests_transferences_component.close
+        respond_to do |format|
+          format.js { 
+             @notice = "No se puede cambiar el estado a "+@close_status.name+", probablemente las cantidades sean incoherentes"
+             render action: "edit"
+          }
         end
-      else
-        format.js { 
-        @notice = "Error al actualizar el registro"
-        render action: "edit" }
-      end
-    end
+      else else_update end
+    else else_update end
   end
 
   # DELETE /requests/transferences/components/1

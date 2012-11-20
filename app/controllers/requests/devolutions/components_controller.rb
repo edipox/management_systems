@@ -64,11 +64,7 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     end
   end
 
-  # PUT /requests/devolutions/components/1
-  # PUT /requests/devolutions/components/1.json
-  def update
-    @requests_devolutions_component = Requests::Devolutions::Component.find(params[:id])
-    @requests_devolutions_component.user = current_user
+  def else_update
     respond_to do |format|
       if @requests_devolutions_component.update_attributes(params[:requests_devolutions_component])
         if @default_status == @requests_devolutions_component.status
@@ -87,6 +83,25 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     end
   end
 
+  # PUT /requests/devolutions/components/1
+  # PUT /requests/devolutions/components/1.json
+  def update
+    @requests_devolutions_component = Requests::Devolutions::Component.find(params[:id])
+    @requests_devolutions_component.user = current_user
+
+    status_id = params[:requests_devolutions_component][:status_id]
+    if status_id == @close_status.id
+      if ! @requests_devolutions_component.close
+        respond_to do |format|
+          format.js { 
+             @notice = "No se puede cambiar el estado a "+@close_status.name+", probablemente las cantidades sean incoherentes"
+             render action: "edit"
+          }
+        end
+      else else_update end
+    else else_update end
+  end
+
   # DELETE /requests/devolutions/components/1
   # DELETE /requests/devolutions/components/1.json
   def destroy
@@ -97,4 +112,5 @@ class Requests::Devolutions::ComponentsController < ApplicationController
       format.js { render 'index' }
     end
   end
+
 end

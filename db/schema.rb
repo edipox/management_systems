@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "stocks_components", :force => true do |t|
     t.string   "component_id"
     t.integer  "quantity"
+    t.integer  "price"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -245,6 +246,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "stocks_productions", :force => true do |t|
     t.string   "component_id"
     t.integer  "quantity"
+    t.integer  "price"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -252,6 +254,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "stocks_products", :force => true do |t|
     t.string   "product_id"
     t.integer  "quantity"
+    t.integer  "price"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

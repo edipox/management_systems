@@ -21,4 +21,28 @@ class Requests::Devolutions::Component < ActiveRecord::Base
 #    self.number = max_number.to_i + 1
 #  end
   auto_increment :column => :number
+  
+  def close
+    details.each do |d|
+      id = d.component
+      price = d.component.price
+      qtty = d.quantity
+      quantity_on_production = 0;
+      d.component.production_stocks.map{|e| 
+        quantity_on_production += e.quantity
+      }
+      if ! (qtty < quantity_on_production)
+        return false
+      end
+    end
+    details.each do |d|
+      id = d.component
+      price = d.component.price
+      qtty = d.quantity
+      Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
+      Stocks::Production.create!({component_id: id, quantity: -qtty, price: price})
+    end
+    return true
+  end
+ 
 end

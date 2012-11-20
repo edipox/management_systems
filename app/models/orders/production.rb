@@ -13,4 +13,33 @@ class Orders::Production < ActiveRecord::Base
   belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Production"    
   
   auto_increment :column => :number
+  
+  def close
+    details.each do |dd|
+      dd.product.details.each do |d|
+        id = d.component
+        price = d.component.price
+        qtty = d.quantity
+        quantity_on_production = 0;
+        d.component.production_stocks.map{|e| 
+          quantity_on_production += e.quantity
+        }
+        if ! (qtty < quantity_on_production)
+          return false
+        end
+      end
+    end
+    
+    details.each do |dd|
+      dd.product.details.each do |d|
+        id = d.component
+        price = d.component.price
+        qtty = d.quantity
+        Stocks::Production.create!({component_id: id, quantity: -qtty, price: price})
+      end
+      Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.price})
+    end
+    return true
+  end
+ 
 end

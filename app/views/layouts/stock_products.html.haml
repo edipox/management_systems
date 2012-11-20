@@ -19,7 +19,7 @@
           %a{ href: '/stock/products/index', data: { role: 'button', remote: "true" } } Stock de productos terminados
           - if can?(:read, Orders::Production.new)
             %a{ href: orders_productions_path, data: { role: 'button', remote: "true"  } } Orden de producción
-          %a{ href: '/stock/products/transactions', data: { role: 'button', remote: "true"  } } Movimientos
+          %a{ href: '/stock/products/transactions', class: 'ui-disabled',data: { role: 'button', remote: "true"  } } Movimientos
           - if can?(:read, Requests::Devolutions::Product.new)  
             %a{ href: requests_devolutions_products_path, data: { role: 'button', remote: "true"  } } Devolucion de productos
           - if can?(:read, Requests::Transferences::Product.new)  
