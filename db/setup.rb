@@ -6,6 +6,7 @@ ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
 
 # The super user role MUST be created first!!
 admin_role = ACL::Role.create!({ name: 'Administrador' })
+AppConfig.create!({ id: 'admin_role_id', value: admin_role.id })
 
 # ACL Entities
 acl_entities = []
@@ -22,9 +23,15 @@ acl_entities << ['Devolución de componentes', 'Requests::Devolutions::Component
 acl_entities << ['Modelo de productos terminados', 'Products::Composition']
 acl_entities << ['Estado de transacciones', 'Transactions::Status']
 acl_entities << ['Orden de producción','Orders::Production']
+
+acl_entities << ['Stock de Materia Prima','Stocks::Component']
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
+
+# Special actions
+stocks_component_entity = ACL::Entity.where('const = :const', { const: "Stocks::Component" }).first
+stocks_component_entity.create_extra_action('Inserción inicial', :initial_insert)
 
 keyboards = Components::Category.create!({
   name:'Teclado inalambrico',

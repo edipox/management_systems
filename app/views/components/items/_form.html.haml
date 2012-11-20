@@ -11,6 +11,10 @@
 
   = f.label :description, "Descripcion"
   = f.text_field :description, "maxlength" => "200" 
+
+  - if can? :initial_insert, Stocks::Component and @components_item.id.nil?
+    = label_tag 'initial_stock_qty', 'Cantidad INICIAL en stock'
+    = number_field_tag 'initial_stock_qty', nil, :style => 'border-color: red;'
   
   = f.label :minimum_quantity, "Cantidad mínima en stock"
   = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }

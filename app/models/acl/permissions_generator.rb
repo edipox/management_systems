@@ -1,7 +1,7 @@
 module ACL
   class PermissionsGenerator
-    def self.generate(role, entity, enabled = false)
-      actions = Action.all
+    def self.generate(role, entity, enabled = false, actions = nil)
+      actions ||= Action.all
       actions.each do |action|
         Permission.create!({
           role: role,

@@ -48,6 +48,7 @@ class Components::ItemsController < ApplicationController
     index
     respond_to do |format|
       if @components_item.save
+        Stocks::Component.create!({ component: @components_item, quantity: params[:initial_stock_qty] })
         format.js { @notice = 'Componente creado correctamente.'
         render 'index' }
       else

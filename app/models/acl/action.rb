@@ -1,5 +1,5 @@
 class ACL::Action < ActiveRecord::Base
-  attr_accessible :name, :symbol
+  attr_accessible :name, :symbol, :extra
 
   has_many :acl_permissions, :class_name => ACL::Permission.to_s
   alias_attribute :permissions, :acl_permissions
