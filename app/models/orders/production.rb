@@ -37,7 +37,7 @@ class Orders::Production < ActiveRecord::Base
         qtty = d.quantity
         Stocks::Production.create!({component_id: id, quantity: -qtty, price: price})
       end
-      Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.price})
+      Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.product.price})
     end
     return true
   end
