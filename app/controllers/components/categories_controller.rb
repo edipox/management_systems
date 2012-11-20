@@ -21,7 +21,7 @@ class Components::CategoriesController < ApplicationController
     respond_to do |format|
       format.html
 #      format.json { render json: @components_category }
-      format.js{ @notice = "Hola mundo" }
+      format.js
     end
   end
 

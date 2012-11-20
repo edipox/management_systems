@@ -21,7 +21,7 @@
         %div{ class: 'ui-block-f trim', data: {trim: '17'} }= item.price
         %div{ class: 'ui-block-g' }
           %div{ data: { role: 'controlgroup', type: 'horizontal' } }
-            - delete_css_class = !can?(:delete, item) ? 'ui-disabled' : ''
+            - delete_css_class = !can?(:delete, item) || item.products_compositions_details != [] ? 'ui-disabled' : ''
             - edit_css_class = !can?(:edit, item) ? 'ui-disabled' : ''
             %a{ href: components_item_path(item), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
             %a{ href: edit_components_item_path(item), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
