@@ -14,6 +14,23 @@
     margin-right:auto!important;
 }*/
 
+.settings_back{
+  width:200px!important;
+  margin-left:10px!important;
+  top: 85%!important;
+  position: absolute!important;
+}
+
+.permissions-buttons.ui-grid-a{
+  width:600px!important;
+}
+.permissions-buttons .ui-block-a{
+  width:190px!important;
+}
+.permissions-buttons .ui-block-b{
+  width:300px!important;
+}
+
 .selected{
   background-image: -webkit-gradient(linear,left top,left bottom,from( #6FACD5 ),to( #497BAE ))!important;
   background-image: -webkit-linear-gradient( #6FACD5,#497BAE )!important;
