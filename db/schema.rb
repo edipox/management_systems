@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.string   "transaction_id"
     t.string   "status_id"
     t.string   "user_id"
+    t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -132,8 +133,10 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
   create_table "products_compositions", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "minimum_quantity"
+    t.integer  "price"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "products_compositions_details", :force => true do |t|
@@ -142,15 +145,6 @@ ActiveRecord::Schema.define(:version => 20121113063217) do
     t.integer  "quantity"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "products_items", :force => true do |t|
-    t.string   "name"
-    t.string   "model_id"
-    t.integer  "minimum_quantity"
-    t.integer  "price"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
   end
 
   create_table "requests_devolutions_components", :force => true do |t|

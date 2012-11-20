@@ -1,17 +1,25 @@
 %ul{ data: { role: 'listview', theme: 'c' } }
   %li{ data: { role: 'list-divider'} }
-    %div{ class: "ui-grid-a" }
+    %div{ class: "ui-grid-c" }
         
       %div{ class: "ui-block-a" } Nombre
         
       %div{ class: "ui-block-b" } Descripci&oacute;n
-  
+      
+      %div{ class: "ui-block-c" } Cantidad Mínima
+        
+      %div{ class: "ui-block-d" } Precio
+      
   %li
-    %div{ class: "ui-grid-a" }
+    %div{ class: "ui-grid-c" }
     
-      %div{ class: "ui-block-a" }= @products_composition.name
+      %div{ class: "ui-block-a trim" }= @products_composition.name
     
-      %div{ class: "ui-block-b" }= @products_composition.description
+      %div{ class: "ui-block-b trim" }= @products_composition.description
+      
+      %div{ class: "ui-block-c trim" }= @products_composition.minimum_quantity
+        
+      %div{ class: "ui-block-d trim" }= @products_composition.price
     
 
   - @products_compositions_details = @products_composition.details.paginate(:page => params[:page])

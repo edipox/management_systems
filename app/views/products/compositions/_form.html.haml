@@ -18,6 +18,12 @@
   .field
     = f.label :description, 'Descripción' 
     = f.text_field :description, { class: " ", "maxlength" => "200", "minlength" => "2"  }
+
+  = f.label :minimum_quantity, "Cantidad mínima en stock"
+  = f.number_field :minimum_quantity, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }
+
+  = f.label :price, "Precio"
+  = f.number_field :price, { class: "required number", "maxlength" => "10", "min" => "1", "max" => "2000000000"  }    
       
   %div.ui-grid-a
     %div.ui-block-a

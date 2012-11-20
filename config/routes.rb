@@ -54,8 +54,6 @@ Stock::Application.routes.draw do
 
   namespace :locations do resources :continents end
 
-  namespace :products do resources :items end
-
   namespace :components do resources :brands end
 
   namespace :components do  namespace :categories do resources :kinds end end

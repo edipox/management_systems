@@ -1,20 +1,24 @@
 %ul{ data: { role: 'listview', theme: 'c' } }
   %li{ data: { role: 'list-divider'} }
-    %div{ class: "ui-grid-b" }
+    %div{ class: "ui-grid-c" }
         
-      %div{ class: "ui-block-a" } Estado
+      %div{ class: "ui-block-a" } Número      
         
-      %div{ class: "ui-block-b" } Usuario
+      %div{ class: "ui-block-b" } Estado
         
-      %div{ class: "ui-block-c" } Fecha
+      %div{ class: "ui-block-c" } Usuario
+
+      %div{ class: "ui-block-d" } Fecha
   %li
-    %div{ class: "ui-grid-b" }
+    %div{ class: "ui-grid-c" }
     
-      %div{ class: "ui-block-a" }= @requests_transferences_component.status.name
+      %div{ class: "ui-block-a" }= @requests_transferences_component.number
     
-      %div{ class: "ui-block-b" }= @requests_transferences_component.user.email
+      %div{ class: "ui-block-b" }= @requests_transferences_component.status.name
     
-      %div{ class: "ui-block-c" }= @requests_transferences_component.updated_at
+      %div{ class: "ui-block-c" }= @requests_transferences_component.user.email
+      
+      %div{ class: "ui-block-d" }= @requests_transferences_component.updated_at
     
 
   - @requests_transferences_components_details = @requests_transferences_component.details.paginate(:page => params[:page])

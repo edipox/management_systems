@@ -2,20 +2,23 @@
   %li{ data: { role: 'list-divider'} }
     %div{ class: "ui-grid-c" }
         
-      %div{ class: "ui-block-b" } :
+      %div{ class: "ui-block-a" } Número
         
-      %div{ class: "ui-block-c" } :
+      %div{ class: "ui-block-b" } Estado
         
-      %div{ class: "ui-block-d" } :
+      %div{ class: "ui-block-c" } Usuario
+      
+      %div{ class: "ui-block-d" } Fecha
   %li
     %div{ class: "ui-grid-c" }
     
-      %div{ class: "ui-block-e" }= @orders_production.transaction_id
+      %div{ class: "ui-block-a" }= @orders_production.number
     
-      %div{ class: "ui-block-e" }= @orders_production.status_id
+      %div{ class: "ui-block-b" }= @orders_production.status.name
     
-      %div{ class: "ui-block-e" }= @orders_production.user_id
-    
+      %div{ class: "ui-block-c" }= @orders_production.user.email
+      
+      %div{ class: "ui-block-d" }= @orders_production.updated_at
 
   - @orders_productions_details = @orders_production.details.paginate(:page => params[:page])
   - @orders_productions_detail = Orders::Productions::Detail.new

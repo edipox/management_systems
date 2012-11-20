@@ -1,2 +1,0 @@
-module Products::ItemsHelper
-end

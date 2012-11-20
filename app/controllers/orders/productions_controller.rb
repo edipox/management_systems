@@ -30,9 +30,11 @@ class Orders::ProductionsController < ApplicationController
   # GET /orders/productions/new.json
   def new
     @orders_production = Orders::Production.new
-    respond_to do |format|
-      format.js # new.html.erb
-    end
+    @orders_production.status = @default_status
+    create 
+#    respond_to do |format|
+#      format.js # new.html.erb
+#    end
   end
 
   # GET /orders/productions/1/edit
@@ -43,10 +45,10 @@ class Orders::ProductionsController < ApplicationController
   # POST /orders/productions
   # POST /orders/productions.json
   def create
-    @orders_production = Orders::Production.new(params[:orders_production])
+    #@orders_production = Orders::Production.new(params[:orders_production])
     transaction = Stocks::Transactions::Production.new
     transaction.kind = "Orders::Production"
-    @orders_production.user_id = "nil"
+    @orders_production.user_id = current_user
     @orders_production.transaction_id = "nil"
     @orders_production.save
     transaction.kind_id = @orders_production.id
@@ -67,11 +69,17 @@ class Orders::ProductionsController < ApplicationController
   # PUT /orders/productions/1.json
   def update
     @orders_production = Orders::Production.find(params[:id])
-
+    @orders_production.user = current_user
     respond_to do |format|
       if @orders_production.update_attributes(params[:orders_production])
-        format.js { @notice = 'Registro guardado correctamente.' 
-        render action: 'show'}
+        if @default_status == @orders_production.status
+          format.js {  @notice = 'Registro guardado correctamente.' 
+          render action: 'show'}
+        else
+          list
+          format.js {  @notice = 'Registro guardado correctamente.' 
+          render action: 'index'}
+        end
       else
         format.js { 
         @notice = "Error al actualizar el registro"

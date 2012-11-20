@@ -1,21 +1,29 @@
 %ul{ data: { role: 'listview', theme: 'c' } }
   %li{ data: { role: 'list-divider'} }
-    %div{ class: "ui-grid-b" }
+    %div{ class: "ui-grid-d" }
         
-      %div{ class: "ui-block-a" } Estado
+      %div{ class: "ui-block-a" } Número
         
-      %div{ class: "ui-block-b" } Usuario
+      %div{ class: "ui-block-b" } Estado
         
       %div{ class: "ui-block-c" } Motivo
+      
+      %div{ class: "ui-block-d" } Fecha
+      
+      %div{ class: "ui-block-e" } Usuario
+      
   %li      
-    %div{ class: "ui-grid-b" }
+    %div{ class: "ui-grid-d" }
     
-      %div{ class: "ui-block-a" }= @requests_devolutions_component.status.name
+      %div{ class: "ui-block-a" }= @requests_devolutions_component.number
     
-      %div{ class: "ui-block-b" }= @requests_devolutions_component.user.email
+      %div{ class: "ui-block-b" }= @requests_devolutions_component.status.name
     
-      %div{ class: "ui-block-c" }= @requests_devolutions_component.reason
-    
+      %div{ class: "ui-block-c trim" }= @requests_devolutions_component.reason
+      
+      %div{ class: "ui-block-d" }= @requests_devolutions_component.updated_at
+      
+      %div{ class: "ui-block-e" }= @requests_devolutions_component.user.email
 
   - @requests_devolutions_components_details = @requests_devolutions_component.details.paginate(:page => params[:page])
   - @requests_devolutions_components_detail = Requests::Devolutions::Components::Detail.new

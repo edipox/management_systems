@@ -24,10 +24,8 @@
             %a{ href: requests_devolutions_products_path, data: { role: 'button', remote: "true"  } } Devolucion de productos
           - if can?(:read, Requests::Transferences::Product.new)  
             %a{ href: requests_transferences_products_path, data: { role: 'button', remote: "true"  } } Pedido de productos
-          - if can?(:read, Products::Item.new)
-            %a{ href: products_items_path, data: { role: 'button', remote: "true"  } } Productos terminados
           - if can?(:read, Products::Composition.new)
-            %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos
+            %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Productos terminados
 
         %div#content
           = yield

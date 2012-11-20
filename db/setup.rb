@@ -21,6 +21,7 @@ acl_entities << ['Solicitud de componentes', 'Requests::Transferences::Component
 acl_entities << ['Devolución de componentes', 'Requests::Devolutions::Component']
 acl_entities << ['Modelo de productos terminados', 'Products::Composition']
 acl_entities << ['Estado de transacciones', 'Transactions::Status']
+acl_entities << ['Orden de producción','Orders::Production']
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
@@ -114,7 +115,9 @@ display = Components::Item.create!({
 
 composition = Products::Composition.create!({
   name: 'CPU Economica',
-  description: 'modelo basico de CPU economica'
+  description: 'modelo basico de CPU economica',
+  minimum_quantity: 2,
+  price: 268000
 })
 
 Products::Compositions::Detail.create!({

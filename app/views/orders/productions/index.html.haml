@@ -3,27 +3,29 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-c" }
+    %div{ class: "ui-grid-d" }
   
       %div{ class: "ui-block-a" } Número
             
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Estado
       
-      %div{ class: "ui-block-c" }  
+      %div{ class: "ui-block-c" } Usuario
       
-      %div{ class: "ui-block-d" }  
+      %div{ class: "ui-block-d" } Fecha
+      
+      %div{ class: "ui-block-e" } Opciones
   
   - @orders_productions.each do |orders_production|
     %li{ class: 'element detail'}
-      %div{ class: "ui-grid-c" }
+      %div{ class: "ui-grid-d" }
         
         %div{ class: "ui-block-a trim" }= orders_production.number
             
-        %div{ class: "ui-block-b trim" }= orders_production.transaction_id
+        %div{ class: "ui-block-b trim" }= orders_production.status.name
       
-        %div{ class: "ui-block-c trim" }= orders_production.status_id
-      
-        %div{ class: "ui-block-d trim" }= orders_production.user_id
+        %div{ class: "ui-block-c trim" }= orders_production.user.email
+        
+        %div{ class: "ui-block-d trim" }= orders_production.user.updated_at
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           - obj = orders_production

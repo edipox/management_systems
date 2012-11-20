@@ -4,7 +4,8 @@ class CreateOrdersProductions < ActiveRecord::Migration
       t.string :transaction_id
       t.string :status_id
       t.string :user_id
-
+      t.integer :number
+  
       t.timestamps
     end
     change_column :orders_productions, :id, :string, :limit => 36, :null => false

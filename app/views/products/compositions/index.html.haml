@@ -2,22 +2,31 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-b" }
-  
+    %div{ class: "ui-grid-d" }
       
-      %div{ class: "ui-block-b" } Nombre 
+      %div{ class: "ui-block-a" } Nombre 
       
-      %div{ class: "ui-block-c" } Descripci&oacute;n 
+      %div{ class: "ui-block-b" } Descripci&oacute;n 
+      
+      %div{ class: "ui-block-c" } Cantidad Mínima
+      
+      %div{ class: "ui-block-d" } Precio
+      
+      %div{ class: "ui-block-e" } Opciones
   
   - @products_compositions.each do |products_composition|
     %li{ class: 'element detail'}
-      %div{ class: "ui-grid-b" }
+      %div{ class: "ui-grid-d" }
       
-        %div{ class: "ui-block-b trim" }= products_composition.name
+        %div{ class: "ui-block-a trim" }= products_composition.name
       
-        %div{ class: "ui-block-c trim" }= products_composition.description
+        %div{ class: "ui-block-b trim" }= products_composition.description
+        
+        %div{ class: "ui-block-c trim" }= products_composition.minimum_quantity
+        
+        %div{ class: "ui-block-d trim" }= products_composition.price
   
-        %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = !can?(:delete, products_composition) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, products_composition) ? 'ui-disabled' : ''
           %a{ href: products_composition_path(products_composition), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
