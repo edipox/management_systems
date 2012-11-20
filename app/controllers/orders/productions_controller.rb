@@ -48,7 +48,7 @@ class Orders::ProductionsController < ApplicationController
     #@orders_production = Orders::Production.new(params[:orders_production])
     transaction = Stocks::Transactions::Production.new
     transaction.kind = "Orders::Production"
-    @orders_production.user_id = current_user
+    @orders_production.user = current_user
     @orders_production.transaction_id = "nil"
     @orders_production.save
     transaction.kind_id = @orders_production.id

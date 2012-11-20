@@ -12,7 +12,7 @@
           
   .field
     = f.label :product_id, 'Producto'
-    = f.collection_select(:product_id, Products::Item.all, :id, :name,{}, { class: "required" })
+    = f.collection_select(:product_id, Products::Composition.all, :id, :name,{}, { class: "required" })
       
     
   .field    
