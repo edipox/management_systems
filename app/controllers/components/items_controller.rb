@@ -52,7 +52,7 @@ class Components::ItemsController < ApplicationController
         format.js { @notice = 'Componente creado correctamente.'
         render 'index' }
       else
-        format.js { @notice = 'Error al crear componente.'  
+        format.js { 
         render action: "new"}
       end
     end
