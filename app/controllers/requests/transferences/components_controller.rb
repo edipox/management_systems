@@ -56,8 +56,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
     @requests_transferences_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_component.save
-        format.js {  @notice = 'Registro actualizado correctamente.' 
-        render action: 'show'}
+        format.js {  render action: 'show' }
       else
         format.js {  @notice = 'Error al guardar el registro.' 
         render action: "new"}

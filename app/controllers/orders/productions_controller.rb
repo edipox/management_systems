@@ -55,8 +55,7 @@ class Orders::ProductionsController < ApplicationController
     
     respond_to do |format|
       if @orders_production.save
-        format.js { @notice = 'Registro actualizado correctamente.'
-        render action: 'show' }
+        format.js { render action: 'show'  }
       else
         format.js {  @notice = 'Error al guardar el registro.' 
         render action: "new"}

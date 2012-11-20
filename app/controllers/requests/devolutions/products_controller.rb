@@ -55,8 +55,7 @@ class Requests::Devolutions::ProductsController < ApplicationController
 
     respond_to do |format|
       if @requests_devolutions_product.save
-        format.js { @notice = 'Registro actualizado correctamente.' 
-        render action: 'show'}
+        format.js { render action: 'show' }
       else
         format.js { @notice = 'Error al guardar el registro.' 
         render action: "new"}

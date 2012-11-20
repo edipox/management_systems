@@ -56,10 +56,9 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     @requests_devolutions_component.transaction = transaction
     respond_to do |format|
       if @requests_devolutions_component.save
-        format.js {  @notice = : 'Registro actualizado correctamente.'
-        render action: 'show'}
+        format.js { render action: 'show' }
       else
-        format.js { @notice = : 'Error al guardar el registro.'
+        format.js { @notice =  'Error al guardar el registro.'
         render action: "new" }
       end
     end
@@ -73,11 +72,11 @@ class Requests::Devolutions::ComponentsController < ApplicationController
     respond_to do |format|
       if @requests_devolutions_component.update_attributes(params[:requests_devolutions_component])
         if @default_status == @requests_devolutions_component.status
-          format.js {  @notice = : 'Registro guardado correctamente.' 
+          format.js {  @notice =  'Registro guardado correctamente.' 
           render action: 'show'}
         else
           list
-          format.js {  @notice = : 'Registro guardado correctamente.' 
+          format.js {  @notice =  'Registro guardado correctamente.' 
           render action: 'index'}
         end
       else
