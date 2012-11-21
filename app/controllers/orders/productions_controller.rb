@@ -88,7 +88,6 @@ class Orders::ProductionsController < ApplicationController
   # PUT /orders/productions/1.json
   def update
     @orders_production = Orders::Production.find(params[:id])
-    @orders_production.user = current_user
     status_id = params[:orders_production][:status_id]
     if status_id == @close_status.id
       if ! @orders_production.close

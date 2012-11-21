@@ -45,7 +45,7 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # POST /requests/devolutions/components.json
   def create
     @requests_devolutions_component = Requests::Devolutions::Component.new(params[:requests_devolutions_component])
-    @requests_devolutions_component.status = get_default_status
+    @requests_devolutions_component.status = @default_status
     transaction = Stocks::Transactions::Component.new
     transaction.kind = "Requests::Devolutions::Component"
     @requests_devolutions_component.user = current_user
@@ -87,8 +87,6 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   # PUT /requests/devolutions/components/1.json
   def update
     @requests_devolutions_component = Requests::Devolutions::Component.find(params[:id])
-    @requests_devolutions_component.user = current_user
-
     status_id = params[:requests_devolutions_component][:status_id]
     if status_id == @close_status.id
       if ! @requests_devolutions_component.close

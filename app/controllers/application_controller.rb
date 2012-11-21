@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
         atts.each do |a|
           attribute = a[0]
           value = a[1]
-          if attribute != "created_at" &&  attribute != "updated_at" &&  attribute != "user_id" && attribute != "id" && attribute != "transaction_id" && !(attribute == "status_id" && value == default_status) && value != ""  && value != nil
+          if attribute != "created_at" && attribute != 'number' &&  attribute != "updated_at" &&  attribute != "user_id" && attribute != "id" && attribute != "transaction_id" && !(attribute == "status_id" && value == default_status) && value != ""  && value != nil
             will_destroy = false
           end
         end

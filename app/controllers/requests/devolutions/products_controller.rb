@@ -30,6 +30,7 @@ class Requests::Devolutions::ProductsController < ApplicationController
   # GET /requests/devolutions/products/new.json
   def new
     @requests_devolutions_product = Requests::Devolutions::Product.new
+    @hide_status_select = true
     respond_to do |format|
       format.js # new.html.erb
     end
@@ -44,9 +45,10 @@ class Requests::Devolutions::ProductsController < ApplicationController
   # POST /requests/devolutions/products.json
   def create
     @requests_devolutions_product = Requests::Devolutions::Product.new(params[:requests_devolutions_product])
+    @requests_devolutions_product.status = @default_status
     transaction = Stocks::Transactions::Product.new
     transaction.kind = "Requests::Devolutions::Product"
-    @requests_devolutions_product.user_id = "nil"
+    @requests_devolutions_product.user = current_user
     @requests_devolutions_product.transaction_id = "nil"
     @requests_devolutions_product.save
     transaction.kind_id = @requests_devolutions_product.id
@@ -57,7 +59,7 @@ class Requests::Devolutions::ProductsController < ApplicationController
       if @requests_devolutions_product.save
         format.js { render action: 'show' }
       else
-        format.js { @notice = 'Error al guardar el registro.' 
+        format.js {
         render action: "new"}
       end
     end

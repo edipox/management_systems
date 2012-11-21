@@ -2,24 +2,28 @@
   %li{ data: { role: 'list-divider'} }
     %div{ class: "ui-grid-d" }
         
-      %div{ class: "ui-block-b" } 
+      %div{ class: "ui-block-a" } Número
         
-      %div{ class: "ui-block-c" } 
+      %div{ class: "ui-block-b" } Estado
         
-      %div{ class: "ui-block-d" } Motivo
+      %div{ class: "ui-block-c" } Motivo
         
-      %div{ class: "ui-block-e" } 
+      %div{ class: "ui-block-d" } Fecha
+      
+      %div{ class: "ui-block-e" } Usuario      
+      
   %li  
     %div{ class: "ui-grid-d" }
     
-      %div{ class: "ui-block-e" }= @requests_devolutions_product.transaction_id
+      %div{ class: "ui-block-a trim" }= @requests_devolutions_product.number
     
-      %div{ class: "ui-block-e" }= @requests_devolutions_product.user_id
-    
-      %div{ class: "ui-block-e" }= @requests_devolutions_product.reason
-    
-      %div{ class: "ui-block-e" }= @requests_devolutions_product.status_id
-    
+      %div{ class: "ui-block-b trim" }= @requests_devolutions_product.status.name
+      
+      %div{ class: "ui-block-c trim" }= @requests_devolutions_product.reason
+
+      %div{ class: "ui-block-d trim" }= @requests_devolutions_product.updated_at
+      
+      %div{ class: "ui-block-e trim" }= @requests_devolutions_product.user.email    
 
   - @requests_devolutions_products_details = @requests_devolutions_product.details.paginate(:page => params[:page])
   - @requests_devolutions_products_detail = Requests::Devolutions::Products::Detail.new

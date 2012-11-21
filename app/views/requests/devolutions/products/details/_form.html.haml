@@ -9,15 +9,16 @@
     -#= fd.hidden_field :SINGULAR_HEADER_id
     -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
 
-      
-    
   .field    
     = hidden_field_tag "header_id", @requests_devolutions_product.id
     
-          
   .field
     = f.label :product_id, 'Producto'
-    = f.collection_select(:product_id, Products::Item.all, :id, :name,{}, { class: "required" })
-    
+    = f.collection_select(:product_id, Products::Composition.all, :id, :name,{}, { class: "required" })
+
+  .field
+    = f.label :quantity, 'Cantidad' 
+    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "min" => "1", "max" => "2000000000"  }
+            
   .actions
     = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

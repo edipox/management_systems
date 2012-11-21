@@ -6,19 +6,13 @@
       %ul
         - @orders_productions_detail.errors.full_messages.each do |msg|
           %li= msg
-    -#= fd.hidden_field :SINGULAR_HEADER_id
-    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
-
           
   .field
     = f.label :product_id, 'Producto'
     = f.collection_select(:product_id, Products::Composition.all, :id, :name,{}, { class: "required" })
-      
     
   .field    
     = hidden_field_tag "header_id", @orders_production.id
-    
-      
     
   .field
     = f.label :quantity, 'Cantidad' 

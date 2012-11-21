@@ -27,7 +27,7 @@ $(document).ready(function(){
 function showNotice(notice){
   if(notice){
     var seconds = notice.length/20
-      TINY.box.show({html:notice,animate:false,close:false,mask:false,boxid:'alert',autohide:seconds})
+      TINY.box.show({html:notice,animate:true,close:true,mask:false,boxid:'alert',autohide:seconds})
   }
 }
 

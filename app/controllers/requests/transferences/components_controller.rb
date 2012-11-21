@@ -87,8 +87,6 @@ class Requests::Transferences::ComponentsController < ApplicationController
   # PUT /requests/transferences/components/1.json
   def update
     @requests_transferences_component = Requests::Transferences::Component.find(params[:id])
-    @requests_transferences_component.user = current_user
-    
     status_id = params[:requests_transferences_component][:status_id]
     if status_id == @close_status.id
       if ! @requests_transferences_component.close

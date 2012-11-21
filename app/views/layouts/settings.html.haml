@@ -9,12 +9,11 @@
   %body
     %div(data-role="page")
       %div(data-role="header" data-position="fixed")
+        %a{ href: url_for(:back), data: { role: 'button' } } Volver
         %h3 Configuración del sistema
       %div(id="content" data-role="content")
       
         = yield
-      
-      %a{ href: url_for(:back), data: { role: 'button' }, class: 'settings_back' } Volver
     
       %div(data-role="footer" data-position="fixed")
         %h3 Footer

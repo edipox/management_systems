@@ -5,20 +5,21 @@
   
     %div{ class: "ui-grid-b" }
   
+      %div{ class: "ui-block-a" } Producto
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Cantidad
       
-      %div{ class: "ui-block-c" }  
+      %div{ class: "ui-block-c" } Opciones      
   
   - @requests_devolutions_products_details.each do |requests_devolutions_products_detail|
     %li{ class: 'element'}
       %div{ class: "ui-grid-b" }
       
-        %div{ class: "ui-block-b trim" }= requests_devolutions_products_detail.header_id
-      
-        %div{ class: "ui-block-c trim" }= requests_devolutions_products_detail.product_id
-  
-        %div{ style:"width:262px;", class: "ui-block-d", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-a trim" }= requests_devolutions_products_detail.product.name
+        
+        %div{ class: "ui-block-b trim" }= requests_devolutions_products_detail.quantity
+          
+        %div{ style:"width:262px;", class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           -# if can? :delete, requests_devolutions_products_detail 
           %a{ href: requests_devolutions_products_detail_path(requests_devolutions_products_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
           -# if can? :update, requests_devolutions_products_detail 

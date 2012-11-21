@@ -11,4 +11,8 @@ class Products::Composition < ActiveRecord::Base
   belongs_to :status, :class_name => "Transactions::Status"
 
   has_many :orders_productions_details, :foreign_key => :product_id, :class_name => Orders::Productions::Detail.to_s
+  
+  has_many :requests_transferences_products_details, :foreign_key => :product_id, :class_name => Requests::Transferences::Products::Detail.to_s
+  
+  has_many :requests_devolutions_products_details, :foreign_key => :product_id, :class_name => Requests::Devolutions::Products::Detail.to_s
 end

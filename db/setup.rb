@@ -23,6 +23,7 @@ acl_entities << ['Devolución de componentes', 'Requests::Devolutions::Component
 acl_entities << ['Modelo de productos terminados', 'Products::Composition']
 acl_entities << ['Estado de transacciones', 'Transactions::Status']
 acl_entities << ['Orden de producción','Orders::Production']
+acl_entities << ['Devolución de productos','Requests::Devolutions::Product']
 
 acl_entities << ['Stock de Materia Prima','Stocks::Component']
 # acl_entities << ['', '']
@@ -229,7 +230,12 @@ Requests::Devolutions::Components::Detail.create!({
   quantity: 10
 })
 
-
+Requests::Devolutions::Product.create!({
+  transaction: Stocks::Transactions::Product.create!({kind:'temp', kind_id:'temp'}),
+  user: system_user,
+  reason: 'Producto funcionando incorrectamente',
+  status: status_open
+})
 =begin
 employee.role.permissions.each do |permission|
   permission.enabled = true if permission.action == 'read'

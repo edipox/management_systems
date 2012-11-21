@@ -7,5 +7,5 @@ class Orders::Productions::Detail < ActiveRecord::Base
 
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s  
   
-  belongs_to :orders_production, :foreign_key => :header_id, :class_name => "Orders::Production"
+  belongs_to :orders_production, :foreign_key => :header_id, :class_name => Orders::Production.to_s
 end
