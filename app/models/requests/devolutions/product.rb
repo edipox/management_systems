@@ -12,4 +12,30 @@ class Requests::Devolutions::Product < ActiveRecord::Base
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   belongs_to :transaction, :foreign_key => :transaction_id, :class_name => Stocks::Transactions::Product.to_s
   auto_increment :column => :number
+  
+  
+    
+  def close
+    details.each do |d|
+      qtty = d.quantity
+      quantity_on_products = 0;
+      d.product.products_stocks.map{|e| 
+        quantity_on_products += e.quantity
+      }
+      if ! (qtty < quantity_on_products)
+        return false
+      end
+    end
+    details.each do |d|
+      id = d.product.id
+      price = d.product.price
+      qtty = d.quantity
+      Stocks::Production.create!({product_id: id, product_quantity: qtty, product_price: price})
+      Stocks::Product.create!({product_id: id, quantity: -qtty, price: price})
+    end
+    return true
+  end
+  
+  
+  
 end

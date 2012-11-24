@@ -16,7 +16,9 @@
         
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
-          %a{ href: '/stock/production/list', data: { role: 'button', remote: "true" } } Stock de producción
+          %a{ href: '/stock/production/list_components', data: { role: 'button', remote: "true" } } Stock de producción
+          %a{ href: '/stock/production/list_products', data: { role: 'button', remote: "true" } } Productos en producción
+          
           - if can?(:read, Requests::Transferences::Component.new)
             %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
           - if can?(:read, Requests::Devolutions::Component.new)

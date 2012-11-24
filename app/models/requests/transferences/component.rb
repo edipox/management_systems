@@ -17,8 +17,6 @@ class Requests::Transferences::Component < ActiveRecord::Base
   
   def close
     details.each do |d|
-      id = d.component
-      price = d.component.price
       qtty = d.quantity
       quantity_on_raw_material = 0;
       d.component.raw_material_stocks.map{|e| 
@@ -29,11 +27,11 @@ class Requests::Transferences::Component < ActiveRecord::Base
       end
     end
     details.each do |d|
-      id = d.component
+      id = d.component.id
       price = d.component.price
       qtty = d.quantity
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
-      Stocks::Production.create!({component_id: id, quantity: qtty, price: price})
+      Stocks::Production.create!({component_id: id, component_quantity: qtty, component_price: price})
     end
     return true
   end

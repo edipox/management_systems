@@ -17,12 +17,10 @@ class Orders::Production < ActiveRecord::Base
   def close
     details.each do |dd|
       dd.product.details.each do |d|
-        id = d.component
-        price = d.component.price
         qtty = d.quantity
         quantity_on_production = 0;
         d.component.production_stocks.map{|e| 
-          quantity_on_production += e.quantity
+          quantity_on_production += e.component_quantity
         }
         if ! (qtty < quantity_on_production)
           return false
@@ -32,10 +30,10 @@ class Orders::Production < ActiveRecord::Base
     
     details.each do |dd|
       dd.product.details.each do |d|
-        id = d.component
+        id = d.component.id
         price = d.component.price
         qtty = d.quantity
-        Stocks::Production.create!({component_id: id, quantity: -qtty, price: price})
+        Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
       end
       Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.product.price})
     end

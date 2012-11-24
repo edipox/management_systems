@@ -24,23 +24,21 @@ class Requests::Devolutions::Component < ActiveRecord::Base
   
   def close
     details.each do |d|
-      id = d.component
-      price = d.component.price
       qtty = d.quantity
       quantity_on_production = 0;
       d.component.production_stocks.map{|e| 
-        quantity_on_production += e.quantity
+        quantity_on_production += e.component_quantity
       }
       if ! (qtty < quantity_on_production)
         return false
       end
     end
     details.each do |d|
-      id = d.component
+      id = d.component.id
       price = d.component.price
       qtty = d.quantity
       Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
-      Stocks::Production.create!({component_id: id, quantity: -qtty, price: price})
+      Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
     end
     return true
   end

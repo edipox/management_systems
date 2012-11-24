@@ -4,8 +4,10 @@ Stock::Application.routes.draw do
 
   get "stock/products/index", :to => "stock/products#index"
   get "stock/products/transactions", :to => "stock/products#transactions"
+  get "stock/products/list_products"
   
-  get "stock/production/list"
+  get "stock/production/list_components"
+  get "stock/production/list_products"
   get "stock/production/index", :to => "stock/production#index"
   get "stock/production/transactions", :to => "stock/production#transactions"
 

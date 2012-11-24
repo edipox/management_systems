@@ -64,22 +64,41 @@ class Requests::Devolutions::ProductsController < ApplicationController
       end
     end
   end
-
-  # PUT /requests/devolutions/products/1
-  # PUT /requests/devolutions/products/1.json
-  def update
-    @requests_devolutions_product = Requests::Devolutions::Product.find(params[:id])
-
+  
+  def else_update
     respond_to do |format|
       if @requests_devolutions_product.update_attributes(params[:requests_devolutions_product])
-        format.js {  @notice = 'Registro guardado correctamente.' 
-        render action: 'show'}
+        if @default_status == @requests_devolutions_product.status
+          format.js {  @notice =  'Registro guardado correctamente.' 
+          render action: 'show'}
+        else
+          list
+          format.js {  @notice =  'Registro guardado correctamente.' 
+          render action: 'index'}
+        end
       else
         format.js { 
         @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end
+  end  
+
+  # PUT /requests/devolutions/products/1
+  # PUT /requests/devolutions/products/1.json
+  def update
+    @requests_devolutions_product = Requests::Devolutions::Product.find(params[:id])
+    status_id = params[:requests_devolutions_product][:status_id]
+    if status_id == @close_status.id
+      if ! @requests_devolutions_product.close
+        respond_to do |format|
+          format.js { 
+             @notice = "No se puede cambiar el estado a "+@close_status.name+", probablemente las cantidades sean incoherentes"
+             render action: "edit"
+          }
+        end
+      else else_update end
+    else else_update end
   end
 
   # DELETE /requests/devolutions/products/1

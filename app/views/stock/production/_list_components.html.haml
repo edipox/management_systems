@@ -8,8 +8,8 @@
 
   - @components.each do |component|
     - stocks = component.production_stocks
-    - stock_total = stocks.reduce {|s0, s1| s0.quantity = s0.quantity + s1.quantity; s0 }
-    - stock_qty = stock_total.nil? ? 0 : stock_total.quantity
+    - stock_total = stocks.reduce {|s0, s1| s0.component_quantity = s0.component_quantity + s1.component_quantity; s0 }
+    - stock_qty = stock_total.nil? ? 0 : stock_total.component_quantity
     %li
       %div.ui-grid-b
         %div.ui-block-a= component.name
