@@ -29,11 +29,24 @@ function showNotice(notice){
     var seconds = notice.length/20
       TINY.box.show({html:notice,animate:true,close:true,mask:false,boxid:'alert',autohide:seconds})
   }
-  $(".ui-loader").hide();
+  hideLoader();
 }
 
 function create_loader(){
-  return $(".ui-loader")/*.removeClass("ui-corner-all").removeClass("ui-body-a")*/.removeClass("ui-loader-default").attr("id","loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>');  
+  $("body").append("<div id='back_loader' class='ui-popup-screen ui-overlay-c in'></div>");
+  return $(".ui-loader").removeClass("ui-loader-default").attr("id","loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>');  
+}
+
+function showLoader(){
+  $("#back_loader").fadeIn(100);
+  if($("#loader").show().length == 0){
+    create_loader().show();
+  }
+}
+
+function hideLoader(){
+  $("#back_loader").fadeOut(100);
+  $("#loader").hide();
 }
 
 function on_load(){
@@ -50,13 +63,11 @@ function on_load(){
     $("#menu .ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
-  create_loader();  
+//  create_loader();  
   $(document).live("ajax:before", function(){
-    if($("#loader").show().length == 0){
-      create_loader().show();
-    }
+    showLoader();
   }).live("ajax:success", function(){
-    $("#loader").hide();
+    hideLoader();
   });
   ajaxifyPagination();
 };
@@ -68,7 +79,7 @@ function ajaxifyPagination() {
     	  url: $(this).attr("href"),
     	  dataType: "script"
     	});
-	    $(".ui-loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>').show();
+      showLoader(); 
     	return false;
     });
 }
@@ -102,8 +113,6 @@ function showFakeSubForm(caller, subform, select, required_fields, existence_fie
             $('#'+required_fields[i]).addClass('required');    
           }
         }
-//        $('#category_name').addClass('required');
-//        $('#category_description').addClass('required');
       },      function () {
         $(select).show();
         $(subform).hide();
@@ -117,9 +126,6 @@ function showFakeSubForm(caller, subform, select, required_fields, existence_fie
             $('#'+required_fields[i]).removeClass('required');    
           }
         }
-
-//        $('#category_name').removeClass('required');
-//        $('#category_description').removeClass('required');
       }
   );
 }
