@@ -32,6 +32,10 @@ function showNotice(notice){
   $(".ui-loader").hide();
 }
 
+function create_loader(){
+  return $(".ui-loader")/*.removeClass("ui-corner-all").removeClass("ui-body-a")*/.removeClass("ui-loader-default").attr("id","loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>');  
+}
+
 function on_load(){
   defaultShowForm("category",["category_name", "category_description"]);
   defaultShowForm("brand",["brand_name"]);
@@ -46,14 +50,15 @@ function on_load(){
     $("#menu .ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
-  ajaxifyPagination();
-  
+  create_loader();  
   $(document).live("ajax:before", function(){
-    $(".ui-loader").removeClass("ui-corner-all").removeClass("ui-body-a").removeClass("ui-loader-default");
-    $(".ui-loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>').show();
+    if($("#loader").show().length == 0){
+      create_loader().show();
+    }
   }).live("ajax:success", function(){
-    $(".ui-loader").hide();
+    $("#loader").hide();
   });
+  ajaxifyPagination();
 };
 
 function ajaxifyPagination() {

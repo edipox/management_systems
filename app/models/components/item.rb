@@ -15,4 +15,12 @@ class Components::Item < ActiveRecord::Base
   has_many :products_compositions_details, :foreign_key => :component_id, :class_name => Products::Compositions::Detail.to_s
   #has_many :requests_devolutions_components_details, :foreign_key => :component_id, :class_name => "Requests::Devolutions::Components::Detail"
   
+#  def components_finished
+#    finished = []
+#    Components::Category.find_each('finished = true') |cat| do
+#        finished + (cat.components_items)
+#    end
+#    return finished
+#  end
+  
 end
