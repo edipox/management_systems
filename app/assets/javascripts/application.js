@@ -33,20 +33,19 @@ function showNotice(notice){
 }
 
 function create_loader(){
-  $("body").append("<div id='back_loader' class='ui-popup-screen ui-overlay-c in'></div>");
-  return $(".ui-loader").removeClass("ui-loader-default").attr("id","loader").html('<div class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>');  
+  html_loader = '<div id="back_loader" class="loader" style="display: block;"><div class="circle" style=""></div><div class="circle1"></div></div>';
+  return $("body").append(html_loader);
 }
 
 function showLoader(){
-  $("#back_loader").fadeIn(100);
-  if($("#loader").show().length == 0){
-    create_loader().show();
+  if($("#back_loader").length == 0){
+    create_loader();
   }
+  $("#back_loader").fadeIn(100);
 }
 
 function hideLoader(){
   $("#back_loader").fadeOut(100);
-  $("#loader").hide();
 }
 
 function on_load(){
@@ -149,14 +148,19 @@ function hasError(){
 function openPopup(content){
   changeContent('#popup', content ).show().popup("open");
   
-  $("#popup form input[type='submit']").click(function(){
-      $("#popup #error_explanation").hide(200, function(){
-        $(this).remove();
-        $("#popup .field_with_errors").removeClass("field_with_errors");
-        $("#popup form").submit();    
-      });
+//  $("#popup form input[type='submit']").click(function(){
+//      $("#popup #error_explanation").hide(3000, function(){
+//        $(this).remove();
+//        $("#popup .field_with_errors").removeClass("field_with_errors");
+//        $("#popup form").submit();    
+//      });
+//  });
+
+  $("#popup form input").keyup(function(){
+      $("#popup #error_explanation").remove();
+      $("#popup .field_with_errors").removeClass("field_with_errors");
   });
-  
+
   $("#popup form").submit(function() {
      setTimeout(function() {
         if($("#popup form").valid() && ! hasError() ){
