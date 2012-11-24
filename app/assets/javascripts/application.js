@@ -148,14 +148,6 @@ function hasError(){
 function openPopup(content){
   changeContent('#popup', content ).show().popup("open");
   
-//  $("#popup form input[type='submit']").click(function(){
-//      $("#popup #error_explanation").hide(3000, function(){
-//        $(this).remove();
-//        $("#popup .field_with_errors").removeClass("field_with_errors");
-//        $("#popup form").submit();    
-//      });
-//  });
-
   $("#popup form input").keyup(function(){
       $("#popup #error_explanation").remove();
       $("#popup .field_with_errors").removeClass("field_with_errors");
@@ -168,7 +160,7 @@ function openPopup(content){
               $("#popup").popup("close");
             });
         }
-     },100);
+     },550);
   });
   
   $("#popup form").validate();
