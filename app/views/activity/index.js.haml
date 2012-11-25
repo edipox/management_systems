@@ -1,0 +1,5 @@
+:plain
+  changeContent('#page #content', 
+    '#{escape_javascript render "index", :formats => [:html]}'
+  );
+  $('#back_loader').hide();
