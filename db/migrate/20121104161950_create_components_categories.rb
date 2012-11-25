@@ -3,6 +3,7 @@ class CreateComponentsCategories < ActiveRecord::Migration
     create_table :components_categories do |t|
       t.string :name
       t.string :description
+      t.boolean :finished, :default => false
 
       t.timestamps
     end

@@ -104,9 +104,15 @@ class Components::ItemsController < ApplicationController
 
     params[:components_item][:category_id] = nil 
 
+
+    puts '******************************************************'
+    puts params[:category_finished]
+    puts '******************************************************'
+    
     category = Components::Category.new({
       name: params[:category_name],
-      description: params[:category_description]
+      description: params[:category_description],
+      finished: params[:category_finished]
     })
     raise 'Error al guardar la nueva categoria' unless category.save
 

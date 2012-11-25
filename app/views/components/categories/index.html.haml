@@ -1,17 +1,19 @@
 = will_paginate @components_categories
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: "true" } }
   %li{ data: { role: 'list-divider' } }
-    %div{ class: 'ui-grid-b' }
+    %div{ class: 'ui-grid-c' }
       %div{ class: 'ui-block-a' } Nombre
       %div{ class: 'ui-block-b' } Descripci&oacute;n
-      %div{ class: 'ui-block-c' } Opciones
+      %div{ class: 'ui-block-c' } Producto terminado
+      %div{ class: 'ui-block-d' } Opciones
 
   - @components_categories.each do |category|
     %li{ class: 'element'}
-      %div{ class: 'ui-grid-b' }
+      %div{ class: 'ui-grid-c' }
         %div{ class: 'ui-block-a', trim:"40" }= category.name
         %div{ class: 'ui-block-b', trim:"40" }= category.description
-        %div{  class: 'ui-block-c', data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: 'ui-block-c', trim:"40" }= category.finished
+        %div{  class: 'ui-block-d', data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = category.components_items != [] || !can?(:delete, category) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, category) ? 'ui-disabled' : ''
           %a{ href: components_category_path(category), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: "true" }, class: delete_css_class } Eliminar

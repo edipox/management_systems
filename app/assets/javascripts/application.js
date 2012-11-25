@@ -68,6 +68,36 @@ function on_load(){
     hideLoader();
   });
   ajaxifyPagination();
+  
+  
+  $("#fake_finished_fake").live('change', function() {
+    $('input[name="category_finished"]').val(this.value);
+  });
+  
+  $("#fake_finished_fake").change(function(){
+    $('input[name="category_finished"]').val(this.value);
+  })
+  
+  $("#finished_fake").change(function() {
+    $('input[name="components_category[finished]"]').val(this.value);
+  });  
+  
+  $("#finished_fake").live('change', function() {
+    $('input[name="components_category[finished]"]').val(this.value);
+  });  
+  /**
+  %script
+        :plain
+          $("#finished_fake").change(function() {$('input[name="category_finished"]').val(this.value);});  
+      
+  */
+  
+  /***
+  
+    %script
+    :plain
+      $("#finished_fake").change(function() {$('input[name="components_category[finished]"]').val(this.value);});  
+  */
 };
 
 function ajaxifyPagination() {

@@ -11,6 +11,17 @@
   .field
     = f.label :description, "Descripcion"
     = f.text_field :description, { class: "required", "maxlength" => "200"  }
+    
+    
+  %div{ class: "containing-element" }
+    %select#finished_fake{ name: "finished_fake", data: { role: "slider" } }
+      %option{ value: '0' }= "Componente común"
+      %option{ value: '1' }= "Producto terminado"
+
+  %div{ style: "display:none" }
+    = f.check_box :finished, {"id" => "finished_category" }
+    = f.label :finished, { "data-inline" => "true" }
+
   %div.ui-grid-a
     %div.ui-block-a
       %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar

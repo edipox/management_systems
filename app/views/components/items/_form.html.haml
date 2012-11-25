@@ -39,7 +39,14 @@
 
       = label_tag :category_description, "Descripcion"
       = text_field_tag :category_description, nil, :html => { "maxlength" => "200" }
-      
+
+
+      %div{ class: "containing-element" }
+        %select#fake_finished_fake{ data: { role: "slider" } }
+          %option{ value: '0' }= "Componente común"
+          %option{ value: '1' }= "Producto terminado"
+      = hidden_field_tag :category_finished, { "data-inline" => "true" }
+
       = hidden_field_tag :new_category, 'false'
 
   .field.plus
