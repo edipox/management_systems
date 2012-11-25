@@ -22,13 +22,15 @@
 
   - @orders_productions_details = @orders_production.details.paginate(:page => params[:page])
   - @orders_productions_detail = Orders::Productions::Detail.new
-
-%div#form
-  = render 'orders/productions/details/form'
+%br
+- obj = @orders_production
+- if can_modify?(obj)
+  %div#form
+    = render 'orders/productions/details/form'
 
 %div#list
   = render 'orders/productions/details/list'
   
 = link_to 'Volver', orders_productions_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
-
-= link_to 'Agregar  ', new_orders_productions_detail_path(:header_id => @orders_production.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+- create_css_class = can?(:create, Orders::Productions::Detail) ? '' : 'ui-disabled'
+= link_to 'Agregar  ', new_orders_productions_detail_path(:header_id => @orders_production.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class  }

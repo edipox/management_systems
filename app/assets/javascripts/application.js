@@ -41,7 +41,7 @@ function showLoader(){
   if($("#back_loader").length == 0){
     create_loader();
   }
-  $("#back_loader").fadeIn(100);
+  $("#back_loader").fadeIn(100);  
 }
 
 function hideLoader(){
@@ -51,7 +51,6 @@ function hideLoader(){
 function on_load(){
   defaultShowForm("category",["category_name", "category_description"]);
   defaultShowForm("brand",["brand_name"]);
-   
 //  showFakeSubForm('#category_button', '#categorySubForm', '#category_select');
 
   $("form").validate(); 

@@ -17,10 +17,10 @@ class Components::Item < ActiveRecord::Base
   
 #  def components_finished
 #    finished = []
-#    Components::Category.find_each('finished = true') |cat| do
+#    Components::Category.find_each(:finished => true) |cat| do
 #        finished + (cat.components_items)
 #    end
 #    return finished
 #  end
-  
+
 end

@@ -24,14 +24,18 @@
   - @requests_transferences_components_details = @requests_transferences_component.details.paginate(:page => params[:page])
   - @requests_transferences_components_detail = Requests::Transferences::Components::Detail.new
 
-%div#form
-  = render 'requests/transferences/components/details/form'
-
+%br
+- obj = @requests_transferences_component
+- if can_modify?(obj)
+  %div#form
+    = render 'requests/transferences/components/details/form'
 %div#list
   = render 'requests/transferences/components/details/list'
   
 = link_to 'Volver', requests_transferences_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
-= link_to 'Agregar  ', new_requests_transferences_components_detail_path(:header_id => @requests_transferences_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+
+- create_css_class = can?(:create, Requests::Transferences::Components::Detail) ? '' : 'ui-disabled'
+= link_to 'Agregar  ', new_requests_transferences_components_detail_path(:header_id => @requests_transferences_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }
 
 -#    %div{ class: "ui-block-d" } :
 -#    %div{ class: "ui-block-e" }= @requests_transferences_component.transaction_id  

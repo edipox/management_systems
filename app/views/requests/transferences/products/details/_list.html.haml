@@ -23,7 +23,9 @@
         %div{ class: "ui-block-d trim" }= requests_transferences_products_detail.quantity
   
         %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, requests_transferences_products_detail 
-          %a{ href: requests_transferences_products_detail_path(requests_transferences_products_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, requests_transferences_products_detail 
-          %a{ href: edit_requests_transferences_products_detail_path(requests_transferences_products_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar
+          - obj = @requests_transferences_product
+          - can_modify?(obj)
+          - delete_css_class = cannot?(:delete, requests_transferences_products_detail) ? 'ui-disabled' : ''
+          - edit_css_class = cannot?(:edit, requests_transferences_products_detail) ? 'ui-disabled' : ''
+          %a{ href: requests_transferences_products_detail_path(requests_transferences_products_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class  } Eliminar
+          %a{ href: edit_requests_transferences_products_detail_path(requests_transferences_products_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class  } Editar

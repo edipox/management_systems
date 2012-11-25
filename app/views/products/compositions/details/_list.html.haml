@@ -20,7 +20,5 @@
         %div{ class: "ui-block-b trim" }= products_compositions_detail.quantity
   
         %div{ style:"width:262px;", class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
-          -# if can? :delete, products_compositions_detail 
           %a{ href: products_compositions_detail_path(products_compositions_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' } } Eliminar
-          -# if can? :update, products_compositions_detail 
           %a{ href: edit_products_compositions_detail_path(products_compositions_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Editar

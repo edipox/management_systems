@@ -20,11 +20,16 @@
   - @requests_transferences_products_details = @requests_transferences_product.details.paginate(:page => params[:page])
   - @requests_transferences_products_detail = Requests::Transferences::Products::Detail.new
 
-%div#form
-  = render 'requests/transferences/products/details/form'
+
+%br
+- obj = @requests_transferences_product
+- if can_modify?(obj)
+  %div#form
+    = render 'requests/transferences/products/details/form'
 
 %div#list
   = render 'requests/transferences/products/details/list'
   
 = link_to 'Volver', requests_transferences_products_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
-= link_to 'Agregar  ', new_requests_transferences_products_detail_path(:header_id => @requests_transferences_product.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' } }
+- create_css_class = can?(:create, Requests::Transferences::Products::Detail) ? '' : 'ui-disabled'
+= link_to 'Agregar  ', new_requests_transferences_products_detail_path(:header_id => @requests_transferences_product.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }

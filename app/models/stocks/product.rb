@@ -5,4 +5,6 @@ class Stocks::Product < ActiveRecord::Base
   validates :price, :presence => true
   validates :quantity, :presence => true #, :length => { :minimum => 2 }
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s      
+  
+#  before_save Hooks.before_save self
 end
