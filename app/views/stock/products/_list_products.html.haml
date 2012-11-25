@@ -8,8 +8,8 @@
 
   - @products.each do |product|
     - stocks = product.products_stocks
-    - stock_total = stocks.reduce {|s0, s1| s0.quantity = s0.quantity + s1.quantity; s0 }
-    - stock_qty = stock_total.nil? ? 0 : stock_total.quantity
+    - stock_total = stocks.reduce {|s0, s1| s0.product_quantity = s0.product_quantity + s1.product_quantity; s0 }
+    - stock_qty = stock_total.nil? ? 0 : stock_total.product_quantity
     %li
       %div.ui-grid-b
         %div.ui-block-a= product.name
