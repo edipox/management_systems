@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20121120120823) do
   create_table "components_categories", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "finished",    :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "components_categories_kinds", :force => true do |t|
