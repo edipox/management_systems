@@ -3,6 +3,10 @@ class ActivityController < ApplicationController
   def index
     WillPaginate.per_page = 8 
     @versions = Version.order(:created_at).reverse.paginate(:page => params[:page])
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
   def show
@@ -11,7 +15,7 @@ class ActivityController < ApplicationController
     @versioned = version.reify
 
     respond_to do |format|
-      format.any { render 'show', :layout => 'dialog' }
+      format.js { render 'show' }
     end
   end
 end

@@ -1,4 +1,3 @@
-= will_paginate @versions
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   %li{ data: { role: 'list-divider' } }
     %div.ui-grid-d
@@ -20,4 +19,5 @@
         %div.ui-block-c= user
         %div.ui-block-d= v.created_at.strftime("%m/%d/%Y %H:%M")
         %div.ui-block-e
-          %a{ href: "/activity/#{v.id}", data: { role: 'button', icon: 'arrow-r', mini: 'true' } } Ver Cambios
+          %a{ href: "/activity/#{v.id}", data: { role: 'button', icon: 'arrow-r', mini: 'true', remote: 'true', rel: 'popup' } } Ver Cambios
+%div{ style: 'margin-top: 8px;' }= will_paginate @versions

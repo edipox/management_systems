@@ -22,5 +22,22 @@ class Components::Item < ActiveRecord::Base
 #    end
 #    return finished
 #  end
+  
+  def raw_material_total_stock
+    qty = raw_material_stocks.reduce do |s0, s1|
+      s0.quantity += s1.quantity
+      s0
+    end
 
+    qty.nil? ? 0 : qty.quantity
+  end
+
+  def production_total_stock
+    qty = production_stocks.reduce do |s0, s1|
+      s0.quantity += s1.quantity
+      s0
+    end
+
+    qty.nil? ? 0 : qty.quantity
+  end
 end
