@@ -2,19 +2,23 @@
   %li{ data: { role: 'list-divider'} }
     %div{ class: "ui-grid-c" }
         
-      %div{ class: "ui-block-b" } :
+      %div{ class: "ui-block-a" } Número      
         
-      %div{ class: "ui-block-c" } :
+      %div{ class: "ui-block-b" } Estado
         
-      %div{ class: "ui-block-d" } :
+      %div{ class: "ui-block-c" } Usuario
+
+      %div{ class: "ui-block-d" } Fecha
   %li
     %div{ class: "ui-grid-c" }
     
-      %div{ class: "ui-block-e" }= @requests_transferences_product.status_id
+      %div{ class: "ui-block-a" }= @requests_transferences_product.number
     
-      %div{ class: "ui-block-e" }= @requests_transferences_product.transaction_id
+      %div{ class: "ui-block-b" }= @requests_transferences_product.status.name
     
-      %div{ class: "ui-block-e" }= @requests_transferences_product.user_id
+      %div{ class: "ui-block-c" }= @requests_transferences_product.user.email
+      
+      %div{ class: "ui-block-d" }= @requests_transferences_product.updated_at
     
 
   - @requests_transferences_products_details = @requests_transferences_product.details.paginate(:page => params[:page])
@@ -22,10 +26,10 @@
 
 
 %br
-- obj = @requests_transferences_product
-- if can_modify?(obj)
-  %div#form
-    = render 'requests/transferences/products/details/form'
+-# obj = @requests_transferences_product
+-# if can_modify?(obj)
+-#  %div#form
+-#    = render 'requests/transferences/products/details/form'
 
 %div#list
   = render 'requests/transferences/products/details/list'
