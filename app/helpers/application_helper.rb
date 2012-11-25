@@ -11,8 +11,7 @@ module ApplicationHelper
       return false
     end
     if obj.status != @default_status
-      puts "obj.status != @default_status"
-      #current_ability.cannot :delete, obj
+      current_ability.cannot :delete, obj
       current_ability.cannot :delete, detail_class
       current_ability.cannot :create, detail_class
       current_ability.cannot :edit, detail_class

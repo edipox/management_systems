@@ -1,0 +1,6 @@
+:plain
+  
+$("#list").html("#{escape_javascript render :file => 'requests/transferences/finished/components/details/_list', :formats => [:html]}").trigger("create") ;
+  
+  $("#form").html("#{escape_javascript render :file => 'requests/transferences/finished/components/details/_form', :formats => [:html]}").trigger("create") ;
+  showNotice('#{ @notice }');  

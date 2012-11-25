@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120120823) do
+ActiveRecord::Schema.define(:version => 20121125182831) do
 
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
@@ -220,6 +220,23 @@ ActiveRecord::Schema.define(:version => 20121120120823) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "requests_transferences_finished_components", :force => true do |t|
+    t.string   "status_id"
+    t.string   "transaction_id"
+    t.string   "user_id"
+    t.integer  "number"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "requests_transferences_finished_components_details", :force => true do |t|
+    t.string   "header_id"
+    t.string   "component_id"
+    t.integer  "quantity"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "requests_transferences_products", :force => true do |t|
     t.string   "status_id"
     t.string   "transaction_id"
@@ -257,11 +274,14 @@ ActiveRecord::Schema.define(:version => 20121120120823) do
   end
 
   create_table "stocks_products", :force => true do |t|
+    t.string   "component_id"
+    t.integer  "component_quantity"
+    t.integer  "component_price"
     t.string   "product_id"
-    t.integer  "quantity"
-    t.integer  "price"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "product_quantity"
+    t.integer  "product_price"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "stocks_transactions_components", :force => true do |t|

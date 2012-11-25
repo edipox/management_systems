@@ -30,7 +30,9 @@ acl_entities << ['Detalle de solicitud de componentes','Requests::Transferences:
 acl_entities << ['Devolución de componentes', 'Requests::Devolutions::Component']
 acl_entities << ['Detalle de devolución de componentes','Requests::Devolutions::Components::Detail']
 acl_entities << ['Transferencia de productos','Requests::Transferences::Product']
-
+acl_entities << ['Detalle de transferencia de productos','Requests::Transferences::Products::Detail']
+acl_entities << ['Transferencia de componentes terminados', 'Requests::Transferences::Finished::Component']
+acl_entities << ['Detalle de transferencia de componentes terminados', 'Requests::Transferences::Finished::Components::Detail']
 
 acl_entities << ['Stock de Materia Prima','Stocks::Component']
 # acl_entities << ['', '']

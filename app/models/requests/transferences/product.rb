@@ -37,7 +37,7 @@ class Requests::Transferences::Product < ActiveRecord::Base
         qtty = d.quantity
         Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
       end
-      Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.product.price})
+      Stocks::Product.create!({product_id: dd.product_id, product_quantity: dd.quantity, product_price: dd.product.price})
     end
     return true
   end

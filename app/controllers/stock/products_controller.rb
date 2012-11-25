@@ -21,4 +21,12 @@ class Stock::ProductsController < ApplicationController
       format.js
     end
   end
+  
+  def list_components
+    @components = Components::Item.paginate(:page => params[:page])
+    respond_to do |format|
+      format.js
+    end
+  end
+    
 end

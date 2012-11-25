@@ -1,0 +1,24 @@
+= form_for @requests_transferences_finished_components_detail, :html => { "data-remote" => "true" } do |f|
+  - if @requests_transferences_finished_components_detail.errors.any?
+    #error_explanation
+      %h2= "No se pudo guardar:"
+      %ul
+        - @requests_transferences_finished_components_detail.errors.full_messages.each do |msg|
+          %li= msg
+    -#= fd.hidden_field :SINGULAR_HEADER_id
+    -#= hidden_field_tag "SINGULAR_HEADER_id", @SINGULAR_HEADER.id
+    
+  .field    
+    = hidden_field_tag "header_id", @requests_transferences_finished_component.id
+      
+  .field
+    = f.label :component_id, 'Componente'
+    - components = []; Components::Category.where("finished = true").each do |cat| ; components.concat cat.components_items ; end
+    = f.collection_select(:component_id, components, :id, :name,{}, { class: "required" })
+      
+  .field
+    = f.label :quantity, 'Cantidad' 
+    = f.number_field :quantity, { class: "required number", "maxlength" => "60", "min" => "1", "max" => "2000000000"  }
+    
+  .actions
+    = f.submit 'Guardar', { data: { icon: 'plus', theme: 'b'} }

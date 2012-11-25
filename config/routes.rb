@@ -1,10 +1,15 @@
 Stock::Application.routes.draw do
+  namespace :requests do  namespace :transferences do  namespace :finished do  namespace :components do resources :details end end end end
+
+  namespace :requests do  namespace :transferences do  namespace :finished do resources :components end end end
+
   get "activity", :to => 'activity#index'
   get 'activity/:id', :to => 'activity#show'
 
   get "stock/products/index", :to => "stock/products#index"
   get "stock/products/transactions", :to => "stock/products#transactions"
   get "stock/products/list_products"
+  get "stock/products/list_components"
   
   get "stock/production/list_components"
   get "stock/production/list_products"

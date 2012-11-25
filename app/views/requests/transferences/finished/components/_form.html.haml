@@ -1,0 +1,20 @@
+
+= form_for @requests_transferences_finished_component, :html => { "data-remote"=>"true", style: "width:400px;" } do |f|
+  - if @requests_transferences_finished_component.errors.any?
+    #error_explanation 
+      %h2= "No se pudo guardar:"
+      %ul
+        - @requests_transferences_finished_component.errors.full_messages.each do |msg|
+          %li= msg
+  
+    
+    
+  .field
+    = f.label :status_id, 'Estado'
+    = f.collection_select(:status_id, Transactions::Status.all, :id, :name, { :disabled => lambda{|status| (@requests_transferences_finished_component.status != @default_status && status == @reject_status) }, class: "required" })
+      
+  %div.ui-grid-a
+    %div.ui-block-a
+      %a.cancel{ data: {role:'button', icon: 'delete', theme: 'a' } } Cancelar
+    %div.ui-block-b  
+      %input{ close: "#componentPopup", type: 'submit', value: 'Guardar', data: { icon: 'plus', theme: 'b' } }
