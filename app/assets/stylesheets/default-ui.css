@@ -353,3 +353,7 @@ display:-moz-box;
   width:14%;
   float: left;
 }
+
+.ui-content .ui-listview, .ui-content .ui-listview-inset {
+  margin: 0 !important;
+}
