@@ -1,7 +1,6 @@
 class CreateRequestsDevolutionsProducts < ActiveRecord::Migration
   def change
     create_table :requests_devolutions_products do |t|
-      t.string :transaction_id
       t.string :user_id
       t.string :reason
       t.string :status_id

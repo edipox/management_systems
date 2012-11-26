@@ -1,7 +1,6 @@
 class CreateOrdersProductions < ActiveRecord::Migration
   def change
     create_table :orders_productions do |t|
-      t.string :transaction_id
       t.string :status_id
       t.string :user_id
       t.integer :number

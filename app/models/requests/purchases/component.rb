@@ -1,6 +1,6 @@
 class Requests::Purchases::Component < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :status, :transaction_id, :user_id, :user, :transaction, :header, :header_id, :number
+  attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Purchases::Components::Detail.to_s
 
@@ -9,9 +9,6 @@ class Requests::Purchases::Component < ActiveRecord::Base
 
   validates :status_id, :presence => true
   validates :user_id, :presence => true
-  validates :transaction_id, :presence => true
-  
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => Stocks::Transactions::Component.to_s
   
   auto_increment :column => :number  
   

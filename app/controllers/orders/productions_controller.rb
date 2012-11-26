@@ -46,15 +46,7 @@ class Orders::ProductionsController < ApplicationController
   # POST /orders/productions.json
   def create
     #@orders_production = Orders::Production.new(params[:orders_production])
-    transaction = Stocks::Transactions::Production.new
-    transaction.kind = "Orders::Production"
     @orders_production.user = current_user
-    @orders_production.transaction_id = "nil"
-    @orders_production.save
-    transaction.kind_id = @orders_production.id
-    transaction.save
-    @orders_production.transaction = transaction
-    
     respond_to do |format|
       if @orders_production.save
         format.js { render action: 'show'  }

@@ -22,6 +22,7 @@ $(document).bind("mobileinit", function(){
 
 $(document).ready(function(){
   on_load();
+  first_load();
 });
 
 function showNotice(notice){
@@ -30,6 +31,33 @@ function showNotice(notice){
       TINY.box.show({html:notice,animate:true,close:true,mask:false,boxid:'alert',autohide:seconds})
   }
   hideLoader();  
+}
+
+function first_load(){
+  $(document).live("ajax:before", function(){
+    showLoader();
+  }).live("ajax:success", function(){
+    hideLoader();
+  });
+  
+  $("#fake_finished_fake").live('change', function() {
+    $('input[name="category_finished"]').val(this.value);
+  });
+
+  $("#finished_fake").live('change', function() {
+    $('input[name="components_category[finished]"]').val(this.value);
+  }); 
+  
+  $(".pagination a").live('click', function() {
+  	$.ajax({
+  	  type: "GET",
+  	  url: $(this).attr("href"),
+  	  dataType: "script"
+  	});
+    showLoader(); 
+  	return false;
+  });
+
 }
 
 function create_loader(){
@@ -60,17 +88,6 @@ function on_load(){
     $("#menu .ui-btn-active").removeClass("ui-btn-active");
     $(this).addClass("ui-btn-active")
   });
-//  create_loader();  
-  $(document).live("ajax:before", function(){
-    showLoader();
-  }).live("ajax:success", function(){
-    hideLoader();
-  });
-  ajaxifyPagination();
-  
-  $("#fake_finished_fake").live('change', function() {
-    $('input[name="category_finished"]').val(this.value);
-  });
   
   $("#fake_finished_fake").change(function(){
     $('input[name="category_finished"]').val(this.value);
@@ -79,10 +96,7 @@ function on_load(){
   $("#finished_fake").change(function() {
     $('input[name="components_category[finished]"]').val(this.value);
   });  
-  
-  $("#finished_fake").live('change', function() {
-    $('input[name="components_category[finished]"]').val(this.value);
-  });  
+  ajaxifyPagination();
 };
 
 function ajaxifyPagination() {
