@@ -1,0 +1,6 @@
+:plain
+  changeContent('#page #content',
+    '#{escape_javascript render 'company', :formats => [:html]}'
+  );
+  showNotice('#{ escape_javascript @notice }');
+  $('#company_config').validate();
