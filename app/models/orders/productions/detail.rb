@@ -8,4 +8,11 @@ class Orders::Productions::Detail < ActiveRecord::Base
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s  
   
   belongs_to :orders_production, :foreign_key => :header_id, :class_name => Orders::Production.to_s
+  
+  before_save :generate_request
+  
+  def generate_request
+    orders_production.generate_request
+  end
+
 end

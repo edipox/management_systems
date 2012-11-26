@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
     t.string   "status_id"
     t.string   "user_id"
     t.string   "transaction_id"
+    t.string   "order_id"
     t.integer  "number"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false

@@ -4,6 +4,7 @@ class CreateRequestsTransferencesComponents < ActiveRecord::Migration
       t.string :status_id
       t.string :user_id
       t.string :transaction_id
+      t.string :order_id
       t.integer :number
       
       t.timestamps

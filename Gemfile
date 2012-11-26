@@ -27,6 +27,7 @@ gem 'cancan'
 gem 'paper_trail'
 gem 'will_paginate', '~> 3.0'
 gem "auto_increment"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

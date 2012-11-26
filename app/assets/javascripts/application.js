@@ -29,7 +29,7 @@ function showNotice(notice){
     var seconds = notice.length/20
       TINY.box.show({html:notice,animate:true,close:true,mask:false,boxid:'alert',autohide:seconds})
   }
-  hideLoader();
+  hideLoader();  
 }
 
 function create_loader(){
@@ -69,7 +69,6 @@ function on_load(){
   });
   ajaxifyPagination();
   
-  
   $("#fake_finished_fake").live('change', function() {
     $('input[name="category_finished"]').val(this.value);
   });
@@ -85,19 +84,6 @@ function on_load(){
   $("#finished_fake").live('change', function() {
     $('input[name="components_category[finished]"]').val(this.value);
   });  
-  /**
-  %script
-        :plain
-          $("#finished_fake").change(function() {$('input[name="category_finished"]').val(this.value);});  
-      
-  */
-  
-  /***
-  
-    %script
-    :plain
-      $("#finished_fake").change(function() {$('input[name="components_category[finished]"]').val(this.value);});  
-  */
 };
 
 function ajaxifyPagination() {
@@ -162,6 +148,7 @@ function showFakeSubForm(caller, subform, select, required_fields, existence_fie
 function changeContent(where, content) {
   var v = $(where).html(content).trigger('create');
   on_load();
+  hideLoader();  
   return v;
 };
 

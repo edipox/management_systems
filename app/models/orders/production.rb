@@ -14,31 +14,47 @@ class Orders::Production < ActiveRecord::Base
   
   auto_increment :column => :number
   
-  after_save :generate_request
-  
   has_many :requests, :foreign_key => :order_id, :class_name => Requests::Transferences::Component.to_s
+  
+  before_destroy :destroy_requests_open
+  
+  def destroy_requests_open
+    
+  end
   
   def generate_request
     system_user_id = AppConfig.find('system_user_id').value
     open_status_id = AppConfig.find('open_status_id').value
-    request_id = Requests::Transferences::Component.create!({
-      user_id: system_user_id,
-      status_id: open_status_id,
-      #temp
-      transaction_id: 'nil'
-      #temp    
-    }).id
+    request = Requests::Transferences::Component.where('order_id = ? AND user_id = ? AND status_id = ?', id, system_user_id, open_status_id).first || Requests::Transferences::Component.create!({
+        user_id: system_user_id,
+        status_id: open_status_id,
+        order_id: id,
+        #temp
+        transaction_id: 'nil'
+        #temp    
+    })
+    
+    components = {}    
     details.each do |dd|
       dd.product.details.each do |c|
-        if ! Requests::Transferences::Components::Detail.create!({
-          component: c.component,
-          quantity: c.quantity,     
-          header_id: request_id
-        })
-          return false
+        if components[c.component.id.to_sym]
+          components[c.component.id.to_sym] = components[c.component.id.to_sym] + c.quantity
+        else
+          components[c.component.id.to_sym] = c.quantity
         end
-      end    
-    end
+      end 
+    end   
+    
+    components.each { |k, v| 
+        detail = Requests::Transferences::Components::Detail.where("component_id = ? AND header_id = ?", k, request.id).first || Requests::Transferences::Components::Detail.create!({
+          component_id: k,
+          quantity: 0,     
+          header_id: request.id
+        })
+        detail.quantity += v
+        detail.save
+    }
+    
     return true
   end
   
