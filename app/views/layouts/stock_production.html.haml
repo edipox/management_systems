@@ -10,8 +10,8 @@
     %div{ data: { role: 'page' }, class: 'not' }
       %div{ data: { role: 'header' } }
         %h3 Stock de Producción
-        %a{ href: destroy_user_session_path, data:{ method: :delete } } Logout
-        %a{ href: settings_path, data:{ role: 'button', icon: "gear" } } Configuraciones
+        %a{ href: destroy_user_session_path, data:{ method: :delete } } Salir
+        %a{ href: settings_path, data:{ role: 'button', icon: "gear" } } Opciones
         = render 'layouts/stock_top_menu'
         
       %div#page
