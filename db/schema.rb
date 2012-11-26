@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125182831) do
+ActiveRecord::Schema.define(:version => 20121126190631) do
 
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
     t.string   "symbol"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "extra",      :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "extra",                    :default => false
+    t.string   "entity_id",  :limit => 36
   end
 
   create_table "acl_entities", :force => true do |t|

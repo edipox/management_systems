@@ -1,7 +1,12 @@
 module ACL
   class RoleCallbacks
     def after_create(role)
-      admin = Role.order(:created_at).first
+      #admin = Role.order(:created_at).first
+      begin admin = Role.find AppConfig.find('admin_role_id').value
+      rescue ActiveRecord::RecordNotFound
+        admin = Role.new
+      end
+
       Entity.all.each do |entity|
         enabled = admin.id == role.id
         PermissionsGenerator.generate(role, entity, enabled)

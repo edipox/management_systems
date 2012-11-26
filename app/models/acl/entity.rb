@@ -11,7 +11,7 @@ module ACL
 
   module EntityMethods
     def create_extra_action(name, symbol)
-      action = ACL::Action.create!({ name: name, symbol: symbol, extra: true })
+      action = ACL::Action.create!({ name: name, symbol: symbol, extra: true, entity: self })
 
       # Generate Permissions
       roles = ACL::Role.all
@@ -35,6 +35,9 @@ class ACL::Entity < ActiveRecord::Base
   alias_attribute :permissions, :acl_permissions
 
   after_create ACL::EntityCallbacks.new
+  
+  attr_accessible :actions
+  has_many :actions, :class_name => ACL::Action.to_s
 
   has_paper_trail
 end
