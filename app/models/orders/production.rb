@@ -37,25 +37,30 @@ class Orders::Production < ActiveRecord::Base
     components = {}    
     details.each do |dd|
       dd.product.details.each do |c|
+        qtty = c.quantity * dd.quantity
         if components[c.component.id.to_sym]
-          components[c.component.id.to_sym] = components[c.component.id.to_sym] + c.quantity
+          components[c.component.id.to_sym] = components[c.component.id.to_sym] + qtty
         else
-          components[c.component.id.to_sym] = c.quantity
+          components[c.component.id.to_sym] = qtty
         end
       end 
     end   
     
     components.each { |k, v| 
-        detail = Requests::Transferences::Components::Detail.where("component_id = ? AND header_id = ?", k, request.id).first || Requests::Transferences::Components::Detail.create!({
-          component_id: k,
-          quantity: 0,     
-          header_id: request.id
-        })
-        detail.quantity += v
-        detail.save
+        detail = Requests::Transferences::Components::Detail.where("component_id = ? AND header_id = ?", k, request.id).first
+        if detail
+          detail.quantity += v
+          detail.save
+        else 
+          Requests::Transferences::Components::Detail.create!({
+            component_id: k,
+            quantity: v,     
+            header_id: request.id
+          }) 
+        end
     }
     
-    return true
+#    return true
   end
   
   def close
