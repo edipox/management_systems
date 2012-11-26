@@ -6,5 +6,43 @@ class Stocks::Product < ActiveRecord::Base
 #  validates :quantity, :presence => true #, :length => { :minimum => 2 }
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s      
   belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s 
-#  before_save Hooks.before_save self
+  after_save :check_qty
+
+  def check_qty
+    sum = product.products_stocks.reduce { |s1, s2| s1.product_quantity += s2.product_quantity; s1 }
+    if product.minimum_quantity > sum.product_quantity
+      missing_component_qty = product.minimum_quantity - sum.product_quantity
+      system_user_id = AppConfig.find('system_user_id').value
+      open_status_id = AppConfig.find('open_status_id').value
+      generated_by_system = Orders::Production.where('user_id = ? AND status_id = ?', system_user_id, open_status_id)
+      detail_generated = nil
+      generated_by_system.each do |e|
+        e.details.each do |d|
+          if d.product = product
+            detail_generated = d
+            break
+          end
+        end
+      end
+      if detail_generated
+        detail_generated.quantity = missing_component_qty
+        detail_generated.save
+      else
+        order_prod = Orders::Production.create!({
+          status_id: open_status_id,
+          user_id: system_user_id,
+          #temp
+          transaction_id: 'nil'
+          #temp
+        }) 
+        Orders::Productions::Detail.create!({
+          header_id: order_prod.id,
+          product: product,
+          quantity: missing_component_qty
+        })
+      end
+    end
+  end
+  
+  
 end
