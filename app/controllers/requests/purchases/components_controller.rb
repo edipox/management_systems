@@ -72,9 +72,8 @@ class Requests::Purchases::ComponentsController < ApplicationController
           render action: 'show' }
         else
           list
-          format.js { 
-          @notice = "Error al actualizar el registro"
-          render action: "index" }
+          format.js {  @notice = 'Registro guardado correctamente.' 
+          render action: 'index'}
         end
       else
         format.js { 
