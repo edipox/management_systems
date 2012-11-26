@@ -1,7 +1,7 @@
 %form{ action: settings_permissions_save_path, method: :post, data: { remote: 'true' } }
   %input{ type: 'hidden', name: 'authenticity_toke', value: form_authenticity_token }
 
-  %div{ data: { role: 'collapsible-set', inset: 'true', :'content-theme' => 'd' } }
+  %div{ data: { role: 'collapsible-set', inset: 'true', :'content-theme' => 'd' }, style: 'margin: 0;' }
     - @count = 0
     - @permissions_by_entity.each do |id, permissions|
       - entity = ACL::Entity.find(id)
