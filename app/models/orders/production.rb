@@ -14,6 +14,34 @@ class Orders::Production < ActiveRecord::Base
   
   auto_increment :column => :number
   
+  after_save :generate_request
+  
+  has_many :requests, :foreign_key => :order_id, :class_name => Requests::Transferences::Component.to_s
+  
+  def generate_request
+    system_user_id = AppConfig.find('system_user_id').value
+    open_status_id = AppConfig.find('open_status_id').value
+    request_id = Requests::Transferences::Component.create!({
+      user_id: system_user_id,
+      status_id: open_status_id,
+      #temp
+      transaction_id: 'nil'
+      #temp    
+    }).id
+    details.each do |dd|
+      dd.product.details.each do |c|
+        if ! Requests::Transferences::Components::Detail.create!({
+          component: c.component,
+          quantity: c.quantity,     
+          header_id: request_id
+        })
+          return false
+        end
+      end    
+    end
+    return true
+  end
+  
   def close
   
     products_transferences = Requests::Transferences::Product.create!({
