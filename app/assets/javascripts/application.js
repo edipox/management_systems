@@ -162,6 +162,7 @@ function showFakeSubForm(caller, subform, select, required_fields, existence_fie
 function changeContent(where, content) {
   var v = $(where).html(content).trigger('create');
   on_load();
+  hideLoader();
   return v;
 };
 

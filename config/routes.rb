@@ -71,6 +71,9 @@ Stock::Application.routes.draw do
     match 'permissions/:role_id', :to => 'permissions#of_role', :via => 'get'
     post 'permissions/save'
     resources :roles
+
+    put 'configurations', :to => 'configurations#update'
+    get 'company', :to => 'configurations#company'
   end
 
   namespace :components do

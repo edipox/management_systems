@@ -1,0 +1,8 @@
+%form{ action: settings_configurations_path, method: 'post', data: { remote: 'true' } } 
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+  = hidden_field_tag :_method, 'put'
+
+  = label_tag @name[:id], @name[:label]
+  = text_field_tag @name[:id], @name[:value]
+  
+  = submit_tag 'Enviar'

@@ -253,3 +253,13 @@ employee.role.permissions.each do |permission|
   permission.save
 end
 =end
+
+## AppConfigs
+
+app_configs = []
+app_configs << [:company_name, 'Nombre de la empresa']
+app_configs << [:company_address, 'Direccion de la empresa']
+app_configs << [:company_telephone, '00-0000-0000']
+app_configs << [:company_ruc, '000000000-0']
+
+app_configs.each {|cfg| AppConfig.create!({ id: cfg[0].to_s, value: cfg[1].to_s }) }
