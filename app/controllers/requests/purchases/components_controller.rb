@@ -30,9 +30,11 @@ class Requests::Purchases::ComponentsController < ApplicationController
   # GET /requests/purchases/components/new.json
   def new
     @requests_purchases_component = Requests::Purchases::Component.new
-    respond_to do |format|
-      format.js # new.html.erb
-    end
+    @requests_purchases_component.status = @default_status
+    create
+#    respond_to do |format|
+#      format.js # new.html.erb
+#    end
   end
 
   # GET /requests/purchases/components/1/edit
@@ -43,16 +45,15 @@ class Requests::Purchases::ComponentsController < ApplicationController
   # POST /requests/purchases/components
   # POST /requests/purchases/components.json
   def create
-    @requests_purchases_component = Requests::Purchases::Component.new(params[:requests_purchases_component])
+    #@requests_purchases_component = Requests::Purchases::Component.new(params[:requests_purchases_component])
     transaction = Stocks::Transactions::Component.new
     transaction.kind = "Requests::Purchases::Component"
-    @requests_purchases_component.user_id = "nil"
+    @requests_purchases_component.user = current_user
     @requests_purchases_component.transaction_id = "nil"
     @requests_purchases_component.save
     transaction.kind_id = @requests_purchases_component.id
     transaction.save
     @requests_purchases_component.transaction = transaction
-    
     respond_to do |format|
       if @requests_purchases_component.save
         format.js { render action: 'show'  }
@@ -62,22 +63,42 @@ class Requests::Purchases::ComponentsController < ApplicationController
       end
     end
   end
-
-  # PUT /requests/purchases/components/1
-  # PUT /requests/purchases/components/1.json
-  def update
-    @requests_purchases_component = Requests::Purchases::Component.find(params[:id])
-
+  
+  def else_update
     respond_to do |format|
       if @requests_purchases_component.update_attributes(params[:requests_purchases_component])
-        format.js { @notice = 'Registro guardado correctamente.'
-        render action: 'show' }
+        if @default_status == @requests_purchases_component.status
+          format.js { @notice = 'Registro guardado correctamente.'
+          render action: 'show' }
+        else
+          list
+          format.js { 
+          @notice = "Error al actualizar el registro"
+          render action: "index" }
+        end
       else
         format.js { 
         @notice = "Error al actualizar el registro"
         render action: "edit" }
       end
     end
+  end
+
+  # PUT /requests/purchases/components/1
+  # PUT /requests/purchases/components/1.json
+  def update
+    @requests_purchases_component = Requests::Purchases::Component.find(params[:id])
+    status_id = params[:requests_purchases_component][:status_id]
+    if status_id == @close_status.id
+      if ! @requests_purchases_component.close
+        respond_to do |format|
+          format.js { 
+             @notice = "No se puede cambiar el estado a "+@close_status.name+", probablemente las cantidades sean incoherentes"
+             render action: "edit"
+          }
+        end
+      else else_update end
+    else else_update end
   end
 
   # DELETE /requests/purchases/components/1

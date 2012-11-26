@@ -11,10 +11,13 @@ class Stocks::Component < ActiveRecord::Base
   after_save :check_qty
 
   def check_qty
-#    sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantiy; s1 }
-#    if component.minimum_quantity > sum.quantity
-#      missings_components_qty = component.minimum_quantity - sum.quantity
-#      ### Generate PurchaseOrder's
-#    end
+    sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantity; s1 }
+    if component.minimum_quantity > sum.quantity
+      missing_component_qty = component.minimum_quantity - sum.quantity
+      
+      puts "Missing component quantity "
+      puts missing_component_qty
+      ### Generate PurchaseOrder's
+    end
   end
 end

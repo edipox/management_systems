@@ -7,8 +7,6 @@
         - @requests_transferences_component.errors.full_messages.each do |msg|
           %li= msg
   
-    
-    
   .field
     = f.label :status_id, 'Estado'
     = f.collection_select(:status_id, Transactions::Status.all, :id, :name, { :disabled => lambda{|status| (@requests_transferences_component.status != @default_status && status == @reject_status) }, class: "required" })

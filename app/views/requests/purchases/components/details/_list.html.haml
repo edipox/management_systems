@@ -1,28 +1,24 @@
-
 = will_paginate @requests_purchases_components_details
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-c" }
+    %div{ class: "ui-grid-b" }
   
+      %div{ class: "ui-block-a" } Componente
       
-      %div{ class: "ui-block-b" }  
+      %div{ class: "ui-block-b" } Cantidad 
       
-      %div{ class: "ui-block-c" }  
-      
-      %div{ class: "ui-block-d" } Cantidad 
+      %div{ class: "ui-block-c" } Opciones   
   
   - @requests_purchases_components_details.each do |requests_purchases_components_detail|
-    %li{ class: 'element'}
+    %li{ class: 'element detail'}
       %div{ class: "ui-grid-c" }
       
-        %div{ class: "ui-block-b trim" }= requests_purchases_components_detail.header_id
+        %div{ class: "ui-block-a trim" }= requests_purchases_components_detail.component.name
       
-        %div{ class: "ui-block-c trim" }= requests_purchases_components_detail.component_id
+        %div{ class: "ui-block-b trim" }= requests_purchases_components_detail.quantity
       
-        %div{ class: "ui-block-d trim" }= requests_purchases_components_detail.quantity
-  
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
           - obj = @requests_purchases_component
           - can_modify?(obj)
           - delete_css_class = !can?(:delete, requests_purchases_components_detail) ? 'ui-disabled' : ''

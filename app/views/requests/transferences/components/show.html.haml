@@ -20,7 +20,6 @@
       
       %div{ class: "ui-block-d" }= @requests_transferences_component.updated_at
     
-
   - @requests_transferences_components_details = @requests_transferences_component.details.paginate(:page => params[:page])
   - @requests_transferences_components_detail = Requests::Transferences::Components::Detail.new
 

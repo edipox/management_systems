@@ -18,8 +18,10 @@
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: stock_raw_material_list_path, data: { role: 'button', remote: "true" } } Stock de componentes
           %a{ href: 'stock/components/transactions', class: 'ui-disabled', data: { role: 'button', remote: "true"  } } Movimientos
-          - if can?(:read, Components::Item.new)
+          - if can?(:read, Components::Item)
             %a{ href: components_items_path, data: { role: 'button', remote:"true" } } Componentes
+          - if can?(:read, Requests::Purchases::Component)
+            %a{ href: requests_purchases_components_path, data: { role: 'button', remote:"true" } } Solicitudes de compras
           - if can?(:read, Components::Category.new)
             %a{ href: components_categories_path, data: { role: 'button', remote:"true" } } Categorias
           - if can?(:read, Components::Brand.new)

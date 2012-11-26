@@ -33,6 +33,8 @@ acl_entities << ['Transferencia de productos','Requests::Transferences::Product'
 acl_entities << ['Detalle de transferencia de productos','Requests::Transferences::Products::Detail']
 acl_entities << ['Transferencia de componentes terminados', 'Requests::Transferences::Finished::Component']
 acl_entities << ['Detalle de transferencia de componentes terminados', 'Requests::Transferences::Finished::Components::Detail']
+acl_entities << ['Solicitud de compra de componentes', 'Requests::Purchases::Component']
+acl_entities << ['Detalle de solicitud de compra de componentes', 'Requests::Purchases::Components::Detail']
 
 acl_entities << ['Stock de Materia Prima','Stocks::Component']
 # acl_entities << ['', '']

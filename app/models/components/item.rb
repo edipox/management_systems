@@ -14,15 +14,8 @@ class Components::Item < ActiveRecord::Base
   has_many :requests_devolutions_components_details, :foreign_key => :component_id, :class_name => Requests::Devolutions::Components::Detail.to_s
   
   has_many :products_compositions_details, :foreign_key => :component_id, :class_name => Products::Compositions::Detail.to_s
-  #has_many :requests_devolutions_components_details, :foreign_key => :component_id, :class_name => "Requests::Devolutions::Components::Detail"
   
-#  def components_finished
-#    finished = []
-#    Components::Category.find_each(:finished => true) |cat| do
-#        finished + (cat.components_items)
-#    end
-#    return finished
-#  end
+  has_many :requests_purchases_components_details, :foreign_key => :component_id, :class_name => Requests::Purchases::Components::Detail.to_s  
   
   def raw_material_total_stock
     qty = raw_material_stocks.reduce do |s0, s1|
