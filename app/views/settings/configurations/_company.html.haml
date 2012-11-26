@@ -1,8 +1,34 @@
-%form{ action: settings_configurations_path, method: 'post', data: { remote: 'true' } } 
+:css
+  form { width: 100%; }
+  .ui-grid-a { width: 100%; }
+  .ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { padding: 0 5px; }
+  
+%form#company_config{ action: settings_configurations_path, method: 'post', data: { remote: 'true' } } 
   = hidden_field_tag :authenticity_token, form_authenticity_token
   = hidden_field_tag :_method, 'put'
 
-  = label_tag @name[:id], @name[:label]
-  = text_field_tag @name[:id], @name[:value]
-  
-  = submit_tag 'Enviar'
+  - raise if @name.nil?
+  - raise if @telephone.nil?
+  - raise if @cellphone.nil?
+  - raise if @ruc.nil?
+  - raise if @address.nil?
+
+  .ui-grid-a
+    .ui-block-a
+      = label_tag @name[:id], @name[:label]
+      = text_field_tag @name[:id], @name[:value], :class => 'required'
+
+      = label_tag @address[:id], @address[:label]
+      = text_field_tag @address[:id], @address[:value], :class => 'required'
+
+      = label_tag @ruc[:id], @ruc[:label]
+      = text_field_tag @ruc[:id], @ruc[:value], :class => 'required'
+
+    .ui-block-b
+      = label_tag @telephone[:id], @telephone[:label]
+      = text_field_tag @telephone[:id], @telephone[:value], :class => 'required'
+
+      = label_tag @cellphone[:id], @cellphone[:label]
+      = text_field_tag @cellphone[:id], @cellphone[:value], :class => 'required'
+
+  = submit_tag 'Guardar'
