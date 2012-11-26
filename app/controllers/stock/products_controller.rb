@@ -9,7 +9,7 @@ class Stock::ProductsController < ApplicationController
   end
 
   def transactions
-    @transactions = Stocks::Transactions::Product.paginate(:page => params[:page])
+    @transactions = nil#Stocks::Transactions::Product.paginate(:page => params[:page])
     respond_to do |format|
       format.js
     end

@@ -1,6 +1,6 @@
 class Requests::Transferences::Finished::Component < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :status, :transaction_id, :user_id, :user, :transaction, :header, :header_id, :component_id, :component, :number
+  attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :component_id, :component, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Finished::Components::Detail.to_s
 
@@ -9,9 +9,6 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
 
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
-  
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => Stocks::Transactions::Product.to_s  
   
   auto_increment :column => :number  
   

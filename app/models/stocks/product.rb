@@ -31,9 +31,6 @@ class Stocks::Product < ActiveRecord::Base
         order_prod = Orders::Production.create!({
           status_id: open_status_id,
           user_id: system_user_id,
-          #temp
-          transaction_id: 'nil'
-          #temp
         }) 
         Orders::Productions::Detail.create!({
           header_id: order_prod.id,

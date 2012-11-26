@@ -1,4 +1,4 @@
-<%- @production_transactions = Stocks::Transactions::Production.paginate(:page => params[:page]) %>
+<%-# @production_transactions = Stocks::Transactions::Production.paginate(:page => params[:page]) -%>
 <%- letters = ["a","b","c","d","e"] %>
 <%- i = 0 %>
 <%- t = {"Requests::Transferences::Component"=> "Pedido de transferencia de componentes", "Requests::Devolutions::Component" => "Devolucion de componentes","Requests::Transferences::Component" => "Solicitud de componentes", "reason" => "Motivo", "updated_at" => "Actualizado", "Requests::Transferences::Component" => "Solicitud de componentes", "Orders::Production" => "Orden  de producción" } %>

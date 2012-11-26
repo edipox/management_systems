@@ -116,12 +116,11 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
   add_index "locations_regions", ["country_id_id"], :name => "index_locations_regions_on_country_id_id"
 
   create_table "orders_productions", :force => true do |t|
-    t.string   "transaction_id"
     t.string   "status_id"
     t.string   "user_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "orders_productions_details", :force => true do |t|
@@ -150,13 +149,12 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
   end
 
   create_table "requests_devolutions_components", :force => true do |t|
-    t.string   "transaction_id"
     t.string   "status_id"
     t.string   "user_id"
     t.string   "reason"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_devolutions_components_details", :force => true do |t|
@@ -168,13 +166,12 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
   end
 
   create_table "requests_devolutions_products", :force => true do |t|
-    t.string   "transaction_id"
     t.string   "user_id"
     t.string   "reason"
     t.string   "status_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_devolutions_products_details", :force => true do |t|
@@ -189,10 +186,9 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
   create_table "requests_purchases_components", :force => true do |t|
     t.string   "status_id"
     t.string   "user_id"
-    t.string   "transaction_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_purchases_components_details", :force => true do |t|
@@ -206,11 +202,10 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
   create_table "requests_transferences_components", :force => true do |t|
     t.string   "status_id"
     t.string   "user_id"
-    t.string   "transaction_id"
     t.string   "order_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_transferences_components_details", :force => true do |t|
@@ -223,11 +218,10 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
 
   create_table "requests_transferences_finished_components", :force => true do |t|
     t.string   "status_id"
-    t.string   "transaction_id"
     t.string   "user_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_transferences_finished_components_details", :force => true do |t|
@@ -240,11 +234,10 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
 
   create_table "requests_transferences_products", :force => true do |t|
     t.string   "status_id"
-    t.string   "transaction_id"
     t.string   "user_id"
     t.integer  "number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "requests_transferences_products_details", :force => true do |t|
@@ -283,27 +276,6 @@ ActiveRecord::Schema.define(:version => 20121125182831) do
     t.integer  "product_price"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-  end
-
-  create_table "stocks_transactions_components", :force => true do |t|
-    t.string   "kind"
-    t.string   "kind_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "stocks_transactions_productions", :force => true do |t|
-    t.string   "kind"
-    t.string   "kind_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "stocks_transactions_products", :force => true do |t|
-    t.string   "kind"
-    t.string   "kind_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "tests", :force => true do |t|

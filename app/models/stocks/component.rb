@@ -33,9 +33,6 @@ class Stocks::Component < ActiveRecord::Base
         request_purchase = Requests::Purchases::Component.create!({
           status_id: open_status_id,
           user_id: system_user_id,
-          #temp
-          transaction_id: 'nil'
-          #temp
         }) 
         Requests::Purchases::Components::Detail.create!({
           header_id: request_purchase.id,

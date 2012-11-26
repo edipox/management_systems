@@ -11,7 +11,7 @@ class Stock::RawMaterialController < ApplicationController
   end
 
   def transactions
-    @transactions = Stocks::Transactions::Component.paginate(:page => params[:page])
+    @transactions = nil#Stocks::Transactions::Component.paginate(:page => params[:page])
     respond_to do |format|
       format.js
     end
