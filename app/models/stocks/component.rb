@@ -14,18 +14,35 @@ class Stocks::Component < ActiveRecord::Base
     sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantity; s1 }
     if component.minimum_quantity > sum.quantity
       missing_component_qty = component.minimum_quantity - sum.quantity
-      request_purchase = Requests::Purchases::Component.create!({
-        status_id: AppConfig.find('open_status_id').value,
-        user_id: AppConfig.find('system_user_id').value,
-        #temp
-        transaction_id: 'nil'
-        #temp
-      }) 
-      Requests::Purchases::Components::Detail.create!({
-        header_id: request_purchase.id,
-        component: component,
-        quantity: missing_component_qty
-      })
+      system_user_id = AppConfig.find('system_user_id').value
+      open_status_id = AppConfig.find('open_status_id').value
+      generated_by_system = Requests::Purchases::Component.where('user_id = ? AND status_id = ?', system_user_id, open_status_id)
+      detail_generated = nil
+      generated_by_system.each do |e|
+        e.details.each do |d|
+          if d.component = component
+            detail_generated = d
+            break
+          end
+        end
+      end
+      if detail_generated
+        detail_generated.quantity = missing_component_qty
+        detail_generated.save
+      else
+        request_purchase = Requests::Purchases::Component.create!({
+          status_id: open_status_id,
+          user_id: system_user_id,
+          #temp
+          transaction_id: 'nil'
+          #temp
+        }) 
+        Requests::Purchases::Components::Detail.create!({
+          header_id: request_purchase.id,
+          component: component,
+          quantity: missing_component_qty
+        })
+      end
     end
   end
 end
