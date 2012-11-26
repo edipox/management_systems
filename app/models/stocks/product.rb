@@ -1,10 +1,10 @@
 class Stocks::Product < ActiveRecord::Base
   has_paper_trail
-  attr_accessible :product_id, :quantity, :price
-  validates :product_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :price, :presence => true
-  validates :quantity, :presence => true #, :length => { :minimum => 2 }
+  attr_accessible :component_id, :component_quantity, :component_price, :product_id, :product_quantity, :product_price
+#  validates :product_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :price, :presence => true
+#  validates :quantity, :presence => true #, :length => { :minimum => 2 }
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s      
-  
+  belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s 
 #  before_save Hooks.before_save self
 end

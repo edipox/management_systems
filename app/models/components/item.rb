@@ -6,6 +6,7 @@ class Components::Item < ActiveRecord::Base
   validates :code, :uniqueness => true
   has_many :raw_material_stocks, :foreign_key => :component_id, :class_name => ::Stocks::Component.to_s
   has_many :production_stocks, :foreign_key => :component_id, :class_name => ::Stocks::Production.to_s
+  has_many :products_stocks, :foreign_key => :component_id, :class_name => ::Stocks::Product.to_s
   has_paper_trail
   
   has_many :requests_transferences_components_details, :foreign_key => :component_id, :class_name => Requests::Transferences::Components::Detail.to_s

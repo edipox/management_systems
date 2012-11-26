@@ -17,16 +17,18 @@
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: '/stock/products/list_products', data: { role: 'button', remote: "true" } } Stock de productos terminados
-          - if can?(:read, Orders::Production.new)
+          %a{ href: '/stock/products/list_components', data: { role: 'button', remote: "true" } } Componentes terminados
+          - if can?(:read, Orders::Production)
             %a{ href: orders_productions_path, data: { role: 'button', remote: "true"  } } Orden de producción
           %a{ href: '/stock/products/transactions', class: 'ui-disabled',data: { role: 'button', remote: "true"  } } Movimientos
-          - if can?(:read, Requests::Devolutions::Product.new)  
+          - if can?(:read, Requests::Devolutions::Product)  
             %a{ href: requests_devolutions_products_path, data: { role: 'button', remote: "true"  } } Devolucion de productos
-          - if can?(:read, Requests::Transferences::Product.new)  
-            %a{ href: requests_transferences_products_path, data: { role: 'button', remote: "true"  } } Pedido de productos
-          - if can?(:read, Products::Composition.new)
+          - if can?(:read, Requests::Transferences::Product)  
+            %a{ href: requests_transferences_products_path, data: { role: 'button', remote: "true"  } } Formulario de productos
+          - if can?(:read, Products::Composition)
             %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Productos terminados
-
+          - if can?(:read, Requests::Transferences::Finished::Component)
+            %a{ href: requests_transferences_finished_components_path, data: { role: 'button', remote: "true"  } } Transferencias de componentes
         %div#content
           = yield
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a' , transition: "slidefade" } } 

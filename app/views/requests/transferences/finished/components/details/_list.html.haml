@@ -1,0 +1,28 @@
+
+= will_paginate @requests_transferences_finished_components_details
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-b" }
+  
+      %div{ class: "ui-block-a" } Componente
+      
+      %div{ class: "ui-block-b" } Cantidad 
+      
+      %div{ class: "ui-block-c" } Opciones       
+  
+  - @requests_transferences_finished_components_details.each do |requests_transferences_finished_components_detail|
+    %li{ class: 'element detail'}
+      %div{ class: "ui-grid-b" }
+      
+        %div{ class: "ui-block-a trim" }= requests_transferences_finished_components_detail.component.name
+      
+        %div{ class: "ui-block-b trim" }= requests_transferences_finished_components_detail.quantity
+  
+        %div{ class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
+          - obj = @requests_transferences_finished_component
+          - can_modify?(obj)
+          - delete_css_class = !can?(:delete, requests_transferences_finished_components_detail) ? 'ui-disabled' : ''
+          - edit_css_class = !can?(:edit, requests_transferences_finished_components_detail) ? 'ui-disabled' : ''
+          %a{ href: requests_transferences_finished_components_detail_path(requests_transferences_finished_components_detail), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          %a{ href: edit_requests_transferences_finished_components_detail_path(requests_transferences_finished_components_detail), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar

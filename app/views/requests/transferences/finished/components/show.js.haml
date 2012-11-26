@@ -1,0 +1,5 @@
+:plain
+  changeContent('#page #content',
+    '#{escape_javascript render :file => "requests/transferences/finished/components/show", :formats => [:html]}'
+  );
+  showNotice('#{ @notice }');  

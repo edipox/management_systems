@@ -1,0 +1,42 @@
+%ul{ data: { role: 'listview', theme: 'c' } }
+  %li{ data: { role: 'list-divider'} }
+    %div{ class: "ui-grid-c" }
+        
+      %div{ class: "ui-block-a" } Número      
+        
+      %div{ class: "ui-block-b" } Estado
+        
+      %div{ class: "ui-block-c" } Usuario
+
+      %div{ class: "ui-block-d" } Fecha
+  %li
+    %div{ class: "ui-grid-c" }
+    
+      %div{ class: "ui-block-a" }= @requests_transferences_finished_component.number
+    
+      %div{ class: "ui-block-b" }= @requests_transferences_finished_component.status.name
+    
+      %div{ class: "ui-block-c" }= @requests_transferences_finished_component.user.email
+      
+      %div{ class: "ui-block-d" }= @requests_transferences_finished_component.updated_at
+    
+
+  - @requests_transferences_finished_components_details = @requests_transferences_finished_component.details.paginate(:page => params[:page])
+  - @requests_transferences_finished_components_detail = Requests::Transferences::Finished::Components::Detail.new
+
+%br
+- obj = @requests_transferences_finished_component
+- if can_modify?(obj)
+  %div#form
+    = render 'requests/transferences/finished/components/details/form'
+%div#list
+  = render 'requests/transferences/finished/components/details/list'
+  
+= link_to 'Volver', requests_transferences_finished_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
+
+- create_css_class = can?(:create, Requests::Transferences::Finished::Components::Detail) ? '' : 'ui-disabled'
+= link_to 'Agregar  ', new_requests_transferences_finished_components_detail_path(:header_id => @requests_transferences_finished_component.id), { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }
+
+-#    %div{ class: "ui-block-d" } :
+-#    %div{ class: "ui-block-e" }= @requests_transferences_finished_component.transaction_id  
+

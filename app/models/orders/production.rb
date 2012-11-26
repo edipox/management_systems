@@ -15,28 +15,31 @@ class Orders::Production < ActiveRecord::Base
   auto_increment :column => :number
   
   def close
-    details.each do |dd|
-      dd.product.details.each do |d|
-        qtty = d.quantity
-        quantity_on_production = 0;
-        d.component.production_stocks.map{|e| 
-          quantity_on_production += e.component_quantity
-        }
-        if ! (qtty < quantity_on_production)
-          return false
-        end
-      end
+  
+    products_transferences = Requests::Transferences::Product.create!({
+      user_id: user.id,
+      status_id: status.id,
+      # temp
+      transaction_id: transaction_id
+      # temp
+    });
+    pt_details = []
+    details.each do |d|
+      pt_details << Requests::Transferences::Products::Detail.create!({
+        header_id: products_transferences.id,
+        product_id: d.product.id,
+        quantity: d.quantity,
+      })
     end
-    
-    details.each do |dd|
-      dd.product.details.each do |d|
-        id = d.component.id
-        price = d.component.price
-        qtty = d.quantity
-        Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+    if ! products_transferences.close
+      pt_details.each do |d|
+        d.destroy
       end
-      Stocks::Product.create!({product_id: dd.product_id, quantity: dd.quantity, price: dd.product.price})
+      products_transferences.destroy
+      return false
     end
+    products_transferences.status = Transactions::Status.find(AppConfig.find('close_status_id').value)
+    products_transferences.save
     return true
   end
  

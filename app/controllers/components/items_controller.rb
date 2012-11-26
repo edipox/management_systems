@@ -104,11 +104,6 @@ class Components::ItemsController < ApplicationController
 
     params[:components_item][:category_id] = nil 
 
-
-    puts '******************************************************'
-    puts params[:category_finished]
-    puts '******************************************************'
-    
     category = Components::Category.new({
       name: params[:category_name],
       description: params[:category_description],

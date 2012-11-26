@@ -3,36 +3,38 @@
 %ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
   %li{ data: { role: 'list-divider' } }
   
-    %div{ class: "ui-grid-c" }
+    %div{ class: "ui-grid-d" }
   
       %div{ class: "ui-block-a" } Número
-            
-      %div{ class: "ui-block-b" }  
+          
+      %div{ class: "ui-block-b" }  Estado
       
-      %div{ class: "ui-block-c" }  
+      %div{ class: "ui-block-c" }  Usuario
       
-      %div{ class: "ui-block-d" }  
+      %div{ class: "ui-block-d" }  Fecha
+      
+      %div{ class: "ui-block-e" }  Detalles
   
   - @requests_transferences_products.each do |requests_transferences_product|
     %li{ class: 'element detail'}
-      %div{ class: "ui-grid-c" }
+      %div{ class: "ui-grid-d" }
       
         %div{ class: "ui-block-a" }= requests_transferences_product.number
 
-        %div{ class: "ui-block-b trim" }= requests_transferences_product.status_id
+        %div{ class: "ui-block-b trim" }= requests_transferences_product.status.name
       
-        %div{ class: "ui-block-c trim" }= requests_transferences_product.transaction_id
-      
-        %div{ class: "ui-block-d trim" }= requests_transferences_product.user_id
-  
-        %div{ style:"width:262px;", class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
-          - obj = requests_devolutions_product
-          - can_modify?(obj)
-          - delete_css_class = !can?(:delete, obj) ? 'ui-disabled' : ''
-          - edit_css_class = !can?(:edit, obj) ? 'ui-disabled' : ''
-          %a{ href: requests_transferences_product_path(requests_transferences_product), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
-          %a{ href: edit_requests_transferences_product_path(requests_transferences_product), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
+        %div{ class: "ui-block-c trim" }= requests_transferences_product.user.email
+        
+        %div{ class: "ui-block-d trim" }= requests_transferences_product.updated_at
+        
+        %div{ class: "ui-block-e", data: { role: 'controlgroup', type: 'horizontal' } }
+          -# obj = requests_transferences_product
+          -# can_modify?(obj)
+          -# delete_css_class = !can?(:delete, obj) ? 'ui-disabled' : ''
+          -# edit_css_class = !can?(:edit, obj) ? 'ui-disabled' : ''
+          -# %a{ href: requests_transferences_product_path(requests_transferences_product), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar
+          -# %a{ href: edit_requests_transferences_product_path(requests_transferences_product), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'}, class: edit_css_class } Editar
           %a{ href: requests_transferences_product_path(requests_transferences_product), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true'} } Detalle
           
   - create_css_class = !can?(:create, Requests::Transferences::Product.new) ? 'ui-disabled' : ''
-  = link_to 'Agregar  ', new_requests_transferences_product_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }
+-#  = link_to 'Agregar  ', new_requests_transferences_product_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class }

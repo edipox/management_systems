@@ -1,0 +1,17 @@
+- will_paginate @components
+%ul{ data: { role: 'listview', inset: 'true' } }
+  %li{ data: { role: 'list-divider'} }
+    %div.ui-grid-b
+      %div.ui-block-a Componente
+      %div.ui-block-b Descripción
+      %div.ui-block-c Existencia
+
+  - @components.each do |component|
+    - stocks = component.products_stocks
+    - stock_total = stocks.reduce {|s0, s1| s0.component_quantity = s0.component_quantity + s1.component_quantity; s0 }
+    - stock_qty = stock_total.nil? ? 0 : stock_total.component_quantity
+    %li
+      %div.ui-grid-b
+        %div.ui-block-a= component.name
+        %div.ui-block-b= component.description
+        %div.ui-block-c= stock_qty
