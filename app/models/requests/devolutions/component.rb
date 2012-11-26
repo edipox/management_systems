@@ -29,7 +29,7 @@ class Requests::Devolutions::Component < ActiveRecord::Base
       d.component.production_stocks.map{|e| 
         quantity_on_production += e.component_quantity
       }
-      if ! (qtty < quantity_on_production)
+      if qtty > quantity_on_production
         return false
       end
     end

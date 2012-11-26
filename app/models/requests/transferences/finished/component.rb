@@ -22,7 +22,7 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
       d.component.raw_material_stocks.map{|e| 
         quantity_on_raw_material += e.quantity
       }
-      if ! (qtty < quantity_on_raw_material)
+      if qtty > quantity_on_raw_material
         return false
       end
     end
