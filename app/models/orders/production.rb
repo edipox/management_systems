@@ -104,38 +104,38 @@ class Orders::Production < ActiveRecord::Base
       sum += d.product.price * d.quantity
       
       d.product.details.each do |dc|
-        component_sum += dc.component.price * dc.quantity  
+        component_sum += dc.component.price * dc.quantity
       end
       
     end
-    
-     
     
     entry_id = Accounting::Entry.create!({
       description: "Transferencia de productos"    
     }).id
     
-    debe_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Productos terminados"
-    })
-    haber_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Productos en curso"
-    })
+    debe_account_id = AppConfig.find('accounting_finished_product_id').value
+    haber_account_id = AppConfig.find('accounting_products_in_process_id').value
+    
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: debe_account.id,
+      account_id: debe_account_id,
       is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
-      value: sum,
-      account_id: haber_account.id,
+      value: component_sum,
+      account_id: haber_account_id,
       is_debe: false
     })
-   
+    haber_account_id2 = AppConfig.find('accounting_production_recharge_id').value
+
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum - component_sum,
+      account_id: haber_account_id2,
+      is_debe: false
+    })
     
     return true
   end

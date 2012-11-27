@@ -49,24 +49,20 @@ class Requests::Devolutions::Component < ActiveRecord::Base
       description: "Devoluciones de componentes y operaciones similares"    
     }).id
     
-    debe_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Devoluciones de compras"
-    })
-    haber_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Materias primas"
-    })
+    debe_account_id = AppConfig.find('accounting_purchases_devolutions_id').value;
+
+    haber_account_id = AppConfig.find('accounting_raw_materials_id').value 
+    
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: debe_account.id,
+      account_id: debe_account_id,
       is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: haber_account.id,
+      account_id: haber_account_id,
       is_debe: false
     })
    

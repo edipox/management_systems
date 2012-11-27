@@ -48,24 +48,18 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
       description: "Transferencia de comerciales"    
     }).id
     
-    debe_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Comerciales"
-    })
-    haber_account = acc = Accounting::Account.create!({
-      entrable: true,
-      name: "Materias primas"
-    })
+    debe_account_id = AppConfig.find("accounting_comercials_id").value
+    haber_account_id = AppConfig.find('accounting_raw_materials_id').value
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: debe_account.id,
+      account_id: debe_account_id,
       is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: haber_account.id,
+      account_id: haber_account_id,
       is_debe: false
     })
    

@@ -177,6 +177,58 @@ Products::Compositions::Detail.create!({
   quantity: 1
 })
 
+AppConfig.create!({
+  id: 'accounting_box_id',
+  value: Accounting::Account.create!({
+      entrable: true,
+      name: "Caja"
+    }).id
+})
+
+AppConfig.create!({
+id: 'accounting_finished_product_id', 
+value: Accounting::Account.create!({
+    entrable: true,
+    name: "Productos terminados"
+  }).id })
+AppConfig.create!({
+id: 'accounting_products_in_process_id', 
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Productos en curso"
+}).id })
+AppConfig.create!({
+id: 'accounting_purchases_devolutions_id', 
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Devoluciones de compras"
+}).id })
+AppConfig.create!({
+id: 'accounting_raw_materials_id'
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Materias primas"
+}).id })
+AppConfig.create!({
+id: 'accounting_sell_devolutions_id'
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Devoluciones de ventas"
+}).id })
+AppConfig.create!({
+id: 'accounting_comercials_id'
+value: Accounting::Account.create!({
+      entrable: true,
+      name: "Comerciales"
+    }).id })
+    
+AppConfig.create!({
+  id: 'accounting_production_recharge_id',
+  value: Accounting::Account.create!({
+      entrable: true,
+      name: "Recargo por produccion"
+  }).id
+})
 status_open = Transactions::Status.find(AppConfig.create!({
   id: 'open_status_id', 
   value: Transactions::Status.create!({ name: 'Abierta' }).id
