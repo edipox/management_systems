@@ -4,8 +4,8 @@
     .ui-dialog-contain { max-width: 100% !important; }
   </style>
 
-%h3{ data: { role: 'header' } } Mostrar Cambios
-%div{ data: { role: 'content' } }
+%h3{ data: { role: 'header' } } Cambios
+%div{ data: { role: 'content' }, :style => "width:950px; text-align:center;" }
   %div.ui-grid-a
     %div.ui-block-a
       - unless @versioned.nil?
