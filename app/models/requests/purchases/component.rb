@@ -15,6 +15,14 @@ class Requests::Purchases::Component < ActiveRecord::Base
   def close
     details.each do |d|
       Stocks::Component.create!({ component_id: d.component.id, quantity: d.quantity, price: d.component.price })
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: "Compras",
+        to_stock: Stocks::Component.to_s,
+        is_component: true
+      })
     end
     return true
   end

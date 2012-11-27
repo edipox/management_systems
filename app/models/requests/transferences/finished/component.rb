@@ -29,6 +29,16 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
       qtty = d.quantity
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
       Stocks::Product.create!({component_id: id, component_quantity: qtty, component_price: price})
+      
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Component.to_s,
+        to_stock: Stocks::Product.to_s,
+        is_component: true
+      })
+      
     end
     return true
   end

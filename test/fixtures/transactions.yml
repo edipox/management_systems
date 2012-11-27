@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  kind: MyString
+  detail_kind: MyString
+  detail_id: MyString
+  from_stock: MyString
+  to_stock: MyString
+  is_component: false
+
+two:
+  kind: MyString
+  detail_kind: MyString
+  detail_id: MyString
+  from_stock: MyString
+  to_stock: MyString
+  is_component: false

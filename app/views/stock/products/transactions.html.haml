@@ -1,0 +1,19 @@
+= will_paginate @transactions
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: "true" } }
+  %li{ data: { role: 'list-divider' } }
+    %div{ class: 'ui-grid-d transaction ' }
+      %div{ class: 'ui-block-a item' }= "Acción"
+      %div{ class: 'ui-block-b item' }= "Item"
+      %div{ class: 'ui-block-c qtty' }= "Cantidad"
+      %div{ class: 'ui-block-d stock' }= "Desde"
+      %div{ class: 'ui-block-e stock' }= "Hacia"
+      
+  - @transactions.each do |trans|
+    %li{ class: 'transaction' }
+      %div{ class: 'ui-grid-d' }
+        - detail = trans.detail_kind.constantize.find(trans.detail_id)
+        %div{ class: 'ui-block-a trim item', data: {trim: '30'} }= ACL::Entity.where("const = ?", trans.kind).first.name
+        %div{ class: 'ui-block-b trim item', data: {trim: '40'} }= trans.is_component ? detail.component.name : detail.product.name
+        %div{ class: 'ui-block-c trim stock', data: {trim: '20'} }= detail.quantity
+        %div{ class: 'ui-block-d trim stock', data: {trim: '20'} }= ACL::Entity.where("const = ?", trans.from_stock).first.name.gsub("Stock de ", "").capitalize
+        %div{ class: 'ui-block-e trim qtty', data: {trim: '20'} }= ACL::Entity.where("const = ?", trans.to_stock).first.name.gsub("Stock de ", "").capitalize

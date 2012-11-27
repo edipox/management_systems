@@ -16,7 +16,7 @@ class Components::Item < ActiveRecord::Base
   has_many :products_compositions_details, :foreign_key => :component_id, :class_name => Products::Compositions::Detail.to_s
   
   has_many :requests_purchases_components_details, :foreign_key => :component_id, :class_name => Requests::Purchases::Components::Detail.to_s  
-  
+    
   def raw_material_total_stock
     qty = raw_material_stocks.reduce do |s0, s1|
       s0.quantity += s1.quantity

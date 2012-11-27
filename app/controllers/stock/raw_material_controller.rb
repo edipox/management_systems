@@ -11,7 +11,7 @@ class Stock::RawMaterialController < ApplicationController
   end
 
   def transactions
-    @transactions = nil#Stocks::Transactions::Component.paginate(:page => params[:page])
+    @transactions = Transaction.where("from_stock = ? OR to_stock = ?", Stocks::Component.to_s, Stocks::Component.to_s).paginate(:page => params[:page])
     respond_to do |format|
       format.js
     end

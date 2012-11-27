@@ -28,8 +28,16 @@ class Requests::Devolutions::Component < ActiveRecord::Base
       id = d.component.id
       price = d.component.price
       qtty = d.quantity
-      Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
       Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+      Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Production.to_s,
+        to_stock: Stocks::Component.to_s,
+        is_component: true
+      })
     end
     return true
   end

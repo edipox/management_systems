@@ -81,6 +81,18 @@ class Orders::Production < ActiveRecord::Base
     end
     products_transferences.status = Transactions::Status.find(AppConfig.find('close_status_id').value)
     products_transferences.save
+    
+    details.each do |d|
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Production.to_s,
+        to_stock: Stocks::Product.to_s,
+        is_component: false
+      })
+    end
+    
     return true
   end
  

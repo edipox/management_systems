@@ -23,7 +23,7 @@
             %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
           - if can?(:read, Requests::Devolutions::Component)
             %a{ href: requests_devolutions_components_path, data: { role: 'button', remote: "true"  } } Devolucion de componentes 
-          %a{ href: '/stock/production/transactions', class: 'ui-disabled', data: { role: 'button', remote: "true"  } } Movimientos          
+          %a{ href: '/stock/production/transactions', data: { role: 'button', remote: "true"  } } Movimientos          
           - if can?(:read, Products::Composition)
             %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos de productos terminados
           - if can?(:read, Transactions::Status)
