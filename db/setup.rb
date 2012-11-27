@@ -39,6 +39,8 @@ acl_entities << ['Detalle de solicitud de compra de componentes', 'Requests::Pur
 acl_entities << ['Stock de Materia Prima','Stocks::Component']
 acl_entities << ['Stock de producción','Stocks::Production']
 acl_entities << ['Stock de productos terminados','Stocks::Product']
+acl_entities << ['Transacción', 'Transaction']
+
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }

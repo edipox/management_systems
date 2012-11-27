@@ -15,10 +15,10 @@
     %li
       %div.ui-grid-d
         - spanish = { "destroy" => "eliminado", "create" => "creado", "update" => "actualizado" }
-        %div.edipo.ui-block-a= spanish[v.event] || v.event
-        %div.edipo.trim.ui-block-b= obj
-        %div.edipo.ui-block-c= user
-        %div.edipo.ui-block-d= v.created_at.strftime("%m/%d/%Y %H:%M")
+        %div.lh-40.ui-block-a= spanish[v.event] || v.event
+        %div.lh-40.trim.ui-block-b= obj
+        %div.lh-40.ui-block-c= user
+        %div.lh-40.ui-block-d= v.created_at.strftime("%m/%d/%Y %H:%M")
         %div.ui-block-e
           %a{ href: "/activity/#{v.id}", data: { role: 'button', icon: 'arrow-r', mini: 'true', remote: 'true', rel: 'popup' } } Ver Cambios
 %div{ style: 'margin-top: 8px;' }= will_paginate @versions
