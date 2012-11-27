@@ -33,6 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       # t.string :authentication_token
 
+      # added by Edipo to make act_as_paranoid works
+      t.date :deleted_at
 
       t.timestamps
     end

@@ -2,6 +2,7 @@ class CreateTests < ActiveRecord::Migration
   def change
     create_table :tests do |t|
       t.string :name
+      t.date :deleted_at
 
       t.timestamps
     end

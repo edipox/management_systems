@@ -3,6 +3,7 @@ class CreateComponentsBrands < ActiveRecord::Migration
     create_table :components_brands do |t|
       t.string :name
       t.string :description
+      t.date :deleted_at
 
       t.timestamps
     end

@@ -1,6 +1,8 @@
 class Requests::Transferences::Finished::Components::Detail < ActiveRecord::Base
 
    has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :header_id, :component_id, :quantity, :component, :requests_transferences_finished_components
   validates :header_id, :presence => true #, :length => { :minimum => 2 }  
   validates :component_id, :presence => true #, :length => { :minimum => 2 }  

@@ -11,7 +11,11 @@ class ActivityController < ApplicationController
 
   def show
     version = Version.find(params[:id])
-    @current = eval "::#{version.item_type}.find '#{version.item_id}'"
+    version_class = version.item_type.constantize
+    if version_class.respond_to? :with_deleted
+      version_class = version_class.with_deleted
+    end
+    @current = version_class.find version.item_id
     @versioned = version.reify
 
     respond_to do |format|

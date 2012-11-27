@@ -1,5 +1,7 @@
 class Requests::Devolutions::Components::Detail < ActiveRecord::Base
   has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :component_id, :header_id, :quantity, :component, :requests_devolutions_component
   validates :header_id, :presence => true #, :length => { :minimum => 2 }  
   validates :component_id, :presence => true #, :length => { :minimum => 2 }  

@@ -3,6 +3,7 @@ class CreateAclActions < ActiveRecord::Migration
     create_table :acl_actions do |t|
       t.string :name
       t.string :symbol
+      t.date :deleted_at
 
       t.timestamps
     end

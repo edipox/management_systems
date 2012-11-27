@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "acl_actions", :force => true do |t|
     t.string   "name"
     t.string   "symbol"
+    t.date     "deleted_at"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.boolean  "extra",                    :default => false
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "acl_entities", :force => true do |t|
     t.string   "name"
     t.string   "const"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -34,18 +36,21 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "entity_id"
     t.string   "action_id"
     t.boolean  "enabled"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "acl_roles", :force => true do |t|
     t.string   "name"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "app_configs", :force => true do |t|
     t.string   "value"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -53,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "components_brands", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.date     "deleted_at"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -61,12 +67,14 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "name"
     t.string   "description"
     t.boolean  "finished",    :default => false
+    t.date     "deleted_at"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
 
   create_table "components_categories_kinds", :force => true do |t|
     t.string   "name"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -79,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "brand_id",         :limit => 36, :null => false
     t.integer  "minimum_quantity"
     t.integer  "price"
+    t.date     "deleted_at"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -86,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "locations_cities", :force => true do |t|
     t.string   "name"
     t.integer  "region_id_id"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -94,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
 
   create_table "locations_continents", :force => true do |t|
     t.string   "name"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -101,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "locations_countries", :force => true do |t|
     t.string   "name"
     t.integer  "continent_id_id"
+    t.date     "deleted_at"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -110,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
   create_table "locations_regions", :force => true do |t|
     t.string   "name"
     t.integer  "country_id_id"
+    t.date     "deleted_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -120,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "status_id"
     t.string   "user_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -128,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "product_id"
     t.string   "header_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -137,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "description"
     t.integer  "minimum_quantity"
     t.integer  "price"
+    t.date     "deleted_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -145,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "component_id"
     t.string   "header_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -154,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "user_id"
     t.string   "reason"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -162,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "component_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -171,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "reason"
     t.string   "status_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -179,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "product_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.integer  "number"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -188,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "status_id"
     t.string   "user_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -196,6 +218,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "component_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -205,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "user_id"
     t.string   "order_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -213,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "component_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -221,6 +246,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "status_id"
     t.string   "user_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -229,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "component_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -237,6 +264,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "status_id"
     t.string   "user_id"
     t.integer  "number"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -245,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "header_id"
     t.string   "product_id"
     t.integer  "quantity"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -253,6 +282,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "component_id"
     t.integer  "quantity"
     t.integer  "price"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -264,6 +294,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "product_id"
     t.integer  "product_quantity"
     t.integer  "product_price"
+    t.date     "deleted_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
@@ -275,12 +306,14 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "product_id"
     t.integer  "product_quantity"
     t.integer  "product_price"
+    t.date     "deleted_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
 
   create_table "tests", :force => true do |t|
     t.string   "name"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -292,12 +325,14 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.string   "from_stock"
     t.string   "to_stock"
     t.boolean  "is_component"
+    t.date     "deleted_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
   create_table "transactions_statuses", :force => true do |t|
     t.string   "name"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -313,6 +348,7 @@ ActiveRecord::Schema.define(:version => 20121126213505) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.date     "deleted_at"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
     t.string   "acl_role_id",            :limit => 36

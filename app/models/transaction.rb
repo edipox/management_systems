@@ -1,5 +1,7 @@
 class Transaction < ActiveRecord::Base
    has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :detail_id, :detail_kind, :from_stock, :is_component, :kind, :to_stock
 
   validates :kind, :presence => true 

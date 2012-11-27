@@ -4,6 +4,7 @@ class CreateRequestsPurchasesComponentsDetails < ActiveRecord::Migration
       t.string :header_id
       t.string :component_id
       t.integer :quantity
+      t.date :deleted_at
 
       t.timestamps
     end

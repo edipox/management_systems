@@ -5,6 +5,7 @@ class CreateRequestsDevolutionsProducts < ActiveRecord::Migration
       t.string :reason
       t.string :status_id
       t.integer :number
+      t.date :deleted_at
       
       t.timestamps
     end

@@ -1,4 +1,5 @@
 class Requests::Purchases::Component < ActiveRecord::Base
+  acts_as_paranoid
    has_paper_trail
   attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :number
 

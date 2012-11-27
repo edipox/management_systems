@@ -18,12 +18,11 @@
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: '/stock/production/list_components', data: { role: 'button', remote: "true" } } Stock de producción
           %a{ href: '/stock/production/list_products', data: { role: 'button', remote: "true" } } Productos en producción
-          
+          %a{ href: '/stock/production/transactions', data: { role: 'button', remote: "true"  } } Movimientos          
           - if can?(:read, Requests::Transferences::Component)
             %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
           - if can?(:read, Requests::Devolutions::Component)
             %a{ href: requests_devolutions_components_path, data: { role: 'button', remote: "true"  } } Devolucion de componentes 
-          %a{ href: '/stock/production/transactions', data: { role: 'button', remote: "true"  } } Movimientos          
           - if can?(:read, Products::Composition)
             %a{ href: products_compositions_path, data: { role: 'button', remote: "true"  } } Modelos de productos terminados
           - if can?(:read, Transactions::Status)

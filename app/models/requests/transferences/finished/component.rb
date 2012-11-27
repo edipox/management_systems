@@ -1,5 +1,7 @@
 class Requests::Transferences::Finished::Component < ActiveRecord::Base
    has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :component_id, :component, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Finished::Components::Detail.to_s

@@ -43,8 +43,8 @@
 
       %div{ class: "containing-element" }
         %select#fake_finished_fake{ data: { role: "slider" } }
-          %option{ value: '0' }= "Componente común"
-          %option{ value: '1' }= "Producto terminado"
+          %option{ value: '0' }= "Componente"
+          %option{ value: '1' }= "Producto"
       = hidden_field_tag :category_finished, { "data-inline" => "true" }
 
       = hidden_field_tag :new_category, 'false'

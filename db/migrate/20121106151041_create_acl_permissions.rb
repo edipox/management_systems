@@ -5,6 +5,7 @@ class CreateAclPermissions < ActiveRecord::Migration
       t.string :entity_id
       t.string :action_id
       t.boolean :enabled
+      t.date :deleted_at
 
       t.timestamps
     end

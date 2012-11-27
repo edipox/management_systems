@@ -8,6 +8,7 @@ class CreateComponentsItems < ActiveRecord::Migration
       t.string :brand_id      
       t.integer :minimum_quantity
       t.integer :price
+      t.date :deleted_at
       
       t.timestamps
     end

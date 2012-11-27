@@ -4,6 +4,7 @@ class CreateComponentsCategories < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.boolean :finished, :default => false
+      t.date :deleted_at
 
       t.timestamps
     end

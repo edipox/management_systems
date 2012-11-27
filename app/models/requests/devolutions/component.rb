@@ -1,5 +1,7 @@
 class Requests::Devolutions::Component < ActiveRecord::Base
    has_paper_trail
+  acts_as_paranoid
+
    attr_accessible :number, :reason, :status_id, :user_id, :user, :header_id, :component_id, :component, :status
 
   has_many :details, :foreign_key => :header_id, :class_name => "Requests::Devolutions::Components::Detail"

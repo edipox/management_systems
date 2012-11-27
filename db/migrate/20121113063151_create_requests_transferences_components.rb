@@ -5,7 +5,7 @@ class CreateRequestsTransferencesComponents < ActiveRecord::Migration
       t.string :user_id
       t.string :order_id
       t.integer :number
-      
+      t.date :deleted_at
       t.timestamps
     end
     change_column :requests_transferences_components, :id, :string, :limit => 36, :null => false

@@ -1,4 +1,5 @@
 class ACL::Permission < ActiveRecord::Base
+  acts_as_paranoid
   attr_accessible :action_id, :entity_id, :role_id, :enabled
 
   attr_accessible :action, :role, :entity

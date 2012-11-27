@@ -1,5 +1,6 @@
 class Components::Item < ActiveRecord::Base
-  attr_accessible :brand, :brand_id, :category, :category_id, :code, :price, :description, :name, :minimum_quantity
+  acts_as_paranoid
+    attr_accessible :brand, :brand_id, :category, :category_id, :code, :price, :description, :name, :minimum_quantity
   belongs_to :category, :class_name => Components::Category.to_s
   belongs_to :brand, :class_name => Components::Brand.to_s
   validates_presence_of  :code, :name, :category_id, :brand_id, :minimum_quantity, :price

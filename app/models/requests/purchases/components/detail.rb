@@ -1,4 +1,5 @@
 class Requests::Purchases::Components::Detail < ActiveRecord::Base
+  acts_as_paranoid
    has_paper_trail
   attr_accessible :component_id, :header_id, :quantity, :component, :requests_purchases_component
   #validates :component_id, :presence => true

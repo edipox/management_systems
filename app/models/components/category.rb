@@ -4,4 +4,5 @@ class Components::Category < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true, :length => { :minimum => 2, :maximum => 40 }
   validates :description, :length => { :maximum => 200 }
   has_paper_trail
+  acts_as_paranoid
 end

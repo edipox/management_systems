@@ -4,6 +4,7 @@ class CreateOrdersProductionsDetails < ActiveRecord::Migration
       t.string :product_id
       t.string :header_id
       t.integer :quantity
+      t.date :deleted_at
 
       t.timestamps
     end

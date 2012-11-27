@@ -2,6 +2,7 @@ class CreateLocationsContinents < ActiveRecord::Migration
   def change
     create_table :locations_continents do |t|
       t.string :name
+      t.date :deleted_at
 
       t.timestamps
     end

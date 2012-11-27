@@ -1,5 +1,7 @@
 class Requests::Devolutions::Products::Detail < ActiveRecord::Base
    has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :header_id, :product_id,:quantity, :product, :requests_devolutions_product
   validates :header_id, :presence => true #, :length => { :minimum => 2 }  
   validates :product_id, :presence => true #, :length => { :minimum => 2 }  

@@ -1,6 +1,7 @@
 class Requests::Transferences::Component < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :status, :order, :order_id, :user_id, :user, :header, :header_id, :component_id, :component, :number
+   acts_as_paranoid
+ attr_accessible :status_id, :status, :order, :order_id, :user_id, :user, :header, :header_id, :component_id, :component, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Components::Detail.to_s
 

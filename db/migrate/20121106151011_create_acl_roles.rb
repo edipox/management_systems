@@ -2,6 +2,7 @@ class CreateAclRoles < ActiveRecord::Migration
   def change
     create_table :acl_roles do |t|
       t.string :name
+      t.date :deleted_at
 
       t.timestamps
     end

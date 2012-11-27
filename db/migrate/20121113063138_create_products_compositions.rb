@@ -5,6 +5,7 @@ class CreateProductsCompositions < ActiveRecord::Migration
       t.string :description
       t.integer :minimum_quantity
       t.integer :price
+      t.date :deleted_at
       
       t.timestamps
     end

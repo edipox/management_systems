@@ -4,6 +4,7 @@ class CreateRequestsTransferencesFinishedComponents < ActiveRecord::Migration
       t.string :status_id
       t.string :user_id
       t.integer :number
+      t.date :deleted_at
       
       t.timestamps
     end

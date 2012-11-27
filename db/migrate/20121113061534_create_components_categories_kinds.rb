@@ -2,6 +2,7 @@ class CreateComponentsCategoriesKinds < ActiveRecord::Migration
   def change
     create_table :components_categories_kinds do |t|
       t.string :name
+      t.date :deleted_at
 
       t.timestamps
     end

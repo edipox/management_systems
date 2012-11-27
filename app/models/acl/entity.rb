@@ -28,6 +28,7 @@ module ACL
 end
 
 class ACL::Entity < ActiveRecord::Base
+  acts_as_paranoid
   include ACL::EntityMethods
   attr_accessible :const, :name
 

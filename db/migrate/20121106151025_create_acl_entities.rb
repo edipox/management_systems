@@ -3,6 +3,7 @@ class CreateAclEntities < ActiveRecord::Migration
     create_table :acl_entities do |t|
       t.string :name
       t.string :const
+      t.date :deleted_at
 
       t.timestamps
     end

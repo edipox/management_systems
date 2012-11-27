@@ -7,6 +7,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.string :from_stock
       t.string :to_stock
       t.boolean :is_component
+      t.date :deleted_at
 
       t.timestamps
     end

@@ -16,4 +16,6 @@ class User < ActiveRecord::Base
   has_many :requests_devolutions_component, :class_name => Requests::Devolutions::Component.to_s
 
   has_paper_trail
+  acts_as_paranoid
+
 end

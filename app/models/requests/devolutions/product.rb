@@ -1,5 +1,6 @@
 class Requests::Devolutions::Product < ActiveRecord::Base
    has_paper_trail
+  acts_as_paranoid
   attr_accessible :reason, :status_id, :user_id, :user, :header_id, :product_id, :product, :status, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Devolutions::Products::Detail.to_s

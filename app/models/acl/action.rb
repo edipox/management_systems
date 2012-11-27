@@ -1,4 +1,5 @@
 class ACL::Action < ActiveRecord::Base
+  acts_as_paranoid
   attr_accessible :name, :symbol, :extra
 
   has_many :acl_permissions, :class_name => ACL::Permission.to_s

@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
   end
   
   def delete_if_void list
-    default_status = get_default_status.id
+    default_status_id = get_default_status.id
     list.each do |element|
-      if element.created_at != element.updated_at
+      #if element.created_at != element.updated_at
         will_destroy = true
         atts = element.attributes
         atts.each do |a|
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
              attribute != "id" &&
              attribute != "transaction_id" &&
              value &&
-             !(attribute == "status_id" && value == default_status) &&
+             !(attribute == "status_id" && value == default_status_id) &&
              value != ""
                 will_destroy = false
           end
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
         if will_destroy && element.details == []
           element.destroy
         end
-      end
+      #end
     end
     
   end

@@ -3,6 +3,7 @@ class CreateLocationsRegions < ActiveRecord::Migration
     create_table :locations_regions do |t|
       t.string :name
       t.references :country_id
+      t.date :deleted_at
 
       t.timestamps
     end

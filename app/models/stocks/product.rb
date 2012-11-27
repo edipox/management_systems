@@ -1,5 +1,7 @@
 class Stocks::Product < ActiveRecord::Base
   has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :component_id, :component_quantity, :component_price, :product_id, :product_quantity, :product_price
 #  validates :product_id, :presence => true #, :length => { :minimum => 2 }  
 #  validates :price, :presence => true

@@ -1,5 +1,7 @@
 class Products::Composition < ActiveRecord::Base
   has_paper_trail
+  acts_as_paranoid
+
   attr_accessible :description, :name, :minimum_quantity, :price, :quantity
   validates :name, :presence => true #, :length => { :minimum => 2 }  
   

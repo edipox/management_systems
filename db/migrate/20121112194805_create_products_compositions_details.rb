@@ -4,6 +4,7 @@ class CreateProductsCompositionsDetails < ActiveRecord::Migration
       t.string :component_id
       t.string :header_id
       t.integer :quantity
+      t.date :deleted_at
 
       t.timestamps
     end
