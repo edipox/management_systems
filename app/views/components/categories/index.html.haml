@@ -12,7 +12,7 @@
       %div{ class: 'ui-grid-c' }
         %div{ class: 'ui-block-a', trim:"40" }= category.name
         %div{ class: 'ui-block-b', trim:"40" }= category.description
-        %div{ class: 'ui-block-c', trim:"40" }= category.finished
+        %div{ class: 'ui-block-c', trim:"40" }= category.finished ? "Si" : "No"
         %div{  class: 'ui-block-d', data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = category.components_items != [] || !can?(:delete, category) ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, category) ? 'ui-disabled' : ''

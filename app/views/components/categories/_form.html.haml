@@ -15,8 +15,12 @@
     
   %div{ class: "containing-element" }
     %select#finished_fake{ name: "finished_fake", data: { role: "slider" } }
-      %option{ value: '0' }= "Componente común"
-      %option{ value: '1' }= "Producto terminado"
+      - if @components_category.finished
+        %option{ value: '1' }= "Producto"
+        %option{ value: '0' }= "Componente"
+      - else
+        %option{ value: '0' }= "Componente"
+        %option{ value: '1' }= "Producto"
 
   %div{ style: "display:none" }
     = f.check_box :finished, {"id" => "finished_category" }

@@ -49,12 +49,14 @@ stocks_component_entity.create_extra_action('Inserción inicial', :initial_inser
 
 keyboards = Components::Category.create!({
   name:'Teclado inalambrico',
-  description:'Teclado inalambrico comun'
+  description:'Teclado inalambrico comun',
+  finished: true
 })
 
 displays = Components::Category.create!({
   name:'Monitores LCD',
-  description:'Monitores LCD comun'
+  description:'Monitores LCD comun',
+  finished: true
 })
 
 brand = Components::Brand.create!({
