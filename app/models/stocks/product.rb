@@ -9,9 +9,10 @@ class Stocks::Product < ActiveRecord::Base
   after_save :check_qty
 
   def check_qty
-    sum = product.products_stocks.reduce { |s1, s2| s1.product_quantity += s2.product_quantity; s1 }
-    if product.minimum_quantity > sum.product_quantity
-      missing_component_qty = product.minimum_quantity - sum.product_quantity
+    if product
+      sum = product.products_stocks.reduce { |s1, s2| s1.product_quantity += s2.product_quantity; s1 }
+      if product.minimum_quantity > sum.product_quantity
+      missing_product_qty = product.minimum_quantity - sum.product_quantity
       system_user_id = AppConfig.find('system_user_id').value
       open_status_id = AppConfig.find('open_status_id').value
       generated_by_system = Orders::Production.where('user_id = ? AND status_id = ?', system_user_id, open_status_id)
@@ -25,23 +26,24 @@ class Stocks::Product < ActiveRecord::Base
         end
       end
       if detail_generated
-        detail_generated.quantity = missing_component_qty
+        detail_generated.quantity = missing_product_qty
         detail_generated.save
       else
         order_prod = Orders::Production.create!({
           status_id: open_status_id,
           user_id: system_user_id,
-          #temp
-          transaction_id: 'nil'
-          #temp
         }) 
         Orders::Productions::Detail.create!({
           header_id: order_prod.id,
           product: product,
-          quantity: missing_component_qty
+          quantity: missing_product_qty
         })
+        end
       end
+    else
+      #sum = component.raw_material_stocks.reduce { |s1, s2| s1.component_quantity += s2.product_quantity; s1 }
     end
+    
   end
   
   

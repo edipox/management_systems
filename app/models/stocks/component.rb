@@ -18,9 +18,9 @@ class Stocks::Component < ActiveRecord::Base
       open_status_id = AppConfig.find('open_status_id').value
       generated_by_system = Requests::Purchases::Component.where('user_id = ? AND status_id = ?', system_user_id, open_status_id)
       detail_generated = nil
-      generated_by_system.each do |e|
-        e.details.each do |d|
-          if d.component = component
+      generated_by_system.each do |header|
+        header.details.each do |d|
+          if d.component.id == component.id
             detail_generated = d
             break
           end
@@ -33,9 +33,6 @@ class Stocks::Component < ActiveRecord::Base
         request_purchase = Requests::Purchases::Component.create!({
           status_id: open_status_id,
           user_id: system_user_id,
-          #temp
-          transaction_id: 'nil'
-          #temp
         }) 
         Requests::Purchases::Components::Detail.create!({
           header_id: request_purchase.id,

@@ -44,14 +44,8 @@ class Requests::Transferences::ProductsController < ApplicationController
   # POST /requests/transferences/products.json
   def create
     @requests_transferences_product = Requests::Transferences::Product.new(params[:requests_transferences_product])
-     transaction = Stocks::Transactions::Product.new
-    transaction.kind = "Requests::Transferences::Product"
-    @requests_devolutions_component.user_id = 'nil'
-    @requests_devolutions_component.transaction_id = 'nil'
+    @requests_devolutions_component.user = current_user
     @requests_devolutions_component.save
-    transaction.kind_id = @requests_devolutions_component.id
-    transaction.save
-    @requests_devolutions_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_product.save
         format.js { render action: 'show' }

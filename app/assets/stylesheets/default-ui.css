@@ -357,3 +357,22 @@ display:-moz-box;
 .ui-content .ui-listview, .ui-content .ui-listview-inset {
   margin: 0 !important;
 }
+
+
+.transaction .ui-block-a, .transaction .ui-block-b, .transaction .ui-block-c, .transaction .ui-block-d, .transaction .ui-block-e, .transaction .ui-block-f, .transaction .ui-block-g{
+  width:22%!important;
+  float: left!important;
+}
+
+.transaction .qtty{
+  width:10%!important;
+}
+
+.transaction .item{
+  width:28%!important;
+}
+
+.transaction .stock{
+  width:17%!important;
+}
+

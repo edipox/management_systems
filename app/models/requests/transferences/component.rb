@@ -1,6 +1,6 @@
 class Requests::Transferences::Component < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :status, :transaction_id, :order, :order_id, :user_id, :user, :transaction, :header, :header_id, :component_id, :component, :number
+  attr_accessible :status_id, :status, :order, :order_id, :user_id, :user, :header, :header_id, :component_id, :component, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Components::Detail.to_s
 
@@ -9,9 +9,6 @@ class Requests::Transferences::Component < ActiveRecord::Base
 
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
-  
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Production"  
   
   auto_increment :column => :number  
   
@@ -34,6 +31,16 @@ class Requests::Transferences::Component < ActiveRecord::Base
       qtty = d.quantity
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
       Stocks::Production.create!({component_id: id, component_quantity: qtty, component_price: price})
+      
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Component.to_s,
+        to_stock: Stocks::Production.to_s,
+        is_component: true
+      })
+     
     end
     return true
   end

@@ -1,25 +1,16 @@
 class Requests::Devolutions::Component < ActiveRecord::Base
    has_paper_trail
-   attr_accessible :number, :reason, :status_id, :transaction_id, :user_id, :user, :transaction, :header_id, :component_id, :component, :status
+   attr_accessible :number, :reason, :status_id, :user_id, :user, :header_id, :component_id, :component, :status
 
   has_many :details, :foreign_key => :header_id, :class_name => "Requests::Devolutions::Components::Detail"
 
   belongs_to :status, :class_name => "Transactions::Status"
   belongs_to :user
 
-  validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   validates :reason, :presence => true #, :length => { :minimum => 2 }  
   
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Component"
-
-
-#  before_create :set_number
-#  def set_number
-#    max_number = Requests::Devolutions::Component.maximum(:number)
-#    self.number = max_number.to_i + 1
-#  end
   auto_increment :column => :number
   
   def close
@@ -37,8 +28,16 @@ class Requests::Devolutions::Component < ActiveRecord::Base
       id = d.component.id
       price = d.component.price
       qtty = d.quantity
-      Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
       Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+      Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Production.to_s,
+        to_stock: Stocks::Component.to_s,
+        is_component: true
+      })
     end
     return true
   end

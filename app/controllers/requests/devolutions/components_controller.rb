@@ -46,14 +46,7 @@ class Requests::Devolutions::ComponentsController < ApplicationController
   def create
     @requests_devolutions_component = Requests::Devolutions::Component.new(params[:requests_devolutions_component])
     @requests_devolutions_component.status = @default_status
-    transaction = Stocks::Transactions::Component.new
-    transaction.kind = "Requests::Devolutions::Component"
     @requests_devolutions_component.user = current_user
-    @requests_devolutions_component.transaction_id = "nil"
-    @requests_devolutions_component.save
-    transaction.kind_id = @requests_devolutions_component.id
-    transaction.save
-    @requests_devolutions_component.transaction = transaction
     respond_to do |format|
       if @requests_devolutions_component.save
         format.js { render action: 'show' }

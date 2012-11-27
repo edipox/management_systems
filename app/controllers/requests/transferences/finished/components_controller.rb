@@ -46,14 +46,7 @@ class Requests::Transferences::Finished::ComponentsController < ApplicationContr
   # POST /requests/transferences/components.json
   def create
     #@requests_transferences_finished_component = Requests::Transferences::Finished::Component.new(params[:requests_transferences_finished_component])
-    transaction = Stocks::Transactions::Product.new
-    transaction.kind = "Requests::Transferences::Finished::Component"
     @requests_transferences_finished_component.user = current_user
-    @requests_transferences_finished_component.transaction_id = 'nil'
-    @requests_transferences_finished_component.save
-    transaction.kind_id = @requests_transferences_finished_component.id
-    transaction.save
-    @requests_transferences_finished_component.transaction = transaction
     respond_to do |format|
       if @requests_transferences_finished_component.save
         format.js {  render action: 'show' }

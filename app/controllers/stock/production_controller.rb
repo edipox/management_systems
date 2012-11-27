@@ -4,7 +4,7 @@ class Stock::ProductionController < ApplicationController
   end
 
   def transactions
-    @transactions = Stocks::Transactions::Production.paginate(:page => params[:page])
+    @transactions = Transaction.where("from_stock = ? OR to_stock = ?", Stocks::Production.to_s, Stocks::Production.to_s).paginate(:page => params[:page])
     respond_to do |format|
       format.js
     end

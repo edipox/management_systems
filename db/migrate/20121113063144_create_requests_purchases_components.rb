@@ -3,7 +3,6 @@ class CreateRequestsPurchasesComponents < ActiveRecord::Migration
     create_table :requests_purchases_components do |t|
       t.string :status_id
       t.string :user_id
-      t.string :transaction_id
       t.integer :number
       
       t.timestamps

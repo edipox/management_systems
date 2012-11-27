@@ -1,6 +1,6 @@
 class Requests::Transferences::Product < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :transaction_id, :user_id, :user, :transaction, :number
+  attr_accessible :status_id, :user_id, :user, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => "Requests::Transferences::Products::Detail"
 
@@ -8,9 +8,7 @@ class Requests::Transferences::Product < ActiveRecord::Base
   belongs_to :user
 
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Product"    
   
   auto_increment :column => :number  
   
@@ -36,9 +34,30 @@ class Requests::Transferences::Product < ActiveRecord::Base
         price = d.component.price
         qtty = d.quantity
         Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+
+        Transaction.create!({
+          kind: self.class.to_s,
+          detail_kind: d.class.to_s,
+          detail_id: d.id,
+          from_stock: Stocks::Production.to_s,
+          to_stock: Stocks::Component.to_s,
+          is_component: true
+        })
+
       end
       Stocks::Product.create!({product_id: dd.product_id, product_quantity: dd.quantity, product_price: dd.product.price})
+
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: dd.class.to_s,
+        detail_id: dd.id,
+        from_stock: Stocks::Production.to_s,
+        to_stock: Stocks::Product.to_s,
+        is_component: false
+      })
+      
     end
+    
     return true
   end
   

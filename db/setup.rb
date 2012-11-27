@@ -37,6 +37,8 @@ acl_entities << ['Solicitud de compra de componentes', 'Requests::Purchases::Com
 acl_entities << ['Detalle de solicitud de compra de componentes', 'Requests::Purchases::Components::Detail']
 
 acl_entities << ['Stock de Materia Prima','Stocks::Component']
+acl_entities << ['Stock de producción','Stocks::Production']
+acl_entities << ['Stock de productos terminados','Stocks::Product']
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
@@ -212,15 +214,9 @@ employee = User.create!({
   role: employee_role
 })
 
-# Those lines could cause an error when transactions will be properly implemented, they must be deleted
-component_transaction = Stocks::Transactions::Component.create!({kind:'temp', kind_id:'temp'})
-production_transaction = Stocks::Transactions::Production.create!({kind:'temp', kind_id:'temp'})
-
-# This request should be created by the System user but it does not exist.
 transference_component = Requests::Transferences::Component.create!({
   status: status_open,
   user: system_user,
-  transaction: production_transaction,
 })
 Requests::Transferences::Components::Detail.create!({
   requests_transferences_component: transference_component,
@@ -231,7 +227,6 @@ Requests::Transferences::Components::Detail.create!({
 devolution_component = Requests::Devolutions::Component.create!({
   status: status_open,
   user: system_user,
-  transaction: component_transaction,
   reason: 'Pedido excesivo de componentes'
 })
 
@@ -242,7 +237,6 @@ Requests::Devolutions::Components::Detail.create!({
 })
 
 Requests::Devolutions::Product.create!({
-  transaction: Stocks::Transactions::Product.create!({kind:'temp', kind_id:'temp'}),
   user: system_user,
   reason: 'Producto funcionando incorrectamente',
   status: status_open

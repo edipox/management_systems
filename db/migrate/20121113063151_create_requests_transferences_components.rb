@@ -3,7 +3,6 @@ class CreateRequestsTransferencesComponents < ActiveRecord::Migration
     create_table :requests_transferences_components do |t|
       t.string :status_id
       t.string :user_id
-      t.string :transaction_id
       t.string :order_id
       t.integer :number
       

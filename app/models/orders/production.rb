@@ -1,16 +1,14 @@
 class Orders::Production < ActiveRecord::Base
    has_paper_trail
-  attr_accessible :status_id, :transaction_id, :user_id, :number
+  attr_accessible :status_id, :user_id, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => "Orders::Productions::Detail"
 
   belongs_to :status, :class_name => "Transactions::Status"
   belongs_to :user
 
-  validates :transaction_id, :presence => true #, :length => { :minimum => 2 }  
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  belongs_to :transaction, :foreign_key => :transaction_id, :class_name => "Stocks::Transactions::Production"    
   
   auto_increment :column => :number
   
@@ -29,9 +27,6 @@ class Orders::Production < ActiveRecord::Base
         user_id: system_user_id,
         status_id: open_status_id,
         order_id: id,
-        #temp
-        transaction_id: 'nil'
-        #temp    
     })
     
     components = {}    
@@ -68,9 +63,6 @@ class Orders::Production < ActiveRecord::Base
     products_transferences = Requests::Transferences::Product.create!({
       user_id: user.id,
       status_id: status.id,
-      # temp
-      transaction_id: transaction_id
-      # temp
     });
     pt_details = []
     details.each do |d|
@@ -89,6 +81,18 @@ class Orders::Production < ActiveRecord::Base
     end
     products_transferences.status = Transactions::Status.find(AppConfig.find('close_status_id').value)
     products_transferences.save
+    
+    details.each do |d|
+      Transaction.create!({
+        kind: self.class.to_s,
+        detail_kind: d.class.to_s,
+        detail_id: d.id,
+        from_stock: Stocks::Production.to_s,
+        to_stock: Stocks::Product.to_s,
+        is_component: false
+      })
+    end
+    
     return true
   end
  
