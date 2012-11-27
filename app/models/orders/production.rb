@@ -19,17 +19,24 @@ class Orders::Production < ActiveRecord::Base
   before_destroy :destroy_requests_open
   
   def destroy_requests_open
-    
+     system_user_id = AppConfig.find('system_user_id').value
+     open_status_id = AppConfig.find('open_status_id').value
+     Requests::Transferences::Component.where('order_id = ? AND user_id = ? AND status_id = ?', id, system_user_id, open_status_id).destroy_all
   end
   
   def generate_request
     system_user_id = AppConfig.find('system_user_id').value
     open_status_id = AppConfig.find('open_status_id').value
-    request = Requests::Transferences::Component.where('order_id = ? AND user_id = ? AND status_id = ?', id, system_user_id, open_status_id).first || Requests::Transferences::Component.create!({
+    
+    request = Requests::Transferences::Component.where('order_id = ? AND user_id = ? AND status_id = ?', id, system_user_id, open_status_id).first
+    
+    if !request 
+      request = Requests::Transferences::Component.create!({
         user_id: system_user_id,
         status_id: open_status_id,
         order_id: id,
-    })
+      })
+    end
     
     components = {}    
     details.each do |dd|
@@ -57,7 +64,7 @@ class Orders::Production < ActiveRecord::Base
         end
     }
     
-#    return true
+    return true
   end
   
   def close
