@@ -3,6 +3,8 @@ Stock::Application.routes.draw do
 
   namespace :requests do  namespace :transferences do  namespace :finished do resources :components end end end
 
+  get "entry/index", :to => "entry#index"
+
   get "activity", :to => 'activity#index'
   get 'activity/:id', :to => 'activity#show'
 

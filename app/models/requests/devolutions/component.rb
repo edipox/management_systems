@@ -26,6 +26,7 @@ class Requests::Devolutions::Component < ActiveRecord::Base
         return false
       end
     end
+    sum = 0
     details.each do |d|
       id = d.component.id
       price = d.component.price
@@ -40,7 +41,35 @@ class Requests::Devolutions::Component < ActiveRecord::Base
         to_stock: Stocks::Component.to_s,
         is_component: true
       })
+      sum += price * qtty
     end
+     
+    
+    entry_id = Accounting::Entry.create!({
+      description: "Devoluciones de componentes y operaciones similares"    
+    }).id
+    
+    debe_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Devoluciones de compras"
+    })
+    haber_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Materias primas"
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: debe_account.id,
+      is_debe: true
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: haber_account.id,
+      is_debe: false
+    })
+   
     return true
   end
  

@@ -22,10 +22,12 @@
             %a{ href: components_items_path, data: { role: 'button', remote:"true" } } Componentes
           - if can?(:read, Requests::Purchases::Component)
             %a{ href: requests_purchases_components_path, data: { role: 'button', remote:"true" } } Solicitudes de compras
-          - if can?(:read, Components::Category.new)
+          - if can?(:read, Components::Category)
             %a{ href: components_categories_path, data: { role: 'button', remote:"true" } } Categorias
-          - if can?(:read, Components::Brand.new)
+          - if can?(:read, Components::Brand)
             %a{ href: components_brands_path, data: { role: 'button', remote:"true" } } Marcas
+          - if can?(:read, Accounting::Entry)
+            %a{ href: "/entry/index", data: { role: 'button', remote:"true" } } Asientos contables
 
         %div#content
           = yield

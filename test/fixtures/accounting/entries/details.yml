@@ -3,7 +3,9 @@
 one:
   account: MyString
   debe_haber: 1
+  header_id: MyString
 
 two:
   account: MyString
   debe_haber: 1
+  header_id: MyString

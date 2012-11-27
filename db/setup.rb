@@ -41,6 +41,12 @@ acl_entities << ['Stock de producción','Stocks::Production']
 acl_entities << ['Stock de productos terminados','Stocks::Product']
 acl_entities << ['Transacción', 'Transaction']
 
+
+acl_entities << ['Cuenta contable','Accounting::Account']
+acl_entities << ['Asiento contable','Accounting::Entry']
+acl_entities << ['Detalle de asiento contable', 'Accounting::Entries::Detail']
+
+
 # acl_entities << ['', '']
 
 acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }

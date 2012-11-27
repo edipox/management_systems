@@ -25,6 +25,7 @@ class Requests::Devolutions::Product < ActiveRecord::Base
         return false
       end
     end
+    sum = 0
     details.each do |d|
       id = d.product.id
       price = d.product.price
@@ -38,8 +39,36 @@ class Requests::Devolutions::Product < ActiveRecord::Base
         from_stock: Stocks::Production.to_s,
         to_stock: Stocks::Product.to_s,
         is_component: false
-      })      
+      })   
+      
+      sum += qtty * price   
     end
+
+    entry_id = Accounting::Entry.create!({
+      description: "Devoluciones de productos y operaciones similares"    
+    }).id
+    
+    debe_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Devoluciones de ventas"
+    })
+    haber_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos terminados"
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: debe_account.id,
+      is_debe: true
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: haber_account.id,
+      is_debe: false
+    })
+   
     return true
   end
   

@@ -1,8 +1,10 @@
 class CreateAccountingEntriesDetails < ActiveRecord::Migration
   def change
     create_table :accounting_entries_details do |t|
-      t.string :account
-      t.integer :debe_haber
+      t.string :account_id
+      t.boolean :is_debe
+      t.string :header_id
+      t.integer :value
 
       t.timestamps
     end

@@ -90,7 +90,8 @@ class Orders::Production < ActiveRecord::Base
     end
     products_transferences.status = Transactions::Status.find(AppConfig.find('close_status_id').value)
     products_transferences.save
-    
+    sum = 0
+    component_sum = 0
     details.each do |d|
       Transaction.create!({
         kind: self.class.to_s,
@@ -100,7 +101,41 @@ class Orders::Production < ActiveRecord::Base
         to_stock: Stocks::Product.to_s,
         is_component: false
       })
+      sum += d.product.price * d.quantity
+      
+      d.product.details.each do |dc|
+        component_sum += dc.component.price * dc.quantity  
+      end
+      
     end
+    
+     
+    
+    entry_id = Accounting::Entry.create!({
+      description: "Transferencia de productos"    
+    }).id
+    
+    debe_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos terminados"
+    })
+    haber_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos en curso"
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: debe_account.id,
+      is_debe: true
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: haber_account.id,
+      is_debe: false
+    })
+   
     
     return true
   end

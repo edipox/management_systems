@@ -1,0 +1,53 @@
+= will_paginate @entries
+%ul.account{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'false' } }
+
+  - @entries.each do |entry|
+    %li{ data: { role: 'list-divider' } }
+    
+      %div{ class: "ui-grid-b" }
+
+        %div{ class: "ui-block-a account date" }= entry.updated_at.strftime("%m/%d/%Y")        
+        %div{ class: "ui-block-b" }= entry.number 
+        %div{ class: "ui-block-c" }
+        
+    %li{ class: 'account'}
+      - entry.details.where("is_debe = true").each do |d|
+        %div{ class: "ui-grid-b" }
+          
+          %div{ class: "ui-block-a date" }
+          
+          %div{ class: "ui-block-b accounts" }
+            %div{ class: "ui-grid-a" }
+              
+              %div{ class: "ui-block-a" }= d.account.name
+              %div{ class: "ui-block-b" } 
+              
+                           
+          %div{ class: "ui-block-c column" }
+            %div{ class: "ui-grid-a" }
+              
+              %div{ class: "ui-block-a" }= d.value
+              %div{ class: "ui-block-b" } 0
+      
+      %hr
+      
+      - entry.details.where("is_debe = false").each do |d|
+        %div{ class: "ui-grid-b" }
+          
+          %div{ class: "ui-block-a date" }
+          
+          %div{ class: "ui-block-b accounts" }
+            %div{ class: "ui-grid-a" }
+              
+              %div{ class: "ui-block-a haber" }= "a "+d.account.name
+              
+                           
+          %div{ class: "ui-block-c column" }
+            %div{ class: "ui-grid-a" }
+              
+              %div{ class: "ui-block-a" } 0
+              %div{ class: "ui-block-b" }= d.value
+
+    
+      %li.description{ data: { trim: "40" } }= entry.description
+  

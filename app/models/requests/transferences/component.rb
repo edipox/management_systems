@@ -26,13 +26,16 @@ class Requests::Transferences::Component < ActiveRecord::Base
         return false
       end
     end
+    
+    sum = 0
+    
     details.each do |d|
       id = d.component.id
       price = d.component.price
       qtty = d.quantity
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
       Stocks::Production.create!({component_id: id, component_quantity: qtty, component_price: price})
-      
+      sum += qtty * price
       Transaction.create!({
         kind: self.class.to_s,
         detail_kind: d.class.to_s,
@@ -43,6 +46,35 @@ class Requests::Transferences::Component < ActiveRecord::Base
       })
      
     end
+    
+    
+    entry_id = Accounting::Entry.create!({
+      description: "Transferencia de componentes"    
+    }).id
+    
+    debe_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos en curso"
+    })
+    haber_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Materias primas"
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: debe_account.id,
+      is_debe: true
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: haber_account.id,
+      is_debe: false
+    })
+    
+    
+    
     return true
   end
   

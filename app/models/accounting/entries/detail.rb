@@ -1,11 +1,11 @@
 class Accounting::Entries::Detail < ActiveRecord::Base
-   has_paper_trail
-  attr_accessible :account, :debe_haber
+  has_paper_trail
+  attr_accessible :account_id, :account, :is_debe, :header_id, :value
 
-  has_many :details, :foreign_key => :header_id, :class_name => "Accounting::Entries::Details::Detail"
-
-  belongs_to :status, :class_name => "Transactions::Status"
+  belongs_to :entry, :foreign_key => :header_id, :class_name => "Accounting::Entry"
+  belongs_to :account, :foreign_key => :account_id, :class_name => "Accounting::Account"
 
   validates :account, :presence => true #, :length => { :minimum => 2 }  
-  validates :debe_haber, :presence => true #, :length => { :minimum => 2 }  
+  validates :value, :presence => true #, :length => { :minimum => 2 }    
+  validates :header_id, :presence => true #, :length => { :minimum => 2 }  
 end

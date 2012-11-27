@@ -29,36 +29,44 @@ class Requests::Transferences::Product < ActiveRecord::Base
         end
       end
     end
-    
+    sum = 0
     details.each do |dd|
       dd.product.details.each do |d|
         id = d.component.id
         price = d.component.price
         qtty = d.quantity
         Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
-
-#        Transaction.create!({
-#          kind: self.class.to_s,
-#          detail_kind: d.class.to_s,
-#          detail_id: d.id,
-#          from_stock: Stocks::Production.to_s,
-#          to_stock: Stocks::Component.to_s,
-#          is_component: true
-#        })
-
+        sum += price * qtty
       end
       Stocks::Product.create!({product_id: dd.product_id, product_quantity: dd.quantity, product_price: dd.product.price})
-
-#      Transaction.create!({
-#        kind: self.class.to_s,
-#        detail_kind: dd.class.to_s,
-#        detail_id: dd.id,
-#        from_stock: Stocks::Production.to_s,
-#        to_stock: Stocks::Product.to_s,
-#        is_component: false
-#      })
       
     end
+    
+    
+    entry_id = Accounting::Entry.create!({
+      description: "Transferencia de productos"    
+    }).id
+    
+    debe_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos terminados"
+    })
+    haber_account = acc = Accounting::Account.create!({
+      entrable: true,
+      name: "Productos en curso"
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: debe_account.id,
+      is_debe: true
+    })
+    Accounting::Entries::Detail.create!({
+      header_id: entry_id,
+      value: sum,
+      account_id: haber_account.id,
+      is_debe: false
+    })
     
     return true
   end

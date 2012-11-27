@@ -9,4 +9,5 @@ class Transaction < ActiveRecord::Base
   validates :detail_id, :presence => true 
   validates :from_stock, :presence => true 
   validates :to_stock, :presence => true 
+  
 end
