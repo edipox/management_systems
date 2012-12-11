@@ -15,7 +15,7 @@
 //= require_self
 //= require_tree .
 
-$(document).bind("mobileinit", function(){
+$(document).on("mobileinit", function(){
   $.mobile.ajaxEnabled = false;
   $.mobile.selectmenu.prototype.options.nativeMenu = false;
 });
@@ -34,21 +34,21 @@ function showNotice(notice){
 }
 
 function first_load(){
-  $(document).live("ajax:before", function(){
+  $(document).on("ajax:before", function(){
     showLoader();
-  }).live("ajax:success", function(){
+  }).on("ajax:success", function(){
     hideLoader();
   });
   
-  $("#fake_finished_fake").live('change', function() {
+  $("#fake_finished_fake").on('change', function() {
     $('input[name="category_finished"]').val(this.value);
   });
 
-  $("#finished_fake").live('change', function() {
+  $("#finished_fake").on('change', function() {
     $('input[name="components_category[finished]"]').val(this.value);
   }); 
   
-  $(".pagination a").live('click', function() {
+  $(".pagination a").on('click', function() {
   	$.ajax({
   	  type: "GET",
   	  url: $(this).attr("href"),

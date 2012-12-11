@@ -204,19 +204,20 @@ value: Accounting::Account.create!({
   name: "Devoluciones de compras"
 }).id })
 AppConfig.create!({
-id: 'accounting_raw_materials_id'
-value: Accounting::Account.create!({
+  id: 'accounting_raw_materials_id',
+  value: Accounting::Account.create!({
   entrable: true,
   name: "Materias primas"
-}).id })
+  }).id
+})
 AppConfig.create!({
-id: 'accounting_sell_devolutions_id'
+id: 'accounting_sell_devolutions_id',
 value: Accounting::Account.create!({
   entrable: true,
   name: "Devoluciones de ventas"
 }).id })
 AppConfig.create!({
-id: 'accounting_comercials_id'
+id: 'accounting_comercials_id',
 value: Accounting::Account.create!({
       entrable: true,
       name: "Comerciales"
