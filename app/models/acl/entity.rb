@@ -43,5 +43,5 @@ class ACL::Entity < ActiveRecord::Base
   has_paper_trail
   
   set_table_name "lca_entidades"
-  
+  alias_attribute :name, :nombre
 end

@@ -10,4 +10,9 @@ class ACL::Permission < ActiveRecord::Base
 
   has_paper_trail
   set_table_name "lca_permisos"
+  alias_attribute :enabled, :concedido
+  alias_attribute :role_id, :rol_id
+  alias_attribute :entity_id, :entidad_id
+  alias_attribute :action_id, :accion_id
+
 end

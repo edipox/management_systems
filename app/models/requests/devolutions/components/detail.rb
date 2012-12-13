@@ -9,4 +9,9 @@ class Requests::Devolutions::Components::Detail < ActiveRecord::Base
   belongs_to :requests_devolutions_component, :foreign_key => :header_id, :class_name => "Requests::Devolutions::Component"
   belongs_to :component, :class_name => Components::Item.to_s
   #has_one :component, :foreign_key => :component_id,:class_name => "Components::Item"
+  
+  set_table_name "devoluciones_componentes_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :header_id, :devoluciones_componentes_id
+  alias_attribute :component_id, :componente_id
 end

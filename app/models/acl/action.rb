@@ -3,11 +3,15 @@ class ACL::Action < ActiveRecord::Base
   attr_accessible :name, :symbol, :extra
 
   has_many :acl_permissions, :class_name => ACL::Permission.to_s
-  alias_attribute :permissions, :acl_permissions
 
-  attr_accessible :entity
+  attr_accessible :entity, :entity_id
   belongs_to :entity, :class_name => ACL::Entity.to_s
 
   has_paper_trail
+  
   set_table_name "lca_acciones"
+  alias_attribute :name, :nombre
+  alias_attribute :symbol, :simbolo
+  alias_attribute :entity_id, :entidad_id
+#  alias_attribute :permissions, :acl_permissions
 end

@@ -11,4 +11,8 @@ class Requests::Transferences::Finished::Components::Detail < ActiveRecord::Base
   belongs_to :requests_transferences_finished_component, :foreign_key => :header_id, :class_name => Requests::Transferences::Finished::Component.to_s
   belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s 
   
+  set_table_name "solicitudes_componentes_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :component_id, :componente_id
+  alias_attribute :header_id, :solicitud_componentes_id
 end

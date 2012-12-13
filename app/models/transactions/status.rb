@@ -7,4 +7,7 @@ class Transactions::Status < ActiveRecord::Base
   has_many :requests_transferences_components, :class_name => Requests::Transferences::Component.to_s
   has_many :requests_devolutions_components, :class_name => Requests::Devolutions::Component.to_s
   has_many :orders_productions, :class_name => Orders::Production.to_s  
+  
+  set_table_name "transacciones_estados"
+  alias_attribute :name, :nombre
 end

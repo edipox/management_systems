@@ -8,4 +8,10 @@ class Products::Compositions::Detail < ActiveRecord::Base
   validates :quantity, :presence => true #, :length => { :minimum => 2 }  
   belongs_to :component, :class_name => Components::Item.to_s
   belongs_to :products_composition, :foreign_key => :header_id, :class_name => "Products::Composition"
+  
+  set_table_name "productos_terminados_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :component_id, :componente_id
+  alias_attribute :header_id, :producto_terminado_id
+  
 end

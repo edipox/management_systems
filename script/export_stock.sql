@@ -1,10 +1,10 @@
 --
 -- ER/Studio 7.5 SQL Code Generation
 -- Company :      uni
--- Project :      TO_EXPORT.DM1
+-- Project :      modelado_en_proceso.dm1
 -- Author :       Pablo
 --
--- Date Created : Monday, December 10, 2012 21:06:47
+-- Date Created : Thursday, December 13, 2012 16:47:52
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -53,6 +53,7 @@ CREATE TABLE componentes(
     nombre          char(36)     NOT NULL,
     descripcion     char(250)    NOT NULL,
     categoria_id    char(36)     NOT NULL,
+    marca_id        char(36)     NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -208,6 +209,23 @@ CREATE TABLE lca_roles(
 
 
 -- 
+-- TABLE: marcas 
+--
+
+CREATE TABLE marcas(
+    id             char(36)        NOT NULL,
+    descripcion    varchar(250),
+    nombre         char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: ordenes_producciones 
 --
 
@@ -284,10 +302,11 @@ CREATE TABLE pedidos_compras_componentes_detalles(
 --
 
 CREATE TABLE productos_terminados(
-    id              char(36)    NOT NULL,
-    stock_minimo    int4        NOT NULL,
-    nombre          char(36)    NOT NULL,
-    modelo          char(36)    NOT NULL,
+    id              char(36)        NOT NULL,
+    precio          int4            NOT NULL,
+    descripcion     varchar(250)    NOT NULL,
+    stock_minimo    int4            NOT NULL,
+    nombre          char(36)        NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -370,10 +389,10 @@ CREATE TABLE solicitudes_transferencias_componentes(
 
 
 -- 
--- TABLE: solicitudes_transferencias_componentes_detalle 
+-- TABLE: solicitudes_transferencias_componentes_detalles 
 --
 
-CREATE TABLE solicitudes_transferencias_componentes_detalle(
+CREATE TABLE solicitudes_transferencias_componentes_detalles(
     id                                        char(36)    NOT NULL,
     cantidad                                  int4        NOT NULL,
     solicitud_transferencia_componentes_id    char(36)    NOT NULL,
@@ -415,7 +434,7 @@ CREATE TABLE solicitudes_transferencias_productos_detalles(
     cantidad                                   int4        NOT NULL,
     solicitudes_transferencias_productos_id    char(36)    NOT NULL,
     producto_terminado_id                      char(36)    NOT NULL,
-    orden_produccion_detalle                   char(36)    NOT NULL,
+    orden_produccion_detalle_id                char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -469,10 +488,13 @@ CREATE TABLE stock_producciones(
 --
 
 CREATE TABLE stock_productos_terminados(
-    id                       char(36)    NOT NULL,
-    precio_unitario          int4        NOT NULL,
-    cantidad                 interval    NOT NULL,
-    producto_terminado_id    char(36)    NOT NULL,
+    id                            char(36)    NOT NULL,
+    precio_unitario_producto      int4,
+    precio_unitario_componente    int4,
+    cantidad_producto             interval,
+    cantidad_componente           int4,
+    producto_terminado_id         char(36),
+    componente_id                 char(36),
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -612,6 +634,14 @@ ALTER TABLE lca_roles ADD
 ;
 
 -- 
+-- TABLE: marcas 
+--
+
+ALTER TABLE marcas ADD 
+    CONSTRAINT "PK91" PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: ordenes_producciones 
 --
 
@@ -684,10 +714,10 @@ ALTER TABLE solicitudes_transferencias_componentes ADD
 ;
 
 -- 
--- TABLE: solicitudes_transferencias_componentes_detalle 
+-- TABLE: solicitudes_transferencias_componentes_detalles 
 --
 
-ALTER TABLE solicitudes_transferencias_componentes_detalle ADD 
+ALTER TABLE solicitudes_transferencias_componentes_detalles ADD 
     CONSTRAINT "PK20" PRIMARY KEY (id)
 ;
 
@@ -751,6 +781,11 @@ ALTER TABLE users ADD
 -- TABLE: componentes 
 --
 
+ALTER TABLE componentes ADD CONSTRAINT "Refmarcas92" 
+    FOREIGN KEY (marca_id)
+    REFERENCES marcas(id)
+;
+
 ALTER TABLE componentes ADD CONSTRAINT "Refcategorias11" 
     FOREIGN KEY (categoria_id)
     REFERENCES categorias(id)
@@ -806,14 +841,14 @@ ALTER TABLE devoluciones_productos ADD CONSTRAINT "Reftransacciones_estados39"
 -- TABLE: devoluciones_productos_detalles 
 --
 
-ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refdevoluciones_productos40" 
-    FOREIGN KEY (devoluciones_productos_id)
-    REFERENCES devoluciones_productos(id)
-;
-
 ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refproductos_terminados41" 
     FOREIGN KEY (producto_id)
     REFERENCES productos_terminados(id)
+;
+
+ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refdevoluciones_productos40" 
+    FOREIGN KEY (devoluciones_productos_id)
+    REFERENCES devoluciones_productos(id)
 ;
 
 
@@ -968,15 +1003,15 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refusers29"
 
 
 -- 
--- TABLE: solicitudes_transferencias_componentes_detalle 
+-- TABLE: solicitudes_transferencias_componentes_detalles 
 --
 
-ALTER TABLE solicitudes_transferencias_componentes_detalle ADD CONSTRAINT "Refsolicitudes_transferencias_componentes27" 
+ALTER TABLE solicitudes_transferencias_componentes_detalles ADD CONSTRAINT "Refsolicitudes_transferencias_componentes27" 
     FOREIGN KEY (solicitud_transferencia_componentes_id)
     REFERENCES solicitudes_transferencias_componentes(id)
 ;
 
-ALTER TABLE solicitudes_transferencias_componentes_detalle ADD CONSTRAINT "Refcomponentes28" 
+ALTER TABLE solicitudes_transferencias_componentes_detalles ADD CONSTRAINT "Refcomponentes28" 
     FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
 ;
@@ -986,6 +1021,11 @@ ALTER TABLE solicitudes_transferencias_componentes_detalle ADD CONSTRAINT "Refco
 -- TABLE: solicitudes_transferencias_productos 
 --
 
+ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_producciones46" 
+    FOREIGN KEY (orden_produccion_id)
+    REFERENCES ordenes_producciones(id)
+;
+
 ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransacciones_estados21" 
     FOREIGN KEY (estado_id)
     REFERENCES transacciones_estados(id)
@@ -994,11 +1034,6 @@ ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransaccione
 ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refusers30" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
-;
-
-ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_producciones46" 
-    FOREIGN KEY (orden_produccion_id)
-    REFERENCES ordenes_producciones(id)
 ;
 
 
@@ -1016,8 +1051,8 @@ ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refpro
     REFERENCES productos_terminados(id)
 ;
 
-ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles25" 
-    FOREIGN KEY (orden_produccion_detalle)
+ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles93" 
+    FOREIGN KEY (orden_produccion_detalle_id)
     REFERENCES ordenes_producciones_detalles(id)
 ;
 
@@ -1051,9 +1086,14 @@ ALTER TABLE stock_producciones ADD CONSTRAINT "Refproductos_terminados7"
 -- TABLE: stock_productos_terminados 
 --
 
-ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refproductos_terminados10" 
+ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refproductos_terminados94" 
     FOREIGN KEY (producto_terminado_id)
     REFERENCES productos_terminados(id)
+;
+
+ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refcomponentes95" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
 ;
 
 

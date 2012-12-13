@@ -17,8 +17,9 @@ end
 
 class ACL::Role < ActiveRecord::Base
   attr_accessible :name
-  validates :name, { presence: true, uniqueness: true }
-
+#  validates :name, { presence: true, uniqueness: true }
+  validates :nombre, { presence: true, uniqueness: true }
+  
   acts_as_paranoid
 
   has_many :acl_permissions, :class_name => ACL::Permission.to_s
@@ -31,4 +32,5 @@ class ACL::Role < ActiveRecord::Base
 
   has_paper_trail
   set_table_name "lca_roles"
+  alias_attribute :name, :nombre
 end

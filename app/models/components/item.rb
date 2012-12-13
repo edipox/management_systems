@@ -18,6 +18,16 @@ class Components::Item < ActiveRecord::Base
   
   has_many :requests_purchases_components_details, :foreign_key => :component_id, :class_name => Requests::Purchases::Components::Detail.to_s  
     
+    
+  set_table_name "componentes"
+  alias_attribute :name, :nombre
+  alias_attribute :code, :codigo
+  alias_attribute :minimum_quantity, :stock_minimo
+  alias_attribute :description, :descripcion
+  alias_attribute :category_id, :categoria_id
+  alias_attribute :brand_id, :marca_id
+  
+  
   def raw_material_total_stock
     qty = raw_material_stocks.reduce do |s0, s1|
       s0.quantity += s1.quantity

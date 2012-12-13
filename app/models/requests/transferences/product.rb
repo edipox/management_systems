@@ -14,6 +14,13 @@ class Requests::Transferences::Product < ActiveRecord::Base
   
   auto_increment :column => :number  
   
+  set_table_name "solicitudes_transferencias_productos"
+  alias_attribute :number, :numero
+  alias_attribute :status_id, :estado_id
+  alias_attribute :user_id, :usuario_id
+  # NEW ATTR
+  alias_attribute :order_production_id, :orden_produccion_id
+  attr_accessible :order_production_id
   
 #  def close
 #    details.each do |dd|

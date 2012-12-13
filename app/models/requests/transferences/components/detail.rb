@@ -9,4 +9,9 @@ class Requests::Transferences::Components::Detail < ActiveRecord::Base
   
   belongs_to :component, :class_name => Components::Item.to_s
   belongs_to :requests_transferences_component, :foreign_key => :header_id, :class_name => "Requests::Transferences::Component"
+  
+  set_table_name "solicitudes_transferencias_componentes_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :header_id, :solicitud_transferencia_componentes_id
+  alias_attribute :component_id, :componente_id
 end

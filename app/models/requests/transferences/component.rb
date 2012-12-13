@@ -1,7 +1,8 @@
 class Requests::Transferences::Component < ActiveRecord::Base
    has_paper_trail
    acts_as_paranoid
- attr_accessible :status_id, :status, :order, :order_id, :user_id, :user, :header, :header_id, :component_id, :component, :number
+ attr_accessible :status_id, :status, :number, :user_id, :user, :header, :header_id
+# , :order, :order_id, :component_id, :component,
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Components::Detail.to_s
 
@@ -14,6 +15,11 @@ class Requests::Transferences::Component < ActiveRecord::Base
   auto_increment :column => :number  
   
   belongs_to :order, :foreign_key => :order_id, :class_name => Orders::Production.to_s
+  
+  set_table_name "solicitud_transferencia_componentes"
+  alias_attribute :number, :numero
+  alias_attribute :status_id, :estado_id
+  alias_attribute :user_id, :usuario_id
   
   def close
     details.each do |d|

@@ -13,6 +13,11 @@ class Requests::Purchases::Component < ActiveRecord::Base
   
   auto_increment :column => :number  
   
+  set_table_name "pedidos_compras_componentes"
+  alias_attribute :number, :numero
+  alias_attribute :status_id, :estado_id
+  alias_attribute :user_id, :usuario_id
+  
   def close
   
     sum = 0

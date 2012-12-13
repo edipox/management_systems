@@ -2,7 +2,8 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
    has_paper_trail
   acts_as_paranoid
 
-  attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :component_id, :component, :number
+  attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :number
+  #:component_id, :component, :number
 
   has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Finished::Components::Detail.to_s
 
@@ -13,6 +14,11 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
   validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   
   auto_increment :column => :number  
+  
+  set_table_name "solicitudes_componentes"
+  alias_attribute :number, :numero
+  alias_attribute :status_id, :estado_id
+  alias_attribute :user_id, :usuario_id
   
   def close
     details.each do |d|

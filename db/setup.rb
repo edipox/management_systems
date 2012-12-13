@@ -1,8 +1,8 @@
 puts 'Inserting initial registers in the database...'
-ACL::Action.create!({ name: 'Crear', symbol: 'create' })
-ACL::Action.create!({ name: 'Leer', symbol: 'read' })
-ACL::Action.create!({ name: 'Editar', symbol: 'update' })
-ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
+#ACL::Action.create!({ name: 'Crear', symbol: 'create' })
+#ACL::Action.create!({ name: 'Leer', symbol: 'read' })
+#ACL::Action.create!({ name: 'Editar', symbol: 'update' })
+#ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
 
 # The super user role MUST be created first!!
 admin_role = ACL::Role.create!({ name: 'Administrador' })
@@ -49,7 +49,13 @@ acl_entities << ['Detalle de asiento contable', 'Accounting::Entries::Detail']
 
 # acl_entities << ['', '']
 
-acl_entities.each { |e| ACL::Entity.create!({ name: e[0], const: e[1] }) }
+acl_entities.each { |e| 
+  ent = ACL::Entity.create!({ name: e[0], const: e[1] })
+  ACL::Action.create!({ name: 'Crear', symbol: 'create', entity: ent })
+  ACL::Action.create!({ name: 'Leer', symbol: 'read', entity: ent })
+  ACL::Action.create!({ name: 'Editar', symbol: 'update', entity: ent })
+  ACL::Action.create!({ name: 'Eliminar', symbol: 'delete', entity: ent })
+}
 
 # Special actions
 stocks_component_entity = ACL::Entity.where('const = :const', { const: "Stocks::Component" }).first

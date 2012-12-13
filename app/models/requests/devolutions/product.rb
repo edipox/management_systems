@@ -12,7 +12,11 @@ class Requests::Devolutions::Product < ActiveRecord::Base
   validates :status_id, :presence => true #, :length => { :minimum => 2 }  
   auto_increment :column => :number
   
-  
+  set_table_name "devoluciones_productos"
+  alias_attribute :number, :numero
+  alias_attribute :reason, :motivo
+  alias_attribute :user_id, :usuario_id
+  alias_attribute :status_id, :estado_id
     
   def close
     details.each do |d|

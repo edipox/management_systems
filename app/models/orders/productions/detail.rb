@@ -12,9 +12,13 @@ class Orders::Productions::Detail < ActiveRecord::Base
   belongs_to :orders_production, :foreign_key => :header_id, :class_name => Orders::Production.to_s
   
   after_save :generate_request
-  
   def generate_request
     orders_production.generate_request
   end
 
+  set_table_name "ordenes_producciones_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :product_id, :producto_terminado_id
+  alias_attribute :header_id, :orden_produccion_id
+  
 end

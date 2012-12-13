@@ -15,6 +15,12 @@ class Requests::Devolutions::Component < ActiveRecord::Base
   
   auto_increment :column => :number
   
+  set_table_name "devoluciones_componentes"
+  alias_attribute :number, :numero
+  alias_attribute :reason, :motivo
+  alias_attribute :user_id, :usuario_id
+  alias_attribute :status_id, :estado_id
+  
   def close
     details.each do |d|
       qtty = d.quantity

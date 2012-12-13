@@ -9,4 +9,12 @@ class Stocks::Production < ActiveRecord::Base
   #validates :price, :presence => true
   belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s
   belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s  
+  
+  set_table_name "stock_producciones"
+  alias_attribute :component_quantity, :cantidad_componente
+  alias_attribute :product_quantity, :cantidad_producto
+  alias_attribute :component_id, :componente_id
+  alias_attribute :product_id, :producto_terminado_id
+  alias_attribute :product_price, :precio_unitario_producto
+  alias_attribute :component_price, :precio_unitario_componente
 end

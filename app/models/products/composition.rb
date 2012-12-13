@@ -22,4 +22,10 @@ class Products::Composition < ActiveRecord::Base
   
   has_many :products_stocks, :foreign_key => :product_id, :class_name => ::Stocks::Product.to_s
   
+  set_table_name "productos_terminados"
+  alias_attribute :minimum_quantity, :stock_minimo
+  alias_attribute :name, :nombre
+  alias_attribute :price, :precio
+  alias_attribute :description, :descripcion
+  
 end

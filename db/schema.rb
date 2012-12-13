@@ -11,374 +11,308 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127123646) do
+ActiveRecord::Schema.define(:version => 20121109183111) do
 
-  create_table "accounting_accounts", :force => true do |t|
-    t.string   "name"
-    t.boolean  "entrable"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "app_configs", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.string   "valor",      :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "accounting_entries", :force => true do |t|
-    t.integer  "number"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "categorias", :id => false, :force => true do |t|
+    t.string   "id",          :limit => 36,  :null => false
+    t.string   "nombre",      :limit => 36,  :null => false
+    t.string   "descripcion", :limit => 250, :null => false
+    t.boolean  "vendible",                   :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "accounting_entries_details", :force => true do |t|
-    t.string   "account_id"
-    t.boolean  "is_debe"
-    t.string   "header_id"
-    t.integer  "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "componentes", :id => false, :force => true do |t|
+    t.string   "id",           :limit => 36,  :null => false
+    t.string   "codigo",       :limit => 36,  :null => false
+    t.integer  "stock_minimo",                :null => false
+    t.string   "nombre",       :limit => 36,  :null => false
+    t.string   "descripcion",  :limit => 250, :null => false
+    t.string   "categoria_id", :limit => 36,  :null => false
+    t.string   "marca_id",     :limit => 36,  :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "acl_actions", :force => true do |t|
-    t.string   "name"
-    t.string   "symbol"
-    t.date     "deleted_at"
+  create_table "devoluciones_componentes", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36,  :null => false
+    t.integer  "numero",                    :null => false
+    t.string   "motivo",     :limit => 250, :null => false
+    t.string   "usuario_id", :limit => 36,  :null => false
+    t.string   "estado_id",  :limit => 36,  :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "devoluciones_componentes_detalles", :id => false, :force => true do |t|
+    t.string   "id",                          :limit => 36, :null => false
+    t.integer  "cantidad",                                  :null => false
+    t.string   "devoluciones_componentes_id", :limit => 36, :null => false
+    t.string   "componente_id",               :limit => 36, :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "devoluciones_productos", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36,  :null => false
+    t.integer  "numero",                    :null => false
+    t.string   "motivo",     :limit => 250, :null => false
+    t.string   "usuario_id", :limit => 36,  :null => false
+    t.string   "estado_id",  :limit => 36,  :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "devoluciones_productos_detalles", :id => false, :force => true do |t|
+    t.string   "id",                        :limit => 36, :null => false
+    t.integer  "cantidad",                                :null => false
+    t.string   "devoluciones_productos_id", :limit => 36, :null => false
+    t.string   "producto_id",               :limit => 36, :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "lca_acciones", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36,                    :null => false
+    t.boolean  "extra",                    :default => false, :null => false
+    t.text     "simbolo",                                     :null => false
+    t.string   "nombre",     :limit => 36,                    :null => false
+    t.string   "entidad_id", :limit => 36,                    :null => false
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
-    t.boolean  "extra",                    :default => false
-    t.string   "entity_id",  :limit => 36
+    t.datetime "deleted_at"
   end
 
-  create_table "acl_entities", :force => true do |t|
-    t.string   "name"
-    t.string   "const"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lca_entidades", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.text     "const",                    :null => false
+    t.string   "nombre",     :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "acl_permissions", :force => true do |t|
-    t.string   "role_id"
-    t.string   "entity_id"
-    t.string   "action_id"
-    t.boolean  "enabled"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lca_permisos", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.boolean  "concedido",                :null => false
+    t.string   "rol_id",     :limit => 36, :null => false
+    t.string   "entidad_id", :limit => 36, :null => false
+    t.string   "accion_id",  :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "acl_roles", :force => true do |t|
-    t.string   "name"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "lca_roles", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.string   "nombre",     :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "app_configs", :force => true do |t|
-    t.string   "value"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "marca", :id => false, :force => true do |t|
+    t.string   "id",          :limit => 36,  :null => false
+    t.string   "descripcion", :limit => 250
+    t.string   "nombre",      :limit => 36,  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "components_brands", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.date     "deleted_at"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "ordenes_producciones", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.integer  "numero",                   :null => false
+    t.string   "estado_id",  :limit => 36, :null => false
+    t.string   "usuario_id", :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "components_categories", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.boolean  "finished",    :default => false
-    t.date     "deleted_at"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+  create_table "ordenes_producciones_detalles", :id => false, :force => true do |t|
+    t.string   "id",                    :limit => 36, :null => false
+    t.integer  "cantidad",                            :null => false
+    t.string   "producto_terminado_id", :limit => 36, :null => false
+    t.string   "orden_produccion_id",   :limit => 36, :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "components_categories_kinds", :force => true do |t|
-    t.string   "name"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "pedidos_compras_componentes", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.integer  "numero",                   :null => false
+    t.string   "estado_id",  :limit => 36, :null => false
+    t.string   "usuario_id", :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "components_items", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "code"
-    t.string   "category_id",      :limit => 36, :null => false
-    t.string   "brand_id",         :limit => 36, :null => false
-    t.integer  "minimum_quantity"
-    t.integer  "price"
-    t.date     "deleted_at"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+  create_table "pedidos_compras_componentes_detalles", :id => false, :force => true do |t|
+    t.string   "id",                             :limit => 36, :null => false
+    t.integer  "cantidad",                                     :null => false
+    t.string   "pedidos_compras_componentes_id", :limit => 36, :null => false
+    t.string   "componentes_id",                 :limit => 36, :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "locations_cities", :force => true do |t|
-    t.string   "name"
-    t.integer  "region_id_id"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+  create_table "productos_terminados", :id => false, :force => true do |t|
+    t.string   "id",           :limit => 36, :null => false
+    t.integer  "stock_minimo",               :null => false
+    t.string   "nombre",       :limit => 36, :null => false
+    t.string   "modelo",       :limit => 36, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.datetime "deleted_at"
   end
 
-  add_index "locations_cities", ["region_id_id"], :name => "index_locations_cities_on_region_id_id"
-
-  create_table "locations_continents", :force => true do |t|
-    t.string   "name"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "productos_terminados_detalles", :id => false, :force => true do |t|
+    t.string   "id",                    :limit => 36, :null => false
+    t.integer  "cantidad",                            :null => false
+    t.string   "componente_id",         :limit => 36, :null => false
+    t.string   "producto_terminado_id", :limit => 36, :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "locations_countries", :force => true do |t|
-    t.string   "name"
-    t.integer  "continent_id_id"
-    t.date     "deleted_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+  create_table "solicitudes_componentes", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.integer  "numero",                   :null => false
+    t.string   "estado_id",  :limit => 36, :null => false
+    t.string   "usuario_id", :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  add_index "locations_countries", ["continent_id_id"], :name => "index_locations_countries_on_continent_id_id"
-
-  create_table "locations_regions", :force => true do |t|
-    t.string   "name"
-    t.integer  "country_id_id"
-    t.date     "deleted_at"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+  create_table "solicitudes_componentes_detalles", :id => false, :force => true do |t|
+    t.string   "id",                       :limit => 36, :null => false
+    t.integer  "cantidad",                               :null => false
+    t.string   "componente_id",            :limit => 36, :null => false
+    t.string   "solicitud_componentes_id", :limit => 36, :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.datetime "deleted_at"
   end
 
-  add_index "locations_regions", ["country_id_id"], :name => "index_locations_regions_on_country_id_id"
-
-  create_table "orders_productions", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "solicitudes_transferencias_componentes", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.integer  "numero",                   :null => false
+    t.string   "estado_id",  :limit => 36, :null => false
+    t.string   "usuario_id", :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "orders_productions_details", :force => true do |t|
-    t.string   "product_id"
-    t.string   "header_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "products_compositions", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "minimum_quantity"
-    t.integer  "price"
-    t.date     "deleted_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  create_table "products_compositions_details", :force => true do |t|
-    t.string   "component_id"
-    t.string   "header_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "requests_devolutions_components", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.string   "reason"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_devolutions_components_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "component_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "requests_devolutions_products", :force => true do |t|
-    t.string   "user_id"
-    t.string   "reason"
-    t.string   "status_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_devolutions_products_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "product_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.integer  "number"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_purchases_components", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_purchases_components_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "component_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "requests_transferences_components", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.string   "order_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_transferences_components_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "component_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "requests_transferences_finished_components", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_transferences_finished_components_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "component_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "requests_transferences_products", :force => true do |t|
-    t.string   "status_id"
-    t.string   "user_id"
-    t.integer  "number"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "requests_transferences_products_details", :force => true do |t|
-    t.string   "header_id"
-    t.string   "product_id"
-    t.integer  "quantity"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "stocks_components", :force => true do |t|
-    t.string   "component_id"
-    t.integer  "quantity"
-    t.integer  "price"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "stocks_productions", :force => true do |t|
-    t.string   "component_id"
-    t.integer  "component_quantity"
-    t.integer  "component_price"
-    t.string   "product_id"
-    t.integer  "product_quantity"
-    t.integer  "product_price"
-    t.date     "deleted_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "stocks_products", :force => true do |t|
-    t.string   "component_id"
-    t.integer  "component_quantity"
-    t.integer  "component_price"
-    t.string   "product_id"
-    t.integer  "product_quantity"
-    t.integer  "product_price"
-    t.date     "deleted_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "tests", :force => true do |t|
-    t.string   "name"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "transactions", :force => true do |t|
-    t.string   "kind"
-    t.string   "detail_kind"
-    t.string   "detail_id"
-    t.string   "from_stock"
-    t.string   "to_stock"
-    t.boolean  "is_component"
-    t.date     "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "transactions_statuses", :force => true do |t|
-    t.string   "name"
-    t.date     "deleted_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "email",                                :default => "", :null => false
-    t.string   "encrypted_password",                   :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.date     "deleted_at"
+  create_table "solicitudes_transferencias_componentes_detalle", :id => false, :force => true do |t|
+    t.string   "id",                                     :limit => 36, :null => false
+    t.integer  "cantidad",                                             :null => false
+    t.string   "solicitud_transferencia_componentes_id", :limit => 36, :null => false
+    t.string   "componente_id",                          :limit => 36, :null => false
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.string   "acl_role_id",            :limit => 36
+    t.datetime "deleted_at"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  create_table "solicitudes_transferencias_productos", :id => false, :force => true do |t|
+    t.string   "id",                  :limit => 36, :null => false
+    t.integer  "numero",                            :null => false
+    t.string   "estado_id",           :limit => 36, :null => false
+    t.string   "usuario_id",          :limit => 36, :null => false
+    t.string   "orden_produccion_id", :limit => 36, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "solicitudes_transferencias_productos_detalles", :id => false, :force => true do |t|
+    t.string   "id",                                      :limit => 36, :null => false
+    t.integer  "cantidad",                                              :null => false
+    t.string   "solicitudes_transferencias_productos_id", :limit => 36, :null => false
+    t.string   "producto_terminado_id",                   :limit => 36, :null => false
+    t.string   "orden_produccion_detalle",                :limit => 36, :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "stock_materias_primas", :id => false, :force => true do |t|
+    t.string   "id",              :limit => 36, :null => false
+    t.string   "componente_id",   :limit => 36, :null => false
+    t.integer  "cantidad",                      :null => false
+    t.integer  "precio_unitario",               :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "stock_producciones", :id => false, :force => true do |t|
+    t.string   "id",                         :limit => 36, :null => false
+    t.integer  "cantidad_componente"
+    t.integer  "cantidad_producto"
+    t.string   "componente_id",              :limit => 36
+    t.string   "producto_terminado_id",      :limit => 36
+    t.integer  "precio_unitario_producto"
+    t.integer  "precio_unitario_componente"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "stock_productos_terminados", :id => false, :force => true do |t|
+    t.string   "id",                    :limit => 36,  :null => false
+    t.integer  "precio_unitario",                      :null => false
+    t.string   "cantidad",              :limit => nil, :null => false
+    t.string   "producto_terminado_id", :limit => 36,  :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "transacciones_estados", :id => false, :force => true do |t|
+    t.string   "id",         :limit => 36, :null => false
+    t.string   "nombre",     :limit => 36, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "users", :id => false, :force => true do |t|
+    t.string   "id",                     :limit => 36,                :null => false
+    t.integer  "sign_in_count",                        :default => 0
+    t.text     "encrypted_password",                                  :null => false
+    t.text     "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.text     "current_sign_in_ip"
+    t.text     "last_sign_in_ip"
+    t.string   "email",                  :limit => 36,                :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.datetime "deleted_at"
+  end
 
   create_table "versions", :force => true do |t|
     t.string   "item_type",                :null => false
@@ -390,5 +324,68 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  add_foreign_key "componentes", "categorias", :name => "Refcategorias11"
+  add_foreign_key "componentes", "marca", :name => "Refmarca92"
+
+  add_foreign_key "devoluciones_componentes", "transacciones_estados", :name => "Reftransacciones_estados34", :column => "estado_id"
+  add_foreign_key "devoluciones_componentes", "users", :name => "Refusers33", :column => "usuario_id"
+
+  add_foreign_key "devoluciones_componentes_detalles", "componentes", :name => "Refcomponentes36"
+  add_foreign_key "devoluciones_componentes_detalles", "devoluciones_componentes", :name => "Refdevoluciones_componentes35", :column => "devoluciones_componentes_id"
+
+  add_foreign_key "devoluciones_productos", "transacciones_estados", :name => "Reftransacciones_estados39", :column => "estado_id"
+  add_foreign_key "devoluciones_productos", "users", :name => "Refusers38", :column => "usuario_id"
+
+  add_foreign_key "devoluciones_productos_detalles", "devoluciones_productos", :name => "Refdevoluciones_productos40", :column => "devoluciones_productos_id"
+  add_foreign_key "devoluciones_productos_detalles", "productos_terminados", :name => "Refproductos_terminados41", :column => "producto_id"
+
+  add_foreign_key "lca_acciones", "lca_entidades", :name => "Reflca_entidades91", :column => "entidad_id"
+
+  add_foreign_key "lca_permisos", "lca_acciones", :name => "Reflca_acciones90", :column => "accion_id"
+  add_foreign_key "lca_permisos", "lca_entidades", :name => "Reflca_entidades89", :column => "entidad_id"
+  add_foreign_key "lca_permisos", "lca_roles", :name => "Reflca_roles88", :column => "rol_id"
+
+  add_foreign_key "ordenes_producciones", "transacciones_estados", :name => "Reftransacciones_estados19", :column => "estado_id"
+  add_foreign_key "ordenes_producciones", "users", :name => "Refusers31", :column => "usuario_id"
+
+  add_foreign_key "ordenes_producciones_detalles", "ordenes_producciones", :name => "Refordenes_producciones18", :column => "orden_produccion_id"
+  add_foreign_key "ordenes_producciones_detalles", "productos_terminados", :name => "Refproductos_terminados17", :column => "producto_terminado_id"
+
+  add_foreign_key "pedidos_compras_componentes", "transacciones_estados", :name => "Reftransacciones_estados42", :column => "estado_id"
+  add_foreign_key "pedidos_compras_componentes", "users", :name => "Refusers43", :column => "usuario_id"
+
+  add_foreign_key "pedidos_compras_componentes_detalles", "componentes", :name => "Refcomponentes45", :column => "componentes_id"
+  add_foreign_key "pedidos_compras_componentes_detalles", "pedidos_compras_componentes", :name => "Refpedidos_compras_componentes44", :column => "pedidos_compras_componentes_id"
+
+  add_foreign_key "productos_terminados_detalles", "componentes", :name => "Refcomponentes8"
+  add_foreign_key "productos_terminados_detalles", "productos_terminados", :name => "Refproductos_terminados9", :column => "producto_terminado_id"
+
+  add_foreign_key "solicitudes_componentes", "transacciones_estados", :name => "Reftransacciones_estados15", :column => "estado_id"
+  add_foreign_key "solicitudes_componentes", "users", :name => "Refusers32", :column => "usuario_id"
+
+  add_foreign_key "solicitudes_componentes_detalles", "componentes", :name => "Refcomponentes14"
+  add_foreign_key "solicitudes_componentes_detalles", "solicitudes_componentes", :name => "Refsolicitudes_componentes16", :column => "solicitud_componentes_id"
+
+  add_foreign_key "solicitudes_transferencias_componentes", "transacciones_estados", :name => "Reftransacciones_estados26", :column => "estado_id"
+  add_foreign_key "solicitudes_transferencias_componentes", "users", :name => "Refusers29", :column => "usuario_id"
+
+  add_foreign_key "solicitudes_transferencias_componentes_detalle", "componentes", :name => "Refcomponentes28"
+  add_foreign_key "solicitudes_transferencias_componentes_detalle", "solicitudes_transferencias_componentes", :name => "Refsolicitudes_transferencias_componentes27", :column => "solicitud_transferencia_componentes_id"
+
+  add_foreign_key "solicitudes_transferencias_productos", "ordenes_producciones", :name => "Refordenes_producciones46", :column => "orden_produccion_id"
+  add_foreign_key "solicitudes_transferencias_productos", "transacciones_estados", :name => "Reftransacciones_estados21", :column => "estado_id"
+  add_foreign_key "solicitudes_transferencias_productos", "users", :name => "Refusers30", :column => "usuario_id"
+
+  add_foreign_key "solicitudes_transferencias_productos_detalles", "ordenes_producciones_detalles", :name => "Refordenes_producciones_detalles25", :column => "orden_produccion_detalle"
+  add_foreign_key "solicitudes_transferencias_productos_detalles", "productos_terminados", :name => "Refproductos_terminados23", :column => "producto_terminado_id"
+  add_foreign_key "solicitudes_transferencias_productos_detalles", "solicitudes_transferencias_productos", :name => "Refsolicitudes_transferencias_productos22", :column => "solicitudes_transferencias_productos_id"
+
+  add_foreign_key "stock_materias_primas", "componentes", :name => "Refcomponentes4"
+
+  add_foreign_key "stock_producciones", "componentes", :name => "Refcomponentes5"
+  add_foreign_key "stock_producciones", "productos_terminados", :name => "Refproductos_terminados7", :column => "producto_terminado_id"
+
+  add_foreign_key "stock_productos_terminados", "productos_terminados", :name => "Refproductos_terminados10", :column => "producto_terminado_id"
 
 end

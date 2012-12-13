@@ -8,4 +8,6 @@ class AppConfig < ActiveRecord::Base
   def self.get(id)
     AppConfig.find(id).value
   end
+  
+  alias_attribute :value, :valor
 end

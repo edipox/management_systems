@@ -10,6 +10,12 @@ class Stocks::Component < ActiveRecord::Base
 
   belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s
 
+  set_table_name "stock_materias_primas"
+  alias_attribute :component_id, :componente_id
+  alias_attribute :quantity, :cantidad
+  alias_attribute :precio, :precio_unitario
+
+
   after_save :check_qty
 
   def check_qty

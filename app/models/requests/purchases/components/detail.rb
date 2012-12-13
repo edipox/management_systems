@@ -8,4 +8,9 @@ class Requests::Purchases::Components::Detail < ActiveRecord::Base
   
   belongs_to :component, :class_name => Components::Item.to_s
   belongs_to :requests_purchases_component, :foreign_key => :header_id, :class_name => Requests::Purchases::Component.to_s
+  
+  set_table_name "pedidos_compras_componentes_detalles"
+  alias_attribute :quantity, :cantidad
+  alias_attribute :header_id, :pedidos_compras_componentes_id
+  alias_attribute :component_id, :componentes_id
 end

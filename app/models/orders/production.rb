@@ -18,6 +18,11 @@ class Orders::Production < ActiveRecord::Base
   
   before_destroy :destroy_requests_open
   
+  set_table_name "ordenes_producciones"
+  alias_attribute :number, :numero
+  alias_attribute :status_id, :estado_id
+  alias_attribute :user_id, :usuario_id
+  
   def destroy_requests_open
      system_user_id = AppConfig.find('system_user_id').value
      open_status_id = AppConfig.find('open_status_id').value
