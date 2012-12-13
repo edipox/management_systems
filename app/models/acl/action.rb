@@ -9,4 +9,5 @@ class ACL::Action < ActiveRecord::Base
   belongs_to :entity, :class_name => ACL::Entity.to_s
 
   has_paper_trail
+  set_table_name "lca_acciones"
 end

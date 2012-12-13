@@ -30,4 +30,5 @@ class ACL::Role < ActiveRecord::Base
   has_many :users, :foreign_key => :acl_role_id
 
   has_paper_trail
+  set_table_name "lca_roles"
 end

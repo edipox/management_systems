@@ -9,4 +9,5 @@ class ACL::Permission < ActiveRecord::Base
   belongs_to :role, :class_name => ACL::Role.to_s
 
   has_paper_trail
+  set_table_name "lca_permisos"
 end

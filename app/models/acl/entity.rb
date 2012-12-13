@@ -41,4 +41,7 @@ class ACL::Entity < ActiveRecord::Base
   has_many :actions, :class_name => ACL::Action.to_s
 
   has_paper_trail
+  
+  set_table_name "lca_entidades"
+  
 end
