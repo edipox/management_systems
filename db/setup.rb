@@ -1,8 +1,8 @@
 puts 'Inserting initial registers in the database...'
-#ACL::Action.create!({ name: 'Crear', symbol: 'create' })
-#ACL::Action.create!({ name: 'Leer', symbol: 'read' })
-#ACL::Action.create!({ name: 'Editar', symbol: 'update' })
-#ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
+ACL::Action.create!({ name: 'Crear', symbol: 'create' })
+ACL::Action.create!({ name: 'Leer', symbol: 'read' })
+ACL::Action.create!({ name: 'Editar', symbol: 'update' })
+ACL::Action.create!({ name: 'Eliminar', symbol: 'delete' })
 
 # The super user role MUST be created first!!
 admin_role = ACL::Role.create!({ name: 'Administrador' })

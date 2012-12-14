@@ -14,9 +14,9 @@ class Requests::Transferences::Component < ActiveRecord::Base
 
   auto_increment :column => :numero
   
-  belongs_to :order, :foreign_key => :order_id, :class_name => Orders::Production.to_s
+  belongs_to :order, :foreign_key => :orden_produccion_id, :class_name => Orders::Production.to_s
   
-  set_table_name "solicitud_transferencia_componentes"
+  set_table_name "solicitudes_transferencias_componentes"
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id

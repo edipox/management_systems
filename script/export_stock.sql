@@ -380,7 +380,7 @@ CREATE TABLE solicitudes_transferencias_componentes(
     numero                 int4        NOT NULL,
     estado_id              char(36)    NOT NULL,
     usuario_id             char(36)    NOT NULL,
-    orden_produccion_id    char(36)    NOT NULL,
+    orden_produccion_id    char(36),
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp

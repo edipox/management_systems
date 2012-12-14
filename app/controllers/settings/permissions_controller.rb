@@ -25,7 +25,7 @@ class Settings::PermissionsController < ApplicationController
 
   def of_role
     @role = ACL::Role.find(params[:role_id])
-    permissions = @role.permissions.order(:created_at, :entity_id)
+    permissions = @role.permissions.order(:created_at, :entidad_id)
     
     @permissions_by_entity = {}
     permissions.each do |permission|
