@@ -90,7 +90,7 @@ CREATE TABLE devoluciones_componentes(
 CREATE TABLE devoluciones_componentes_detalles(
     id                             char(36)    NOT NULL,
     cantidad                       int4        NOT NULL,
-    devoluciones_componentes_id    char(36)    NOT NULL,
+    devoluciones_componente_id    char(36)    NOT NULL,
     componente_id                  char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
@@ -287,8 +287,8 @@ CREATE TABLE pedidos_compras_componentes(
 CREATE TABLE pedidos_compras_componentes_detalles(
     id                                char(36)    NOT NULL,
     cantidad                          int4        NOT NULL,
-    pedidos_compras_componentes_id    char(36)    NOT NULL,
-    componentes_id                    char(36)    NOT NULL,
+    pedidos_compras_componente_id    char(36)    NOT NULL,
+    componente_id                    char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -361,7 +361,7 @@ CREATE TABLE solicitudes_componentes_detalles(
     id                          char(36)    NOT NULL,
     cantidad                    int4        NOT NULL,
     componente_id               char(36)    NOT NULL,
-    solicitud_componentes_id    char(36)    NOT NULL,
+    solicitud_componente_id    char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -397,7 +397,7 @@ CREATE TABLE solicitudes_transferencias_componentes(
 CREATE TABLE solicitudes_transferencias_componentes_detalles(
     id                                        char(36)    NOT NULL,
     cantidad                                  int4        NOT NULL,
-    solicitud_transferencia_componentes_id    char(36)    NOT NULL,
+    solicitud_transferencia_componente_id    char(36)    NOT NULL,
     componente_id                             char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
@@ -815,7 +815,7 @@ ALTER TABLE devoluciones_componentes ADD CONSTRAINT "Reftransacciones_estados34"
 --
 
 ALTER TABLE devoluciones_componentes_detalles ADD CONSTRAINT "Refdevoluciones_componentes35" 
-    FOREIGN KEY (devoluciones_componentes_id)
+    FOREIGN KEY (devoluciones_componente_id)
     REFERENCES devoluciones_componentes(id)
 ;
 
@@ -935,12 +935,12 @@ ALTER TABLE pedidos_compras_componentes ADD CONSTRAINT "Refusers43"
 --
 
 ALTER TABLE pedidos_compras_componentes_detalles ADD CONSTRAINT "Refpedidos_compras_componentes44" 
-    FOREIGN KEY (pedidos_compras_componentes_id)
+    FOREIGN KEY (pedidos_compras_componente_id)
     REFERENCES pedidos_compras_componentes(id)
 ;
 
 ALTER TABLE pedidos_compras_componentes_detalles ADD CONSTRAINT "Refcomponentes45" 
-    FOREIGN KEY (componentes_id)
+    FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
 ;
 
@@ -985,7 +985,7 @@ ALTER TABLE solicitudes_componentes_detalles ADD CONSTRAINT "Refcomponentes14"
 ;
 
 ALTER TABLE solicitudes_componentes_detalles ADD CONSTRAINT "Refsolicitudes_componentes16" 
-    FOREIGN KEY (solicitud_componentes_id)
+    FOREIGN KEY (solicitud_componente_id)
     REFERENCES solicitudes_componentes(id)
 ;
 
@@ -1015,7 +1015,7 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_pr
 --
 
 ALTER TABLE solicitudes_transferencias_componentes_detalles ADD CONSTRAINT "Refsolicitudes_transferencias_componentes27" 
-    FOREIGN KEY (solicitud_transferencia_componentes_id)
+    FOREIGN KEY (solicitud_transferencia_componente_id)
     REFERENCES solicitudes_transferencias_componentes(id)
 ;
 
