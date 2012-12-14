@@ -4,23 +4,27 @@ class Requests::Transferences::Product < ActiveRecord::Base
 
   attr_accessible :status_id, :user_id, :user, :number
 
-  has_many :details, :foreign_key => :header_id, :class_name => "Requests::Transferences::Products::Detail"
+  has_many :details, :foreign_key => :solicitudes_transferencias_productos_id, :class_name => "Requests::Transferences::Products::Detail"
 
-  belongs_to :status, :class_name => "Transactions::Status"
-  belongs_to :user
+  belongs_to :status,  :foreign_key => :estado_id, :class_name => "Transactions::Status"
+  belongs_to :user, :foreign_key => :usuario_id
 
-  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   
-  auto_increment :column => :number  
-  
+  auto_increment :column => :numero
+   
   set_table_name "solicitudes_transferencias_productos"
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
+  validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
+    
   # NEW ATTR
   alias_attribute :order_production_id, :orden_produccion_id
   attr_accessible :order_production_id
+  
   
 #  def close
 #    details.each do |dd|

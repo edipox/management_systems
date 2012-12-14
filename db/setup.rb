@@ -51,15 +51,59 @@ acl_entities << ['Detalle de asiento contable', 'Accounting::Entries::Detail']
 
 acl_entities.each { |e| 
   ent = ACL::Entity.create!({ name: e[0], const: e[1] })
-  ACL::Action.create!({ name: 'Crear', symbol: 'create', entity: ent })
-  ACL::Action.create!({ name: 'Leer', symbol: 'read', entity: ent })
-  ACL::Action.create!({ name: 'Editar', symbol: 'update', entity: ent })
-  ACL::Action.create!({ name: 'Eliminar', symbol: 'delete', entity: ent })
 }
 
+
+status_open = Transactions::Status.find(AppConfig.create!({
+  id: 'open_status_id', 
+  value: Transactions::Status.create!({ name: 'Abierta' }).id
+}).value)
+AppConfig.create!({
+  id: 'close_status_id', 
+  value: Transactions::Status.create!({ name: 'Cerrada' }).id
+})
+AppConfig.create!({
+  id: 'reject_status_id', 
+  value: Transactions::Status.create!({ name: 'Rechazada' }).id
+})
+Transactions::Status.create!({
+  name: 'Pendiente'
+})
+Transactions::Status.create!({
+  name: 'En curso'
+})
+
+# For test permissions creation, create a Role after a Component
+employee_role = ACL::Role.create!({ name: 'Empleado' })
+
+system_user = User.create!({
+  email: 'system@site.com',
+  password: 'systempass',
+  password_confirmation: 'systempass',
+  role: admin_role
+})
+
+AppConfig.create!({
+  id: 'system_user_id', 
+  value: system_user.id
+})
+
+User.create!({
+  email: 'admin@site.com',
+  password: 'contrasenha',
+  password_confirmation: 'contrasenha',
+  role: admin_role
+})
+employee = User.create!({
+  email: 'employee@site.com',
+  password: 'contrasenha',
+  password_confirmation: 'contrasenha',
+  role: employee_role
+})
+
 # Special actions
-stocks_component_entity = ACL::Entity.where('const = :const', { const: "Stocks::Component" }).first
-stocks_component_entity.create_extra_action('Inserción inicial', :initial_insert)
+#stocks_component_entity = ACL::Entity.where('const = :const', { const: "Stocks::Component" }).first
+#stocks_component_entity.create_extra_action('Inserción inicial', :initial_insert)
 
 keyboards = Components::Category.create!({
   name:'Teclado inalambrico',
@@ -235,52 +279,6 @@ AppConfig.create!({
       entrable: true,
       name: "Recargo por produccion"
   }).id
-})
-status_open = Transactions::Status.find(AppConfig.create!({
-  id: 'open_status_id', 
-  value: Transactions::Status.create!({ name: 'Abierta' }).id
-}).value)
-AppConfig.create!({
-  id: 'close_status_id', 
-  value: Transactions::Status.create!({ name: 'Cerrada' }).id
-})
-AppConfig.create!({
-  id: 'reject_status_id', 
-  value: Transactions::Status.create!({ name: 'Rechazada' }).id
-})
-Transactions::Status.create!({
-  name: 'Pendiente'
-})
-Transactions::Status.create!({
-  name: 'En curso'
-})
-
-# For test permissions creation, create a Role after a Component
-employee_role = ACL::Role.create!({ name: 'Empleado' })
-
-system_user = User.create!({
-  email: 'system@site.com',
-  password: 'systempass',
-  password_confirmation: 'systempass',
-  role: admin_role
-})
-
-AppConfig.create!({
-  id: 'system_user_id', 
-  value: system_user.id
-})
-
-User.create!({
-  email: 'admin@site.com',
-  password: 'contrasenha',
-  password_confirmation: 'contrasenha',
-  role: admin_role
-})
-employee = User.create!({
-  email: 'employee@site.com',
-  password: 'contrasenha',
-  password_confirmation: 'contrasenha',
-  role: employee_role
 })
 
 transference_component = Requests::Transferences::Component.create!({

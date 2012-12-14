@@ -6,8 +6,8 @@ class Stocks::Product < ActiveRecord::Base
 #  validates :product_id, :presence => true #, :length => { :minimum => 2 }  
 #  validates :price, :presence => true
 #  validates :quantity, :presence => true #, :length => { :minimum => 2 }
-  belongs_to :product, :foreign_key => :product_id, :class_name => Products::Composition.to_s      
-  belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s 
+  belongs_to :product, :foreign_key => :producto_terminado_id, :class_name => Products::Composition.to_s      
+  belongs_to :component, :foreign_key => :componente_id, :class_name => Components::Item.to_s 
   
   set_table_name "stock_productos_terminados"
   alias_attribute :component_quantity, :cantidad_componente

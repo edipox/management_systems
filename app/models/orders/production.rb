@@ -4,17 +4,19 @@ class Orders::Production < ActiveRecord::Base
 
   attr_accessible :status_id, :user_id, :number
 
-  has_many :details, :foreign_key => :header_id, :class_name => "Orders::Productions::Detail"
+  has_many :details, :foreign_key => :orden_produccion_id, :class_name => "Orders::Productions::Detail"
 
-  belongs_to :status, :class_name => "Transactions::Status"
-  belongs_to :user
+  belongs_to :status, :foreign_key => :estado_id, :class_name => "Transactions::Status"
+  belongs_to :user,:foreign_key => :usuario_id
 
-  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+#  
+  #auto_increment :column => :number
+  auto_increment :column => :numero
   
-  auto_increment :column => :number
-  
-  has_many :requests, :foreign_key => :order_id, :class_name => Requests::Transferences::Component.to_s
+  has_many :requests, :foreign_key => :orden_produccion_id, :class_name => Requests::Transferences::Component.to_s
+  has_many :transferences, :foreign_key => :orden_produccion_id, :class_name => Requests::Transferences::Product.to_s
   
   before_destroy :destroy_requests_open
   
@@ -22,7 +24,11 @@ class Orders::Production < ActiveRecord::Base
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
-  
+
+
+  validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
+    
   def destroy_requests_open
      system_user_id = AppConfig.find('system_user_id').value
      open_status_id = AppConfig.find('open_status_id').value

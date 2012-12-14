@@ -4,9 +4,9 @@ class ACL::Permission < ActiveRecord::Base
 
   attr_accessible :action, :role, :entity
 
-  belongs_to :action, :class_name => ACL::Action.to_s
-  belongs_to :entity, :class_name => ACL::Entity.to_s
-  belongs_to :role, :class_name => ACL::Role.to_s
+  belongs_to :action, :foreign_key => :accion_id, :class_name => ACL::Action.to_s
+  belongs_to :entity, :foreign_key => :entidad_id, :class_name => ACL::Entity.to_s
+  belongs_to :role, :foreign_key => :rol_id, :class_name => ACL::Role.to_s
 
   has_paper_trail
   set_table_name "lca_permisos"

@@ -3,20 +3,24 @@ class Requests::Purchases::Component < ActiveRecord::Base
    has_paper_trail
   attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :number
 
-  has_many :details, :foreign_key => :header_id, :class_name => Requests::Purchases::Components::Detail.to_s
+  has_many :details, :foreign_key => :pedidos_compras_componentes_id, :class_name => Requests::Purchases::Components::Detail.to_s
 
-  belongs_to :status, :class_name => Transactions::Status.to_s
-  belongs_to :user
+  belongs_to :status,  :foreign_key => :estado_id, :class_name => Transactions::Status.to_s
+  belongs_to :user, :foreign_key => :usuario_id
 
-  validates :status_id, :presence => true
-  validates :user_id, :presence => true
+#  validates :status_id, :presence => true
+#  validates :user_id, :presence => true
   
-  auto_increment :column => :number  
-  
+#  auto_increment :column => :number  
+  auto_increment :column => :numero
+   
   set_table_name "pedidos_compras_componentes"
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
+
+  validates :estado_id, :presence => true
+  validates :usuario_id, :presence => true
   
   def close
   

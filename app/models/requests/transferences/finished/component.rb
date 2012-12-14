@@ -5,20 +5,25 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
   attr_accessible :status_id, :status, :user_id, :user, :header, :header_id, :number
   #:component_id, :component, :number
 
-  has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Finished::Components::Detail.to_s
+  has_many :details, :foreign_key => :solicitud_componentes_id, :class_name => Requests::Transferences::Finished::Components::Detail.to_s
 
-  belongs_to :status, :class_name => Transactions::Status.to_s
-  belongs_to :user
+  belongs_to :status, :foreign_key => :estado_id,  :class_name => Transactions::Status.to_s
+  belongs_to :user, :foreign_key => :usuario_id
 
-  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
   
-  auto_increment :column => :number  
+  auto_increment :column => :numero
   
   set_table_name "solicitudes_componentes"
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
+  
+  
+  validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
+  
   
   def close
     details.each do |d|

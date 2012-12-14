@@ -22,7 +22,7 @@ class ACL::Role < ActiveRecord::Base
   
   acts_as_paranoid
 
-  has_many :acl_permissions, :class_name => ACL::Permission.to_s
+  has_many :acl_permissions,:foreign_key => :rol_id, :class_name => ACL::Permission.to_s
   alias_attribute :permissions, :acl_permissions
 
   after_create ACL::RoleCallbacks.new

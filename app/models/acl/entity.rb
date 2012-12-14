@@ -32,13 +32,13 @@ class ACL::Entity < ActiveRecord::Base
   include ACL::EntityMethods
   attr_accessible :const, :name
 
-  has_many :acl_permissions, :class_name => ACL::Permission.to_s
+  has_many :acl_permissions,:foreign_key => :entidad_id, :class_name => ACL::Permission.to_s
   alias_attribute :permissions, :acl_permissions
 
   after_create ACL::EntityCallbacks.new
   
   attr_accessible :actions
-  has_many :actions, :class_name => ACL::Action.to_s
+  has_many :actions,:foreign_key => :entidad_id, :class_name => ACL::Action.to_s
 
   has_paper_trail
   

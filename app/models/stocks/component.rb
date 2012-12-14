@@ -4,16 +4,19 @@ class Stocks::Component < ActiveRecord::Base
 
   attr_accessible :component_id, :quantity, :price
   attr_accessible :component
-  validates :component_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :quantity, :presence => true #, :length => { :minimum => 2 }  
-  validates :price, :presence => true
+#  validates :component_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :quantity, :presence => true #, :length => { :minimum => 2 }  
+#  validates :price, :presence => true
 
-  belongs_to :component, :foreign_key => :component_id, :class_name => Components::Item.to_s
+  belongs_to :component, :foreign_key => :componente_id, :class_name => Components::Item.to_s
 
   set_table_name "stock_materias_primas"
   alias_attribute :component_id, :componente_id
   alias_attribute :quantity, :cantidad
   alias_attribute :precio, :precio_unitario
+  validates :componente_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :cantidad, :presence => true #, :length => { :minimum => 2 }  
+  validates :precio, :presence => true
 
 
   after_save :check_qty

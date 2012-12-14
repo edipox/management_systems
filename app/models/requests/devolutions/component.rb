@@ -4,22 +4,28 @@ class Requests::Devolutions::Component < ActiveRecord::Base
 
    attr_accessible :number, :reason, :status_id, :user_id, :user, :header_id, :component_id, :component, :status
 
-  has_many :details, :foreign_key => :header_id, :class_name => "Requests::Devolutions::Components::Detail"
+  has_many :details, :foreign_key => :devoluciones_componentes_id, :class_name => "Requests::Devolutions::Components::Detail"
 
-  belongs_to :status, :class_name => "Transactions::Status"
-  belongs_to :user
+  belongs_to :status,  :foreign_key => :estado_id, :class_name => "Transactions::Status"
+  belongs_to :user, :foreign_key => :usuario_id 
 
-  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :reason, :presence => true #, :length => { :minimum => 2 }  
+#  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :reason, :presence => true #, :length => { :minimum => 2 }  
   
-  auto_increment :column => :number
+  #auto_increment :column => :number
+  auto_increment :column => :numero
   
   set_table_name "devoluciones_componentes"
   alias_attribute :number, :numero
   alias_attribute :reason, :motivo
   alias_attribute :user_id, :usuario_id
   alias_attribute :status_id, :estado_id
+
+  validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :motivo, :presence => true #, :length => { :minimum => 2 }  
+    
   
   def close
     details.each do |d|

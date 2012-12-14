@@ -4,15 +4,15 @@ class Requests::Transferences::Component < ActiveRecord::Base
  attr_accessible :status_id, :status, :number, :user_id, :user, :header, :header_id
 # , :order, :order_id, :component_id, :component,
 
-  has_many :details, :foreign_key => :header_id, :class_name => Requests::Transferences::Components::Detail.to_s
+  has_many :details, :foreign_key => :solicitud_transferencia_componentes_id, :class_name => Requests::Transferences::Components::Detail.to_s
 
-  belongs_to :status, :class_name => Transactions::Status.to_s
-  belongs_to :user
+  belongs_to :status, :foreign_key => :estado_id,  :class_name => Transactions::Status.to_s
+  belongs_to :user, :foreign_key => :usuario_id 
 
-  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
-  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
-  
-  auto_increment :column => :number  
+#  validates :status_id, :presence => true #, :length => { :minimum => 2 }  
+#  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
+
+  auto_increment :column => :numero
   
   belongs_to :order, :foreign_key => :order_id, :class_name => Orders::Production.to_s
   
@@ -20,6 +20,9 @@ class Requests::Transferences::Component < ActiveRecord::Base
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
+
+  validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
+  validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
   
   def close
     details.each do |d|

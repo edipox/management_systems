@@ -1,10 +1,10 @@
 --
 -- ER/Studio 7.5 SQL Code Generation
 -- Company :      uni
--- Project :      modelado_en_proceso.dm1
+-- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Thursday, December 13, 2012 16:47:52
+-- Date Created : Friday, December 14, 2012 08:55:03
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -146,7 +146,7 @@ CREATE TABLE lca_acciones(
     extra         boolean     DEFAULT false NOT NULL,
     simbolo       text        NOT NULL,
     nombre        char(36)    NOT NULL,
-    entidad_id    char(36)    NOT NULL,
+    entidad_id    char(36),
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -163,7 +163,7 @@ CREATE TABLE lca_acciones(
 CREATE TABLE lca_entidades(
     id        char(36)    NOT NULL,
     const     text        NOT NULL,
-    nombre    char(36)    NOT NULL,
+    nombre    text        NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -181,7 +181,7 @@ CREATE TABLE lca_permisos(
     id            char(36)    NOT NULL,
     concedido     boolean     NOT NULL,
     rol_id        char(36)    NOT NULL,
-    entidad_id    char(36)    NOT NULL,
+    entidad_id    char(36),
     accion_id     char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
@@ -375,10 +375,11 @@ CREATE TABLE solicitudes_componentes_detalles(
 --
 
 CREATE TABLE solicitudes_transferencias_componentes(
-    id            char(36)    NOT NULL,
-    numero        int4        NOT NULL,
-    estado_id     char(36)    NOT NULL,
-    usuario_id    char(36)    NOT NULL,
+    id                     char(36)    NOT NULL,
+    numero                 int4        NOT NULL,
+    estado_id              char(36)    NOT NULL,
+    usuario_id             char(36)    NOT NULL,
+    orden_produccion_id    char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -536,6 +537,7 @@ CREATE TABLE users(
     current_sign_in_ip        text,
     last_sign_in_ip           text,
     email                     char(36)     NOT NULL,
+    acl_role_id               char(36)     NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -841,14 +843,14 @@ ALTER TABLE devoluciones_productos ADD CONSTRAINT "Reftransacciones_estados39"
 -- TABLE: devoluciones_productos_detalles 
 --
 
-ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refproductos_terminados41" 
-    FOREIGN KEY (producto_id)
-    REFERENCES productos_terminados(id)
-;
-
 ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refdevoluciones_productos40" 
     FOREIGN KEY (devoluciones_productos_id)
     REFERENCES devoluciones_productos(id)
+;
+
+ALTER TABLE devoluciones_productos_detalles ADD CONSTRAINT "Refproductos_terminados41" 
+    FOREIGN KEY (producto_id)
+    REFERENCES productos_terminados(id)
 ;
 
 
@@ -886,14 +888,14 @@ ALTER TABLE lca_permisos ADD CONSTRAINT "Reflca_acciones90"
 -- TABLE: ordenes_producciones 
 --
 
-ALTER TABLE ordenes_producciones ADD CONSTRAINT "Reftransacciones_estados19" 
-    FOREIGN KEY (estado_id)
-    REFERENCES transacciones_estados(id)
-;
-
 ALTER TABLE ordenes_producciones ADD CONSTRAINT "Refusers31" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
+;
+
+ALTER TABLE ordenes_producciones ADD CONSTRAINT "Reftransacciones_estados19" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
 ;
 
 
@@ -961,14 +963,14 @@ ALTER TABLE productos_terminados_detalles ADD CONSTRAINT "Refproductos_terminado
 -- TABLE: solicitudes_componentes 
 --
 
-ALTER TABLE solicitudes_componentes ADD CONSTRAINT "Reftransacciones_estados15" 
-    FOREIGN KEY (estado_id)
-    REFERENCES transacciones_estados(id)
-;
-
 ALTER TABLE solicitudes_componentes ADD CONSTRAINT "Refusers32" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
+;
+
+ALTER TABLE solicitudes_componentes ADD CONSTRAINT "Reftransacciones_estados15" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
 ;
 
 
@@ -1001,6 +1003,11 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refusers29"
     REFERENCES users(id)
 ;
 
+ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones97" 
+    FOREIGN KEY (orden_produccion_id)
+    REFERENCES ordenes_producciones(id)
+;
+
 
 -- 
 -- TABLE: solicitudes_transferencias_componentes_detalles 
@@ -1021,11 +1028,6 @@ ALTER TABLE solicitudes_transferencias_componentes_detalles ADD CONSTRAINT "Refc
 -- TABLE: solicitudes_transferencias_productos 
 --
 
-ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_producciones46" 
-    FOREIGN KEY (orden_produccion_id)
-    REFERENCES ordenes_producciones(id)
-;
-
 ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransacciones_estados21" 
     FOREIGN KEY (estado_id)
     REFERENCES transacciones_estados(id)
@@ -1034,6 +1036,11 @@ ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransaccione
 ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refusers30" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
+;
+
+ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_producciones46" 
+    FOREIGN KEY (orden_produccion_id)
+    REFERENCES ordenes_producciones(id)
 ;
 
 
@@ -1094,6 +1101,16 @@ ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refproductos_terminados94
 ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refcomponentes95" 
     FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
+;
+
+
+-- 
+-- TABLE: users 
+--
+
+ALTER TABLE users ADD CONSTRAINT "Reflca_roles96" 
+    FOREIGN KEY (acl_role_id)
+    REFERENCES lca_roles(id)
 ;
 
 
