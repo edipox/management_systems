@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   end
 
   create_table "devoluciones_componentes_detalles", :id => false, :force => true do |t|
-    t.string   "id",                          :limit => 36, :null => false
-    t.integer  "cantidad",                                  :null => false
-    t.string   "devoluciones_componentes_id", :limit => 36, :null => false
-    t.string   "componente_id",               :limit => 36, :null => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.string   "id",                         :limit => 36, :null => false
+    t.integer  "cantidad",                                 :null => false
+    t.string   "devoluciones_componente_id", :limit => 36, :null => false
+    t.string   "componente_id",              :limit => 36, :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.datetime "deleted_at"
   end
 
@@ -189,12 +189,12 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   end
 
   create_table "pedidos_compras_componentes_detalles", :id => false, :force => true do |t|
-    t.string   "id",                             :limit => 36, :null => false
-    t.integer  "cantidad",                                     :null => false
-    t.string   "pedidos_compras_componentes_id", :limit => 36, :null => false
-    t.string   "componentes_id",                 :limit => 36, :null => false
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.string   "id",                            :limit => 36, :null => false
+    t.integer  "cantidad",                                    :null => false
+    t.string   "pedidos_compras_componente_id", :limit => 36, :null => false
+    t.string   "componente_id",                 :limit => 36, :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.datetime "deleted_at"
   end
 
@@ -230,12 +230,12 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   end
 
   create_table "solicitudes_componentes_detalles", :id => false, :force => true do |t|
-    t.string   "id",                       :limit => 36, :null => false
-    t.integer  "cantidad",                               :null => false
-    t.string   "componente_id",            :limit => 36, :null => false
-    t.string   "solicitud_componentes_id", :limit => 36, :null => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "id",                      :limit => 36, :null => false
+    t.integer  "cantidad",                              :null => false
+    t.string   "componente_id",           :limit => 36, :null => false
+    t.string   "solicitud_componente_id", :limit => 36, :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.datetime "deleted_at"
   end
 
@@ -251,12 +251,12 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   end
 
   create_table "solicitudes_transferencias_componentes_detalles", :id => false, :force => true do |t|
-    t.string   "id",                                     :limit => 36, :null => false
-    t.integer  "cantidad",                                             :null => false
-    t.string   "solicitud_transferencia_componentes_id", :limit => 36, :null => false
-    t.string   "componente_id",                          :limit => 36, :null => false
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.string   "id",                                    :limit => 36, :null => false
+    t.integer  "cantidad",                                            :null => false
+    t.string   "solicitud_transferencia_componente_id", :limit => 36, :null => false
+    t.string   "componente_id",                         :limit => 36, :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.datetime "deleted_at"
   end
 
@@ -362,7 +362,7 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   add_foreign_key "devoluciones_componentes", "users", :name => "Refusers33", :column => "usuario_id"
 
   add_foreign_key "devoluciones_componentes_detalles", "componentes", :name => "Refcomponentes36"
-  add_foreign_key "devoluciones_componentes_detalles", "devoluciones_componentes", :name => "Refdevoluciones_componentes35", :column => "devoluciones_componentes_id"
+  add_foreign_key "devoluciones_componentes_detalles", "devoluciones_componentes", :name => "Refdevoluciones_componentes35"
 
   add_foreign_key "devoluciones_productos", "transacciones_estados", :name => "Reftransacciones_estados39", :column => "estado_id"
   add_foreign_key "devoluciones_productos", "users", :name => "Refusers38", :column => "usuario_id"
@@ -385,8 +385,8 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   add_foreign_key "pedidos_compras_componentes", "transacciones_estados", :name => "Reftransacciones_estados42", :column => "estado_id"
   add_foreign_key "pedidos_compras_componentes", "users", :name => "Refusers43", :column => "usuario_id"
 
-  add_foreign_key "pedidos_compras_componentes_detalles", "componentes", :name => "Refcomponentes45", :column => "componentes_id"
-  add_foreign_key "pedidos_compras_componentes_detalles", "pedidos_compras_componentes", :name => "Refpedidos_compras_componentes44", :column => "pedidos_compras_componentes_id"
+  add_foreign_key "pedidos_compras_componentes_detalles", "componentes", :name => "Refcomponentes45"
+  add_foreign_key "pedidos_compras_componentes_detalles", "pedidos_compras_componentes", :name => "Refpedidos_compras_componentes44"
 
   add_foreign_key "productos_terminados_detalles", "componentes", :name => "Refcomponentes8"
   add_foreign_key "productos_terminados_detalles", "productos_terminados", :name => "Refproductos_terminados9", :column => "producto_terminado_id"
@@ -395,14 +395,14 @@ ActiveRecord::Schema.define(:version => 20121127123646) do
   add_foreign_key "solicitudes_componentes", "users", :name => "Refusers32", :column => "usuario_id"
 
   add_foreign_key "solicitudes_componentes_detalles", "componentes", :name => "Refcomponentes14"
-  add_foreign_key "solicitudes_componentes_detalles", "solicitudes_componentes", :name => "Refsolicitudes_componentes16", :column => "solicitud_componentes_id"
+  add_foreign_key "solicitudes_componentes_detalles", "solicitudes_componentes", :name => "Refsolicitudes_componentes16", :column => "solicitud_componente_id"
 
   add_foreign_key "solicitudes_transferencias_componentes", "ordenes_producciones", :name => "Refordenes_producciones97", :column => "orden_produccion_id"
   add_foreign_key "solicitudes_transferencias_componentes", "transacciones_estados", :name => "Reftransacciones_estados26", :column => "estado_id"
   add_foreign_key "solicitudes_transferencias_componentes", "users", :name => "Refusers29", :column => "usuario_id"
 
   add_foreign_key "solicitudes_transferencias_componentes_detalles", "componentes", :name => "Refcomponentes28"
-  add_foreign_key "solicitudes_transferencias_componentes_detalles", "solicitudes_transferencias_componentes", :name => "Refsolicitudes_transferencias_componentes27", :column => "solicitud_transferencia_componentes_id"
+  add_foreign_key "solicitudes_transferencias_componentes_detalles", "solicitudes_transferencias_componentes", :name => "Refsolicitudes_transferencias_componentes27", :column => "solicitud_transferencia_componente_id"
 
   add_foreign_key "solicitudes_transferencias_productos", "ordenes_producciones", :name => "Refordenes_producciones46", :column => "orden_produccion_id"
   add_foreign_key "solicitudes_transferencias_productos", "transacciones_estados", :name => "Reftransacciones_estados21", :column => "estado_id"
