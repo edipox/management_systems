@@ -9,4 +9,5 @@ class Transactions::Status < ActiveRecord::Base
   
   set_table_name "transacciones_estados"
   alias_attribute :name, :nombre
+  attr_accessible :name
 end

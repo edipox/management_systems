@@ -25,6 +25,7 @@ class Components::Item < ActiveRecord::Base
   alias_attribute :description, :descripcion
   alias_attribute :category_id, :categoria_id
   alias_attribute :brand_id, :marca_id
+  alias_attribute :price, :precio
   
   validates :codigo, :uniqueness => true
   

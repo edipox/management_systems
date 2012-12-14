@@ -4,7 +4,7 @@
 -- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Friday, December 14, 2012 08:55:03
+-- Date Created : Friday, December 14, 2012 09:40:17
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -49,6 +49,7 @@ CREATE TABLE categorias(
 CREATE TABLE componentes(
     id              char(36)     NOT NULL,
     codigo          char(36)     NOT NULL,
+    precio          int4         NOT NULL,
     stock_minimo    int4         NOT NULL,
     nombre          char(36)     NOT NULL,
     descripcion     char(250)    NOT NULL,
