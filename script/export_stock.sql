@@ -32,7 +32,7 @@ CREATE TABLE categorias(
     id             char(36)        NOT NULL,
     nombre         char(36)        NOT NULL,
     descripcion    varchar(250)    NOT NULL,
-    vendible       boolean         NOT NULL,
+    vendible       boolean    DEFAULT false NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp

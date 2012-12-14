@@ -22,18 +22,19 @@ ActiveRecord::Schema.define(:version => 20121109183111) do
   end
 
   create_table "categorias", :id => false, :force => true do |t|
-    t.string   "id",          :limit => 36,  :null => false
-    t.string   "nombre",      :limit => 36,  :null => false
-    t.string   "descripcion", :limit => 250, :null => false
-    t.boolean  "vendible",                   :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "id",          :limit => 36,                     :null => false
+    t.string   "nombre",      :limit => 36,                     :null => false
+    t.string   "descripcion", :limit => 250,                    :null => false
+    t.boolean  "vendible",                   :default => false, :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.datetime "deleted_at"
   end
 
   create_table "componentes", :id => false, :force => true do |t|
     t.string   "id",           :limit => 36,  :null => false
     t.string   "codigo",       :limit => 36,  :null => false
+    t.integer  "precio",                      :null => false
     t.integer  "stock_minimo",                :null => false
     t.string   "nombre",       :limit => 36,  :null => false
     t.string   "descripcion",  :limit => 250, :null => false
