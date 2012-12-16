@@ -18,4 +18,15 @@ class Requests::Devolutions::Products::Detail < ActiveRecord::Base
   validates :producto_id, :presence => true #, :length => { :minimum => 2 }  
   validates :cantidad, :presence => true #, :length => { :minimum => 2 }  
 
+  after_create :increment_quantity
+  def increment_quantity
+    requests_devolutions_product.details.each  do |d|
+      if d.product_id == product_id && d.id != id
+        d.quantity += quantity
+        d.save
+        self.destroy
+      end
+    end
+  end
+
 end

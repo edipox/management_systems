@@ -4,7 +4,7 @@
 -- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Friday, December 14, 2012 12:02:05
+-- Date Created : Sunday, December 16, 2012 18:02:41
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -23,7 +23,6 @@ CREATE TABLE app_configs(
 
 
 
-
 -- 
 -- TABLE: categorias 
 --
@@ -38,7 +37,6 @@ CREATE TABLE categorias(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -63,7 +61,6 @@ CREATE TABLE componentes(
 
 
 
-
 -- 
 -- TABLE: devoluciones_componentes 
 --
@@ -82,7 +79,6 @@ CREATE TABLE devoluciones_componentes(
 
 
 
-
 -- 
 -- TABLE: devoluciones_componentes_detalles 
 --
@@ -97,7 +93,6 @@ CREATE TABLE devoluciones_componentes_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -119,7 +114,6 @@ CREATE TABLE devoluciones_productos(
 
 
 
-
 -- 
 -- TABLE: devoluciones_productos_detalles 
 --
@@ -134,7 +128,6 @@ CREATE TABLE devoluciones_productos_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -156,7 +149,6 @@ CREATE TABLE lca_acciones(
 
 
 
-
 -- 
 -- TABLE: lca_entidades 
 --
@@ -170,7 +162,6 @@ CREATE TABLE lca_entidades(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -192,7 +183,6 @@ CREATE TABLE lca_permisos(
 
 
 
-
 -- 
 -- TABLE: lca_roles 
 --
@@ -205,7 +195,6 @@ CREATE TABLE lca_roles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -222,7 +211,6 @@ CREATE TABLE marcas(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -243,7 +231,6 @@ CREATE TABLE ordenes_producciones(
 
 
 
-
 -- 
 -- TABLE: ordenes_producciones_detalles 
 --
@@ -258,7 +245,6 @@ CREATE TABLE ordenes_producciones_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -279,7 +265,6 @@ CREATE TABLE pedidos_compras_componentes(
 
 
 
-
 -- 
 -- TABLE: pedidos_compras_componentes_detalles 
 --
@@ -294,7 +279,6 @@ CREATE TABLE pedidos_compras_componentes_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -316,7 +300,6 @@ CREATE TABLE productos_terminados(
 
 
 
-
 -- 
 -- TABLE: productos_terminados_detalles 
 --
@@ -331,7 +314,6 @@ CREATE TABLE productos_terminados_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -352,7 +334,6 @@ CREATE TABLE solicitudes_componentes(
 
 
 
-
 -- 
 -- TABLE: solicitudes_componentes_detalles 
 --
@@ -370,23 +351,21 @@ CREATE TABLE solicitudes_componentes_detalles(
 
 
 
-
 -- 
 -- TABLE: solicitudes_transferencias_componentes 
 --
 
 CREATE TABLE solicitudes_transferencias_componentes(
-    id                     char(36)    NOT NULL,
-    numero                 int4        NOT NULL,
-    estado_id              char(36)    NOT NULL,
-    usuario_id             char(36)    NOT NULL,
-    orden_produccion_id    char(36),
+    id                             char(36)    NOT NULL,
+    numero                         int4        NOT NULL,
+    estado_id                      char(36)    NOT NULL,
+    usuario_id                     char(36)    NOT NULL,
+    orden_produccion_detalle_id    char(36),
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -404,7 +383,6 @@ CREATE TABLE solicitudes_transferencias_componentes_detalles(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -426,7 +404,6 @@ CREATE TABLE solicitudes_transferencias_productos(
 
 
 
-
 -- 
 -- TABLE: solicitudes_transferencias_productos_detalles 
 --
@@ -445,7 +422,6 @@ CREATE TABLE solicitudes_transferencias_productos_detalles(
 
 
 
-
 -- 
 -- TABLE: stock_materias_primas 
 --
@@ -460,7 +436,6 @@ CREATE TABLE stock_materias_primas(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -484,7 +459,6 @@ CREATE TABLE stock_producciones(
 
 
 
-
 -- 
 -- TABLE: stock_productos_terminados 
 --
@@ -505,7 +479,6 @@ CREATE TABLE stock_productos_terminados(
 
 
 
-
 -- 
 -- TABLE: transacciones_estados 
 --
@@ -518,7 +491,6 @@ CREATE TABLE transacciones_estados(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -544,7 +516,6 @@ CREATE TABLE users(
     deleted_at timestamp
 )
 ;
-
 
 
 
@@ -1004,9 +975,9 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refusers29"
     REFERENCES users(id)
 ;
 
-ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones97" 
-    FOREIGN KEY (orden_produccion_id)
-    REFERENCES ordenes_producciones(id)
+ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones_detalles99" 
+    FOREIGN KEY (orden_produccion_detalle_id)
+    REFERENCES ordenes_producciones_detalles(id)
 ;
 
 

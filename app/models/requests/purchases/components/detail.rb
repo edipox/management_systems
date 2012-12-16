@@ -12,10 +12,21 @@ class Requests::Purchases::Components::Detail < ActiveRecord::Base
   set_table_name "pedidos_compras_componentes_detalles"
   alias_attribute :quantity, :cantidad
   alias_attribute :header_id, :pedidos_compras_componentes_id
-  alias_attribute :component_id, :componentes_id
+  alias_attribute :component_id, :componente_id
   
   validates :componente_id, :presence => true
   validates :pedidos_compras_componentes_id, :presence => true
   validates :cantidad, :presence => true, :numericality => { :greater_than => 0, :less_than => 2000000001 }
+
+  after_create :increment_quantity
+  def increment_quantity
+    requests_purchases_component.details.each  do |d|
+      if d.component_id == component_id && d.id != id
+        d.quantity += quantity
+        d.save
+        self.destroy
+      end
+    end
+  end
   
 end

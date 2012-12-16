@@ -18,4 +18,16 @@ class Requests::Devolutions::Components::Detail < ActiveRecord::Base
   validates :componente_id, :presence => true #, :length => { :minimum => 2 }  
   validates :cantidad, :presence => true, :numericality => { :greater_than => 0, :less_than => 2000000001 }
   
+  after_create :increment_quantity
+  def increment_quantity
+    requests_devolutions_component.details.each  do |d|
+      if d.component_id == component_id && d.id != id
+        d.quantity += quantity
+        d.save
+        self.destroy
+      end
+    end
+  end
+
+  
 end

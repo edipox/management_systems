@@ -22,6 +22,14 @@ class Requests::Purchases::Component < ActiveRecord::Base
   validates :estado_id, :presence => true
   validates :usuario_id, :presence => true
   
+  class << self
+    def generated_by_system
+      system_user_id = AppConfig.find('system_user_id').value
+      open_status_id = AppConfig.find('open_status_id').value
+      return self.where('usuario_id = ? AND estado_id = ?', system_user_id, open_status_id)
+    end
+  end
+  
   def close
   
     sum = 0
@@ -36,14 +44,14 @@ class Requests::Purchases::Component < ActiveRecord::Base
         price: d.component.price
       })
       
-      Transaction.create!({
-        kind: self.class.to_s,
-        detail_kind: d.class.to_s,
-        detail_id: d.id,
-        from_stock: "Compras",
-        to_stock: Stocks::Component.to_s,
-        is_component: true
-      })
+#      Transaction.create!({
+#        kind: self.class.to_s,
+#        detail_kind: d.class.to_s,
+#        detail_id: d.id,
+#        from_stock: "Compras",
+#        to_stock: Stocks::Component.to_s,
+#        is_component: true
+#      })
     
     end
     

@@ -34,13 +34,13 @@ class ApplicationController < ActionController::Base
           attribute = a[0]
           value = a[1]
           if attribute != "created_at" &&
-             attribute != 'number' &&
+             attribute != 'numero' &&
              attribute != "updated_at" &&
              attribute != "user_id" &&
+             attribute != "usuario_id" &&             
              attribute != "id" &&
-             attribute != "transaction_id" &&
              value &&
-             !(attribute == "status_id" && value == default_status_id) &&
+             !(attribute == "estado_id" && value == default_status_id) &&
              value != ""
                 will_destroy = false
           end

@@ -20,4 +20,15 @@ class Requests::Transferences::Finished::Components::Detail < ActiveRecord::Base
   validates :componente_id, :presence => true #, :length => { :minimum => 2 }  
   validates :cantidad, :presence => true #, :length => { :minimum => 2 }  
 
+  after_create :increment_quantity
+  def increment_quantity
+    requests_transferences_finished_component.details.each  do |d|
+      if d.component_id == component_id && d.id != id
+        d.quantity += quantity
+        d.save
+        self.destroy
+      end
+    end
+  end
+
 end

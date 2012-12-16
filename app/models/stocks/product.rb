@@ -22,6 +22,13 @@ class Stocks::Product < ActiveRecord::Base
   def check_qty
     if product
       sum = product.products_stocks.reduce { |s1, s2| s1.product_quantity += s2.product_quantity; s1 }
+      puts "*************************************************************************************"
+      puts "product.minimum_quantity"
+      puts product.minimum_quantity
+      puts "*************************************************************************************"      
+      puts "sum.product_quantity"
+      puts sum.product_quantity
+      puts "*************************************************************************************"      
       if product.minimum_quantity > sum.product_quantity
       missing_product_qty = product.minimum_quantity - sum.product_quantity
       system_user_id = AppConfig.find('system_user_id').value

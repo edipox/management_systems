@@ -41,14 +41,14 @@ class Requests::Devolutions::Product < ActiveRecord::Base
       qtty = d.quantity
       Stocks::Production.create!({product_id: id, product_quantity: qtty, product_price: price})
       Stocks::Product.create!({product_id: id, quantity: -qtty, price: price})
-      Transaction.create!({
-        kind: self.class.to_s,
-        detail_kind: d.class.to_s,
-        detail_id: d.id,
-        from_stock: Stocks::Production.to_s,
-        to_stock: Stocks::Product.to_s,
-        is_component: false
-      })   
+#      Transaction.create!({
+#        kind: self.class.to_s,
+#        detail_kind: d.class.to_s,
+#        detail_id: d.id,
+#        from_stock: Stocks::Production.to_s,
+#        to_stock: Stocks::Product.to_s,
+#        is_component: false
+#      })   
       
       sum += qtty * price   
     end

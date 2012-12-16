@@ -22,4 +22,16 @@ class Requests::Transferences::Products::Detail < ActiveRecord::Base
   alias_attribute :order_production_detail_id, :orden_produccion_detalle_id
   attr_accessible :order_production_detail_id
   belongs_to :order,  :foreign_key => :orden_produccion_detalle_id, :class_name => Orders::Productions::Detail.to_s 
+
+  after_create :increment_quantity
+  def increment_quantity
+    requests_transferences_product.details.each  do |d|
+      if d.product_id == product_id && d.id != id
+        d.quantity += quantity
+        d.save
+        self.destroy
+      end
+    end
+  end
+  
 end

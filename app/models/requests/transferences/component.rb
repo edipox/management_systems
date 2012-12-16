@@ -1,8 +1,7 @@
 class Requests::Transferences::Component < ActiveRecord::Base
    has_paper_trail
    acts_as_paranoid
- attr_accessible :status_id, :status, :number, :user_id, :user, :header, :header_id
-# , :order, :order_id, :component_id, :component,
+ attr_accessible :status_id, :status, :number, :user_id, :user, :header, :header_id, :order, :order_detail_id
 
   has_many :details, :foreign_key => :solicitud_transferencia_componentes_id, :class_name => Requests::Transferences::Components::Detail.to_s
 
@@ -13,16 +12,23 @@ class Requests::Transferences::Component < ActiveRecord::Base
 #  validates :user_id, :presence => true #, :length => { :minimum => 2 }  
 
   auto_increment :column => :numero
-  
-  belongs_to :order, :foreign_key => :orden_produccion_id, :class_name => Orders::Production.to_s
-  
+
+  belongs_to :order_detail, :foreign_key => :orden_produccion_detalle_id, :class_name => Orders::Productions::Detail.to_s
+    
   set_table_name "solicitudes_transferencias_componentes"
   alias_attribute :number, :numero
   alias_attribute :status_id, :estado_id
   alias_attribute :user_id, :usuario_id
+  alias_attribute :order_detail_id, :orden_produccion_detalle_id
 
   validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
   validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
+  
+  class << self
+    def get_by_order_detail(id, status_id)
+      return self.where('orden_produccion_detalle_id = ? AND estado_id = ?', id, status_id)
+    end
+  end
   
   def close
     details.each do |d|
@@ -45,18 +51,16 @@ class Requests::Transferences::Component < ActiveRecord::Base
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
       Stocks::Production.create!({component_id: id, component_quantity: qtty, component_price: price})
       sum += qtty * price
-      Transaction.create!({
-        kind: self.class.to_s,
-        detail_kind: d.class.to_s,
-        detail_id: d.id,
-        from_stock: Stocks::Component.to_s,
-        to_stock: Stocks::Production.to_s,
-        is_component: true
-      })
-     
+#      Transaction.create!({
+#        kind: self.class.to_s,
+#        detail_kind: d.class.to_s,
+#        detail_id: d.id,
+#        from_stock: Stocks::Component.to_s,
+#        to_stock: Stocks::Production.to_s,
+#        is_component: true
+#      })   
     end
-    
-    
+
     entry_id = Accounting::Entry.create!({
       description: "Transferencia de componentes"    
     }).id
@@ -74,9 +78,7 @@ class Requests::Transferences::Component < ActiveRecord::Base
       account_id: haber_account_id,
       is_debe: false
     })
-    
-    
-    
+
     return true
   end
   
