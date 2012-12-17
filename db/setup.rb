@@ -323,5 +323,6 @@ app_configs << [:company_address, 'Direccion de la empresa']
 app_configs << [:company_telephone, '00-000000']
 app_configs << [:company_cellphone, '0000-000000']
 app_configs << [:company_ruc, '0000000-0']
+app_configs << [:company_image, nil]
 
 app_configs.each {|cfg| AppConfig.create!({ id: cfg[0].to_s, value: cfg[1].to_s }) }

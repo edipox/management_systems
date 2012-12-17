@@ -6,6 +6,7 @@ class Settings::ConfigurationsController < ApplicationController
   end
 
   def update
+    before_update
     params.each do |key, value|
       puts "#{key} #{value}"
       begin

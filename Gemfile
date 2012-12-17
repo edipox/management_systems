@@ -27,6 +27,7 @@ gem 'cancan'
 gem 'paper_trail'
 gem 'will_paginate', '~> 3.0'
 gem "auto_increment"
+gem 'remotipart', '~> 1.0'
 
 gem "rails3_acts_as_paranoid", "~>0.2.0"
 
