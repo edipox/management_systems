@@ -63,19 +63,17 @@ class Requests::Devolutions::Component < ActiveRecord::Base
     
     debe_account_id = AppConfig.find('accounting_purchases_devolutions_id').value;
 
-    haber_account_id = AppConfig.find('accounting_raw_materials_id').value 
+    haber_account_id = AppConfig.find('to_accounting_raw_materials_id').value 
     
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: debe_account_id,
-      is_debe: true
+      account_id: debe_account_id
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
-      account_id: haber_account_id,
-      is_debe: false
+      account_id: haber_account_id
     })
    
     return true

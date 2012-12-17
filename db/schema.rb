@@ -11,35 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127123646) do
-
-  create_table "accounting_accounts", :force => true do |t|
-    t.string   "name"
-    t.boolean  "entrable"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "accounting_entries", :force => true do |t|
-    t.integer  "number"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "accounting_entries_details", :force => true do |t|
-    t.string   "account_id"
-    t.boolean  "is_debe"
-    t.string   "header_id"
-    t.integer  "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20121109183111) do
 
   create_table "versions", :force => true do |t|
-    t.string   "item_type",                :null => false
-    t.string   "item_id",    :limit => 36, :null => false
-    t.string   "event",                    :null => false
+    t.string   "item_type",  :null => false
+    t.string   "item_id",    :null => false
+    t.string   "event",      :null => false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"

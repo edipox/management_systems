@@ -172,27 +172,24 @@ class Orders::Production < ActiveRecord::Base
     }).id
     
     debe_account_id = AppConfig.find('accounting_finished_product_id').value
-    haber_account_id = AppConfig.find('accounting_products_in_process_id').value
+    haber_account_id = AppConfig.find('to_accounting_products_in_process_id').value
     
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: component_sum,
       account_id: haber_account_id,
-      is_debe: false
     })
-    haber_account_id2 = AppConfig.find('accounting_production_recharge_id').value
+    haber_account_id2 = AppConfig.find('to_accounting_production_recharge_id').value
 
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum - component_sum,
       account_id: haber_account_id2,
-      is_debe: false
     })
     
     return true

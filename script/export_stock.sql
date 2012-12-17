@@ -4,7 +4,7 @@
 -- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Monday, December 17, 2012 08:52:48
+-- Date Created : Monday, December 17, 2012 15:28:52
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -13,8 +13,109 @@
 --
 
 CREATE TABLE app_configs(
-    id       char(36)    NOT NULL,
-    valor    char(36)    NOT NULL,
+    id       varchar(150)    NOT NULL,
+    valor    char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: asientos 
+--
+
+CREATE TABLE asientos(
+    id              char(36)        NOT NULL,
+    numero          int4            NOT NULL,
+    descripcion     varchar(250)    NOT NULL,
+    ejercicio_id    char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: asientos_detalles 
+--
+
+CREATE TABLE asientos_detalles(
+    id            char(36)    NOT NULL,
+    importe       int4        NOT NULL,
+    id_asiento    char(36)    NOT NULL,
+    cuenta_id     char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: balances_generales 
+--
+
+CREATE TABLE balances_generales(
+    id                             char(36)       NOT NULL,
+    total_sumas_debitos            int4           NOT NULL,
+    total_sumas_creditos           int4           NOT NULL,
+    total_saldos_deudor            int4           NOT NULL,
+    total_saldos_acreedor          int4           NOT NULL,
+    total_ajustes_debe             int4           NOT NULL,
+    total_ajustes_haber            int4           NOT NULL,
+    total_ajustados_deudor         int4           NOT NULL,
+    total_ajustados_acreedor       int4           NOT NULL,
+    total_patrimonial_activo       int4           NOT NULL,
+    total_patrimonial_pasivo_pn    int4           NOT NULL,
+    total_resultados_perdidas      char(36)       NOT NULL,
+    resultados_ganancias           char(36)       NOT NULL,
+    fecha_fin                      date           NOT NULL,
+    numero                         int4           NOT NULL,
+    descripcion                    varchar(45),
+    fecha_inicio                   date           NOT NULL,
+    ejercicio_id                   char(36)       NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: balances_generales_detalles 
+--
+
+CREATE TABLE balances_generales_detalles(
+    id                       char(36)       NOT NULL,
+    sumas_debitos            int4           NOT NULL,
+    sumas_creditos           int4           NOT NULL,
+    saldos_deudor            int4           NOT NULL,
+    saldos_acreedor          int4           NOT NULL,
+    ajustes_debe             int4           NOT NULL,
+    ajustes_haber            int4           NOT NULL,
+    ajustados_deudor         int4           NOT NULL,
+    ajustados_acreedor       int4           NOT NULL,
+    patrimonial_activo       int4           NOT NULL,
+    patrimonial_pasivo_pn    int4           NOT NULL,
+    resultados_perdidas      char(36)       NOT NULL,
+    resultados_ganancias     char(36)       NOT NULL,
+    fecha_fin                date           NOT NULL,
+    numero                   int4           NOT NULL,
+    descripcion              varchar(45),
+    fecha_inicio             date           NOT NULL,
+    balance_id               char(36)       NOT NULL,
+    mayor_id                 char(36)       NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -55,6 +156,26 @@ CREATE TABLE componentes(
     descripcion     char(250)    NOT NULL,
     categoria_id    char(36)     NOT NULL,
     marca_id        char(36)     NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: cuentas_contables 
+--
+
+CREATE TABLE cuentas_contables(
+    id                    char(36)        NOT NULL,
+    asentable             boolean         DEFAULT false NOT NULL,
+    nombre                varchar(100)    NOT NULL,
+    tipo                  char(1)         NOT NULL,
+    cuenta_superior_id    char(36),
+    numero                int4            NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -139,6 +260,23 @@ CREATE TABLE devoluciones_productos_detalles(
 
 
 -- 
+-- TABLE: ejercicios_contables 
+--
+
+CREATE TABLE ejercicios_contables(
+    id              char(36)    NOT NULL,
+    fecha_inicio    date        NOT NULL,
+    fecha_fin       date        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: lca_acciones 
 --
 
@@ -210,6 +348,25 @@ CREATE TABLE lca_roles(
 
 
 -- 
+-- TABLE: libros_mayor 
+--
+
+CREATE TABLE libros_mayor(
+    id              char(36)    NOT NULL,
+    numero          int4        NOT NULL,
+    fecha_inicio    date        NOT NULL,
+    fecha_fin       date        NOT NULL,
+    ejercicio_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: marcas 
 --
 
@@ -217,6 +374,44 @@ CREATE TABLE marcas(
     id             char(36)        NOT NULL,
     descripcion    varchar(250),
     nombre         char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: mayor_registros 
+--
+
+CREATE TABLE mayor_registros(
+    id                char(36)    NOT NULL,
+    total_debe        int4        NOT NULL,
+    tota_haber        int4        NOT NULL,
+    saldo_debe        int4        NOT NULL,
+    saldo_haber       int4        NOT NULL,
+    cuenta_id         char(36)    NOT NULL,
+    lirbo_mayor_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: mayor_registros_detalles 
+--
+
+CREATE TABLE mayor_registros_detalles(
+    id                    char(36)    NOT NULL,
+    asiento_detalle_id    char(36)    NOT NULL,
+    libro_mayor_id        char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -553,7 +748,39 @@ CREATE TABLE users(
 --
 
 ALTER TABLE app_configs ADD 
-    CONSTRAINT "PK86" PRIMARY KEY (id)
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: asientos 
+--
+
+ALTER TABLE asientos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: asientos_detalles 
+--
+
+ALTER TABLE asientos_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: balances_generales 
+--
+
+ALTER TABLE balances_generales ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: balances_generales_detalles 
+--
+
+ALTER TABLE balances_generales_detalles ADD 
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -561,7 +788,7 @@ ALTER TABLE app_configs ADD
 --
 
 ALTER TABLE categorias ADD 
-    CONSTRAINT "PK9" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -569,7 +796,15 @@ ALTER TABLE categorias ADD
 --
 
 ALTER TABLE componentes ADD 
-    CONSTRAINT "PK2" PRIMARY KEY (id)
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: cuentas_contables 
+--
+
+ALTER TABLE cuentas_contables ADD 
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -577,7 +812,7 @@ ALTER TABLE componentes ADD
 --
 
 ALTER TABLE devoluciones_componentes ADD 
-    CONSTRAINT "PK22" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -585,7 +820,7 @@ ALTER TABLE devoluciones_componentes ADD
 --
 
 ALTER TABLE devoluciones_componentes_detalles ADD 
-    CONSTRAINT "PK23" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -593,7 +828,7 @@ ALTER TABLE devoluciones_componentes_detalles ADD
 --
 
 ALTER TABLE devoluciones_productos ADD 
-    CONSTRAINT "PK22_1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -601,7 +836,15 @@ ALTER TABLE devoluciones_productos ADD
 --
 
 ALTER TABLE devoluciones_productos_detalles ADD 
-    CONSTRAINT "PK23_1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ejercicios_contables 
+--
+
+ALTER TABLE ejercicios_contables ADD 
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -609,7 +852,7 @@ ALTER TABLE devoluciones_productos_detalles ADD
 --
 
 ALTER TABLE lca_acciones ADD 
-    CONSTRAINT "PK87" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -617,7 +860,7 @@ ALTER TABLE lca_acciones ADD
 --
 
 ALTER TABLE lca_entidades ADD 
-    CONSTRAINT "PK88" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -625,7 +868,7 @@ ALTER TABLE lca_entidades ADD
 --
 
 ALTER TABLE lca_permisos ADD 
-    CONSTRAINT "PK90" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -633,7 +876,15 @@ ALTER TABLE lca_permisos ADD
 --
 
 ALTER TABLE lca_roles ADD 
-    CONSTRAINT "PK89" PRIMARY KEY (id)
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: libros_mayor 
+--
+
+ALTER TABLE libros_mayor ADD 
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -641,7 +892,23 @@ ALTER TABLE lca_roles ADD
 --
 
 ALTER TABLE marcas ADD 
-    CONSTRAINT "PK91" PRIMARY KEY (id)
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: mayor_registros 
+--
+
+ALTER TABLE mayor_registros ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: mayor_registros_detalles 
+--
+
+ALTER TABLE mayor_registros_detalles ADD 
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -649,7 +916,7 @@ ALTER TABLE marcas ADD
 --
 
 ALTER TABLE ordenes_producciones ADD 
-    CONSTRAINT "PK15" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -657,7 +924,7 @@ ALTER TABLE ordenes_producciones ADD
 --
 
 ALTER TABLE ordenes_producciones_detalles ADD 
-    CONSTRAINT "PK11_1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -665,7 +932,7 @@ ALTER TABLE ordenes_producciones_detalles ADD
 --
 
 ALTER TABLE pedidos_compras_componentes ADD 
-    CONSTRAINT "PK26" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -673,7 +940,7 @@ ALTER TABLE pedidos_compras_componentes ADD
 --
 
 ALTER TABLE pedidos_compras_componentes_detalles ADD 
-    CONSTRAINT "PK29" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -681,7 +948,7 @@ ALTER TABLE pedidos_compras_componentes_detalles ADD
 --
 
 ALTER TABLE productos_terminados ADD 
-    CONSTRAINT "PK4" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -689,7 +956,7 @@ ALTER TABLE productos_terminados ADD
 --
 
 ALTER TABLE productos_terminados_detalles ADD 
-    CONSTRAINT "PK6" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -697,7 +964,7 @@ ALTER TABLE productos_terminados_detalles ADD
 --
 
 ALTER TABLE solicitudes_componentes ADD 
-    CONSTRAINT "PK10" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -705,7 +972,7 @@ ALTER TABLE solicitudes_componentes ADD
 --
 
 ALTER TABLE solicitudes_componentes_detalles ADD 
-    CONSTRAINT "PK11" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -713,7 +980,7 @@ ALTER TABLE solicitudes_componentes_detalles ADD
 --
 
 ALTER TABLE solicitudes_transferencias_componentes ADD 
-    CONSTRAINT "PK19" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -721,7 +988,7 @@ ALTER TABLE solicitudes_transferencias_componentes ADD
 --
 
 ALTER TABLE solicitudes_transferencias_componentes_detalles ADD 
-    CONSTRAINT "PK20" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -729,7 +996,7 @@ ALTER TABLE solicitudes_transferencias_componentes_detalles ADD
 --
 
 ALTER TABLE solicitudes_transferencias_productos ADD 
-    CONSTRAINT "PK15_1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -737,7 +1004,7 @@ ALTER TABLE solicitudes_transferencias_productos ADD
 --
 
 ALTER TABLE solicitudes_transferencias_productos_detalles ADD 
-    CONSTRAINT "PK11_1_1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -745,7 +1012,7 @@ ALTER TABLE solicitudes_transferencias_productos_detalles ADD
 --
 
 ALTER TABLE stock_materias_primas ADD 
-    CONSTRAINT "PK1" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -753,7 +1020,7 @@ ALTER TABLE stock_materias_primas ADD
 --
 
 ALTER TABLE stock_producciones ADD 
-    CONSTRAINT "PK3" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -761,7 +1028,7 @@ ALTER TABLE stock_producciones ADD
 --
 
 ALTER TABLE stock_productos_terminados ADD 
-    CONSTRAINT "PK7" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -769,7 +1036,7 @@ ALTER TABLE stock_productos_terminados ADD
 --
 
 ALTER TABLE transacciones_estados ADD 
-    CONSTRAINT "PK14" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
 
 -- 
@@ -777,8 +1044,58 @@ ALTER TABLE transacciones_estados ADD
 --
 
 ALTER TABLE users ADD 
-    CONSTRAINT "PK21" PRIMARY KEY (id)
+    PRIMARY KEY (id)
 ;
+
+-- 
+-- TABLE: asientos 
+--
+
+ALTER TABLE asientos ADD CONSTRAINT "Refejercicios_contables102" 
+    FOREIGN KEY (ejercicio_id)
+    REFERENCES ejercicios_contables(id)
+;
+
+
+-- 
+-- TABLE: asientos_detalles 
+--
+
+ALTER TABLE asientos_detalles ADD CONSTRAINT "Refasientos100" 
+    FOREIGN KEY (id_asiento)
+    REFERENCES asientos(id)
+;
+
+ALTER TABLE asientos_detalles ADD CONSTRAINT "Refcuentas_contables101" 
+    FOREIGN KEY (cuenta_id)
+    REFERENCES cuentas_contables(id)
+;
+
+
+-- 
+-- TABLE: balances_generales 
+--
+
+ALTER TABLE balances_generales ADD CONSTRAINT "Refejercicios_contables111" 
+    FOREIGN KEY (ejercicio_id)
+    REFERENCES ejercicios_contables(id)
+;
+
+
+-- 
+-- TABLE: balances_generales_detalles 
+--
+
+ALTER TABLE balances_generales_detalles ADD CONSTRAINT "Refbalances_generales112" 
+    FOREIGN KEY (balance_id)
+    REFERENCES balances_generales(id)
+;
+
+ALTER TABLE balances_generales_detalles ADD CONSTRAINT "Refmayor_registros118" 
+    FOREIGN KEY (mayor_id)
+    REFERENCES mayor_registros(id)
+;
+
 
 -- 
 -- TABLE: componentes 
@@ -882,6 +1199,46 @@ ALTER TABLE lca_permisos ADD CONSTRAINT "Reflca_entidades89"
 ALTER TABLE lca_permisos ADD CONSTRAINT "Reflca_acciones90" 
     FOREIGN KEY (accion_id)
     REFERENCES lca_acciones(id)
+;
+
+
+-- 
+-- TABLE: libros_mayor 
+--
+
+ALTER TABLE libros_mayor ADD CONSTRAINT "Refejercicios_contables114" 
+    FOREIGN KEY (ejercicio_id)
+    REFERENCES ejercicios_contables(id)
+;
+
+
+-- 
+-- TABLE: mayor_registros 
+--
+
+ALTER TABLE mayor_registros ADD CONSTRAINT "Refcuentas_contables106" 
+    FOREIGN KEY (cuenta_id)
+    REFERENCES cuentas_contables(id)
+;
+
+ALTER TABLE mayor_registros ADD CONSTRAINT "Reflibros_mayor116" 
+    FOREIGN KEY (lirbo_mayor_id)
+    REFERENCES libros_mayor(id)
+;
+
+
+-- 
+-- TABLE: mayor_registros_detalles 
+--
+
+ALTER TABLE mayor_registros_detalles ADD CONSTRAINT "Refasientos_detalles103" 
+    FOREIGN KEY (asiento_detalle_id)
+    REFERENCES asientos_detalles(id)
+;
+
+ALTER TABLE mayor_registros_detalles ADD CONSTRAINT "Refmayor_registros105" 
+    FOREIGN KEY (libro_mayor_id)
+    REFERENCES mayor_registros(id)
 ;
 
 
@@ -994,6 +1351,11 @@ ALTER TABLE solicitudes_componentes_detalles ADD CONSTRAINT "Refsolicitudes_comp
 -- TABLE: solicitudes_transferencias_componentes 
 --
 
+ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones_detalles99" 
+    FOREIGN KEY (orden_produccion_detalle_id)
+    REFERENCES ordenes_producciones_detalles(id)
+;
+
 ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Reftransacciones_estados26" 
     FOREIGN KEY (estado_id)
     REFERENCES transacciones_estados(id)
@@ -1002,11 +1364,6 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Reftransaccio
 ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refusers29" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
-;
-
-ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones_detalles99" 
-    FOREIGN KEY (orden_produccion_detalle_id)
-    REFERENCES ordenes_producciones_detalles(id)
 ;
 
 
@@ -1029,11 +1386,6 @@ ALTER TABLE solicitudes_transferencias_componentes_detalles ADD CONSTRAINT "Refc
 -- TABLE: solicitudes_transferencias_productos 
 --
 
-ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransacciones_estados21" 
-    FOREIGN KEY (estado_id)
-    REFERENCES transacciones_estados(id)
-;
-
 ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refusers30" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
@@ -1044,10 +1396,20 @@ ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_prod
     REFERENCES ordenes_producciones(id)
 ;
 
+ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Reftransacciones_estados21" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
+;
+
 
 -- 
 -- TABLE: solicitudes_transferencias_productos_detalles 
 --
+
+ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles93" 
+    FOREIGN KEY (orden_produccion_detalle_id)
+    REFERENCES ordenes_producciones_detalles(id)
+;
 
 ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refsolicitudes_transferencias_productos22" 
     FOREIGN KEY (solicitudes_transferencias_productos_id)
@@ -1057,11 +1419,6 @@ ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refsol
 ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refproductos_terminados23" 
     FOREIGN KEY (producto_terminado_id)
     REFERENCES productos_terminados(id)
-;
-
-ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles93" 
-    FOREIGN KEY (orden_produccion_detalle_id)
-    REFERENCES ordenes_producciones_detalles(id)
 ;
 
 

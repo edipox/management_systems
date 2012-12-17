@@ -59,19 +59,17 @@ class Requests::Transferences::Product < ActiveRecord::Base
     }).id
     
     debe_account_id = AppConfig.find('accounting_finished_product_id').value
-    haber_account_id = AppConfig.find('accounting_products_in_process_id').value
+    haber_account_id = AppConfig.find('to_accounting_products_in_process_id').value
     
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: haber_account_id,
-      is_debe: false
     })
     self.save
     return true

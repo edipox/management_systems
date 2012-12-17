@@ -68,18 +68,16 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
     }).id
     
     debe_account_id = AppConfig.find("accounting_comercials_id").value
-    haber_account_id = AppConfig.find('accounting_raw_materials_id').value
+    haber_account_id = AppConfig.find('to_accounting_raw_materials_id').value
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: haber_account_id,
-      is_debe: false
     })
    
     return true
