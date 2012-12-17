@@ -281,15 +281,18 @@ AppConfig.create!({
   }).id
 })
 
-transference_component = Requests::Transferences::Component.create!({
+purchase_component = Requests::Purchases::Component.create!({
   status: status_open,
   user: system_user,
 })
-Requests::Transferences::Components::Detail.create!({
-  requests_transferences_component: transference_component,
-  component: keyboard,
-  quantity: 4
-})
+
+Components::Item.all.each do |c|
+  Requests::Purchases::Components::Detail.create!({
+    header_id: purchase_component.id,
+    component: c,
+    quantity: 4
+  })
+end
 
 devolution_component = Requests::Devolutions::Component.create!({
   status: status_open,

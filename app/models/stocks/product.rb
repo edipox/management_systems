@@ -21,45 +21,71 @@ class Stocks::Product < ActiveRecord::Base
 
   def check_qty
     if product
+    
       sum = product.products_stocks.reduce { |s1, s2| s1.product_quantity += s2.product_quantity; s1 }
-      puts "*************************************************************************************"
-      puts "product.minimum_quantity"
-      puts product.minimum_quantity
-      puts "*************************************************************************************"      
-      puts "sum.product_quantity"
-      puts sum.product_quantity
-      puts "*************************************************************************************"      
       if product.minimum_quantity > sum.product_quantity
-      missing_product_qty = product.minimum_quantity - sum.product_quantity
-      system_user_id = AppConfig.find('system_user_id').value
-      open_status_id = AppConfig.find('open_status_id').value
-      generated_by_system = Orders::Production.where('user_id = ? AND status_id = ?', system_user_id, open_status_id)
-      detail_generated = nil
-      generated_by_system.each do |e|
-        e.details.each do |d|
-          if d.product = product
-            detail_generated = d
-            break
+        missing_product_qty = product.minimum_quantity - sum.product_quantity
+        system_user_id = AppConfig.find('system_user_id').value
+        open_status_id = AppConfig.find('open_status_id').value
+        generated_by_system = Orders::Production.generated_by_system
+        detail_generated = nil
+        generated_by_system.each do |e|
+          e.details.each do |d|
+            if d.product = product
+              detail_generated = d
+              break
+            end
           end
         end
-      end
-      if detail_generated
-        detail_generated.quantity = missing_product_qty
-        detail_generated.save
-      else
-        order_prod = Orders::Production.create!({
-          status_id: open_status_id,
-          user_id: system_user_id,
-        }) 
-        Orders::Productions::Detail.create!({
-          header_id: order_prod.id,
-          product: product,
-          quantity: missing_product_qty
-        })
+        if detail_generated
+          detail_generated.quantity = missing_product_qty
+          detail_generated.save
+        else
+          order_prod = Orders::Production.create!({
+            status_id: open_status_id,
+            user_id: system_user_id,
+          }) 
+          Orders::Productions::Detail.create!({
+            header_id: order_prod.id,
+            product: product,
+            quantity: missing_product_qty
+          })
         end
       end
+      
     else
-      #sum = component.raw_material_stocks.reduce { |s1, s2| s1.component_quantity += s2.product_quantity; s1 }
+     sum = component.products_stocks.reduce { |s1, s2|
+      s1.component_quantity += s2.component_quantity; s1 }
+     if component.minimum_quantity > sum.component_quantity
+        missing_component_qty = component.minimum_quantity - sum.component_quantity
+        system_user_id = AppConfig.find('system_user_id').value
+        open_status_id = AppConfig.find('open_status_id').value
+        generated_by_system = Requests::Transferences::Finished::Component.generated_by_system
+        detail_generated = nil
+        generated_by_system.each do |e|
+          e.details.each do |d|
+            if d.component = component
+              detail_generated = d
+              break
+            end
+          end
+        end
+        if detail_generated
+          detail_generated.quantity = missing_component_qty
+          detail_generated.save
+        else
+          request_finished = Requests::Transferences::Finished::Component.create!({
+            status_id: open_status_id,
+            user_id: system_user_id
+          })
+          Requests::Transferences::Finished::Components::Detail.create!({
+            header_id: request_finished.id,
+            component: component,
+            quantity: missing_component_qty 
+          })
+        end
+      end
+     
     end
     
   end

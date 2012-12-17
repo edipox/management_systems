@@ -33,7 +33,7 @@ class Requests::Transferences::Product < ActiveRecord::Base
       dd.product.details.each do |d|
         qtty = d.quantity
         quantity_on_production = 0;
-        d.component.production_stocks.map{|e| 
+        d.component.production_stocks.map{ |e| 
           quantity_on_production += e.component_quantity
         }
         if qtty > quantity_on_production

@@ -11,4 +11,10 @@ class Components::Category < ActiveRecord::Base
   alias_attribute :name, :nombre
   alias_attribute :description, :descripcion
   alias_attribute :finished, :vendible
+  
+  class << self
+    def get_finished
+      self.where("vendible = true")
+    end
+  end
 end

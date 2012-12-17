@@ -31,6 +31,7 @@ class Requests::Transferences::Component < ActiveRecord::Base
   end
   
   def close
+    can_be_done = true
     details.each do |d|
       qtty = d.quantity
       quantity_on_raw_material = 0;
@@ -38,9 +39,11 @@ class Requests::Transferences::Component < ActiveRecord::Base
         quantity_on_raw_material += e.quantity
       }
       if qtty > quantity_on_raw_material
+        can_be_done = false
         return false
       end
     end
+    return false unless can_be_done
     
     sum = 0
     

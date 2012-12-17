@@ -4,7 +4,7 @@
 -- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Sunday, December 16, 2012 18:02:41
+-- Date Created : Monday, December 17, 2012 08:52:48
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -23,6 +23,7 @@ CREATE TABLE app_configs(
 
 
 
+
 -- 
 -- TABLE: categorias 
 --
@@ -37,6 +38,7 @@ CREATE TABLE categorias(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -61,6 +63,7 @@ CREATE TABLE componentes(
 
 
 
+
 -- 
 -- TABLE: devoluciones_componentes 
 --
@@ -79,6 +82,7 @@ CREATE TABLE devoluciones_componentes(
 
 
 
+
 -- 
 -- TABLE: devoluciones_componentes_detalles 
 --
@@ -93,6 +97,7 @@ CREATE TABLE devoluciones_componentes_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -114,6 +119,7 @@ CREATE TABLE devoluciones_productos(
 
 
 
+
 -- 
 -- TABLE: devoluciones_productos_detalles 
 --
@@ -128,6 +134,7 @@ CREATE TABLE devoluciones_productos_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -149,6 +156,7 @@ CREATE TABLE lca_acciones(
 
 
 
+
 -- 
 -- TABLE: lca_entidades 
 --
@@ -162,6 +170,7 @@ CREATE TABLE lca_entidades(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -183,6 +192,7 @@ CREATE TABLE lca_permisos(
 
 
 
+
 -- 
 -- TABLE: lca_roles 
 --
@@ -195,6 +205,7 @@ CREATE TABLE lca_roles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -211,6 +222,7 @@ CREATE TABLE marcas(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -231,6 +243,7 @@ CREATE TABLE ordenes_producciones(
 
 
 
+
 -- 
 -- TABLE: ordenes_producciones_detalles 
 --
@@ -245,6 +258,7 @@ CREATE TABLE ordenes_producciones_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -265,6 +279,7 @@ CREATE TABLE pedidos_compras_componentes(
 
 
 
+
 -- 
 -- TABLE: pedidos_compras_componentes_detalles 
 --
@@ -279,6 +294,7 @@ CREATE TABLE pedidos_compras_componentes_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -300,6 +316,7 @@ CREATE TABLE productos_terminados(
 
 
 
+
 -- 
 -- TABLE: productos_terminados_detalles 
 --
@@ -314,6 +331,7 @@ CREATE TABLE productos_terminados_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -334,6 +352,7 @@ CREATE TABLE solicitudes_componentes(
 
 
 
+
 -- 
 -- TABLE: solicitudes_componentes_detalles 
 --
@@ -348,6 +367,7 @@ CREATE TABLE solicitudes_componentes_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -369,6 +389,7 @@ CREATE TABLE solicitudes_transferencias_componentes(
 
 
 
+
 -- 
 -- TABLE: solicitudes_transferencias_componentes_detalles 
 --
@@ -383,6 +404,7 @@ CREATE TABLE solicitudes_transferencias_componentes_detalles(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -404,6 +426,7 @@ CREATE TABLE solicitudes_transferencias_productos(
 
 
 
+
 -- 
 -- TABLE: solicitudes_transferencias_productos_detalles 
 --
@@ -422,6 +445,7 @@ CREATE TABLE solicitudes_transferencias_productos_detalles(
 
 
 
+
 -- 
 -- TABLE: stock_materias_primas 
 --
@@ -436,6 +460,7 @@ CREATE TABLE stock_materias_primas(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -459,6 +484,7 @@ CREATE TABLE stock_producciones(
 
 
 
+
 -- 
 -- TABLE: stock_productos_terminados 
 --
@@ -467,7 +493,7 @@ CREATE TABLE stock_productos_terminados(
     id                            char(36)    NOT NULL,
     precio_unitario_producto      int4,
     precio_unitario_componente    int4,
-    cantidad_producto             interval,
+    cantidad_producto             int4,
     cantidad_componente           int4,
     producto_terminado_id         char(36),
     componente_id                 char(36),
@@ -476,6 +502,7 @@ CREATE TABLE stock_productos_terminados(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -491,6 +518,7 @@ CREATE TABLE transacciones_estados(
     deleted_at timestamp
 )
 ;
+
 
 
 
@@ -516,6 +544,7 @@ CREATE TABLE users(
     deleted_at timestamp
 )
 ;
+
 
 
 
