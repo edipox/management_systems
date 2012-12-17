@@ -1,4 +1,5 @@
 class Stock::ProductsController < ApplicationController
+  require "will_paginate/array"
   layout "stock_products"
   def index
     @existances = Stocks::Product.paginate(:page => params[:page])
@@ -23,7 +24,7 @@ class Stock::ProductsController < ApplicationController
   end
   
   def list_components
-    @components = Components::Item.paginate(:page => params[:page])
+    @components = Components::Item.get_finished.paginate(:page => params[:page])
     respond_to do |format|
       format.js
     end
