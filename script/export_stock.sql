@@ -1,10 +1,10 @@
 --
 -- ER/Studio 7.5 SQL Code Generation
 -- Company :      uni
--- Project :      MODEL_IN_PROGRESS.DM1
+-- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Monday, December 17, 2012 16:45:09
+-- Date Created : Monday, December 17, 2012 17:04:04
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -43,32 +43,12 @@ CREATE TABLE acumuladores_conceptos(
 
 
 -- 
--- TABLE: aperturas_de_cajas 
---
-
-CREATE TABLE aperturas_de_cajas(
-    id                char(36)     NOT NULL,
-    total_efectivo    int8         NOT NULL,
-    total_cheques     int8         NOT NULL,
-    fecha_cierre      timestamp    NOT NULL,
-    fecha_apertura    timestamp    NOT NULL,
-    caja_id           char(36)     NOT NULL,
-    created_at timestamp         NOT NULL,
-    updated_at timestamp         NOT NULL,
-    deleted_at timestamp
-)
-;
-
-
-
-
--- 
 -- TABLE: app_configs 
 --
 
 CREATE TABLE app_configs(
-    id       varchar(100)    NOT NULL,
-    valor    char(36)        NOT NULL,
+    id       text    NOT NULL,
+    valor    text    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -170,23 +150,6 @@ CREATE TABLE balances_generales_detalles(
     fecha_inicio             date           NOT NULL,
     balance_id               char(36)       NOT NULL,
     mayor_id                 char(36)       NOT NULL,
-    created_at timestamp         NOT NULL,
-    updated_at timestamp         NOT NULL,
-    deleted_at timestamp
-)
-;
-
-
-
-
--- 
--- TABLE: cajas 
---
-
-CREATE TABLE cajas(
-    id        char(36)    NOT NULL,
-    nombre    char(36)    NOT NULL,
-    numero    char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -1357,14 +1320,6 @@ ALTER TABLE acumuladores_conceptos ADD
 ;
 
 -- 
--- TABLE: aperturas_de_cajas 
---
-
-ALTER TABLE aperturas_de_cajas ADD 
-    PRIMARY KEY (id)
-;
-
--- 
 -- TABLE: app_configs 
 --
 
@@ -1401,14 +1356,6 @@ ALTER TABLE balances_generales ADD
 --
 
 ALTER TABLE balances_generales_detalles ADD 
-    PRIMARY KEY (id)
-;
-
--- 
--- TABLE: cajas 
---
-
-ALTER TABLE cajas ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1924,16 +1871,6 @@ ALTER TABLE acumuladores_conceptos ADD CONSTRAINT "Refmodelos_de_conceptos_de_su
 
 
 -- 
--- TABLE: aperturas_de_cajas 
---
-
-ALTER TABLE aperturas_de_cajas ADD CONSTRAINT "Refcajas121" 
-    FOREIGN KEY (caja_id)
-    REFERENCES cajas(id)
-;
-
-
--- 
 -- TABLE: asientos 
 --
 
@@ -1987,14 +1924,14 @@ ALTER TABLE balances_generales_detalles ADD CONSTRAINT "Refmayor_registros132"
 -- TABLE: componentes 
 --
 
-ALTER TABLE componentes ADD CONSTRAINT "Refmarcas92" 
-    FOREIGN KEY (marca_id)
-    REFERENCES marcas(id)
-;
-
 ALTER TABLE componentes ADD CONSTRAINT "Refcategorias11" 
     FOREIGN KEY (categoria_id)
     REFERENCES categorias(id)
+;
+
+ALTER TABLE componentes ADD CONSTRAINT "Refmarcas92" 
+    FOREIGN KEY (marca_id)
+    REFERENCES marcas(id)
 ;
 
 
@@ -2027,11 +1964,6 @@ ALTER TABLE cotizaciones ADD CONSTRAINT "Refproveedores59"
 -- TABLE: cotizaciones_detalles 
 --
 
-ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refcomponentes63" 
-    FOREIGN KEY (componente_id)
-    REFERENCES componentes(id)
-;
-
 ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refcotizaciones57" 
     FOREIGN KEY (cotizacion_id)
     REFERENCES cotizaciones(id)
@@ -2040,6 +1972,11 @@ ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refcotizaciones57"
 ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refpedidos_cotizaciones_detalles60" 
     FOREIGN KEY (pedido_cotizacion_detalle_id)
     REFERENCES pedidos_cotizaciones_detalles(id)
+;
+
+ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refcomponentes63" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
 ;
 
 
@@ -2232,16 +2169,6 @@ ALTER TABLE ordenes_compras ADD CONSTRAINT "Refproveedores66"
 -- TABLE: ordenes_compras_detalles 
 --
 
-ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcomponentes61" 
-    FOREIGN KEY (componente_id)
-    REFERENCES componentes(id)
-;
-
-ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcotizaciones_detalles65" 
-    FOREIGN KEY (cotizacion_detalle_id)
-    REFERENCES cotizaciones_detalles(id)
-;
-
 ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refordenes_compras54" 
     FOREIGN KEY (orden_compra_id)
     REFERENCES ordenes_compras(id)
@@ -2250,6 +2177,16 @@ ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refordenes_compras54"
 ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refproveedores_facturas_detalles56" 
     FOREIGN KEY (proveedores_factura_detalle_id)
     REFERENCES proveedores_facturas_detalles(id)
+;
+
+ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcomponentes61" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
+;
+
+ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcotizaciones_detalles65" 
+    FOREIGN KEY (cotizacion_detalle_id)
+    REFERENCES cotizaciones_detalles(id)
 ;
 
 
@@ -2302,14 +2239,14 @@ ALTER TABLE pedidos_compras_componentes ADD CONSTRAINT "Refusers43"
 -- TABLE: pedidos_compras_componentes_detalles 
 --
 
-ALTER TABLE pedidos_compras_componentes_detalles ADD CONSTRAINT "Refcomponentes98" 
-    FOREIGN KEY (componente_id)
-    REFERENCES componentes(id)
-;
-
 ALTER TABLE pedidos_compras_componentes_detalles ADD CONSTRAINT "Refpedidos_compras_componentes44" 
     FOREIGN KEY (pedidos_compras_componentes_id)
     REFERENCES pedidos_compras_componentes(id)
+;
+
+ALTER TABLE pedidos_compras_componentes_detalles ADD CONSTRAINT "Refcomponentes98" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
 ;
 
 
@@ -2332,11 +2269,6 @@ ALTER TABLE pedidos_cotizaciones ADD CONSTRAINT "Refproveedores48"
 -- TABLE: pedidos_cotizaciones_detalles 
 --
 
-ALTER TABLE pedidos_cotizaciones_detalles ADD CONSTRAINT "Refcomponentes64" 
-    FOREIGN KEY (componente_id)
-    REFERENCES componentes(id)
-;
-
 ALTER TABLE pedidos_cotizaciones_detalles ADD CONSTRAINT "Refpedidos_compras_componentes_detalles49" 
     FOREIGN KEY (pedido_compra_componente_detalle_id)
     REFERENCES pedidos_compras_componentes_detalles(id)
@@ -2345,6 +2277,11 @@ ALTER TABLE pedidos_cotizaciones_detalles ADD CONSTRAINT "Refpedidos_compras_com
 ALTER TABLE pedidos_cotizaciones_detalles ADD CONSTRAINT "Refpedidos_cotizaciones53" 
     FOREIGN KEY (pedido_cotizacion_id)
     REFERENCES pedidos_cotizaciones(id)
+;
+
+ALTER TABLE pedidos_cotizaciones_detalles ADD CONSTRAINT "Refcomponentes64" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
 ;
 
 
@@ -2437,14 +2374,14 @@ ALTER TABLE proveedores_facturas ADD CONSTRAINT "Refproveedores_formas_pago77"
 -- TABLE: proveedores_facturas_detalles 
 --
 
-ALTER TABLE proveedores_facturas_detalles ADD CONSTRAINT "Refcomponentes62" 
-    FOREIGN KEY (componente_id)
-    REFERENCES componentes(id)
-;
-
 ALTER TABLE proveedores_facturas_detalles ADD CONSTRAINT "Refproveedores_facturas55" 
     FOREIGN KEY (proveedores_factura_id)
     REFERENCES proveedores_facturas(id)
+;
+
+ALTER TABLE proveedores_facturas_detalles ADD CONSTRAINT "Refcomponentes62" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
 ;
 
 
@@ -2562,11 +2499,6 @@ ALTER TABLE solicitudes_componentes_detalles ADD CONSTRAINT "Refsolicitudes_comp
 -- TABLE: solicitudes_transferencias_componentes 
 --
 
-ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones_detalles99" 
-    FOREIGN KEY (orden_produccion_detalle_id)
-    REFERENCES ordenes_producciones_detalles(id)
-;
-
 ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Reftransacciones_estados26" 
     FOREIGN KEY (estado_id)
     REFERENCES transacciones_estados(id)
@@ -2575,6 +2507,11 @@ ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Reftransaccio
 ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refusers29" 
     FOREIGN KEY (usuario_id)
     REFERENCES users(id)
+;
+
+ALTER TABLE solicitudes_transferencias_componentes ADD CONSTRAINT "Refordenes_producciones_detalles99" 
+    FOREIGN KEY (orden_produccion_detalle_id)
+    REFERENCES ordenes_producciones_detalles(id)
 ;
 
 
@@ -2617,11 +2554,6 @@ ALTER TABLE solicitudes_transferencias_productos ADD CONSTRAINT "Refordenes_prod
 -- TABLE: solicitudes_transferencias_productos_detalles 
 --
 
-ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles93" 
-    FOREIGN KEY (orden_produccion_detalle_id)
-    REFERENCES ordenes_producciones_detalles(id)
-;
-
 ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refsolicitudes_transferencias_productos22" 
     FOREIGN KEY (solicitudes_transferencias_productos_id)
     REFERENCES solicitudes_transferencias_productos(id)
@@ -2630,6 +2562,11 @@ ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refsol
 ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refproductos_terminados23" 
     FOREIGN KEY (producto_terminado_id)
     REFERENCES productos_terminados(id)
+;
+
+ALTER TABLE solicitudes_transferencias_productos_detalles ADD CONSTRAINT "Refordenes_producciones_detalles93" 
+    FOREIGN KEY (orden_produccion_detalle_id)
+    REFERENCES ordenes_producciones_detalles(id)
 ;
 
 
