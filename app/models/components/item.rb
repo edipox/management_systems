@@ -29,6 +29,16 @@ class Components::Item < ActiveRecord::Base
   
   validates :codigo, :uniqueness => true
   
+  class << self
+    def get_finished
+      components = []; 
+      Components::Category.get_finished.each do |category|
+        components.concat category.components_items
+      end
+      return components
+    end
+  end
+  
   def raw_material_total_stock
     qty = raw_material_stocks.reduce do |s0, s1|
       s0.quantity += s1.quantity

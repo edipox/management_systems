@@ -45,6 +45,7 @@ acl_entities << ['Transacción', 'Transaction']
 acl_entities << ['Cuenta contable','Accounting::Account']
 acl_entities << ['Asiento contable','Accounting::Entry']
 acl_entities << ['Detalle de asiento contable', 'Accounting::Entries::Detail']
+acl_entities << ['Ejercicio contable', 'Accounting::Year']
 
 
 # acl_entities << ['', '']
@@ -81,6 +82,14 @@ system_user = User.create!({
   password: 'systempass',
   password_confirmation: 'systempass',
   role: admin_role
+})
+
+AppConfig.create!({
+  id: 'current_accounting_year_id',
+  value: Accounting::Year.create!({
+    start_date:  Date.parse("2012-01-01"),
+    end_date: Date.parse("2012-12-24")
+  }).id
 })
 
 AppConfig.create!({
@@ -198,7 +207,7 @@ composition = Products::Composition.create!({
   name: 'CPU Economica',
   description: 'modelo basico de CPU economica',
   minimum_quantity: 2,
-  price: 268000
+  price: 550000
 })
 
 Products::Compositions::Detail.create!({
@@ -231,7 +240,20 @@ AppConfig.create!({
   id: 'accounting_box_id',
   value: Accounting::Account.create!({
       entrable: true,
-      name: "Caja"
+      name: "Caja",
+      kind: "d",
+      number: 4
+    }).id
+})
+
+
+AppConfig.create!({
+  id: 'to_accounting_box_id',
+  value: Accounting::Account.create!({
+      entrable: true,
+      name: "Caja",
+      kind: "h",
+      number: 5      
     }).id
 })
 
@@ -239,57 +261,138 @@ AppConfig.create!({
 id: 'accounting_finished_product_id', 
 value: Accounting::Account.create!({
     entrable: true,
-    name: "Productos terminados"
+    name: "Productos terminados",
+    kind: "d",
+      number: 8
   }).id })
+AppConfig.create!({
+id: 'to_accounting_finished_product_id', 
+value: Accounting::Account.create!({
+    entrable: true,
+    name: "Productos terminados",
+    kind: "h",
+      number: 9
+  }).id })
+  
 AppConfig.create!({
 id: 'accounting_products_in_process_id', 
 value: Accounting::Account.create!({
   entrable: true,
-  name: "Productos en curso"
+  name: "Productos en curso",
+  kind: "d",
+      number: 12
 }).id })
+
+AppConfig.create!({
+id: 'to_accounting_products_in_process_id', 
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Productos en curso",
+  kind: "h",
+      number: 13
+}).id })
+
 AppConfig.create!({
 id: 'accounting_purchases_devolutions_id', 
 value: Accounting::Account.create!({
   entrable: true,
-  name: "Devoluciones de compras"
+  name: "Devoluciones de compras",
+  kind: "d",
+      number: 14
 }).id })
+AppConfig.create!({
+id: 'to_accounting_purchases_devolutions_id', 
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Devoluciones de compras",
+  kind: "h",
+      number: 14
+}).id })
+
 AppConfig.create!({
   id: 'accounting_raw_materials_id',
   value: Accounting::Account.create!({
   entrable: true,
-  name: "Materias primas"
+  name: "Materias primas",
+  kind: "d",
+      number: 16
+  }).id
+})
+
+AppConfig.create!({
+  id: 'to_accounting_raw_materials_id',
+  value: Accounting::Account.create!({
+  entrable: true,
+  name: "Materias primas",
+  kind: "h",
+      number: 18
   }).id
 })
 AppConfig.create!({
 id: 'accounting_sell_devolutions_id',
 value: Accounting::Account.create!({
   entrable: true,
-  name: "Devoluciones de ventas"
+  name: "Devoluciones de ventas",
+  kind: "d",
+      number: 19
+}).id })
+AppConfig.create!({
+id: 'to_accounting_sell_devolutions_id',
+value: Accounting::Account.create!({
+  entrable: true,
+  name: "Devoluciones de ventas",
+  kind: "h",
+      number: 19
 }).id })
 AppConfig.create!({
 id: 'accounting_comercials_id',
 value: Accounting::Account.create!({
       entrable: true,
-      name: "Comerciales"
+      name: "Comerciales",
+      kind: "d",
+      number: 21
+    }).id })
+    
+AppConfig.create!({
+id: 'to_accounting_comercials_id',
+value: Accounting::Account.create!({
+      entrable: true,
+      name: "Comerciales",
+      kind: "h",
+      number: 24
     }).id })
     
 AppConfig.create!({
   id: 'accounting_production_recharge_id',
   value: Accounting::Account.create!({
       entrable: true,
-      name: "Recargo por produccion"
+      name: "Recargo por produccion",
+      kind: "d",
+      number: 25
+  }).id
+})
+AppConfig.create!({
+  id: 'to_accounting_production_recharge_id',
+  value: Accounting::Account.create!({
+      entrable: true,
+      name: "Recargo por produccion",
+      kind: "h",
+      number: 25
   }).id
 })
 
-transference_component = Requests::Transferences::Component.create!({
+purchase_component = Requests::Purchases::Component.create!({
   status: status_open,
   user: system_user,
 })
-Requests::Transferences::Components::Detail.create!({
-  requests_transferences_component: transference_component,
-  component: keyboard,
-  quantity: 4
-})
+
+Components::Item.all.each do |c|
+  Requests::Purchases::Components::Detail.create!({
+    header_id: purchase_component.id,
+    component: c,
+    quantity: 4
+  })
+end
 
 devolution_component = Requests::Devolutions::Component.create!({
   status: status_open,

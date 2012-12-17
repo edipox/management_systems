@@ -24,6 +24,13 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
   validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
   validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
   
+  class << self
+    def generated_by_system
+      system_user_id = AppConfig.find('system_user_id').value
+      open_status_id = AppConfig.find('open_status_id').value
+      self.where('usuario_id = ? AND estado_id = ?', system_user_id, open_status_id)
+    end
+  end
   
   def close
     details.each do |d|
@@ -41,6 +48,7 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
       id = d.component.id
       price = d.component.price
       qtty = d.quantity
+   
       Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
       Stocks::Product.create!({component_id: id, component_quantity: qtty, component_price: price})
       
@@ -60,18 +68,16 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
     }).id
     
     debe_account_id = AppConfig.find("accounting_comercials_id").value
-    haber_account_id = AppConfig.find('accounting_raw_materials_id').value
+    haber_account_id = AppConfig.find('to_accounting_raw_materials_id').value
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: haber_account_id,
-      is_debe: false
     })
    
     return true

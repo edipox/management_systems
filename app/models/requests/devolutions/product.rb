@@ -28,9 +28,9 @@ class Requests::Devolutions::Product < ActiveRecord::Base
       qtty = d.quantity
       quantity_on_products = 0;
       d.product.products_stocks.map{|e| 
-        quantity_on_products += e.quantity
+        quantity_on_products += e.product_quantity
       }
-      if ! (qtty < quantity_on_products)
+      if qtty > quantity_on_products
         return false
       end
     end
@@ -40,7 +40,7 @@ class Requests::Devolutions::Product < ActiveRecord::Base
       price = d.product.price
       qtty = d.quantity
       Stocks::Production.create!({product_id: id, product_quantity: qtty, product_price: price})
-      Stocks::Product.create!({product_id: id, quantity: -qtty, price: price})
+      Stocks::Product.create!({product_id: id, product_quantity: -qtty, product_price: price})
 #      Transaction.create!({
 #        kind: self.class.to_s,
 #        detail_kind: d.class.to_s,
@@ -59,19 +59,17 @@ class Requests::Devolutions::Product < ActiveRecord::Base
     
     debe_account_id = AppConfig.find('accounting_sell_devolutions_id').value
     
-    haber_account_id = AppConfig.find('accounting_finished_product_id').value
+    haber_account_id = AppConfig.find('to_accounting_finished_product_id').value
     
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: haber_account_id,
-      is_debe: false
     })
    
     return true

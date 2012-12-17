@@ -13,8 +13,7 @@
       
   .field
     = f.label :component_id, 'Componente'
-    - components = []; Components::Category.where("finished = true").each do |cat| ; components.concat cat.components_items ; end
-    = f.collection_select(:component_id, components, :id, :name,{}, { class: "required" })
+    = f.collection_select(:component_id, Components::Item.get_finished, :id, :name,{}, { class: "required" })
       
   .field
     = f.label :quantity, 'Cantidad' 

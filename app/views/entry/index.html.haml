@@ -11,7 +11,7 @@
         %div{ class: "ui-block-c" }
         
     %li{ class: 'account'}
-      - entry.details.where("is_debe = true").each do |d|
+      - entry.d_kind_details.each do |d|
         %div{ class: "ui-grid-b" }
           
           %div{ class: "ui-block-a date" }
@@ -29,9 +29,9 @@
               %div{ class: "ui-block-a" }= d.value
               %div{ class: "ui-block-b" } 0
       
-      %hr
+        %hr
       
-      - entry.details.where("is_debe = false").each do |d|
+      - entry.h_kind_details.each do |d|
         %div{ class: "ui-grid-b" }
           
           %div{ class: "ui-block-a date" }
@@ -39,7 +39,7 @@
           %div{ class: "ui-block-b accounts" }
             %div{ class: "ui-grid-a" }
               
-              %div{ class: "ui-block-a haber" }= "a "+d.account.name
+              %div{ class: "ui-block-a haber" }= " a "+d.account.name
               
                            
           %div{ class: "ui-block-c column" }
@@ -47,7 +47,7 @@
               
               %div{ class: "ui-block-a" } 0
               %div{ class: "ui-block-b" }= d.value
-
+        %hr        
     
       %li.description{ data: { trim: "40" } }= entry.description
   

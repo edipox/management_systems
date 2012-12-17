@@ -22,25 +22,19 @@ class Stocks::Component < ActiveRecord::Base
   after_save :check_qty
 
   def check_qty
-    sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantity; s1 }
-    if component.minimum_quantity > sum.quantity
-      missing_component_qty = component.minimum_quantity - sum.quantity
-      system_user_id = AppConfig.find('system_user_id').value
-      open_status_id = AppConfig.find('open_status_id').value
-      generated_by_system = Requests::Purchases::Component.generated_by_system.first
-      detail_generated = nil
-#      generated_by_system.each do |header|
-#        header.details.each do |d|
-#          if d.component.id == component.id
-#            detail_generated = d
-#            break
-#          end
-#        end
-#      end
-#      if detail_generated
-#        detail_generated.quantity = missing_component_qty
-#        detail_generated.save
-#      else
+#    Components::Item.all.each do |component|
+      #sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantity; s1 }
+      quantity_on_stock = 0
+      component.raw_material_stocks.map{ |e| 
+        quantity_on_stock += e.quantity || 0
+      }
+      if component.minimum_quantity > quantity_on_stock
+        missing_component_qty = component.minimum_quantity - quantity_on_stock
+        system_user_id = AppConfig.find('system_user_id').value
+        open_status_id = AppConfig.find('open_status_id').value
+        generated_by_system = Requests::Purchases::Component.generated_by_system.first
+        detail_generated = nil
+
         request_purchase = generated_by_system || Requests::Purchases::Component.create!({
           status_id: open_status_id,
           user_id: system_user_id,
@@ -50,7 +44,10 @@ class Stocks::Component < ActiveRecord::Base
           component: component,
           quantity: missing_component_qty
         })
-#      end
-    end
+     
+      end
+#    end
   end
+
+
 end

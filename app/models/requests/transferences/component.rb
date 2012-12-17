@@ -31,6 +31,7 @@ class Requests::Transferences::Component < ActiveRecord::Base
   end
   
   def close
+    can_be_done = true
     details.each do |d|
       qtty = d.quantity
       quantity_on_raw_material = 0;
@@ -38,9 +39,11 @@ class Requests::Transferences::Component < ActiveRecord::Base
         quantity_on_raw_material += e.quantity
       }
       if qtty > quantity_on_raw_material
+        can_be_done = false
         return false
       end
     end
+    return false unless can_be_done
     
     sum = 0
     
@@ -65,18 +68,16 @@ class Requests::Transferences::Component < ActiveRecord::Base
       description: "Transferencia de componentes"    
     }).id
     debe_account_id = AppConfig.find('accounting_products_in_process_id').value
-    haber_account_id = AppConfig.find('accounting_raw_materials_id').value
+    haber_account_id = AppConfig.find('to_accounting_raw_materials_id').value
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: haber_account_id,
-      is_debe: false
     })
 
     return true

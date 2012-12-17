@@ -28,7 +28,13 @@ class Orders::Production < ActiveRecord::Base
   validates :estado_id, :presence => true #, :length => { :minimum => 2 }  
   validates :usuario_id, :presence => true #, :length => { :minimum => 2 }  
     
-    
+  class << self
+    def generated_by_system
+      system_user_id = AppConfig.find('system_user_id').value
+      open_status_id = AppConfig.find('open_status_id').value
+      self.where('usuario_id = ? AND estado_id = ?', system_user_id, open_status_id)
+    end
+  end
   
     
   def destroy_requests_open
@@ -43,12 +49,14 @@ class Orders::Production < ActiveRecord::Base
     open_status_id = AppConfig.find('open_status_id').value
 
     details.each do |dd|
-      request = Requests::Transferences::Component.get_by_order_detail( dd.id, open_status_id).first || request = Requests::Transferences::Component.create!({
-          user_id: system_user_id,
-          status_id: open_status_id,
-          order_detail_id: dd.id,
-        })
-
+      request = Requests::Transferences::Component.get_by_order_detail( dd.id, open_status_id).first #|| request = Requests::Transferences::Component.create!({
+#          user_id: system_user_id,
+#          status_id: open_status_id,
+#          order_detail_id: dd.id,
+#        })
+      
+      return false unless request
+      
       components = {}    
       dd.product.details.each do |c|
         qtty = c.quantity * dd.quantity
@@ -126,9 +134,8 @@ class Orders::Production < ActiveRecord::Base
       status_id: status.id,
       order_production_id: id
     });
-    pt_details = []
     details.each do |d|
-      pt_details << Requests::Transferences::Products::Detail.create!({
+      Requests::Transferences::Products::Detail.create!({
         header_id: products_transferences.id,
         product_id: d.product.id,
         quantity: d.quantity,
@@ -137,12 +144,11 @@ class Orders::Production < ActiveRecord::Base
     end
 
     if ! products_transferences.close
-      pt_details.each do |d|
-        d.destroy
-      end
+      products_transferences.details.destroy_all
       products_transferences.destroy
       return false
     end
+    
     sum = 0
     component_sum = 0
     details.each do |d|
@@ -166,27 +172,24 @@ class Orders::Production < ActiveRecord::Base
     }).id
     
     debe_account_id = AppConfig.find('accounting_finished_product_id').value
-    haber_account_id = AppConfig.find('accounting_products_in_process_id').value
+    haber_account_id = AppConfig.find('to_accounting_products_in_process_id').value
     
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum,
       account_id: debe_account_id,
-      is_debe: true
     })
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: component_sum,
       account_id: haber_account_id,
-      is_debe: false
     })
-    haber_account_id2 = AppConfig.find('accounting_production_recharge_id').value
+    haber_account_id2 = AppConfig.find('to_accounting_production_recharge_id').value
 
     Accounting::Entries::Detail.create!({
       header_id: entry_id,
       value: sum - component_sum,
       account_id: haber_account_id2,
-      is_debe: false
     })
     
     return true
