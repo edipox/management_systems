@@ -17,7 +17,6 @@
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: stock_raw_material_list_path, data: { role: 'button', remote: "true" } } Stock de componentes
-          %a{ href: '/stock/raw_material/transactions', data: { role: 'button', remote: "true"  } } Movimientos
           - if can?(:read, Components::Item)
             %a{ href: components_items_path, data: { role: 'button', remote:"true" } } Componentes
           - if can?(:read, Requests::Purchases::Component)
@@ -26,8 +25,6 @@
             %a{ href: components_categories_path, data: { role: 'button', remote:"true" } } Categorias
           - if can?(:read, Components::Brand)
             %a{ href: components_brands_path, data: { role: 'button', remote:"true" } } Marcas
-          - if can?(:read, Accounting::Entry)
-            %a{ href: "/entry/index", data: { role: 'button', remote:"true" } } Asientos contables
 
         %div#content
           = yield

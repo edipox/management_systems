@@ -14,6 +14,10 @@
     margin-right:auto!important;
 }*/
 
+.account{
+  width: 972px!important;
+}
+
 .account .column .ui-block-b, .account .column .ui-block-a{
   border-left: 1px solid gray!important;
   height:20px!important;

@@ -17,8 +17,7 @@
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
           %a{ href: '/stock/products/list_products', data: { role: 'button', remote: "true" } } Stock de productos terminados
-          %a{ href: '/stock/products/list_components', data: { role: 'button', remote: "true" } } Componentes en stock
-          %a{ href: '/stock/products/transactions', data: { role: 'button', remote: "true"  } } Movimientos          
+          %a{ href: '/stock/products/list_components', data: { role: 'button', remote: "true" } } Componentes en stock 
           - if can?(:read, Orders::Production)
             %a{ href: orders_productions_path, data: { role: 'button', remote: "true"  } } Orden de producción
           - if can?(:read, Requests::Devolutions::Product)  
