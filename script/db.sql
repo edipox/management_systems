@@ -4,7 +4,7 @@
 -- Project :      TO_EXPORT.DM1
 -- Author :       Pablo
 --
--- Date Created : Monday, December 17, 2012 17:04:04
+-- Date Created : Tuesday, December 18, 2012 12:13:20
 -- Target DBMS : PostgreSQL 8.0
 --
 
@@ -33,6 +33,26 @@ CREATE TABLE acumuladores_conceptos(
     id                       char(36)    NOT NULL,
     acumulador_id            char(36)    NOT NULL,
     modelo_de_concepto_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: aperturas_de_cajas 
+--
+
+CREATE TABLE aperturas_de_cajas(
+    id                char(36)     NOT NULL,
+    total_efectivo    int8         NOT NULL,
+    total_cheques     int8         NOT NULL,
+    fecha_apertura    timestamp    NOT NULL,
+    fecha_cierre      timestamp    NOT NULL,
+    caja_id           char(36)     NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -144,12 +164,61 @@ CREATE TABLE balances_generales_detalles(
     patrimonial_pasivo_pn    int4           NOT NULL,
     resultados_perdidas      char(36)       NOT NULL,
     resultados_ganancias     char(36)       NOT NULL,
-    fecha_fin                date           NOT NULL,
     numero                   int4           NOT NULL,
     descripcion              varchar(45),
-    fecha_inicio             date           NOT NULL,
     balance_id               char(36)       NOT NULL,
     mayor_id                 char(36)       NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: bancos 
+--
+
+CREATE TABLE bancos(
+    id        char(36)    NOT NULL,
+    nombre    text        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: boletas_de_deposito 
+--
+
+CREATE TABLE boletas_de_deposito(
+    id                  char(36)    NOT NULL,
+    importe_efectivo    int8        NOT NULL,
+    numero              int8        NOT NULL,
+    cuenta_bancaria     char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: cajas 
+--
+
+CREATE TABLE cajas(
+    id        char(36)    NOT NULL,
+    nombre    text        NOT NULL,
+    numero    int8        NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -178,6 +247,256 @@ CREATE TABLE categorias(
 
 
 -- 
+-- TABLE: cheques_de_terceros 
+--
+
+CREATE TABLE cheques_de_terceros(
+    id                       char(36)    NOT NULL,
+    fecha                    date        NOT NULL,
+    tipo_de_valor            char(36)    NOT NULL,
+    concepto                 text        NOT NULL,
+    numero                   int8        NOT NULL,
+    importe                  int8        NOT NULL,
+    movimiento_id            char(36)    NOT NULL,
+    boleta_de_deposito_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: cheques_orden_pago_detalles 
+--
+
+CREATE TABLE cheques_orden_pago_detalles(
+    id           char(36)    NOT NULL,
+    orden_id     char(36)    NOT NULL,
+    cheque_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: cheques_propios 
+--
+
+CREATE TABLE cheques_propios(
+    id           char(36)    NOT NULL,
+    fecha        date        NOT NULL,
+    concepto     text        NOT NULL,
+    numero       int4        NOT NULL,
+    importe      int8        NOT NULL,
+    cuenta_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes 
+--
+
+CREATE TABLE clientes(
+    id             char(36)        NOT NULL,
+    descripcion    varchar(100)    NOT NULL,
+    persona_id     char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_cuenta_corriente_detalles 
+--
+
+CREATE TABLE clientes_cuenta_corriente_detalles(
+    id                     char(36)    NOT NULL,
+    saldo                  int4        NOT NULL,
+    a_pagar                int4        NOT NULL,
+    cantidad_cuotas        int4        NOT NULL,
+    cuenta_corriente_id    char(36)    NOT NULL,
+    documento_id           char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_cuentas_corriente 
+--
+
+CREATE TABLE clientes_cuentas_corriente(
+    id            char(36)    NOT NULL,
+    saldo         int8        NOT NULL,
+    cliente_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_cuotas 
+--
+
+CREATE TABLE clientes_cuotas(
+    id                   char(36)    NOT NULL,
+    pagado_en_fecha      date        NOT NULL,
+    total_a_pagar        int4        NOT NULL,
+    saldo                int4        NOT NULL,
+    valor                int4        NOT NULL,
+    fecha_vencimiento    date        NOT NULL,
+    plazo_id             char(36)    NOT NULL,
+    factura_id           char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_facturas 
+--
+
+CREATE TABLE clientes_facturas(
+    id               char(36)    NOT NULL,
+    total_iva        int4        NOT NULL,
+    monto_total      int4        NOT NULL,
+    cliente_id       char(36)    NOT NULL,
+    forma_pago_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_facturas_detalles 
+--
+
+CREATE TABLE clientes_facturas_detalles(
+    id                 char(36)    NOT NULL,
+    precio_unitario    int4        NOT NULL,
+    subtotal_iva       int4        NOT NULL,
+    monto_subtotal     int4        NOT NULL,
+    cantidad           int4        NOT NULL,
+    factura_id         char(36)    NOT NULL,
+    componente_id      char(36),
+    producto_id        char(36),
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_facturas_iva 
+--
+
+CREATE TABLE clientes_facturas_iva(
+    id                    char(36)    NOT NULL,
+    cliente_factura_id    char(36)    NOT NULL,
+    iva_tipo_id           char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_forma_pago 
+--
+
+CREATE TABLE clientes_forma_pago(
+    id             char(36)    NOT NULL,
+    nombre         char(36)    NOT NULL,
+    descripcion    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_notas_credito 
+--
+
+CREATE TABLE clientes_notas_credito(
+    id                          char(36)        NOT NULL,
+    motivo                      varchar(100)    NOT NULL,
+    numero                      int4            NOT NULL,
+    total                       int4            NOT NULL,
+    cliente_id                  char(36)        NOT NULL,
+    documento_id                char(36)        NOT NULL,
+    devolucion_producto_id      char(36),
+    devolucion_componente_id    char(36),
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: clientes_notas_credito_detalles 
+--
+
+CREATE TABLE clientes_notas_credito_detalles(
+    id                                  char(36)    NOT NULL,
+    nota_credito_id                     char(36)    NOT NULL,
+    devolucion_producto_detalle_id      char(36)    NOT NULL,
+    devolucion_componente_detalle_id    char(36),
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: componentes 
 --
 
@@ -190,6 +509,72 @@ CREATE TABLE componentes(
     descripcion     char(250)    NOT NULL,
     categoria_id    char(36)     NOT NULL,
     marca_id        char(36)     NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: compras_documento 
+--
+
+CREATE TABLE compras_documento(
+    id                char(36)    NOT NULL,
+    tipo_documento    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: compras_plazos 
+--
+
+CREATE TABLE compras_plazos(
+    id        char(36)    NOT NULL,
+    nombre    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: compras_plazos_detalles 
+--
+
+CREATE TABLE compras_plazos_detalles(
+    id             char(36)       NOT NULL,
+    valor          int4           NOT NULL,
+    descripcion    varchar(36)    NOT NULL,
+    plazo_id       char(36)       NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: compras_tipo_documento 
+--
+
+CREATE TABLE compras_tipo_documento(
+    id             char(36)    NOT NULL,
+    descripcion    char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -224,8 +609,10 @@ CREATE TABLE conceptos_de_sueldo(
 
 CREATE TABLE cotizaciones(
     id                      char(36)    NOT NULL,
+    numero                  int4        NOT NULL,
     pedido_cotizacion_id    char(36)    NOT NULL,
     proveedor_id            char(36)    NOT NULL,
+    estado_id               char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -246,6 +633,24 @@ CREATE TABLE cotizaciones_detalles(
     cotizacion_id                   char(36)    NOT NULL,
     pedido_cotizacion_detalle_id    char(36)    NOT NULL,
     componente_id                   char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: cuentas_bancarias 
+--
+
+CREATE TABLE cuentas_bancarias(
+    id             char(36)    NOT NULL,
+    numero         text        NOT NULL,
+    descripcion    text        NOT NULL,
+    banco_id       char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -385,23 +790,6 @@ CREATE TABLE ejercicios_contables(
 
 
 -- 
--- TABLE: financiamiento 
---
-
-CREATE TABLE financiamiento(
-    id                   char(36)    NOT NULL,
-    valor                int4        NOT NULL,
-    fecha_vencimiento    date        NOT NULL,
-    created_at timestamp         NOT NULL,
-    updated_at timestamp         NOT NULL,
-    deleted_at timestamp
-)
-;
-
-
-
-
--- 
 -- TABLE: lca_acciones 
 --
 
@@ -473,6 +861,24 @@ CREATE TABLE lca_roles(
 
 
 -- 
+-- TABLE: legajos_de_personal 
+--
+
+CREATE TABLE legajos_de_personal(
+    id                  char(36)    NOT NULL,
+    numero              int4        NOT NULL,
+    fecha_de_ingreso    date        NOT NULL,
+    personal_id         char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: libros_mayor 
 --
 
@@ -500,6 +906,7 @@ CREATE TABLE liquidaciones(
     total          int8        NOT NULL,
     empleado_id    char(36)    NOT NULL,
     estado_id      char(36)    NOT NULL,
+    legajo_id      char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -550,6 +957,22 @@ CREATE TABLE marcas(
     id             char(36)        NOT NULL,
     descripcion    varchar(250),
     nombre         char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: marcas_tarjetas_credito 
+--
+
+CREATE TABLE marcas_tarjetas_credito(
+    id        char(36)    NOT NULL,
+    nombre    text        NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -619,6 +1042,80 @@ CREATE TABLE modelos_de_conceptos_de_sueldo(
 
 
 -- 
+-- TABLE: modelos_de_movimiento_de_banco 
+--
+
+CREATE TABLE modelos_de_movimiento_de_banco(
+    id          char(36)    NOT NULL,
+    concepto    text        NOT NULL,
+    signo       boolean     NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: modelos_de_movimientos_de_cajas 
+--
+
+CREATE TABLE modelos_de_movimientos_de_cajas(
+    id        char(36)    NOT NULL,
+    signo     boolean     NOT NULL,
+    motivo    text        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: movimientos_de_bancos 
+--
+
+CREATE TABLE movimientos_de_bancos(
+    id           char(36)    NOT NULL,
+    importe      int8        NOT NULL,
+    banco_id     char(36)    NOT NULL,
+    modelo_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: movimientos_de_cajas 
+--
+
+CREATE TABLE movimientos_de_cajas(
+    id                         char(36)    NOT NULL,
+    importe_tarjeta_credito    int8        NOT NULL,
+    importe_efectivo           int8        NOT NULL,
+    caja_id                    char(36)    NOT NULL,
+    modelo_id                  char(36)    NOT NULL,
+    cliente_factura_id         char(36)    NOT NULL,
+    proveedor_factura_id       char(36)    NOT NULL,
+    tarjeta_de_credito_id      char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: ordenes_compras 
 --
 
@@ -639,13 +1136,51 @@ CREATE TABLE ordenes_compras(
 --
 
 CREATE TABLE ordenes_compras_detalles(
-    id                                char(36)    NOT NULL,
-    fecha_entrega                     date        NOT NULL,
-    cantidad                          int4        NOT NULL,
-    orden_compra_id                   char(36)    NOT NULL,
-    proveedores_factura_detalle_id    char(36)    NOT NULL,
-    componente_id                     char(36)    NOT NULL,
-    cotizacion_detalle_id             char(36)    NOT NULL,
+    id                       char(36)    NOT NULL,
+    fecha_entrega            date        NOT NULL,
+    cantidad                 int4        NOT NULL,
+    orden_compra_id          char(36)    NOT NULL,
+    componente_id            char(36)    NOT NULL,
+    cotizacion_detalle_id    char(36)    NOT NULL,
+    estado_id                char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: ordenes_pago 
+--
+
+CREATE TABLE ordenes_pago(
+    id             char(36)       NOT NULL,
+    numero         int4           NOT NULL,
+    descripcion    varchar(36)    NOT NULL,
+    total          int8           NOT NULL,
+    cuota_id       char(36)       NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: ordenes_pago_detalle 
+--
+
+CREATE TABLE ordenes_pago_detalle(
+    id               char(36)    NOT NULL,
+    monto            int4        NOT NULL,
+    orden_pago_id    char(36)    NOT NULL,
+    factura_id       char(36)    NOT NULL,
+    cuota_id         char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -682,6 +1217,24 @@ CREATE TABLE ordenes_producciones_detalles(
     cantidad                 int4        NOT NULL,
     producto_terminado_id    char(36)    NOT NULL,
     orden_produccion_id      char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: pagos_a_proveedores 
+--
+
+CREATE TABLE pagos_a_proveedores(
+    id              char(36)    NOT NULL,
+    efectivo        int8        NOT NULL,
+    proveedor_id    char(36)    NOT NULL,
+    cheque_id       char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -749,8 +1302,10 @@ CREATE TABLE pedidos_compras_componentes_detalles(
 
 CREATE TABLE pedidos_cotizaciones(
     id                             char(36)    NOT NULL,
+    numero                         int4        NOT NULL,
     pedido_compra_componente_id    char(36)    NOT NULL,
     proveedor_id                   char(36)    NOT NULL,
+    estado_id                      char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -794,7 +1349,23 @@ CREATE TABLE persona(
     email                varchar(60),
     tipo_documento_id    char(36)        NOT NULL,
     cuidad_id            char(36)        NOT NULL,
-    categoria_id         char(36)        NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: personal 
+--
+
+CREATE TABLE personal(
+    id              char(36)    NOT NULL,
+    categoria_id    char(36)    NOT NULL,
+    persona_id      char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -863,8 +1434,9 @@ CREATE TABLE productos_terminados_detalles(
 --
 
 CREATE TABLE proveedores(
-    id            char(36)    NOT NULL,
-    persona_id    char(36)    NOT NULL,
+    id             char(36)        NOT NULL,
+    descripcion    varchar(100)    NOT NULL,
+    persona_id     char(36)        NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -892,6 +1464,83 @@ CREATE TABLE proveedores_categorias(
 
 
 -- 
+-- TABLE: proveedores_cuenta_corriente 
+--
+
+CREATE TABLE proveedores_cuenta_corriente(
+    id              char(36)    NOT NULL,
+    saldo           int8        NOT NULL,
+    proveedor_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: proveedores_cuenta_corriente_detalles 
+--
+
+CREATE TABLE proveedores_cuenta_corriente_detalles(
+    id                     char(36)    NOT NULL,
+    saldo                  int4        NOT NULL,
+    a_pagar                int4        NOT NULL,
+    cantidad_cuota         int4        NOT NULL,
+    cuenta_corriente_id    char(36)    NOT NULL,
+    documento_id           char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: proveedores_cuotas 
+--
+
+CREATE TABLE proveedores_cuotas(
+    id                   char(36)    NOT NULL,
+    pagado_en_fecha      date        NOT NULL,
+    total_a_pagar        int4        NOT NULL,
+    saldo                int4        NOT NULL,
+    valor                int4        NOT NULL,
+    fecha_vencimiento    date        NOT NULL,
+    plazo_id             char(36)    NOT NULL,
+    factura_id           char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: proveedores_cupon_tarjeta_credito 
+--
+
+CREATE TABLE proveedores_cupon_tarjeta_credito(
+    id            char(36)    NOT NULL,
+    monto         int4        NOT NULL,
+    tarjeta_id    char(36)    NOT NULL,
+    factura_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: proveedores_facturas 
 --
 
@@ -901,6 +1550,8 @@ CREATE TABLE proveedores_facturas(
     total_iva                    int4        NOT NULL,
     proveedor_id                 char(36)    NOT NULL,
     proveedores_forma_pago_id    char(36)    NOT NULL,
+    documento_id                 char(36)    NOT NULL,
+    orden_compra_id              char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -922,6 +1573,24 @@ CREATE TABLE proveedores_facturas_detalles(
     cantidad                  int4        NOT NULL,
     proveedores_factura_id    char(36)    NOT NULL,
     componente_id             char(36)    NOT NULL,
+    orden_detalle_id          char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: proveedores_facturas_iva 
+--
+
+CREATE TABLE proveedores_facturas_iva(
+    id             char(36)    NOT NULL,
+    tipo_iva_id    char(36)    NOT NULL,
+    factura_id     char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -954,9 +1623,13 @@ CREATE TABLE proveedores_formas_pago(
 
 CREATE TABLE proveedores_notas_credito(
     id                     char(36)    NOT NULL,
+    numero                 int4        NOT NULL,
     total                  int4        NOT NULL,
     proveedor_id           char(36)    NOT NULL,
     orden_devolucion_id    char(36)    NOT NULL,
+    documento_id           char(36)    NOT NULL,
+    factura_id             char(36)    NOT NULL,
+    devolucion_id          char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -987,23 +1660,6 @@ CREATE TABLE proveedores_notas_credito_detalles(
 
 
 -- 
--- TABLE: proveedores_notas_creditos 
---
-
-CREATE TABLE proveedores_notas_creditos(
-    id              char(36)    NOT NULL,
-    numero          char(36)    NOT NULL,
-    proveedor_id    char(36)    NOT NULL,
-    created_at timestamp         NOT NULL,
-    updated_at timestamp         NOT NULL,
-    deleted_at timestamp
-)
-;
-
-
-
-
--- 
 -- TABLE: proveedores_ordenes_devoluciones 
 --
 
@@ -1012,6 +1668,7 @@ CREATE TABLE proveedores_ordenes_devoluciones(
     motivo                    char(36)    NOT NULL,
     proveedores_factura_id    char(36)    NOT NULL,
     proveedor_id              char(36)    NOT NULL,
+    estado_id                 char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -1030,6 +1687,40 @@ CREATE TABLE proveedores_ordenes_devoluciones_detalles(
     cantidad                           int4        NOT NULL,
     proveedores_facturas_detalle_id    char(36)    NOT NULL,
     componente_id                      char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: recibos_pagos 
+--
+
+CREATE TABLE recibos_pagos(
+    id            char(36)    NOT NULL,
+    cliente_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: recibos_pagos_detalles 
+--
+
+CREATE TABLE recibos_pagos_detalles(
+    id            char(36)    NOT NULL,
+    factura_id    char(36)    NOT NULL,
+    recibo_id     char(36)    NOT NULL,
+    cuota_id      char(36)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -1228,6 +1919,42 @@ CREATE TABLE stock_productos_terminados(
 
 
 -- 
+-- TABLE: tarjetas_credito_propias 
+--
+
+CREATE TABLE tarjetas_credito_propias(
+    id          char(36)    NOT NULL,
+    numero      char(36)    NOT NULL,
+    marca_id    char(36)    NOT NULL,
+    banco_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: tarjetas_de_credito 
+--
+
+CREATE TABLE tarjetas_de_credito(
+    id          char(36)    NOT NULL,
+    numero      text        NOT NULL,
+    marca_id    char(36)    NOT NULL,
+    banco_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: tipo_documento 
 --
 
@@ -1235,6 +1962,23 @@ CREATE TABLE tipo_documento(
     id         char(36)    NOT NULL,
     tipo       char(36)    NOT NULL,
     pais_id    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: tipo_iva 
+--
+
+CREATE TABLE tipo_iva(
+    id             char(36)          NOT NULL,
+    descripcion    varchar(100)      NOT NULL,
+    porcentaje     decimal(36, 0)    NOT NULL,
     created_at timestamp         NOT NULL,
     updated_at timestamp         NOT NULL,
     deleted_at timestamp
@@ -1287,6 +2031,72 @@ CREATE TABLE users(
 
 
 -- 
+-- TABLE: ventas_documentos 
+--
+
+CREATE TABLE ventas_documentos(
+    id                char(36)    NOT NULL,
+    tipo_documento    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: ventas_plazos 
+--
+
+CREATE TABLE ventas_plazos(
+    id        char(36)    NOT NULL,
+    nombre    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: ventas_plazos_detalles 
+--
+
+CREATE TABLE ventas_plazos_detalles(
+    id             char(36)       NOT NULL,
+    valor          int4           NOT NULL,
+    descripcion    varchar(36)    NOT NULL,
+    plazo_id       char(36)       NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
+-- TABLE: ventas_tipo_documento 
+--
+
+CREATE TABLE ventas_tipo_documento(
+    id             char(36)    NOT NULL,
+    descripcion    char(36)    NOT NULL,
+    created_at timestamp         NOT NULL,
+    updated_at timestamp         NOT NULL,
+    deleted_at timestamp
+)
+;
+
+
+
+
+-- 
 -- TABLE: zona_horaria 
 --
 
@@ -1316,6 +2126,14 @@ ALTER TABLE acumuladores ADD
 --
 
 ALTER TABLE acumuladores_conceptos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: aperturas_de_cajas 
+--
+
+ALTER TABLE aperturas_de_cajas ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1360,6 +2178,30 @@ ALTER TABLE balances_generales_detalles ADD
 ;
 
 -- 
+-- TABLE: bancos 
+--
+
+ALTER TABLE bancos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: boletas_de_deposito 
+--
+
+ALTER TABLE boletas_de_deposito ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: cajas 
+--
+
+ALTER TABLE cajas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: categorias 
 --
 
@@ -1368,10 +2210,146 @@ ALTER TABLE categorias ADD
 ;
 
 -- 
+-- TABLE: cheques_de_terceros 
+--
+
+ALTER TABLE cheques_de_terceros ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: cheques_orden_pago_detalles 
+--
+
+ALTER TABLE cheques_orden_pago_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: cheques_propios 
+--
+
+ALTER TABLE cheques_propios ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes 
+--
+
+ALTER TABLE clientes ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_cuenta_corriente_detalles 
+--
+
+ALTER TABLE clientes_cuenta_corriente_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_cuentas_corriente 
+--
+
+ALTER TABLE clientes_cuentas_corriente ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_cuotas 
+--
+
+ALTER TABLE clientes_cuotas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_facturas 
+--
+
+ALTER TABLE clientes_facturas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_facturas_detalles 
+--
+
+ALTER TABLE clientes_facturas_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_facturas_iva 
+--
+
+ALTER TABLE clientes_facturas_iva ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_forma_pago 
+--
+
+ALTER TABLE clientes_forma_pago ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_notas_credito 
+--
+
+ALTER TABLE clientes_notas_credito ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: clientes_notas_credito_detalles 
+--
+
+ALTER TABLE clientes_notas_credito_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: componentes 
 --
 
 ALTER TABLE componentes ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: compras_documento 
+--
+
+ALTER TABLE compras_documento ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: compras_plazos 
+--
+
+ALTER TABLE compras_plazos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: compras_plazos_detalles 
+--
+
+ALTER TABLE compras_plazos_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: compras_tipo_documento 
+--
+
+ALTER TABLE compras_tipo_documento ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1396,6 +2374,14 @@ ALTER TABLE cotizaciones ADD
 --
 
 ALTER TABLE cotizaciones_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: cuentas_bancarias 
+--
+
+ALTER TABLE cuentas_bancarias ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1456,14 +2442,6 @@ ALTER TABLE ejercicios_contables ADD
 ;
 
 -- 
--- TABLE: financiamiento 
---
-
-ALTER TABLE financiamiento ADD 
-    PRIMARY KEY (id)
-;
-
--- 
 -- TABLE: lca_acciones 
 --
 
@@ -1492,6 +2470,14 @@ ALTER TABLE lca_permisos ADD
 --
 
 ALTER TABLE lca_roles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: legajos_de_personal 
+--
+
+ALTER TABLE legajos_de_personal ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1536,6 +2522,14 @@ ALTER TABLE marcas ADD
 ;
 
 -- 
+-- TABLE: marcas_tarjetas_credito 
+--
+
+ALTER TABLE marcas_tarjetas_credito ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: mayor_registros 
 --
 
@@ -1560,6 +2554,38 @@ ALTER TABLE modelos_de_conceptos_de_sueldo ADD
 ;
 
 -- 
+-- TABLE: modelos_de_movimiento_de_banco 
+--
+
+ALTER TABLE modelos_de_movimiento_de_banco ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: modelos_de_movimientos_de_cajas 
+--
+
+ALTER TABLE modelos_de_movimientos_de_cajas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: movimientos_de_bancos 
+--
+
+ALTER TABLE movimientos_de_bancos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: movimientos_de_cajas 
+--
+
+ALTER TABLE movimientos_de_cajas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: ordenes_compras 
 --
 
@@ -1576,6 +2602,22 @@ ALTER TABLE ordenes_compras_detalles ADD
 ;
 
 -- 
+-- TABLE: ordenes_pago 
+--
+
+ALTER TABLE ordenes_pago ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ordenes_pago_detalle 
+--
+
+ALTER TABLE ordenes_pago_detalle ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: ordenes_producciones 
 --
 
@@ -1588,6 +2630,14 @@ ALTER TABLE ordenes_producciones ADD
 --
 
 ALTER TABLE ordenes_producciones_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: pagos_a_proveedores 
+--
+
+ALTER TABLE pagos_a_proveedores ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1640,6 +2690,14 @@ ALTER TABLE persona ADD
 ;
 
 -- 
+-- TABLE: personal 
+--
+
+ALTER TABLE personal ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: personal_categorias 
 --
 
@@ -1680,6 +2738,38 @@ ALTER TABLE proveedores_categorias ADD
 ;
 
 -- 
+-- TABLE: proveedores_cuenta_corriente 
+--
+
+ALTER TABLE proveedores_cuenta_corriente ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: proveedores_cuenta_corriente_detalles 
+--
+
+ALTER TABLE proveedores_cuenta_corriente_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: proveedores_cuotas 
+--
+
+ALTER TABLE proveedores_cuotas ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: proveedores_cupon_tarjeta_credito 
+--
+
+ALTER TABLE proveedores_cupon_tarjeta_credito ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: proveedores_facturas 
 --
 
@@ -1692,6 +2782,14 @@ ALTER TABLE proveedores_facturas ADD
 --
 
 ALTER TABLE proveedores_facturas_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: proveedores_facturas_iva 
+--
+
+ALTER TABLE proveedores_facturas_iva ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1720,14 +2818,6 @@ ALTER TABLE proveedores_notas_credito_detalles ADD
 ;
 
 -- 
--- TABLE: proveedores_notas_creditos 
---
-
-ALTER TABLE proveedores_notas_creditos ADD 
-    PRIMARY KEY (id)
-;
-
--- 
 -- TABLE: proveedores_ordenes_devoluciones 
 --
 
@@ -1740,6 +2830,22 @@ ALTER TABLE proveedores_ordenes_devoluciones ADD
 --
 
 ALTER TABLE proveedores_ordenes_devoluciones_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: recibos_pagos 
+--
+
+ALTER TABLE recibos_pagos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: recibos_pagos_detalles 
+--
+
+ALTER TABLE recibos_pagos_detalles ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1824,10 +2930,34 @@ ALTER TABLE stock_productos_terminados ADD
 ;
 
 -- 
+-- TABLE: tarjetas_credito_propias 
+--
+
+ALTER TABLE tarjetas_credito_propias ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: tarjetas_de_credito 
+--
+
+ALTER TABLE tarjetas_de_credito ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
 -- TABLE: tipo_documento 
 --
 
 ALTER TABLE tipo_documento ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: tipo_iva 
+--
+
+ALTER TABLE tipo_iva ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1844,6 +2974,38 @@ ALTER TABLE transacciones_estados ADD
 --
 
 ALTER TABLE users ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ventas_documentos 
+--
+
+ALTER TABLE ventas_documentos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ventas_plazos 
+--
+
+ALTER TABLE ventas_plazos ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ventas_plazos_detalles 
+--
+
+ALTER TABLE ventas_plazos_detalles ADD 
+    PRIMARY KEY (id)
+;
+
+-- 
+-- TABLE: ventas_tipo_documento 
+--
+
+ALTER TABLE ventas_tipo_documento ADD 
     PRIMARY KEY (id)
 ;
 
@@ -1867,6 +3029,16 @@ ALTER TABLE acumuladores_conceptos ADD CONSTRAINT "Refacumuladores106"
 ALTER TABLE acumuladores_conceptos ADD CONSTRAINT "Refmodelos_de_conceptos_de_sueldo112" 
     FOREIGN KEY (modelo_de_concepto_id)
     REFERENCES modelos_de_conceptos_de_sueldo(id)
+;
+
+
+-- 
+-- TABLE: aperturas_de_cajas 
+--
+
+ALTER TABLE aperturas_de_cajas ADD CONSTRAINT "Refcajas239" 
+    FOREIGN KEY (caja_id)
+    REFERENCES cajas(id)
 ;
 
 
@@ -1921,6 +3093,201 @@ ALTER TABLE balances_generales_detalles ADD CONSTRAINT "Refmayor_registros132"
 
 
 -- 
+-- TABLE: boletas_de_deposito 
+--
+
+ALTER TABLE boletas_de_deposito ADD CONSTRAINT "Refcuentas_bancarias241" 
+    FOREIGN KEY (cuenta_bancaria)
+    REFERENCES cuentas_bancarias(id)
+;
+
+
+-- 
+-- TABLE: cheques_de_terceros 
+--
+
+ALTER TABLE cheques_de_terceros ADD CONSTRAINT "Refmovimientos_de_cajas238" 
+    FOREIGN KEY (movimiento_id)
+    REFERENCES movimientos_de_cajas(id)
+;
+
+ALTER TABLE cheques_de_terceros ADD CONSTRAINT "Refboletas_de_deposito265" 
+    FOREIGN KEY (boleta_de_deposito_id)
+    REFERENCES boletas_de_deposito(id)
+;
+
+
+-- 
+-- TABLE: cheques_orden_pago_detalles 
+--
+
+ALTER TABLE cheques_orden_pago_detalles ADD CONSTRAINT "Refordenes_pago_detalle145" 
+    FOREIGN KEY (orden_id)
+    REFERENCES ordenes_pago_detalle(id)
+;
+
+ALTER TABLE cheques_orden_pago_detalles ADD CONSTRAINT "Refcheques_propios146" 
+    FOREIGN KEY (cheque_id)
+    REFERENCES cheques_propios(id)
+;
+
+
+-- 
+-- TABLE: cheques_propios 
+--
+
+ALTER TABLE cheques_propios ADD CONSTRAINT "Refcuentas_bancarias267" 
+    FOREIGN KEY (cuenta_id)
+    REFERENCES cuentas_bancarias(id)
+;
+
+
+-- 
+-- TABLE: clientes 
+--
+
+ALTER TABLE clientes ADD CONSTRAINT "Refpersona177" 
+    FOREIGN KEY (persona_id)
+    REFERENCES persona(id)
+;
+
+
+-- 
+-- TABLE: clientes_cuenta_corriente_detalles 
+--
+
+ALTER TABLE clientes_cuenta_corriente_detalles ADD CONSTRAINT "Refclientes_cuentas_corriente191" 
+    FOREIGN KEY (cuenta_corriente_id)
+    REFERENCES clientes_cuentas_corriente(id)
+;
+
+ALTER TABLE clientes_cuenta_corriente_detalles ADD CONSTRAINT "Refventas_documentos194" 
+    FOREIGN KEY (documento_id)
+    REFERENCES ventas_documentos(id)
+;
+
+
+-- 
+-- TABLE: clientes_cuentas_corriente 
+--
+
+ALTER TABLE clientes_cuentas_corriente ADD CONSTRAINT "Refclientes192" 
+    FOREIGN KEY (cliente_id)
+    REFERENCES clientes(id)
+;
+
+
+-- 
+-- TABLE: clientes_cuotas 
+--
+
+ALTER TABLE clientes_cuotas ADD CONSTRAINT "Refventas_plazos186" 
+    FOREIGN KEY (plazo_id)
+    REFERENCES ventas_plazos(id)
+;
+
+ALTER TABLE clientes_cuotas ADD CONSTRAINT "Refclientes_facturas188" 
+    FOREIGN KEY (factura_id)
+    REFERENCES clientes_facturas(id)
+;
+
+
+-- 
+-- TABLE: clientes_facturas 
+--
+
+ALTER TABLE clientes_facturas ADD CONSTRAINT "Refclientes178" 
+    FOREIGN KEY (cliente_id)
+    REFERENCES clientes(id)
+;
+
+ALTER TABLE clientes_facturas ADD CONSTRAINT "Refclientes_forma_pago179" 
+    FOREIGN KEY (forma_pago_id)
+    REFERENCES clientes_forma_pago(id)
+;
+
+
+-- 
+-- TABLE: clientes_facturas_detalles 
+--
+
+ALTER TABLE clientes_facturas_detalles ADD CONSTRAINT "Refclientes_facturas180" 
+    FOREIGN KEY (factura_id)
+    REFERENCES clientes_facturas(id)
+;
+
+ALTER TABLE clientes_facturas_detalles ADD CONSTRAINT "Refcomponentes181" 
+    FOREIGN KEY (componente_id)
+    REFERENCES componentes(id)
+;
+
+ALTER TABLE clientes_facturas_detalles ADD CONSTRAINT "Refproductos_terminados182" 
+    FOREIGN KEY (producto_id)
+    REFERENCES productos_terminados(id)
+;
+
+
+-- 
+-- TABLE: clientes_facturas_iva 
+--
+
+ALTER TABLE clientes_facturas_iva ADD CONSTRAINT "Refclientes_facturas175" 
+    FOREIGN KEY (cliente_factura_id)
+    REFERENCES clientes_facturas(id)
+;
+
+ALTER TABLE clientes_facturas_iva ADD CONSTRAINT "Reftipo_iva176" 
+    FOREIGN KEY (iva_tipo_id)
+    REFERENCES tipo_iva(id)
+;
+
+
+-- 
+-- TABLE: clientes_notas_credito 
+--
+
+ALTER TABLE clientes_notas_credito ADD CONSTRAINT "Refclientes214" 
+    FOREIGN KEY (cliente_id)
+    REFERENCES clientes(id)
+;
+
+ALTER TABLE clientes_notas_credito ADD CONSTRAINT "Refventas_documentos226" 
+    FOREIGN KEY (documento_id)
+    REFERENCES ventas_documentos(id)
+;
+
+ALTER TABLE clientes_notas_credito ADD CONSTRAINT "Refdevoluciones_productos229" 
+    FOREIGN KEY (devolucion_producto_id)
+    REFERENCES devoluciones_productos(id)
+;
+
+ALTER TABLE clientes_notas_credito ADD CONSTRAINT "Refdevoluciones_componentes231" 
+    FOREIGN KEY (devolucion_componente_id)
+    REFERENCES devoluciones_componentes(id)
+;
+
+
+-- 
+-- TABLE: clientes_notas_credito_detalles 
+--
+
+ALTER TABLE clientes_notas_credito_detalles ADD CONSTRAINT "Refclientes_notas_credito227" 
+    FOREIGN KEY (nota_credito_id)
+    REFERENCES clientes_notas_credito(id)
+;
+
+ALTER TABLE clientes_notas_credito_detalles ADD CONSTRAINT "Refdevoluciones_productos_detalles232" 
+    FOREIGN KEY (devolucion_producto_detalle_id)
+    REFERENCES devoluciones_productos_detalles(id)
+;
+
+ALTER TABLE clientes_notas_credito_detalles ADD CONSTRAINT "Refdevoluciones_componentes_detalles233" 
+    FOREIGN KEY (devolucion_componente_detalle_id)
+    REFERENCES devoluciones_componentes_detalles(id)
+;
+
+
+-- 
 -- TABLE: componentes 
 --
 
@@ -1932,6 +3299,26 @@ ALTER TABLE componentes ADD CONSTRAINT "Refcategorias11"
 ALTER TABLE componentes ADD CONSTRAINT "Refmarcas92" 
     FOREIGN KEY (marca_id)
     REFERENCES marcas(id)
+;
+
+
+-- 
+-- TABLE: compras_documento 
+--
+
+ALTER TABLE compras_documento ADD CONSTRAINT "Refcompras_tipo_documento136" 
+    FOREIGN KEY (tipo_documento)
+    REFERENCES compras_tipo_documento(id)
+;
+
+
+-- 
+-- TABLE: compras_plazos_detalles 
+--
+
+ALTER TABLE compras_plazos_detalles ADD CONSTRAINT "Refcompras_plazos147" 
+    FOREIGN KEY (plazo_id)
+    REFERENCES compras_plazos(id)
 ;
 
 
@@ -1959,6 +3346,11 @@ ALTER TABLE cotizaciones ADD CONSTRAINT "Refproveedores59"
     REFERENCES proveedores(id)
 ;
 
+ALTER TABLE cotizaciones ADD CONSTRAINT "Reftransacciones_estados158" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
+;
+
 
 -- 
 -- TABLE: cotizaciones_detalles 
@@ -1977,6 +3369,16 @@ ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refpedidos_cotizaciones_detall
 ALTER TABLE cotizaciones_detalles ADD CONSTRAINT "Refcomponentes63" 
     FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
+;
+
+
+-- 
+-- TABLE: cuentas_bancarias 
+--
+
+ALTER TABLE cuentas_bancarias ADD CONSTRAINT "Refbancos240" 
+    FOREIGN KEY (banco_id)
+    REFERENCES bancos(id)
 ;
 
 
@@ -2086,6 +3488,16 @@ ALTER TABLE lca_permisos ADD CONSTRAINT "Reflca_acciones90"
 
 
 -- 
+-- TABLE: legajos_de_personal 
+--
+
+ALTER TABLE legajos_de_personal ADD CONSTRAINT "Refpersonal255" 
+    FOREIGN KEY (personal_id)
+    REFERENCES personal(id)
+;
+
+
+-- 
 -- TABLE: libros_mayor 
 --
 
@@ -2107,6 +3519,11 @@ ALTER TABLE liquidaciones ADD CONSTRAINT "Refpersona114"
 ALTER TABLE liquidaciones ADD CONSTRAINT "Refliquidaciones_estados120" 
     FOREIGN KEY (estado_id)
     REFERENCES liquidaciones_estados(id)
+;
+
+ALTER TABLE liquidaciones ADD CONSTRAINT "Reflegajos_de_personal258" 
+    FOREIGN KEY (legajo_id)
+    REFERENCES legajos_de_personal(id)
 ;
 
 
@@ -2156,6 +3573,51 @@ ALTER TABLE mayor_registros_detalles ADD CONSTRAINT "Refmayor_registros126"
 
 
 -- 
+-- TABLE: movimientos_de_bancos 
+--
+
+ALTER TABLE movimientos_de_bancos ADD CONSTRAINT "Refbancos249" 
+    FOREIGN KEY (banco_id)
+    REFERENCES bancos(id)
+;
+
+ALTER TABLE movimientos_de_bancos ADD CONSTRAINT "Refmodelos_de_movimiento_de_banco269" 
+    FOREIGN KEY (modelo_id)
+    REFERENCES modelos_de_movimiento_de_banco(id)
+;
+
+
+-- 
+-- TABLE: movimientos_de_cajas 
+--
+
+ALTER TABLE movimientos_de_cajas ADD CONSTRAINT "Refcajas236" 
+    FOREIGN KEY (caja_id)
+    REFERENCES cajas(id)
+;
+
+ALTER TABLE movimientos_de_cajas ADD CONSTRAINT "Refmodelos_de_movimientos_de_cajas237" 
+    FOREIGN KEY (modelo_id)
+    REFERENCES modelos_de_movimientos_de_cajas(id)
+;
+
+ALTER TABLE movimientos_de_cajas ADD CONSTRAINT "Refclientes_facturas259" 
+    FOREIGN KEY (cliente_factura_id)
+    REFERENCES clientes_facturas(id)
+;
+
+ALTER TABLE movimientos_de_cajas ADD CONSTRAINT "Refproveedores_facturas260" 
+    FOREIGN KEY (proveedor_factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
+ALTER TABLE movimientos_de_cajas ADD CONSTRAINT "Reftarjetas_de_credito261" 
+    FOREIGN KEY (tarjeta_de_credito_id)
+    REFERENCES tarjetas_de_credito(id)
+;
+
+
+-- 
 -- TABLE: ordenes_compras 
 --
 
@@ -2174,11 +3636,6 @@ ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refordenes_compras54"
     REFERENCES ordenes_compras(id)
 ;
 
-ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refproveedores_facturas_detalles56" 
-    FOREIGN KEY (proveedores_factura_detalle_id)
-    REFERENCES proveedores_facturas_detalles(id)
-;
-
 ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcomponentes61" 
     FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
@@ -2187,6 +3644,41 @@ ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcomponentes61"
 ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Refcotizaciones_detalles65" 
     FOREIGN KEY (cotizacion_detalle_id)
     REFERENCES cotizaciones_detalles(id)
+;
+
+ALTER TABLE ordenes_compras_detalles ADD CONSTRAINT "Reftransacciones_estados252" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
+;
+
+
+-- 
+-- TABLE: ordenes_pago 
+--
+
+ALTER TABLE ordenes_pago ADD CONSTRAINT "Refproveedores_cuotas154" 
+    FOREIGN KEY (cuota_id)
+    REFERENCES proveedores_cuotas(id)
+;
+
+
+-- 
+-- TABLE: ordenes_pago_detalle 
+--
+
+ALTER TABLE ordenes_pago_detalle ADD CONSTRAINT "Refordenes_pago140" 
+    FOREIGN KEY (orden_pago_id)
+    REFERENCES ordenes_pago(id)
+;
+
+ALTER TABLE ordenes_pago_detalle ADD CONSTRAINT "Refproveedores_facturas142" 
+    FOREIGN KEY (factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
+ALTER TABLE ordenes_pago_detalle ADD CONSTRAINT "Refproveedores_cuotas160" 
+    FOREIGN KEY (cuota_id)
+    REFERENCES proveedores_cuotas(id)
 ;
 
 
@@ -2217,6 +3709,21 @@ ALTER TABLE ordenes_producciones_detalles ADD CONSTRAINT "Refproductos_terminado
 ALTER TABLE ordenes_producciones_detalles ADD CONSTRAINT "Refordenes_producciones18" 
     FOREIGN KEY (orden_produccion_id)
     REFERENCES ordenes_producciones(id)
+;
+
+
+-- 
+-- TABLE: pagos_a_proveedores 
+--
+
+ALTER TABLE pagos_a_proveedores ADD CONSTRAINT "Refproveedores246" 
+    FOREIGN KEY (proveedor_id)
+    REFERENCES proveedores(id)
+;
+
+ALTER TABLE pagos_a_proveedores ADD CONSTRAINT "Refcheques_propios247" 
+    FOREIGN KEY (cheque_id)
+    REFERENCES cheques_propios(id)
 ;
 
 
@@ -2264,6 +3771,11 @@ ALTER TABLE pedidos_cotizaciones ADD CONSTRAINT "Refproveedores48"
     REFERENCES proveedores(id)
 ;
 
+ALTER TABLE pedidos_cotizaciones ADD CONSTRAINT "Reftransacciones_estados159" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
+;
+
 
 -- 
 -- TABLE: pedidos_cotizaciones_detalles 
@@ -2299,9 +3811,19 @@ ALTER TABLE persona ADD CONSTRAINT "Refcuidades76"
     REFERENCES cuidades(id)
 ;
 
-ALTER TABLE persona ADD CONSTRAINT "Refpersonal_categorias103" 
+
+-- 
+-- TABLE: personal 
+--
+
+ALTER TABLE personal ADD CONSTRAINT "Refpersonal_categorias253" 
     FOREIGN KEY (categoria_id)
     REFERENCES personal_categorias(id)
+;
+
+ALTER TABLE personal ADD CONSTRAINT "Refpersona254" 
+    FOREIGN KEY (persona_id)
+    REFERENCES persona(id)
 ;
 
 
@@ -2356,6 +3878,61 @@ ALTER TABLE proveedores_categorias ADD CONSTRAINT "Refcategorias52"
 
 
 -- 
+-- TABLE: proveedores_cuenta_corriente 
+--
+
+ALTER TABLE proveedores_cuenta_corriente ADD CONSTRAINT "Refproveedores133" 
+    FOREIGN KEY (proveedor_id)
+    REFERENCES proveedores(id)
+;
+
+
+-- 
+-- TABLE: proveedores_cuenta_corriente_detalles 
+--
+
+ALTER TABLE proveedores_cuenta_corriente_detalles ADD CONSTRAINT "Refproveedores_cuenta_corriente134" 
+    FOREIGN KEY (cuenta_corriente_id)
+    REFERENCES proveedores_cuenta_corriente(id)
+;
+
+ALTER TABLE proveedores_cuenta_corriente_detalles ADD CONSTRAINT "Refcompras_documento139" 
+    FOREIGN KEY (documento_id)
+    REFERENCES compras_documento(id)
+;
+
+
+-- 
+-- TABLE: proveedores_cuotas 
+--
+
+ALTER TABLE proveedores_cuotas ADD CONSTRAINT "Refcompras_plazos148" 
+    FOREIGN KEY (plazo_id)
+    REFERENCES compras_plazos(id)
+;
+
+ALTER TABLE proveedores_cuotas ADD CONSTRAINT "Refproveedores_facturas161" 
+    FOREIGN KEY (factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
+
+-- 
+-- TABLE: proveedores_cupon_tarjeta_credito 
+--
+
+ALTER TABLE proveedores_cupon_tarjeta_credito ADD CONSTRAINT "Reftarjetas_credito_propias165" 
+    FOREIGN KEY (tarjeta_id)
+    REFERENCES tarjetas_credito_propias(id)
+;
+
+ALTER TABLE proveedores_cupon_tarjeta_credito ADD CONSTRAINT "Refproveedores_facturas167" 
+    FOREIGN KEY (factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
+
+-- 
 -- TABLE: proveedores_facturas 
 --
 
@@ -2367,6 +3944,16 @@ ALTER TABLE proveedores_facturas ADD CONSTRAINT "Refproveedores73"
 ALTER TABLE proveedores_facturas ADD CONSTRAINT "Refproveedores_formas_pago77" 
     FOREIGN KEY (proveedores_forma_pago_id)
     REFERENCES proveedores_formas_pago(id)
+;
+
+ALTER TABLE proveedores_facturas ADD CONSTRAINT "Refcompras_documento137" 
+    FOREIGN KEY (documento_id)
+    REFERENCES compras_documento(id)
+;
+
+ALTER TABLE proveedores_facturas ADD CONSTRAINT "Refordenes_compras251" 
+    FOREIGN KEY (orden_compra_id)
+    REFERENCES ordenes_compras(id)
 ;
 
 
@@ -2384,6 +3971,26 @@ ALTER TABLE proveedores_facturas_detalles ADD CONSTRAINT "Refcomponentes62"
     REFERENCES componentes(id)
 ;
 
+ALTER TABLE proveedores_facturas_detalles ADD CONSTRAINT "Refordenes_compras_detalles250" 
+    FOREIGN KEY (orden_detalle_id)
+    REFERENCES ordenes_compras_detalles(id)
+;
+
+
+-- 
+-- TABLE: proveedores_facturas_iva 
+--
+
+ALTER TABLE proveedores_facturas_iva ADD CONSTRAINT "Reftipo_iva169" 
+    FOREIGN KEY (tipo_iva_id)
+    REFERENCES tipo_iva(id)
+;
+
+ALTER TABLE proveedores_facturas_iva ADD CONSTRAINT "Refproveedores_facturas170" 
+    FOREIGN KEY (factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
 
 -- 
 -- TABLE: proveedores_notas_credito 
@@ -2396,6 +4003,21 @@ ALTER TABLE proveedores_notas_credito ADD CONSTRAINT "Refproveedores83"
 
 ALTER TABLE proveedores_notas_credito ADD CONSTRAINT "Refproveedores_ordenes_devoluciones84" 
     FOREIGN KEY (orden_devolucion_id)
+    REFERENCES proveedores_ordenes_devoluciones(id)
+;
+
+ALTER TABLE proveedores_notas_credito ADD CONSTRAINT "Refcompras_documento143" 
+    FOREIGN KEY (documento_id)
+    REFERENCES compras_documento(id)
+;
+
+ALTER TABLE proveedores_notas_credito ADD CONSTRAINT "Refproveedores_facturas144" 
+    FOREIGN KEY (factura_id)
+    REFERENCES proveedores_facturas(id)
+;
+
+ALTER TABLE proveedores_notas_credito ADD CONSTRAINT "Refproveedores_ordenes_devoluciones156" 
+    FOREIGN KEY (devolucion_id)
     REFERENCES proveedores_ordenes_devoluciones(id)
 ;
 
@@ -2416,16 +4038,6 @@ ALTER TABLE proveedores_notas_credito_detalles ADD CONSTRAINT "Refproveedores_no
 
 
 -- 
--- TABLE: proveedores_notas_creditos 
---
-
-ALTER TABLE proveedores_notas_creditos ADD CONSTRAINT "Refproveedores74" 
-    FOREIGN KEY (proveedor_id)
-    REFERENCES proveedores(id)
-;
-
-
--- 
 -- TABLE: proveedores_ordenes_devoluciones 
 --
 
@@ -2437,6 +4049,11 @@ ALTER TABLE proveedores_ordenes_devoluciones ADD CONSTRAINT "Refproveedores_fact
 ALTER TABLE proveedores_ordenes_devoluciones ADD CONSTRAINT "Refproveedores82" 
     FOREIGN KEY (proveedor_id)
     REFERENCES proveedores(id)
+;
+
+ALTER TABLE proveedores_ordenes_devoluciones ADD CONSTRAINT "Reftransacciones_estados157" 
+    FOREIGN KEY (estado_id)
+    REFERENCES transacciones_estados(id)
 ;
 
 
@@ -2452,6 +4069,36 @@ ALTER TABLE proveedores_ordenes_devoluciones_detalles ADD CONSTRAINT "Refproveed
 ALTER TABLE proveedores_ordenes_devoluciones_detalles ADD CONSTRAINT "Refcomponentes80" 
     FOREIGN KEY (componente_id)
     REFERENCES componentes(id)
+;
+
+
+-- 
+-- TABLE: recibos_pagos 
+--
+
+ALTER TABLE recibos_pagos ADD CONSTRAINT "Refclientes199" 
+    FOREIGN KEY (cliente_id)
+    REFERENCES clientes(id)
+;
+
+
+-- 
+-- TABLE: recibos_pagos_detalles 
+--
+
+ALTER TABLE recibos_pagos_detalles ADD CONSTRAINT "Refclientes_facturas195" 
+    FOREIGN KEY (factura_id)
+    REFERENCES clientes_facturas(id)
+;
+
+ALTER TABLE recibos_pagos_detalles ADD CONSTRAINT "Refrecibos_pagos196" 
+    FOREIGN KEY (recibo_id)
+    REFERENCES recibos_pagos(id)
+;
+
+ALTER TABLE recibos_pagos_detalles ADD CONSTRAINT "Refclientes_cuotas197" 
+    FOREIGN KEY (cuota_id)
+    REFERENCES clientes_cuotas(id)
 ;
 
 
@@ -2611,6 +4258,36 @@ ALTER TABLE stock_productos_terminados ADD CONSTRAINT "Refcomponentes95"
 
 
 -- 
+-- TABLE: tarjetas_credito_propias 
+--
+
+ALTER TABLE tarjetas_credito_propias ADD CONSTRAINT "Refmarcas_tarjetas_credito163" 
+    FOREIGN KEY (marca_id)
+    REFERENCES marcas_tarjetas_credito(id)
+;
+
+ALTER TABLE tarjetas_credito_propias ADD CONSTRAINT "Refbancos164" 
+    FOREIGN KEY (banco_id)
+    REFERENCES bancos(id)
+;
+
+
+-- 
+-- TABLE: tarjetas_de_credito 
+--
+
+ALTER TABLE tarjetas_de_credito ADD CONSTRAINT "Refmarcas_tarjetas_credito262" 
+    FOREIGN KEY (marca_id)
+    REFERENCES marcas_tarjetas_credito(id)
+;
+
+ALTER TABLE tarjetas_de_credito ADD CONSTRAINT "Refbancos263" 
+    FOREIGN KEY (banco_id)
+    REFERENCES bancos(id)
+;
+
+
+-- 
 -- TABLE: tipo_documento 
 --
 
@@ -2627,6 +4304,26 @@ ALTER TABLE tipo_documento ADD CONSTRAINT "Refpaises72"
 ALTER TABLE users ADD CONSTRAINT "Reflca_roles96" 
     FOREIGN KEY (acl_role_id)
     REFERENCES lca_roles(id)
+;
+
+
+-- 
+-- TABLE: ventas_documentos 
+--
+
+ALTER TABLE ventas_documentos ADD CONSTRAINT "Refventas_tipo_documento173" 
+    FOREIGN KEY (tipo_documento)
+    REFERENCES ventas_tipo_documento(id)
+;
+
+
+-- 
+-- TABLE: ventas_plazos_detalles 
+--
+
+ALTER TABLE ventas_plazos_detalles ADD CONSTRAINT "Refventas_plazos185" 
+    FOREIGN KEY (plazo_id)
+    REFERENCES ventas_plazos(id)
 ;
 
 
