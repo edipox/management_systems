@@ -17,7 +17,6 @@ module ApplicationHelper
       current_ability.cannot :edit, detail_class
       return false
     end
-    puts "NONE"
     return true
   end
   
