@@ -3,10 +3,6 @@ class Stock::ProductsController < ApplicationController
   layout "stock_products"
   def index
     @existances = Stocks::Product.paginate(:page => params[:page])
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def transactions
@@ -20,6 +16,11 @@ class Stock::ProductsController < ApplicationController
     @products = Products::Composition.paginate(:page => params[:page])
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/stock/products/_list_products.html.haml',
+          :layout => 'stock_pdf.html.erb'
+      }     
     end
   end
   
@@ -27,6 +28,11 @@ class Stock::ProductsController < ApplicationController
     @components = Components::Item.get_finished.paginate(:page => params[:page])
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/stock/products/_list_components.html.haml',
+          :layout => 'stock_pdf.html.erb'
+      }     
     end
   end
     

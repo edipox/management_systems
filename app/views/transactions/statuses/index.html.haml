@@ -6,15 +6,16 @@
     %div{ class: "ui-grid-a" }
   
       
-      %div{ class: "ui-block-b" } Nombre 
+      %div{ class: "ui-block-a" } Nombre 
+      %div{ class: "ui-block-b" } Opciones
   
   - @transactions_statuses.each do |transactions_status|
     %li{ class: 'element'}
       %div{ class: "ui-grid-a" }
       
-        %div{ class: "ui-block-b trim" }= transactions_status.name
+        %div{ class: "ui-block-a trim" }= transactions_status.name
   
-        %div{  class: "ui-block-c", data: { role: 'controlgroup', type: 'horizontal' } }
+        %div{ class: "ui-block-b", data: { role: 'controlgroup', type: 'horizontal' } }
           - delete_css_class = !can?(:delete, transactions_status) || transactions_status.requests_transferences_components != [] || transactions_status.requests_devolutions_components != [] || @is_protected[transactions_status.id]  ? 'ui-disabled' : ''
           - edit_css_class = !can?(:edit, transactions_status) ? 'ui-disabled' : ''
           %a{ href: transactions_status_path(transactions_status), data: { method: :delete, confirm: 'Esta seguro?', role: 'button', icon: 'delete', mini: 'true', remote: 'true' }, class: delete_css_class } Eliminar

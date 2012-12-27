@@ -1,0 +1,43 @@
+.account{
+  width: 972px!important;
+}
+
+.account *{
+  border:none!important;
+}
+
+
+.account .column .ui-block-b, .account .column .ui-block-a{
+  border-left: 1px solid gray!important;
+/*  height:20px!important;*/
+  width:220px!important;
+}
+.account .description{
+  height:15px!important;
+  line-height:5px!important;
+  font-weight:none!important;
+  font-size:0.8em!important;
+  color:gray!important;
+}
+.ui-block-c.column{
+  width:440px!important;
+}
+
+.account .date, .account.date{
+  width:100px!important;
+}
+
+.account .accounts{
+  width:400px!important;
+  border-left: 1px solid gray!important;
+}
+.account .accounts .ui-block-a, .account .accounts .ui-block-b{
+  width:350px!important;
+  text-align:left!important;
+  padding-left:20px!important;
+}
+
+.account .haber{
+  margin-left:60px;
+}
+

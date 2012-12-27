@@ -124,6 +124,8 @@ GEM
       macaddr (~> 1.0)
     warden (1.2.1)
       rack (>= 1.0)
+    wicked_pdf (0.8.0)
+      rails
     will_paginate (3.0.3)
 
 PLATFORMS
@@ -145,4 +147,5 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   uuid
+  wicked_pdf
   will_paginate (~> 3.0)

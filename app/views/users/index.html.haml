@@ -1,0 +1,19 @@
+= will_paginate @users
+%ul{ data: { role: 'listview', inset: 'true', theme: 'c', filter: 'true' } }
+  %li{ data: { role: 'list-divider' } }
+  
+    %div{ class: "ui-grid-c" }
+  
+      
+      %div{ class: "ui-block-a" } Email
+      %div{ class: "ui-block-b" } Veces conectado
+      %div{ class: "ui-block-c" } &Uacute;ltima conexi&oacute;n
+      %div{ class: "ui-block-d" } Rol
+  - @users.each do |user|
+    %li{ class: 'element'}
+      %div{ class: "ui-grid-c" }
+      
+        %div{ class: "ui-block-a trim" }= user.email
+        %div{ class: "ui-block-b trim" }= user.sign_in_count
+        %div{ class: "ui-block-c trim" }= user.last_sign_in_at
+        %div{ class: "ui-block-d trim" }= user.role.name

@@ -3,6 +3,16 @@ class Components::CategoriesController < ApplicationController
   # GET /components/categories.json
   def index
     @components_categories = Components::Category.paginate(:page => params[:page])
+    respond_to do |format|
+      format.js
+      format.pdf {
+          current_ability.cannot :manage, Components::Item
+          render :pdf => "file_name", 
+          :template => '/components/categories/index.html.haml',
+          :layout => 'pdf.html.erb' 
+      } 
+    end
+
   end
 
   # GET /components/categories/1

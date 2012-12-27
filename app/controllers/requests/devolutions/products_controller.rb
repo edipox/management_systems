@@ -14,7 +14,13 @@ class Requests::Devolutions::ProductsController < ApplicationController
     list  
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/requests/devolutions/products/index.html.haml',
+          :layout => 'pdf.html.erb' 
+      }     
     end
+
   end
 
   # GET /requests/devolutions/products/1

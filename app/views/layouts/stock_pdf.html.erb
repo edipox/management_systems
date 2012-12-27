@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDF</title>
+  <%= wicked_pdf_stylesheet_link_tag "application" %>
+  <%= wicked_pdf_javascript_include_tag "slize", "pdf" %>
+  <%= csrf_meta_tags %>
+</head>
+<script>
+</script>
+</head>
+<body onload="on_load_pdf('keep_column')" class="document pdf">
+  <div id="page" >
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div>
+
+<div data-page="true">
+  P&aacute;gina <span class="page"></span> de <span class="topage"></span>
+</div>
+</body>
+
+</html>
+

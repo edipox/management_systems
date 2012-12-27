@@ -1,0 +1,118 @@
+.document.pdf {
+  height: 297mm - 23mm;
+  width: 210mm -21mm;
+
+  background-image: url(<%= asset_data_uri 'watermark.png' %>);
+  background-repeat: no-repeat;
+  background-position: 200px 280px;
+}
+
+.document.pdf ul{
+  list-style-type: none;
+}
+
+.document.pdf div{
+  text-align:center;
+}
+
+.document.pdf #content, .document.pdf ul, .document.pdf li{
+  width:100%!important;
+}
+
+.document.pdf .ui-block-a, .document.pdf .ui-block-b, .document.pdf .ui-block-c, .document.pdf .ui-block-d, .document.pdf .ui-block-e, .document.pdf .ui-block-f, .document.pdf .ui-block-g, .document.pdf .ui-block-h, .document.pdf .ui-grid-e, .document.pdf .ui-grid-f, .document.pdf .ui-grid-g{
+  padding:0 0 0 0!important;
+  height:49px!important;
+  line-height:49px!important;
+  border:1px solid black;
+  border-right:none;
+  border-top:none;
+  border-bottom:none;
+  margin:0!important!important!important;
+  padding:0!important!important!important;
+} 
+
+.document.pdf li[data-role="list-divider"]{
+  font-weight:bold;
+  line-height:29px!important;
+  font-size:14px;
+  color:white;
+  background:#373737!important;
+  padding:0;
+  border-top:1px solid black!important;
+}
+
+.document.pdf li.even{
+  background:white;
+}
+
+.document.pdf li.odd{
+  background:#88c8ff;
+}
+
+.document.pdf .ui-grid-z, .document.pdf .ui-grid-f, .document.pdf .ui-grid-e, .document.pdf .ui-grid-g, .document.pdf .ui-grid-h{
+  display: block;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: static;
+  text-align: center;
+  text-decoration: none;
+}
+
+.document.pdf .ui-grid-z .ui-block-a{
+  width:100%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-a .ui-block-a, .document.pdf .ui-grid-a .ui-block-b{
+  width:50%!important;
+  border-bottom:1px solid black!important;
+}
+
+
+.document.pdf .ui-grid-b .ui-block-a, .document.pdf .ui-grid-b .ui-block-b, .document.pdf .ui-grid-b .ui-block-c{
+  width:33.333333%!important;
+  border-bottom:1px solid black!important;
+}
+
+
+.document.pdf .ui-grid-c .ui-block-a, .document.pdf .ui-grid-c .ui-block-b, .document.pdf .ui-grid-c .ui-block-c, .document.pdf .ui-grid-c .ui-block-d{
+  width:25%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-d .ui-block-a, .document.pdf .ui-grid-d .ui-block-b, .document.pdf .ui-grid-d .ui-block-c, .document.pdf .ui-grid-d .ui-block-d, .document.pdf .ui-grid-d .ui-block-e{
+  width:20%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-e .ui-block-a, .document.pdf .ui-grid-e .ui-block-b, .document.pdf .ui-grid-e .ui-block-c, .document.pdf .ui-grid-e .ui-block-d, .document.pdf .ui-grid-e .ui-block-e, .document.pdf .ui-grid-e .ui-block-f{
+  width:16.66666666%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-f .ui-block-a, .document.pdf .ui-grid-f .ui-block-b, .document.pdf .ui-grid-f .ui-block-c, .document.pdf .ui-grid-f .ui-block-d, .document.pdf .ui-grid-f .ui-block-e, .document.pdf .ui-grid-f .ui-block-f, .document.pdf .ui-grid-f .ui-block-g{
+  width:14.285%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-g .ui-block-a, .document.pdf .ui-grid-g .ui-block-b, .document.pdf .ui-grid-g .ui-block-c, .document.pdf .ui-grid-g .ui-block-d, .document.pdf .ui-grid-g .ui-block-e, .document.pdf .ui-grid-g .ui-block-f, .document.pdf .ui-grid-g .ui-block-g, .document.pdf .ui-grid-g .ui-block-h{
+  width:12.5%!important;
+  border-bottom:1px solid black!important;
+}
+
+.document.pdf .ui-grid-g .ui-block-h, .document.pdf .ui-grid-f .ui-block-g, .document.pdf .ui-grid-e .ui-block-f, .document.pdf .ui-grid-d .ui-block-e, .document.pdf .ui-grid-c .ui-block-d, .document.pdf .ui-grid-b .ui-block-c, .document.pdf .ui-grid-a .ui-block-b, .document.pdf .ui-grid-z .ui-block-a{
+  border-right:1px solid black;
+}
+
+
+.document.pdf .ui-grid-g .ui-block-h, .document.pdf .ui-grid-f .ui-block-g, .document.pdf .ui-grid-e .ui-block-f{
+  border-top:none;
+  border-bottom:none;
+  padding:0!important;
+  margin:0!important;
+  height:48px!important; 
+  margin-right: -0.5px!important;
+}

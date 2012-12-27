@@ -6,7 +6,7 @@
       %div{ class: 'ui-block-b' } Marca
       %div{ class: 'ui-block-c' } C&oacute;digo
       %div{ class: 'ui-block-d' } Categor&iacute;a
-      %div{ class: 'ui-block-e' } Cantidad mínima
+      %div{ class: 'ui-block-e' } Cantidad m&iacute;nima
       %div{ class: 'ui-block-f' } Precio   
       %div{ class: 'ui-block-g' } Opciones
       
@@ -29,3 +29,9 @@
 - create_css_class = !can?(:create, Components::Item.new) ? 'ui-disabled' : ''
 %a{ href: new_components_item_path, style: 'width: 250px; float: right',
     data: { role: 'button', theme: 'b', icon: 'new', remote: 'true' }, class: create_css_class } Nuevo Componente
+
+%br    
+%div{ data: { role: 'controlgroup', type: 'horizontal' } }
+  %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: components_brands_url(:format => :pdf) } } Reporte
+
+

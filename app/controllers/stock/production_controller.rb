@@ -14,6 +14,11 @@ class Stock::ProductionController < ApplicationController
     @components = Components::Item.paginate(:page => params[:page])
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/stock/production/_list_components.html.haml',
+          :layout => 'stock_pdf.html.erb'
+      }     
     end
   end
   
@@ -22,6 +27,11 @@ class Stock::ProductionController < ApplicationController
     @products = Products::Composition.paginate(:page => params[:page])
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/stock/production/_list_products.html.haml',
+          :layout => 'stock_pdf.html.erb'
+      }     
     end
   end
 end

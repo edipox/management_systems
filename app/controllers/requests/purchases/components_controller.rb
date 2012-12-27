@@ -14,6 +14,11 @@ class Requests::Purchases::ComponentsController < ApplicationController
     list  
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/requests/purchases/components/index.html.haml',
+          :layout => 'pdf.html.erb' 
+      }     
     end
   end
 

@@ -14,6 +14,12 @@ class Orders::ProductionsController < ApplicationController
     list  
     respond_to do |format|
       format.js
+      format.pdf {
+          current_ability.cannot :manage, Components::Item
+          render :pdf => "file_name", 
+          :template => '/orders/productions/index.html.haml',
+          :layout => 'pdf.html.erb' 
+      }     
     end
   end
 

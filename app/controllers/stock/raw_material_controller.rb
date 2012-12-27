@@ -7,6 +7,11 @@ class Stock::RawMaterialController < ApplicationController
     @components = Components::Item.paginate(:page => params[:page])
     respond_to do |format|
       format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/stock/raw_material/_list.html.haml',
+          :layout => 'stock_pdf.html.erb'
+      }     
     end
   end
 

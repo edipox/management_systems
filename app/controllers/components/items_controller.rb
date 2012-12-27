@@ -5,11 +5,16 @@ class Components::ItemsController < ApplicationController
   
   def index
     @components_items = Components::Item.paginate(:page => params[:page])
-#    respond_to do |format|
-#      format.html{ render 'index', :layout => "default" }
-#      format.js
-#      format.json { render json: @components_items }
-#    end
+    respond_to do |format|
+      format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/components/items/index.html.haml',
+          :type => "pdf",
+          :file_name => "file_name.pdf",
+          :layout => 'pdf.html.erb' 
+      } 
+    end
   end
 
   # GET /components/items/1

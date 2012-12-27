@@ -7,6 +7,14 @@ class Transactions::StatusesController < ApplicationController
   def index
     @is_protected = { @default_status.id => true, @reject_status.id => true,  @close_status.id => true }
     @transactions_statuses = Transactions::Status.paginate(:page => params[:page])
+    respond_to do |format|
+      format.js
+      format.pdf {
+          render :pdf => "file_name", 
+          :template => '/transactions/statuses/index.html.haml',
+          :layout => 'pdf.html.erb' 
+      }     
+    end    
   end
 
   # GET /transactions/statuses/1

@@ -18,6 +18,7 @@ Stock::Application.routes.draw do
   get "stock/production/index", :to => "stock/production#index"
   get "stock/production/transactions", :to => "stock/production#transactions"
 
+  get '/users', :to => 'users#index'
 
   namespace :stock do
     get "raw_material", :to => "raw_material#index"
