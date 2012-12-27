@@ -18,7 +18,8 @@
   function trim_js() {
     var to_trim = document.getElementsByClassName("trim");
     for (var i= 0; i < to_trim.length; i++){
-       var maxLength = 18;
+       var trim_attr_value = to_trim[i].getAttribute("data-trim")
+       var maxLength = trim_attr_value ? trim_attr_value : 20;
        var s = to_trim[i].textContent;
        to_trim[i].textContent = s.length > maxLength ? s.substr(0,maxLength-3)+"..." : s;
     }
