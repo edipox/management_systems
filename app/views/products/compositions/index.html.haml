@@ -8,7 +8,7 @@
       
       %div{ class: "ui-block-b" } Descripci&oacute;n 
       
-      %div{ class: "ui-block-c" } Cantidad Mínima
+      %div{ class: "ui-block-c" } Cantidad M&iacute;nima
       
       %div{ class: "ui-block-d" } Precio
       
@@ -35,3 +35,8 @@
           
   - create_css_class = !can?(:create, Products::Composition.new) ? 'ui-disabled' : ''
   = link_to 'Agregar  ', new_products_composition_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true', rel: "dialog" }, class: create_css_class }
+  
+
+%br    
+%div{ data: { role: 'controlgroup', type: 'horizontal' } }
+  %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: products_compositions_url(:format => :pdf) } } Reporte

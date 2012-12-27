@@ -1,0 +1,5 @@
+:plain
+  changeContent('#page #content',
+    '#{escape_javascript render :file => "users/index", :formats => [:html]}'
+  );
+  showNotice('#{ @notice }');  

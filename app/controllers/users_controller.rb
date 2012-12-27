@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       format.pdf {
           render :pdf => "file_name", 
           :template => '/users/index.html.haml',
-          :layout => 'pdf.html.erb' 
+          :layout => 'special_pdf.html.erb' 
       }     
     end  
   end

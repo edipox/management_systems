@@ -17,3 +17,7 @@
         %div{ class: "ui-block-b trim" }= user.sign_in_count
         %div{ class: "ui-block-c trim" }= user.last_sign_in_at
         %div{ class: "ui-block-d trim" }= user.role.name
+%br    
+%div{ data: { role: 'controlgroup', type: 'horizontal' } }
+  %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: users_url(:format => :pdf) } } Reporte
+  

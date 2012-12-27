@@ -8,7 +8,7 @@ class EntryController < ApplicationController
       format.pdf {
           render :pdf => "file_name", 
           :template => '/entry/index.html.haml',
-          :layout => 'stock_pdf.html.erb' 
+          :layout => 'special_pdf.html.erb' 
       }     
     end  
   end

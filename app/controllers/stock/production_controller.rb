@@ -17,7 +17,7 @@ class Stock::ProductionController < ApplicationController
       format.pdf {
           render :pdf => "file_name", 
           :template => '/stock/production/_list_components.html.haml',
-          :layout => 'stock_pdf.html.erb'
+          :layout => 'special_pdf.html.erb'
       }     
     end
   end
@@ -30,7 +30,7 @@ class Stock::ProductionController < ApplicationController
       format.pdf {
           render :pdf => "file_name", 
           :template => '/stock/production/_list_products.html.haml',
-          :layout => 'stock_pdf.html.erb'
+          :layout => 'special_pdf.html.erb'
       }     
     end
   end

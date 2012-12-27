@@ -15,3 +15,7 @@
         %div.ui-block-a= component.name
         %div.ui-block-b= component.description
         %div.ui-block-c= stock_qty
+%br    
+%div{ data: { role: 'controlgroup', type: 'horizontal' } }
+  %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: stock_products_list_components_url(:format => :pdf) } } Reporte
+  

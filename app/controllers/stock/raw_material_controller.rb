@@ -10,7 +10,7 @@ class Stock::RawMaterialController < ApplicationController
       format.pdf {
           render :pdf => "file_name", 
           :template => '/stock/raw_material/_list.html.haml',
-          :layout => 'stock_pdf.html.erb'
+          :layout => 'special_pdf.html.erb'
       }     
     end
   end
