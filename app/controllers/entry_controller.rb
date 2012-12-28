@@ -6,9 +6,11 @@ class EntryController < ApplicationController
     respond_to do |format|
       format.js
       format.pdf {
+          @title = "Asientos contables"
+          @entries = Accounting::Entry.paginate(:page => params[:page], :per_page => 999)
           render :pdf => "file_name", 
           :template => '/entry/index.html.haml',
-          :layout => 'special_pdf.html.erb' 
+          :layout => 'special_pdf.html.erb'
       }     
     end  
   end

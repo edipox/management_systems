@@ -2,9 +2,20 @@
   height: 297mm - 23mm;
   width: 210mm -21mm;
 
-  background-image: url(<%= asset_data_uri 'watermark.png' %>);
+/*  background-image: url(<%= asset_data_uri 'rails.png' %>);*/
   background-repeat: no-repeat;
   background-position: 200px 280px;
+}
+
+
+.watermark_box {
+  position:relative;
+  display:block;
+}
+img.watermark {
+  position: absolute;
+  top: 4px;
+  left: 4px;
 }
 
 .document.pdf ul{
@@ -34,9 +45,10 @@
 .document.pdf li[data-role="list-divider"]{
   font-weight:bold;
   line-height:29px!important;
-  font-size:14px;
+  font-size:16px;
   color:white;
-  background:#373737!important;
+/*  background:#373737!important;*/
+  background:#626262!important;
   padding:0;
   border-top:1px solid black!important;
 }
@@ -46,7 +58,7 @@
 }
 
 .document.pdf li.odd{
-  background:#88c8ff;
+  background:#c4d7ff;
 }
 
 .document.pdf .ui-grid-z, .document.pdf .ui-grid-f, .document.pdf .ui-grid-e, .document.pdf .ui-grid-g, .document.pdf .ui-grid-h{

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js
       format.pdf {
+          @users = User.paginate(:page => params[:page])
           render :pdf => "file_name", 
           :template => '/users/index.html.haml',
           :layout => 'special_pdf.html.erb' 

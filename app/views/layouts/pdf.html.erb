@@ -10,15 +10,15 @@
 </script>
 </head>
 <body onload="on_load_pdf()" class="document pdf">
-  <div id="page" >
+
+  <div id="" >
+    <h1><%= @title %></h1>
+
     <div id="content">
       <%= yield %>
     </div>
   </div>
 
-<div data-page="true">
-  P&aacute;gina <span class="page"></span> de <span class="topage"></span>
-</div>
 </body>
 
 </html>

@@ -27,6 +27,8 @@
             %a{ href: components_brands_path, data: { role: 'button', remote:"true" } } Marcas
 
         %div#content
+          %img{ src: "/images/#{AppConfig.find('company_image').value}", width: "42px", height: "42px" }
+          
           = yield
         %div#popup{ class: 'ui-corner-all', data: { role: 'popup', theme: 'a', :'overlay-theme' => 'a', transition: "slidefade" } } 
       %div{ data: { role: 'footer', position: 'fixed' } }

@@ -1,0 +1,26 @@
+
+    <div class="company_info ui-grid-a">
+      <div class="ui-block-a">
+        <div class="company_name">
+          <%= AppConfig.find("company_name").value %>
+        </div>
+        <div class="company_address">
+          Direcci&oacute;n: <%= AppConfig.find("company_address").value %>
+        </div>
+      </div>
+      <div class="ui-block-b">
+        <div class="company_telephone">
+          Telefono: <%= AppConfig.find("company_telephone").value %>
+        </div>
+        <div class="company_cellphone">
+          Celular: <%= AppConfig.find("company_cellphone").value %>
+        </div>
+        <div class="company_ruc">
+          RUC: <%= AppConfig.find("company_ruc").value %>
+        </div>
+      </div>
+    <div class="watermark_box">
+      <%= wicked_pdf_image_tag_for_public "#{ AppConfig.find('company_image').value }", "class" => "watermark" %>  
+    </div>
+  </div>
+

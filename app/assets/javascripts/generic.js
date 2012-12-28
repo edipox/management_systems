@@ -16,15 +16,6 @@ function pdffy(){
   });
 }
 
-function trim(element){
-    $.each($.makeArray(element), function(i, val){
-       var maxLength = eval($(val).attr("data-trim"));
-       maxLength = maxLength == undefined || maxLength == 0 || maxLength == "" || isNaN(maxLength) ? 20 : maxLength;
-       var s = $(val).text();
-       $(val).text(s.length > maxLength ? s.substr(0,maxLength-3)+"..." : s);
-    })
-}
-
 function showNotice(notice){
   if(notice != undefined && notice != null && notice != ''){
     var seconds = notice.length/20
@@ -83,8 +74,8 @@ function on_load(){
   defaultShowForm("brand",["brand_name"]);
 
   $("form").validate(); 
-  trim($(".trim"));
-  trim($("*[trim]"));
+  
+  trim();
   
   $("#menu a").click(function(){
     $("#menu .ui-btn-active").removeClass("ui-btn-active");

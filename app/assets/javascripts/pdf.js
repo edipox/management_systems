@@ -1,21 +1,8 @@
   function z(str){
     return Sizzle(str)
   }
-
-
-  function number_pages() {
-    var vars={};
-    var x=document.location.search.substring(1).split('&');
-    for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
-    var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
-    for(var i in x) {
-      var y = document.getElementsByClassName(x[i]);
-      for(var j=0; j<y.length; ++j){
-        y[j].textContent = vars[x[i]] == undefined ? 1 : vars[x[i]];
-      }
-    }
-  }
-  function trim_js() {
+  
+  function trim() {
     var to_trim = document.getElementsByClassName("trim");
     for (var i= 0; i < to_trim.length; i++){
        var trim_attr_value = to_trim[i].getAttribute("data-trim")
@@ -65,8 +52,7 @@
   }
   
   function on_load_pdf(kind){
-    trim_js();
-    number_pages();
+    trim();
     odd_style();
     if(kind != "keep_column"){
       remove_last_column();
