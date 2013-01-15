@@ -12,11 +12,14 @@ class Requests::Transferences::ProductsController < ApplicationController
 
   def index
     list  
+    @title = "Pedidos de transferencia de productos"
     respond_to do |format|
       format.js
       format.pdf {
+        @requests_transferences_products = Requests::Transferences::Product.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/requests/transferences/products/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

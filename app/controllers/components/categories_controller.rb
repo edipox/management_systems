@@ -1,13 +1,16 @@
+
 class Components::CategoriesController < ApplicationController
   # GET /components/categories
   # GET /components/categories.json
   def index
     @components_categories = Components::Category.paginate(:page => params[:page])
+    @title = "Categorias de componentes"
     respond_to do |format|
       format.js
       format.pdf {
-          current_ability.cannot :manage, Components::Item
+          @components_categories = Components::Category.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :template => '/components/categories/index.html.haml',
           :layout => 'pdf.html.erb' 
       } 

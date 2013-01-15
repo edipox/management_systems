@@ -12,11 +12,14 @@ class Requests::Devolutions::ComponentsController < ApplicationController
 
   def index
     list  
+    @title = "Pedidos de devoluci&oacute;n de componentes"
     respond_to do |format|
       format.js
       format.pdf {
+        @requests_devolutions_components = Requests::Devolutions::Component.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/requests/devolutions/components/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

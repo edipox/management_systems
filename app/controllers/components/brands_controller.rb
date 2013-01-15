@@ -1,3 +1,4 @@
+
 class Components::BrandsController < ApplicationController
   # GET /components/brands
   # GET /components/brands.json
@@ -6,12 +7,14 @@ class Components::BrandsController < ApplicationController
 
   def index
     @components_brands = Components::Brand.paginate(:page => params[:page])
+    @title = "Marcas de componentes"
     respond_to do |format|
       format.js
       format.pdf {
-          current_ability.cannot :manage, Components::Item
+          @components_brands = Components::Brand.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/components/brands/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

@@ -12,12 +12,14 @@ class Orders::ProductionsController < ApplicationController
 
   def index
     list  
+    @title = "Ordenes de producci&oacute;n"
     respond_to do |format|
       format.js
       format.pdf {
-          current_ability.cannot :manage, Components::Item
+        @orders_productions = Orders::Production.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/orders/productions/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

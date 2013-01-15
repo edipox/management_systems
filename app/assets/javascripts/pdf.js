@@ -49,6 +49,7 @@
   function remove_pagination(){
     remove_items(z(".previous_page"));
     remove_items(z("em.current"));
+    remove_items(z(".next_page"));
   }
   
   function on_load_pdf(kind){

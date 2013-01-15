@@ -11,12 +11,15 @@ class Stock::ProductionController < ApplicationController
   end
 
   def list_components
+    @title = "Existencia de componentes en stock de producci&oacute;n"
     @components = Components::Item.paginate(:page => params[:page])
     respond_to do |format|
       format.js
       format.pdf {
+        @components = Components::Item.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/stock/production/_list_components.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'special_pdf.html.erb'
       }     
     end
@@ -24,12 +27,15 @@ class Stock::ProductionController < ApplicationController
   
   
   def list_products
+    @title = "Existencia de productos en stock de producci&oacute;n"
     @products = Products::Composition.paginate(:page => params[:page])
     respond_to do |format|
       format.js
       format.pdf {
+        @products = Products::Composition.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/stock/production/_list_products.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'special_pdf.html.erb'
       }     
     end

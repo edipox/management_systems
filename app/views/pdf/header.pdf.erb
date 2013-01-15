@@ -1,4 +1,3 @@
-
     <div class="company_info ui-grid-a">
       <div class="ui-block-a">
         <div class="company_name">
@@ -8,6 +7,7 @@
           Direcci&oacute;n: <%= AppConfig.find("company_address").value %>
         </div>
       </div>
+      
       <div class="ui-block-b">
         <div class="company_telephone">
           Telefono: <%= AppConfig.find("company_telephone").value %>
@@ -19,8 +19,9 @@
           RUC: <%= AppConfig.find("company_ruc").value %>
         </div>
       </div>
-    <div class="watermark_box">
-      <%= wicked_pdf_image_tag_for_public "#{ AppConfig.find('company_image').value }", "class" => "watermark" %>  
+    
+      <div class="watermark_box">
+        <%= wicked_pdf_image_tag_for_public "#{ AppConfig.find('company_image').value }", "class" => "watermark" %>  
+      </div>
     </div>
-  </div>
 

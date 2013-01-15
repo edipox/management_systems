@@ -13,24 +13,30 @@ class Stock::ProductsController < ApplicationController
   end
   
   def list_products
+    @title = "Existencia de productos en stock de productos terminados"
     @products = Products::Composition.paginate(:page => params[:page])
     respond_to do |format|
       format.js
       format.pdf {
+        @products = Products::Composition.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/stock/products/_list_products.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'special_pdf.html.erb'
       }     
     end
   end
   
   def list_components
+    @title = "Existencia de componentes en stock de productos terminados"
     @components = Components::Item.get_finished.paginate(:page => params[:page])
     respond_to do |format|
       format.js
       format.pdf {
+        @components = Components::Item.get_finished.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/stock/products/_list_components.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'special_pdf.html.erb'
       }     
     end

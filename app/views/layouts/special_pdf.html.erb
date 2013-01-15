@@ -12,7 +12,7 @@
 <body onload="on_load_pdf('keep_column')" class="document pdf"  style="width:900px!important; margin:auto;">
   
   <div id="" >
-    <h1><%= @title %></h1>
+    <h1><%= (@title || "").html_safe %></h1>
 
     <div id="content">
       <%= yield %>

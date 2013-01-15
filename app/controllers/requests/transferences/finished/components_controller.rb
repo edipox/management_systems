@@ -12,11 +12,14 @@ class Requests::Transferences::Finished::ComponentsController < ApplicationContr
 
   def index
     list  
+    @title = "Pedidos de transferencia de componentes"
     respond_to do |format|
       format.js
       format.pdf {
+        @requests_transferences_finished_components = Requests::Transferences::Finished::Component.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/requests/transferences/finished/components/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

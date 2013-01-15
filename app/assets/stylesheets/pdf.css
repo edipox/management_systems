@@ -128,3 +128,16 @@ img.watermark {
   height:48px!important; 
   margin-right: -0.5px!important;
 }
+
+
+.document.pdf .company_info{
+  display:inline-block!important;
+  padding: 50px!important;
+  margin:60px!important;
+  top:60px!important;
+}
+
+.document.pdf #title{
+  top:60px!important;
+  display: inline-block!important;
+}

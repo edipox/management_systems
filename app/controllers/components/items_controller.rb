@@ -5,11 +5,14 @@ class Components::ItemsController < ApplicationController
   
   def index
     @components_items = Components::Item.paginate(:page => params[:page])
+    @title = "Componentes"
     respond_to do |format|
       format.js
       format.pdf {
+          @components_items = Components::Item.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/components/items/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :type => "pdf",
           :file_name => "file_name.pdf",
           :layout => 'pdf.html.erb' 

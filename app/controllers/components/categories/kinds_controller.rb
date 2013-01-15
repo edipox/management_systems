@@ -1,3 +1,4 @@
+
 class Components::Categories::KindsController < ApplicationController
   # GET /components/categories/kinds
   # GET /components/categories/kinds.json
@@ -5,6 +6,7 @@ class Components::Categories::KindsController < ApplicationController
   layout "dialog"
 
   def index
+    @title = "Tipos de componentes"
     @components_categories_kinds = Components::Categories::Kind.paginate(:page => params[:page])
   end
 

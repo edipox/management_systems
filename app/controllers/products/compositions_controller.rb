@@ -10,11 +10,14 @@ class Products::CompositionsController < ApplicationController
 
   def index
     list  
+    @title = "Productos terminados"
     respond_to do |format|
       format.js
       format.pdf {
+        @products_compositions = Products::Composition.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/products/compositions/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end

@@ -12,11 +12,14 @@ class Requests::Purchases::ComponentsController < ApplicationController
 
   def index
     list  
+    @title = "Pedidos de compra de componentes"
     respond_to do |format|
       format.js
       format.pdf {
+        @requests_purchases_components = Requests::Purchases::Component.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
           render :pdf => "file_name", 
           :template => '/requests/purchases/components/index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
           :layout => 'pdf.html.erb' 
       }     
     end
