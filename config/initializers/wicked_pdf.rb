@@ -9,9 +9,9 @@ WickedPdf.config = {
 #   :exe_path => '/usr/local/bin/wkhtmltopdf',
 #   :orientation => 'Landscape',
    :exe_path => "#{Rails.root}/lib/wkhtmltopdf",
-   :page_size => 'Letter',
+#   :header => { :html => { :template => "pdf/header.pdf.erb" } }, # NEVER UNCOMMENT THIS LINE, THE APP WILL DIE!!
    :footer => { :right => 'Página [page] de [topage]' },
-   :header => { :html => { :template => '/pdf/header.pdf.erb' } }
+   :page_size => 'Letter'
 #   :show_as_html => true
 #   :footer => { :html => {:template => "layouts/footer.pdf.erb"} }
 

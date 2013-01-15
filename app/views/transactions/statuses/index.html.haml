@@ -22,3 +22,7 @@
           %a{ href: edit_transactions_status_path(transactions_status), data: { role: 'button', icon: 'grid', mini: 'true', remote: 'true' }, class: edit_css_class } Editar
 
   = link_to 'Agregar  ', new_transactions_status_path, { style: 'width: 250px; float: right', data: { role: 'button', theme: 'b', icon: 'new', remote: 'true'  } }
+
+%br    
+%div{ data: { role: 'controlgroup', type: 'horizontal' } }
+  %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: transactions_statuses_url(:format => :pdf) } } Reporte
