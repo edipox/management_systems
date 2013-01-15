@@ -90,5 +90,8 @@ class Stocks::Product < ActiveRecord::Base
     
   end
   
-  
+  def self.subtract params
+    Stocks::Manager.subtract self, 'products_stocks', params
+  end
+
 end

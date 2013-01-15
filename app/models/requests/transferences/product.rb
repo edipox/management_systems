@@ -47,7 +47,7 @@ class Requests::Transferences::Product < ActiveRecord::Base
         id = d.component.id
         price = d.component.price
         qtty = d.quantity
-        Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+        return false unless Stocks::Production.subtract({component_id: id, component_quantity: qtty, component_price: price})
         sum += price * qtty
       end
       Stocks::Product.create!({product_id: dd.product_id, product_quantity: dd.quantity, product_price: dd.product.price})

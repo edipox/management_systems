@@ -49,7 +49,7 @@ class Requests::Transferences::Finished::Component < ActiveRecord::Base
       price = d.component.price
       qtty = d.quantity
    
-      Stocks::Component.create!({component_id: id, quantity: -qtty, price: price})
+      return false unless Stocks::Component.subtract({component_id: id, quantity: qtty, price: price})
       Stocks::Product.create!({component_id: id, component_quantity: qtty, component_price: price})
       
 #      Transaction.create!({

@@ -17,4 +17,9 @@ class Stocks::Production < ActiveRecord::Base
   alias_attribute :product_id, :producto_terminado_id
   alias_attribute :product_price, :precio_unitario_producto
   alias_attribute :component_price, :precio_unitario_componente
+
+  def self.subtract params
+    Stocks::Manager.subtract self, 'production_stocks', params
+  end
+
 end

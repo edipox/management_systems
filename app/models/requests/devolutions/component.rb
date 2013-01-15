@@ -43,7 +43,7 @@ class Requests::Devolutions::Component < ActiveRecord::Base
       id = d.component.id
       price = d.component.price
       qtty = d.quantity
-      Stocks::Production.create!({component_id: id, component_quantity: -qtty, component_price: price})
+      return false unless Stocks::Production.subtract({component_id: id, component_quantity: qtty, component_price: price})
       Stocks::Component.create!({component_id: id, quantity: qtty, price: price})
 #      Transaction.create!({
 #        kind: self.class.to_s,

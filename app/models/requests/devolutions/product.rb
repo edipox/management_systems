@@ -40,7 +40,8 @@ class Requests::Devolutions::Product < ActiveRecord::Base
       price = d.product.price
       qtty = d.quantity
       Stocks::Production.create!({product_id: id, product_quantity: qtty, product_price: price})
-      Stocks::Product.create!({product_id: id, product_quantity: -qtty, product_price: price})
+      return false unless Stocs::Product.subtract({product_id: id, product_quantity: qtty, product_price: price})
+      #Stocks::Product.create!({product_id: id, product_quantity: -qtty, product_price: price})
 #      Transaction.create!({
 #        kind: self.class.to_s,
 #        detail_kind: d.class.to_s,
