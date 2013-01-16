@@ -7,7 +7,7 @@ class Requests::Transferences::ComponentsController < ApplicationController
   def list
     @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page])
     delete_if_void @requests_transferences_components
-    @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page])
+    @requests_transferences_components = Requests::Transferences::Component.paginate(:page => params[:page], :order => "created_at DESC")
   end
 
   def index

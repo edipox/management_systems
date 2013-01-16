@@ -7,7 +7,7 @@ class Orders::ProductionsController < ApplicationController
   def list
     @orders_productions = Orders::Production.paginate(:page => params[:page])
     delete_if_void @orders_productions
-    @orders_productions = Orders::Production.paginate(:page => params[:page])
+    @orders_productions = Orders::Production.paginate(:page => params[:page], :order => "created_at DESC")
   end
 
   def index

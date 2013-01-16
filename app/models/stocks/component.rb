@@ -50,7 +50,7 @@ class Stocks::Component < ActiveRecord::Base
   end
 
   def self.subtract params
-    Stocks::Manager.subtract self, 'raw_material_stocks', params
+    Stocks::Manager.subtract 'raw_material_stocks', params
   end
 
 end

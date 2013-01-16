@@ -7,7 +7,7 @@ class Requests::Transferences::ProductsController < ApplicationController
   def list
     @requests_transferences_products = Requests::Transferences::Product.paginate(:page => params[:page])
     delete_if_void @requests_transferences_products
-    @requests_transferences_products = Requests::Transferences::Product.paginate(:page => params[:page])
+    @requests_transferences_products = Requests::Transferences::Product.all.reverse.paginate(:page => params[:page], :order => "created_at DESC")
   end
 
   def index
