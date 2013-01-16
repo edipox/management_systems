@@ -10,8 +10,8 @@
     
       %div{ class: "ui-grid-b" }
 
-        %div{ class: "ui-block-a account date" }= entry.updated_at.strftime("%m/%d/%Y")        
-        %div{ class: "ui-block-b" }= entry.number 
+        %div{ class: "ui-block-a date" }= entry.number 
+        %div{ class: "ui-block-b " }= entry.updated_at.strftime("%m/%d/%Y")        
         %div{ class: "ui-block-c" }
         
     %li{ class: 'account'}

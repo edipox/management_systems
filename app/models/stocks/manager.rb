@@ -13,7 +13,7 @@ class Stocks::Manager
 		stock = eval "element.#{plural}"
 		sum = stock.reduce { |s1, s2| eval "s1.#{prefix}quantity += s2.#{prefix}quantity; s1" }
 		if eval "quantity > 0 && quantity <= sum.#{prefix}quantity"
-			while quantity > 0
+			while quantity > 0 # LIFO method
 				last = stock_class.last
 				last_quantity = eval "last.#{prefix}quantity"
 				if last_quantity > quantity
