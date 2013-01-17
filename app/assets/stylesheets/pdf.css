@@ -14,8 +14,13 @@
 }
 img.watermark {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  left: 1px;
+}
+
+.watermark_box, img.watermark{
+  top:10px;
+  width: 80px;
+  height: 80px;
 }
 
 .document.pdf ul{
@@ -34,7 +39,7 @@ img.watermark {
   padding:0 0 0 0!important;
   height:49px!important;
   line-height:49px!important;
-  border:1px solid black;
+/*  border:1px solid black;*/
   border-right:none;
   border-top:none;
   border-bottom:none;
@@ -131,13 +136,25 @@ img.watermark {
 
 
 .document.pdf .company_info{
-  display:inline-block!important;
-  padding: 50px!important;
-  margin:60px!important;
-  top:60px!important;
+  display:block!important;
+  padding: 5px!important;
+  margin:5px!important;
+  margin-top:15px!important;
+  border:none!important;
 }
 
 .document.pdf #title{
-  top:60px!important;
-  display: inline-block!important;
+  /*top:60px!important;*/
+  /*display: inline-block!important;*/
+}
+
+.document.pdf .company_info *{
+  border: 0 white solid!important;
+  border-width: 0!important;
+  border:none!important;
+}
+
+.document.pdf .company_name{
+  font-weight: bold;
+  font-size: 16px;
 }

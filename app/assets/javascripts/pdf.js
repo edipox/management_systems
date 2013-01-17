@@ -28,7 +28,7 @@
   function remove_last_column(){
     var letters = ["z", "a", "b", "c", "d", "e", "f", "g", "h"]
     for( var i = 0; i < letters.length; i++){
-      var last_grids = z(".ui-grid-"+letters[i]);
+      var last_grids = z(".ui-grid-"+letters[i]+":not(.header)");
       if(last_grids.length != 0){
 
         var last_blocks = z(".ui-grid-"+letters[i]+" .ui-block-"+letters[i+1])

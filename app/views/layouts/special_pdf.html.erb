@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PDF</title>
+  <title><%= ( @title || "PDF" ).html_safe %></title>
   <%= wicked_pdf_stylesheet_link_tag "application" %>
   <%= wicked_pdf_javascript_include_tag "slize", "pdf" %>
   <%= csrf_meta_tags %>
 </head>
-<script>
-</script>
-</head>
 <body onload="on_load_pdf('keep_column')" class="document pdf"  style="width:900px!important; margin:auto;">
   
   <div id="" >
-    <h1><%= (@title || "").html_safe %></h1>
+    <br/><br/><br/><br/><br/><br/><br/>
+    <h1 id="title"><%= (@title || "").html_safe %></h1>
 
     <div id="content">
       <%= yield %>

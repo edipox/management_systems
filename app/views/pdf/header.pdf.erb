@@ -1,14 +1,19 @@
-    <div class="company_info ui-grid-a">
-      <div class="ui-block-a">
+<div style="height:60px; width:100%;">
+    <div class="company_info ui-grid-a header" style="height:150px;">
+      <div class="ui-block-a header">
         <div class="company_name">
           <%= AppConfig.find("company_name").value %>
         </div>
         <div class="company_address">
           Direcci&oacute;n: <%= AppConfig.find("company_address").value %>
         </div>
+        <div>
+          <% t = Time.now %>
+          Fecha: <%= t.strftime("%d/%m/%Y") %> -- Hora: <%= t.strftime("%H:%M:%S") %>
+        </div>
       </div>
       
-      <div class="ui-block-b">
+      <div class="ui-block-b header">
         <div class="company_telephone">
           Telefono: <%= AppConfig.find("company_telephone").value %>
         </div>
@@ -23,5 +28,6 @@
       <div class="watermark_box">
         <%= wicked_pdf_image_tag_for_public "#{ AppConfig.find('company_image').value }", "class" => "watermark" %>  
       </div>
-    </div>
 
+    </div>
+</div>
