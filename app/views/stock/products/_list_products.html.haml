@@ -1,20 +1,32 @@
 - will_paginate @products
 %ul{ data: { role: 'listview', inset: 'true' } }
   %li{ data: { role: 'list-divider'} }
-    %div.ui-grid-b
+    %div.ui-grid-d
       %div.ui-block-a Producto
       %div.ui-block-b Descripci&oacute;n
       %div.ui-block-c Existencia
-
+      %div.ui-block-d Precio promedio
+      %div.ui-block-e Valorizado      
+  - total_val = 0.0
   - @products.each do |product|
     - stocks = product.products_stocks
     - stock_total = stocks.reduce {|s0, s1| s0.product_quantity = s0.product_quantity + s1.product_quantity; s0 }
     - stock_qty = stock_total.nil? ? 0 : stock_total.product_quantity
+    - price_sum = Stocks::Product.product_valuation product    
     %li
-      %div.ui-grid-b
-        %div.ui-block-a= product.name
-        %div.ui-block-b= product.description
+      %div.ui-grid-d
+        %div.ui-block-a.trim= product.name
+        %div.ui-block-b.trim= product.description
         %div.ui-block-c= stock_qty
+        - ppp = (price_sum / stock_qty).round(2)
+        - total_val += ppp = ppp.finite? ? ppp : 0
+        %div.ui-block-d= ppp.zero? ? product.price : ppp
+        %div.ui-block-e= (price_sum).round(2)
+  
+  %li{ data: { role: 'list-divider'} }
+    %div
+      %label Total valorizado:
+      %span= total_val
 %br    
 %div{ data: { role: 'controlgroup', type: 'horizontal' } }
   %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: stock_products_list_products_url(:format => :pdf) } } Reporte

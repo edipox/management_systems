@@ -22,4 +22,26 @@ class Stocks::Production < ActiveRecord::Base
     Stocks::Manager.subtract 'production_stocks', params
   end
 
+
+  def self.component_valuation component
+    quantity_on_stock = 0.0
+    price_sum = 0.0
+    component.production_stocks.each do |e|
+      quantity_on_stock += e.component_quantity || 0
+      price_sum += e.component_price || 0
+    end
+    price_sum# / quantity_on_stock
+  end
+
+
+  def self.product_valuation product
+    quantity_on_stock = 0.0
+    price_sum = 0.0
+    product.production_stocks.each do |e|
+      quantity_on_stock += e.product_quantity || 0
+      price_sum += e.product_price || 0
+    end
+    price_sum# / quantity_on_stock
+  end
+
 end

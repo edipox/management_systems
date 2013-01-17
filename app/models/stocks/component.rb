@@ -25,9 +25,7 @@ class Stocks::Component < ActiveRecord::Base
 #    Components::Item.all.each do |component|
       #sum = component.raw_material_stocks.reduce { |s1, s2| s1.quantity += s2.quantity; s1 }
       quantity_on_stock = 0
-      component.raw_material_stocks.map{ |e| 
-        quantity_on_stock += e.quantity || 0
-      }
+      component.raw_material_stocks.map{ |e| quantity_on_stock += e.quantity || 0 }
       if component.minimum_quantity > quantity_on_stock
         missing_component_qty = component.minimum_quantity - quantity_on_stock
         system_user_id = AppConfig.find('system_user_id').value
@@ -51,6 +49,16 @@ class Stocks::Component < ActiveRecord::Base
 
   def self.subtract params
     Stocks::Manager.subtract 'raw_material_stocks', params
+  end
+
+  def self.valuation component
+    quantity_on_stock = 0.0
+    price_sum = 0.0
+    component.raw_material_stocks.each do |e|
+      quantity_on_stock += e.quantity || 0
+      price_sum += e.price || 0
+    end
+    price_sum# / quantity_on_stock
   end
 
 end

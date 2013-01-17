@@ -27,9 +27,9 @@
 - obj = @requests_purchases_component
 - if can_modify?(obj)
   %div#form
-    = render 'requests/purchases/components/details/form'
+    = render 'requests/purchases/components/details/form', :formats=>[:html]
 %div#list
-  = render 'requests/purchases/components/details/list'
+  = render 'requests/purchases/components/details/list', :formats=>[:html]
   
 = link_to 'Volver', requests_purchases_components_path, { style: 'width: 250px; float: left', data: { role: 'button', theme: 'c', remote: 'true' } }
 

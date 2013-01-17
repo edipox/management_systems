@@ -6,6 +6,14 @@ class ActivityController < ApplicationController
     
     respond_to do |format|
       format.js
+      format.pdf {
+          @title = "Auditor&iacute;a"
+          @versions = Version.order(:created_at).reverse.paginate(:page => params[:page], :per_page => MAX_PER_PAGE)
+          render :pdf => "file_name", 
+          :template => '/activity/_index.html.haml',
+          :header => { :html =>  { :template => 'pdf/header.pdf' } },
+          :layout => 'pdf.html.erb'
+      }     
     end
   end
 

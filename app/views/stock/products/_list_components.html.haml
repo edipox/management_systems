@@ -1,20 +1,33 @@
 - will_paginate @components
 %ul{ data: { role: 'listview', inset: 'true' } }
   %li{ data: { role: 'list-divider'} }
-    %div.ui-grid-b
+    %div.ui-grid-d
       %div.ui-block-a Componente
       %div.ui-block-b Descripci&oacute;n
       %div.ui-block-c Existencia
+      %div.ui-block-d Precio promedio
+      %div.ui-block-e Valorizado      
 
+  - total_val = 0.0
   - @components.each do |component|
     - stocks = component.products_stocks
     - stock_total = stocks.reduce {|s0, s1| s0.component_quantity = s0.component_quantity + s1.component_quantity; s0 }
     - stock_qty = stock_total.nil? ? 0 : stock_total.component_quantity
+    - price_sum = Stocks::Product.component_valuation component    
     %li
-      %div.ui-grid-b
+      %div.ui-grid-d
         %div.ui-block-a= component.name
         %div.ui-block-b= component.description
         %div.ui-block-c= stock_qty
+        - ppp = (price_sum / stock_qty).round(2)
+        - total_val += ppp = ppp.finite? ? ppp : 0
+        %div.ui-block-d= ppp.zero? ? component.price : ppp
+        %div.ui-block-e= (price_sum).round(2)
+
+  %li{ data: { role: 'list-divider'} }
+    %div
+      %label Total valorizado:
+      %span= total_val        
 %br    
 %div{ data: { role: 'controlgroup', type: 'horizontal' } }
   %a{ href: "#", data: { role: 'button', mini: 'true', pdf: 'true', href: stock_products_list_components_url(:format => :pdf) } } Reporte
