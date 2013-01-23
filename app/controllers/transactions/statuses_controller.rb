@@ -4,10 +4,14 @@ class Transactions::StatusesController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @is_protected = { @default_status.id => true, @reject_status.id => true,  @close_status.id => true }
     @transactions_statuses = Transactions::Status.paginate(:page => params[:page])
     @title = "Estados de transacciones"
+  end
+
+  def index
+    list
     respond_to do |format|
       format.js
       format.pdf {
@@ -50,7 +54,7 @@ class Transactions::StatusesController < ApplicationController
   # POST /transactions/statuses.json
   def create
     @transactions_status = Transactions::Status.new(params[:transactions_status])
-    index
+    list
     respond_to do |format|
       if @transactions_status.save
         format.js { render 'index'; @notice = 'Registro guardado correctamente.' 
@@ -65,10 +69,12 @@ class Transactions::StatusesController < ApplicationController
   # PUT /transactions/statuses/1.json
   def update
     @transactions_status = Transactions::Status.find(params[:id])
-    index
+    list
     respond_to do |format|
       if @transactions_status.update_attributes(params[:transactions_status])
-        format.js { render 'index'; @notice = 'Registro actualizado correctamente.' 
+        format.js {
+          @notice = 'Registro actualizado correctamente.'
+          render 'index'
         }
       else
         format.js { 
@@ -85,7 +91,7 @@ class Transactions::StatusesController < ApplicationController
     @transactions_status.destroy
     respond_to do |format|
       format.js { 
-        index
+        list
         render  'index'
       }
     end

@@ -5,8 +5,12 @@ class Components::BrandsController < ApplicationController
   
   layout "dialog"
 
-  def index
+  def list
     @components_brands = Components::Brand.paginate(:page => params[:page])
+  end
+
+  def index
+    list
     @title = "Marcas de componentes"
     respond_to do |format|
       format.js
@@ -50,7 +54,7 @@ class Components::BrandsController < ApplicationController
   # POST /components/brands.json
   def create
     @components_brand = Components::Brand.new(params[:components_brand])
-    index
+    list
     respond_to do |format|
       if @components_brand.save
         format.js { 
@@ -67,7 +71,7 @@ class Components::BrandsController < ApplicationController
   # PUT /components/brands/1.json
   def update
     @components_brand = Components::Brand.find(params[:id])
-    index
+    list
     respond_to do |format|
       if @components_brand.update_attributes(params[:components_brand])
         format.js { @notice = 'Registro actualizado correctamente.'
@@ -97,7 +101,7 @@ class Components::BrandsController < ApplicationController
       @components_brand.destroy
       respond_to do |format|
         format.js { 
-          index
+          list
           render  'index'
         }
       end
