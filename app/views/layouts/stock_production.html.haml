@@ -16,7 +16,7 @@
         
       %div#page
         %div#menu{ data: { role: 'controlgroup' } }
-          %a{ href: '/stock/production/list_components', data: { role: 'button', remote: "true" } } Stock de producción
+          %a#stock{ href: '/stock/production/list_components', data: { role: 'button', remote: "true" } } Stock de producción
           %a{ href: '/stock/production/list_products', data: { role: 'button', remote: "true" } } Productos en producción
           - if can?(:read, Requests::Transferences::Component)
             %a{ href: requests_transferences_components_path, data: { role: 'button', remote: "true"  } } Solicitud de componentes
@@ -35,3 +35,6 @@
 
       %div{ data: { role: 'footer', position: 'fixed' } }
         %h3 Sistema de Gestion
+
+:javascript
+  $("#menu a#stock").click().addClass("ui-btn-active");
