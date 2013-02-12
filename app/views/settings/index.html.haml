@@ -4,7 +4,7 @@
     %a{ href: settings_roles_path, data: { role: 'button', remote: 'true' } } Tipos de funcionario
     %a{ href: activity_path, data: { role: 'button', remote: 'true' } } Auditoría
     - if can?(:read, Accounting::Entry)
-      %a{ href: entry_index_path, data: { role: 'button', remote:"true" } } Asientos contables
+      /%a{ href: entry_index_path, data: { role: 'button', remote:"true" } } Asientos contables
     - if can?(:read, User)
       %a{ href: users_path, data: { role: 'button', remote:"true" } } Usuarios
   %div#content

@@ -6,7 +6,7 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
 
-  %body
+  %body(onload="$(\"[href='/settings/company']\").click()")
     %div(data-role="page")
       %div(data-role="header" data-position="fixed")
         %a{ href: url_for(:back), data: { role: 'button' } } Volver

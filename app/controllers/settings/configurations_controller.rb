@@ -1,8 +1,8 @@
 class Settings::ConfigurationsController < ApplicationController
   include Settings::ConfigurationsHelper
-  respond_to :js
   def company
     load_company_config
+    @notice = 'Las configuraciones han sido guardadas'
   end
 
   def update
@@ -16,9 +16,6 @@ class Settings::ConfigurationsController < ApplicationController
       rescue ActiveRecord::RecordNotFound
       end
     end
-
-    company
-    @notice = 'Las configuraciones han sido guardadas'
-    render :company
+    redirect_to :settings
   end
 end

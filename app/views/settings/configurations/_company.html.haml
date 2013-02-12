@@ -3,7 +3,7 @@
   .ui-grid-a { width: 100%; }
   .ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { padding: 0 5px; }
   
-%form#company_config{ action: settings_configurations_path, method: 'post', multipart: 'true', data: { remote: 'true' } } 
+%form#company_config{ action: settings_configurations_path, method: 'post', enctype: "multipart/form-data" } 
   = hidden_field_tag :authenticity_token, form_authenticity_token
   = hidden_field_tag :_method, 'put'
 
