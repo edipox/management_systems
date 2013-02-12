@@ -1,5 +1,5 @@
 :css
-  form { width: 100%; }
+  form { width: 75%; }
   .ui-grid-a { width: 100%; }
   .ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { padding: 0 5px; }
   
@@ -33,5 +33,5 @@
 
       = label_tag @cellphone[:id], @cellphone[:label]
       = text_field_tag @cellphone[:id], @cellphone[:value], :class => 'required'
-
-  = submit_tag 'Guardar'
+  %div{ style: "width:160px; margin:auto;" }
+    = submit_tag 'Guardar', data: { thme: "a" }

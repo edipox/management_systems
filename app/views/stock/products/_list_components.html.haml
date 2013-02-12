@@ -19,9 +19,9 @@
         %div.ui-block-a= component.name
         %div.ui-block-b= component.description
         %div.ui-block-c= stock_qty
-        - ppp = (price_sum / stock_qty).round(2)
-        - total_val += ppp = ppp.finite? ? ppp : 0
-        %div.ui-block-d= ppp.zero? ? component.price : ppp
+        - ppp = stock_qty > 0 ? (price_sum / stock_qty).round(2) : component.price
+        - total_val += price_sum # stock_qty > 0 ? ppp : 0
+        %div.ui-block-d= ppp
         %div.ui-block-e= (price_sum).round(2)
 
   %li{ data: { role: 'list-divider'} }
